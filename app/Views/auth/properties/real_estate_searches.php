@@ -1,0 +1,1 @@
+<?= view('shared/datatable/datatable'); ?>
