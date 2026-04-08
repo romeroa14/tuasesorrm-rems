@@ -211,6 +211,7 @@
     </li>
 
     <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 4): ?>
+        <hr class="sidebar-divider">
         <div class="sidebar-heading">
             Mercadeo
         </div>
@@ -223,6 +224,7 @@
         <hr class="sidebar-divider">
     <?php endif; ?>
     <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 8): ?>
+        <hr class="sidebar-divider">
         <div class="sidebar-heading">
             Servicios API
         </div>
@@ -235,6 +237,7 @@
         <hr class="sidebar-divider">
     <?php endif; ?>
     <?php if(session()->get('id_fk_rol') == 2): ?>
+        <hr class="sidebar-divider">
         <div class="sidebar-heading">
             SUPER ACCIONES
         </div>

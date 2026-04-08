@@ -34,8 +34,8 @@ class CrmController extends BaseController
         ];
 
         return view('template/header/header', $data)
-            . view('template/navbar/navbar', $data)
             . view('template/sidebar/sidebar', $data)
+            . view('template/navbar/navbar', $data)
             . view('auth/crm/inbox', $data)
             . view('template/footer/footer', $data);
     }
@@ -52,8 +52,8 @@ class CrmController extends BaseController
         ];
 
         return view('template/header/header', $data)
-            . view('template/navbar/navbar', $data)
             . view('template/sidebar/sidebar', $data)
+            . view('template/navbar/navbar', $data)
             . view('auth/crm/pipeline', $data)
             . view('template/footer/footer', $data);
     }
@@ -70,8 +70,8 @@ class CrmController extends BaseController
         ];
 
         return view('template/header/header', $data)
-            . view('template/navbar/navbar', $data)
             . view('template/sidebar/sidebar', $data)
+            . view('template/navbar/navbar', $data)
             . view('auth/crm/crm_dashboard', $data)
             . view('template/footer/footer', $data);
     }
