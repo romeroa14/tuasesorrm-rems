@@ -23,6 +23,13 @@ class Leads extends Model
         'id_businessmodel',
         'name',
         'phone',
+        'email',
+        'instagram_username',
+        'intention_score',
+        'intention_label',
+        'interest_type',
+        'budget_detected',
+        'zone_interest',
         'observation',
         'status',
     ];

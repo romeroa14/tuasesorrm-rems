@@ -13,6 +13,7 @@
         <link href="<?= base_url('vendor/fontawesome-free/css/all.min.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?= base_url('vendor/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?= base_url('css/ruang-admin.css') ?>" rel="stylesheet">
+        <script src="<?= base_url('vendor/jquery/jquery.min.js') ?>"></script>
         <?php if (ENVIRONMENT !== 'development'): ?>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <?php endif; ?>
@@ -95,7 +96,6 @@
             </div>
         </div>
         <!-- Login Content -->
-        <script src="<?= base_url('vendor/jquery/jquery.min.js') ?>"></script>
         <script src="<?= base_url('vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
         <script src="<?= base_url('vendor/jquery-easing/jquery.easing.min.js') ?>"></script>
         <script src="<?= base_url('js/ruang-admin.min.js') ?>"></script>

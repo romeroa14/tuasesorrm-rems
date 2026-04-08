@@ -16,6 +16,8 @@
         <link href="<?= base_url('vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css') ?>" rel="stylesheet" >
         <!-- Bootstrap Touchspin -->
         <link href="<?= base_url('vendor/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css') ?>" rel="stylesheet" >
+        <!-- jQuery (moved to head to avoid reference errors in inline scripts) -->
+        <script src="<?= base_url('vendor/jquery/jquery.min.js') ?>"></script>
     </head>
     <body id="page-top"
     <?php if (isset($datatable['prefix'])): ?>

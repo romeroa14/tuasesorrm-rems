@@ -121,6 +121,31 @@ $routes->get('/app/options/get_businessmodel', 'ConfigurationsController::get_bu
 
 
 // =============================================================================
+// CRM MODULE
+// =============================================================================
+
+// CRM Views (requieren autenticación)
+$routes->get('/app/crm/inbox', 'CrmController::inbox', ['filter' => 'auth']); /* CRM Inbox */
+$routes->get('/app/crm/pipeline', 'CrmController::pipeline', ['filter' => 'auth']); /* CRM Pipeline Kanban */
+$routes->get('/app/crm/dashboard', 'CrmController::dashboard', ['filter' => 'auth']); /* CRM Dashboard */
+
+// CRM API (requieren autenticación)
+$routes->get('/app/crm/api/conversations', 'CrmController::api_conversations', ['filter' => 'auth']); /* Obtener conversaciones */
+$routes->get('/app/crm/api/messages/(:num)', 'CrmController::api_messages/$1', ['filter' => 'auth']); /* Obtener mensajes */
+$routes->post('/app/crm/api/send', 'CrmController::api_send_message', ['filter' => 'auth']); /* Enviar mensaje */
+$routes->post('/app/crm/api/assign', 'CrmController::api_assign', ['filter' => 'auth']); /* Asignar conversación */
+$routes->post('/app/crm/api/status', 'CrmController::api_update_status', ['filter' => 'auth']); /* Actualizar estado */
+$routes->get('/app/crm/api/pipeline', 'CrmController::api_pipeline', ['filter' => 'auth']); /* Datos del pipeline */
+$routes->get('/app/crm/api/stats', 'CrmController::api_stats', ['filter' => 'auth']); /* Estadísticas CRM */
+$routes->get('/app/crm/api/rescore/(:num)', 'CrmController::api_rescore/$1', ['filter' => 'auth']); /* Recalcular score */
+$routes->get('/app/crm/export/meta', 'CrmController::export_meta', ['filter' => 'auth']); /* Exportar para Meta */
+
+// Webhooks (público - sin autenticación)
+$routes->get('/api/webhook/instagram', 'WebhookController::verifyInstagram'); /* Verificación webhook Instagram */
+$routes->post('/api/webhook/instagram', 'WebhookController::instagram'); /* Webhook Instagram DM */
+$routes->post('/api/webhook/whatsapp', 'WebhookController::whatsapp'); /* Webhook WhatsApp */
+
+// =============================================================================
 // API PÚBLICA - ACCESO SIN AUTENTICACIÓN
 // =============================================================================
 // Estas rutas NO requieren autenticación y son de acceso público

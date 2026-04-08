@@ -185,6 +185,31 @@
         <?php endif; ?>
         <hr class="sidebar-divider">
     <?php endif; ?>
+    <!-- CRM Module -->
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+        CRM
+    </div>
+    <li class="nav-item <?= ($title == 'CRM Inbox' || $title == 'Pipeline CRM' || $title == 'CRM Dashboard') ? 'active' : '' ?>">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCRM" aria-expanded="false" aria-controls="collapseCRM">
+            <i class="fas fa-headset"></i>
+            <span>CRM</span>
+        </a>
+        <div id="collapseCRM" class="collapse <?= ($title == 'CRM Inbox' || $title == 'Pipeline CRM' || $title == 'CRM Dashboard') ? 'show' : '' ?>">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item <?= $title == 'CRM Inbox' ? 'active' : '' ?>" href="<?= base_url('/app/crm/inbox') ?>">
+                    <i class="fas fa-inbox"></i> Inbox
+                </a>
+                <a class="collapse-item <?= $title == 'Pipeline CRM' ? 'active' : '' ?>" href="<?= base_url('/app/crm/pipeline') ?>">
+                    <i class="fas fa-columns"></i> Pipeline
+                </a>
+                <a class="collapse-item <?= $title == 'CRM Dashboard' ? 'active' : '' ?>" href="<?= base_url('/app/crm/dashboard') ?>">
+                    <i class="fas fa-chart-bar"></i> Dashboard
+                </a>
+            </div>
+        </div>
+    </li>
+
     <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 4): ?>
         <div class="sidebar-heading">
             Mercadeo
