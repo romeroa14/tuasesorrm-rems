@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "rems-mysql-local": {
+      "command": "npx",
+      "args": ["-y", "@sajithrw/mcp-mysql"],
+      "env": {
+        "MYSQL_HOST": "localhost",
+        "MYSQL_PORT": "3306",
+        "MYSQL_USER": "YOUR_DB_USER",
+        "MYSQL_PASSWORD": "YOUR_DB_PASSWORD",
+        "MYSQL_DATABASE": "YOUR_DB_NAME"
+      }
+    }
+  }
+}

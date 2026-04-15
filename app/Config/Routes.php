@@ -121,6 +121,16 @@ $routes->get('/app/options/get_businessmodel', 'ConfigurationsController::get_bu
 
 
 // =============================================================================
+// ESTATUS DE SEGUIMIENTO (PIPELINE)
+// =============================================================================
+
+$routes->get('/app/trackingstatus/all', 'TrackingStatusController::all', ['filter' => 'auth']);
+$routes->post('/app/trackingstatus/create', 'TrackingStatusController::create', ['filter' => 'auth']);
+$routes->get('/app/trackingstatus/edit/(:num)', 'TrackingStatusController::edit/$1', ['filter' => 'auth']);
+$routes->post('/app/trackingstatus/edit/(:num)', 'TrackingStatusController::edit/$1', ['filter' => 'auth']);
+$routes->get('/app/trackingstatus/delete/(:num)', 'TrackingStatusController::delete/$1', ['filter' => 'auth']);
+
+// =============================================================================
 // CRM MODULE
 // =============================================================================
 
@@ -133,14 +143,18 @@ $routes->get('/app/crm/dashboard', 'CrmController::dashboard', ['filter' => 'aut
 $routes->get('/app/crm/api/conversations', 'CrmController::api_conversations', ['filter' => 'auth']); /* Obtener conversaciones */
 $routes->get('/app/crm/api/messages/(:num)', 'CrmController::api_messages/$1', ['filter' => 'auth']); /* Obtener mensajes */
 $routes->post('/app/crm/api/send', 'CrmController::api_send_message', ['filter' => 'auth']); /* Enviar mensaje */
+$routes->post('/app/crm/api/return_to_ai', 'CrmController::api_return_to_ai', ['filter' => 'auth']); /* Devolver a la IA */
 $routes->post('/app/crm/api/assign', 'CrmController::api_assign', ['filter' => 'auth']); /* Asignar conversación */
 $routes->post('/app/crm/api/status', 'CrmController::api_update_status', ['filter' => 'auth']); /* Actualizar estado */
 $routes->get('/app/crm/api/pipeline', 'CrmController::api_pipeline', ['filter' => 'auth']); /* Datos del pipeline */
+$routes->get('/app/crm/api/pipeline/counts', 'CrmController::api_pipeline_counts', ['filter' => 'auth']); /* Conteos por estado + relación BD */
+$routes->post('/app/crm/api/pipeline/move', 'CrmController::api_pipeline_move', ['filter' => 'auth']); /* Mover lead entre columnas Kanban */
 $routes->get('/app/crm/api/stats', 'CrmController::api_stats', ['filter' => 'auth']); /* Estadísticas CRM */
 $routes->get('/app/crm/api/rescore/(:num)', 'CrmController::api_rescore/$1', ['filter' => 'auth']); /* Recalcular score */
 $routes->get('/app/crm/export/meta', 'CrmController::export_meta', ['filter' => 'auth']); /* Exportar para Meta */
 
 // Webhooks (público - sin autenticación)
+$routes->post('/api/ia/ingest', 'AiIntegrationController::ingest'); /* Ingesta de IA */
 $routes->get('/api/webhook/instagram', 'WebhookController::verifyInstagram'); /* Verificación webhook Instagram */
 $routes->post('/api/webhook/instagram', 'WebhookController::instagram'); /* Webhook Instagram DM */
 $routes->post('/api/webhook/whatsapp', 'WebhookController::whatsapp'); /* Webhook WhatsApp */

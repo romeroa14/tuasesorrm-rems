@@ -71,6 +71,9 @@
                                 </div>
                             </div>
                             <div>
+                                <button class="btn btn-sm btn-outline-info" onclick="returnToAi()" title="Devolver a la IA">
+                                    <i class="fas fa-robot"></i>
+                                </button>
                                 <button class="btn btn-sm btn-outline-warning" onclick="rescoreConversation()" title="Recalcular score">
                                     <i class="fas fa-brain"></i>
                                 </button>
@@ -512,6 +515,23 @@ function resolveConversation() {
         status: 'resolved'
     }, function() {
         loadConversations();
+    });
+}
+
+function returnToAi() {
+    if (!currentConversationId) return;
+    if (!confirm('¿Estás seguro de devolver esta conversación a la IA?')) return;
+    
+    $.post('/app/crm/api/return_to_ai', {
+        conversation_id: currentConversationId
+    }, function(response) {
+        if (response.status === 'success') {
+            alert(response.message || 'Conversación devuelta a la IA');
+            loadConversations();
+            openConversation(currentConversationId);
+        } else {
+            alert(response.message || 'Error al devolver a la IA');
+        }
     });
 }
 

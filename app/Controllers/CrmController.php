@@ -3,22 +3,24 @@ namespace App\Controllers;
 
 use App\Models\Conversation;
 use App\Models\Message;
-use App\Models\Leads;
 use App\Models\IntentionLog;
 use App\Libraries\ScoringService;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 class CrmController extends BaseController
 {
     protected $conversationModel;
     protected $messageModel;
-    protected $leadsModel;
     protected $intentionLogModel;
 
-    public function __construct()
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
+        parent::initController($request, $response, $logger);
+
         $this->conversationModel = new Conversation();
         $this->messageModel = new Message();
-        $this->leadsModel = new Leads();
         $this->intentionLogModel = new IntentionLog();
     }
 
@@ -93,7 +95,6 @@ class CrmController extends BaseController
 
         $conversations = $this->conversationModel->getInbox($filters);
 
-        // Get last message for each conversation
         foreach ($conversations as &$conv) {
             $lastMsg = $this->messageModel->getLastMessage($conv['id']);
             $conv['last_message'] = $lastMsg ? $lastMsg['content'] : '';
@@ -111,7 +112,6 @@ class CrmController extends BaseController
         $messages = $this->messageModel->getByConversation($conversationId);
         $conversation = $this->conversationModel->getWithLead($conversationId);
 
-        // Mark messages as read
         $this->messageModel->markAsRead($conversationId);
         $this->conversationModel->update($conversationId, ['unread_count' => 0]);
 
@@ -120,7 +120,7 @@ class CrmController extends BaseController
             'data' => [
                 'conversation' => $conversation,
                 'messages' => $messages,
-            ]
+            ],
         ]);
     }
 
@@ -142,7 +142,6 @@ class CrmController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'Conversación no encontrada']);
         }
 
-        // Save message locally
         $messageId = $this->messageModel->insert([
             'conversation_id' => $conversationId,
             'direction' => 'outbound',
@@ -153,23 +152,81 @@ class CrmController extends BaseController
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
-        // Update conversation
         $this->conversationModel->update($conversationId, [
             'last_message_at' => date('Y-m-d H:i:s'),
             'status' => 'assigned',
             'assigned_to' => $agentId,
         ]);
 
-        // TODO: Send via Instagram/WhatsApp API when tokens are configured
-        // $this->sendToInstagram($conversation['external_id'], $content);
+        // Send handoff webhook to Python AI
+        $pythonAiUrl = getenv('PYTHON_AI_WEBHOOK_URL');
+        if ($pythonAiUrl) {
+            try {
+                $client = \Config\Services::curlrequest();
+                $client->post($pythonAiUrl . '/handoff', [
+                    'json' => [
+                        'conversation_id' => $conversationId,
+                        'external_id' => $conversation['external_id'],
+                        'action' => 'pause'
+                    ],
+                    'timeout' => 3
+                ]);
+            } catch (\Exception $e) {
+                // Ignore errors if unreachable
+                log_message('error', 'Failed to send handoff webhook: ' . $e->getMessage());
+            }
+        }
 
         return $this->response->setJSON([
             'status' => 'success',
             'data' => [
                 'message_id' => $messageId,
                 'sent_at' => date('Y-m-d H:i:s'),
-            ]
+            ],
         ]);
+    }
+
+    /**
+     * Return conversation to AI
+     */
+    public function api_return_to_ai()
+    {
+        $conversationId = $this->request->getPost('conversation_id');
+
+        if (empty($conversationId)) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Faltan campos requeridos']);
+        }
+
+        $conversation = $this->conversationModel->find($conversationId);
+        if (!$conversation) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Conversación no encontrada']);
+        }
+
+        $this->conversationModel->update($conversationId, [
+            'status' => 'open',
+            'assigned_to' => null,
+        ]);
+
+        // Send resume webhook to Python AI
+        $pythonAiUrl = getenv('PYTHON_AI_WEBHOOK_URL');
+        if ($pythonAiUrl) {
+            try {
+                $client = \Config\Services::curlrequest();
+                $client->post($pythonAiUrl . '/handoff', [
+                    'json' => [
+                        'conversation_id' => $conversationId,
+                        'external_id' => $conversation['external_id'],
+                        'action' => 'resume'
+                    ],
+                    'timeout' => 3
+                ]);
+            } catch (\Exception $e) {
+                // Ignore errors if unreachable
+                log_message('error', 'Failed to send resume webhook: ' . $e->getMessage());
+            }
+        }
+
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Conversación devuelta a la IA']);
     }
 
     /**
@@ -202,6 +259,88 @@ class CrmController extends BaseController
     }
 
     /**
+     * Pipeline: DB relationship + lead counts per trackingstatus (for dashboards / debugging)
+     */
+    public function api_pipeline_counts()
+    {
+        $db = \Config\Database::connect();
+
+        $byStatus = $db->query("
+            SELECT ts.id, ts.name, COUNT(l.id) AS lead_count
+            FROM trackingstatus ts
+            LEFT JOIN assignedclients ac ON ac.trackingstatus_id = ts.id
+            LEFT JOIN leads l ON l.id = ac.lead_id
+            GROUP BY ts.id, ts.name
+            ORDER BY ts.id
+        ")->getResultArray();
+
+        $crmWithoutRow = (int) $db->query("
+            SELECT COUNT(DISTINCT l.id) AS n
+            FROM leads l
+            INNER JOIN conversations c ON c.lead_id = l.id
+            LEFT JOIN assignedclients ac ON ac.lead_id = l.id
+            WHERE ac.id IS NULL
+        ")->getRow()->n;
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data' => [
+                'relationship' => [
+                    'summary' => 'trackingstatus (estados del embudo) ← assignedclients.trackingstatus_id. Cada lead tiene como máximo una fila en assignedclients (lead_id UNIQUE) con el estado actual y el agente asignado.',
+                    'keys' => [
+                        'trackingstatus.id' => 'PK; columna Kanban',
+                        'assignedclients.lead_id' => 'FK → leads.id (UNIQUE)',
+                        'assignedclients.trackingstatus_id' => 'FK → trackingstatus.id',
+                    ],
+                ],
+                'leads_by_tracking_status' => $byStatus,
+                'crm_leads_with_conversation_but_no_assignedclients_row' => $crmWithoutRow,
+            ],
+        ]);
+    }
+
+    /**
+     * Move a lead to another pipeline column (updates or creates assignedclients)
+     */
+    public function api_pipeline_move()
+    {
+        $leadId = (int) $this->request->getPost('lead_id');
+        $statusId = (int) $this->request->getPost('trackingstatus_id');
+        $userId = (int) session()->get('id');
+
+        if ($leadId < 1 || $statusId < 1 || $userId < 1) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Datos inválidos']);
+        }
+
+        if (!$this->TrackingStatus->find($statusId)) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Estado de seguimiento no existe']);
+        }
+
+        if (!$this->Leads->find($leadId)) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Lead no encontrado']);
+        }
+
+        $existing = $this->AssignedClients->where('lead_id', $leadId)->first();
+
+        if ($existing) {
+            $this->AssignedClients->update($existing['id'], [
+                'trackingstatus_id' => $statusId,
+            ]);
+        } else {
+            $this->AssignedClients->insert([
+                'delegate_id' => $userId,
+                'assigned_id' => $userId,
+                'lead_id' => $leadId,
+                'trackingstatus_id' => $statusId,
+                'assignment_at' => date('Y-m-d'),
+                'first_contact_at' => '0000-00-00',
+            ]);
+        }
+
+        return $this->response->setJSON(['status' => 'success']);
+    }
+
+    /**
      * Get pipeline data grouped by trackingstatus
      */
     public function api_pipeline()
@@ -229,11 +368,12 @@ class CrmController extends BaseController
             LEFT JOIN assignedclients ac ON ac.trackingstatus_id = ts.id
             LEFT JOIN leads l ON l.id = ac.lead_id
             LEFT JOIN users u ON u.id = ac.assigned_id
-            LEFT JOIN conversations c ON c.lead_id = l.id
+            LEFT JOIN conversations c ON c.lead_id = l.id AND c.id = (
+                SELECT MAX(c2.id) FROM conversations c2 WHERE c2.lead_id = l.id
+            )
             ORDER BY ts.id, l.intention_score DESC
         ")->getResultArray();
 
-        // Group by status
         $pipeline = [];
         foreach ($result as $row) {
             $statusId = $row['status_id'];
@@ -245,9 +385,14 @@ class CrmController extends BaseController
                 ];
             }
             if ($row['lead_id']) {
-                $pipeline[$statusId]['leads'][] = $row;
+                $pipeline[$statusId]['leads'][$row['lead_id']] = $row;
             }
         }
+
+        foreach ($pipeline as &$column) {
+            $column['leads'] = array_values($column['leads']);
+        }
+        unset($column);
 
         return $this->response->setJSON(['status' => 'success', 'data' => array_values($pipeline)]);
     }
@@ -259,8 +404,8 @@ class CrmController extends BaseController
     {
         $db = \Config\Database::connect();
 
-        $totalLeads = $db->query("SELECT COUNT(*) as total FROM leads")->getRow()->total;
-        $totalConversations = $db->query("SELECT COUNT(*) as total FROM conversations")->getRow()->total;
+        $totalLeads = $db->query('SELECT COUNT(*) as total FROM leads')->getRow()->total;
+        $totalConversations = $db->query('SELECT COUNT(*) as total FROM conversations')->getRow()->total;
         $openConversations = $db->query("SELECT COUNT(*) as total FROM conversations WHERE status = 'open'")->getRow()->total;
         $unassigned = $db->query("SELECT COUNT(*) as total FROM conversations WHERE assigned_to IS NULL AND status != 'archived'")->getRow()->total;
 
@@ -271,19 +416,19 @@ class CrmController extends BaseController
             GROUP BY intention_label
         ")->getResultArray();
 
-        $byChannel = $db->query("
+        $byChannel = $db->query('
             SELECT channel, COUNT(*) as total 
             FROM conversations 
             GROUP BY channel
-        ")->getResultArray();
+        ')->getResultArray();
 
-        $recentScores = $db->query("
+        $recentScores = $db->query('
             SELECT il.*, l.name as lead_name 
             FROM intention_logs il 
             JOIN leads l ON l.id = il.lead_id 
             ORDER BY il.created_at DESC 
             LIMIT 10
-        ")->getResultArray();
+        ')->getResultArray();
 
         return $this->response->setJSON([
             'status' => 'success',
@@ -295,7 +440,7 @@ class CrmController extends BaseController
                 'by_label' => $byLabel,
                 'by_channel' => $byChannel,
                 'recent_scores' => $recentScores,
-            ]
+            ],
         ]);
     }
 
@@ -321,8 +466,8 @@ class CrmController extends BaseController
     public function export_meta()
     {
         $filters = $this->request->getGet();
-        
-        $builder = $this->leadsModel->select('leads.name, leads.phone, leads.email, leads.instagram_username, leads.intention_score, leads.intention_label, leads.interest_type, leads.budget_detected, leads.zone_interest');
+
+        $builder = $this->Leads->select('leads.name, leads.phone, leads.email, leads.instagram_username, leads.intention_score, leads.intention_label, leads.interest_type, leads.budget_detected, leads.zone_interest');
 
         if (!empty($filters['label'])) {
             $builder->where('intention_label', $filters['label']);
@@ -339,14 +484,12 @@ class CrmController extends BaseController
 
         $leads = $builder->findAll();
 
-        // Generate CSV
         $filename = 'leads_meta_export_' . date('Y-m-d_His') . '.csv';
-        
+
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=' . $filename);
 
         $output = fopen('php://output', 'w');
-        // Meta Ads requires: email, phone, fn (first name), ln (last name), ct (city), country
         fputcsv($output, ['email', 'phone', 'fn', 'ln', 'ct', 'country']);
 
         foreach ($leads as $lead) {

@@ -7,6 +7,9 @@ use App\Models\Leads;
 use App\Models\Funnels;
 use App\Libraries\ScoringService;
 use CodeIgniter\RESTful\ResourceController;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 class WebhookController extends ResourceController
 {
@@ -14,8 +17,10 @@ class WebhookController extends ResourceController
     protected $messageModel;
     protected $leadsModel;
 
-    public function __construct()
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
+        parent::initController($request, $response, $logger);
+
         $this->conversationModel = new Conversation();
         $this->messageModel = new Message();
         $this->leadsModel = new Leads();

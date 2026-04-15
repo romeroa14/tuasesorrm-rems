@@ -122,6 +122,9 @@ nb-configuration.xml
 # Visual Studio Code
 .vscode/
 
+# Cursor — MCP local con credenciales (copiar desde .cursor/mcp.json.example)
+.cursor/mcp.json
+
 /results/
 /phpunit*.xml
 /.phpunit.*.cache
