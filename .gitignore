@@ -82,9 +82,9 @@ tests/coverage*
 phpunit
 
 #-------------------------
-# Composer
+# Composer (solo la raíz del proyecto, no public/vendor/ con assets de npm)
 #-------------------------
-vendor/
+/vendor/
 
 #-------------------------
 # IDE / Development Files
