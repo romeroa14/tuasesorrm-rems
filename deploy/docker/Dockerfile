@@ -1,15 +1,16 @@
-# CodeIgniter 4 — PHP 8.2 + Apache, DocumentRoot = public/
-FROM php:8.2-apache
+# CodeIgniter 4 — Apache. Usar PHP 8.4: google/recaptcha ^1.4 requiere php>=8.4 (composer.lock).
+FROM php:8.4-apache
 
 # Paquetes para extensiones
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
     libicu-dev \
     libzip-dev \
     libpng-dev \
     libpq-dev \
     unzip \
   && docker-php-ext-configure intl \
-  && docker-php-ext-install -j"$(nproc)" intl mysqli pdo pdo_mysql zip gd pdo_pgsql opcache \
+  && docker-php-ext-install -j"$(nproc)" intl mysqli pdo pdo_mysql zip gd pdo_pgsql opcache bcmath \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN a2enmod rewrite headers

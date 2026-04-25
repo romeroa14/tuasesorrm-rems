@@ -1,5 +1,7 @@
 # Despluge REMS + Nginx Proxy Manager (red `proxy-network`)
 
+La imagen usa **PHP 8.4** para que `composer install` sea compatible con `google/recaptcha` 1.4.x del `composer.lock` (esas versiones exigen `php >= 8.4`).
+
 ## Requisitos en el servidor
 
 - Docker y Docker Compose v2
@@ -76,6 +78,15 @@ Abre `https://rems.admetricas.com/`. Ruta pública de webhook (según [Routes](a
 
 `https://rems.admetricas.com/api/webhook/instagram`
 
-## 7. Depuración
+## 7. Contenedor en `Restarting` y “sin puerto”
+
+- **No hay columna `PORTS`**: en este `docker-compose` **no** se publica `0.0.0.0:80->80` a propósito; Nginx Proxy Manager habla con `rems-app` por la red Docker `proxy-network`. Eso es correcto.
+- **Estado `Restarting`**: el entrypoint o Apache termina con error. En el servidor ejecuta:
+  ```bash
+  docker logs rems-app --tail 80
+  ```
+  Causas típicas: **falta `composer.json` en el volumen** (ruta de `..` en `docker-compose` apunta a la carpeta incorrecta), **volumen vacío**, **fallo de `composer install`** (red, memoria) o **`.env` no aplica al arranque** (el fallo luego se ve al abrir la web).
+
+## 8. Depuración de red (NPM)
 
 Si no resuelve el nombre `rems-app` desde NPM, en la misma red debería funcionar. Si NPM está en otra red, conecta el servicio `rems` a la red de NPM o añade un `ports: "127.0.0.1:9080:80"` y en NPM reenvía a `172.17.0.1:9080` o la IP de bridge del host (menos limpio que una sola red compartida).
