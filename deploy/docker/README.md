@@ -44,6 +44,15 @@ Si ves la página sin estilos y 404 en `/vendor/bootstrap/...`, falta ejecutar e
 
 El compose levanta **`rems-mysql`** (imagen `mysql:8.0`, datos persistidos en el volumen `rems_mysql_data`, **sin** abrir 3306 al host salvo que descomentéis `ports` en el yml). La app y MySQL se ven por la red interna `rems-internal`; el contenedor de PHP alcanza el motor con el **nombre de host DNS** `rems-mysql` (no uses `localhost` en CodeIgniter).
 
+### Los **dos** `.env` (sí, son distintos)
+
+| Fichero | Quién lo lee | Qué poner en la **contraseña** si es `Rems20$` |
+|--------|----------------|-----------------------------------------------|
+| **`deploy/docker/.env`** | Solo **Docker Compose** (crea el contenedor MySQL) | `REMS_MYSQL_PASSWORD=Rems20$$` — aquí **`$$` = un solo `$` real** en MySQL. |
+| **`.env` en la raíz del repo** (junto a `app/`, `public/`) | **CodeIgniter** (`spark`, la web) | La clave **tal cual la usa la base**: p. ej. `database.default.password = "Rems20$"` (un dólar). **No** uses `Rems20$$` aquí: no es el mismo lenguaje que Compose; con `$$` la app intentaría una contraseña distinta a la de MySQL. |
+
+Misma lógica para `REMS_MYSQL_ROOT_PASSWORD` vs lo que tú guardes para root; el usuario y base **deben coincidir** (p. ej. `rems` y `rems_db` en ambos lados). En **local**, si no levantas `docker compose` y usas un MySQL en tu máquina, basta con el **`.env` de la raíz** apuntando a `localhost` (o 127.0.0.1) y a tu clave; **`deploy/docker/.env` no hace falta** salvo que arranques el stack con Compose en esa máquina.
+
 1. Crea el fichero de variables **solo** para Docker Compose (no subir a git):
 
    ```bash
@@ -53,15 +62,15 @@ El compose levanta **`rems-mysql`** (imagen `mysql:8.0`, datos persistidos en el
    # contraseña real hasta que la cambies con ALTER USER o recrees el volumen).
    ```
 
-2. En el **`.env` de la raíz del repo** (CodeIgniter), alinea conexión con el mismo usuario, base y contraseña que en el paso 1, y host por TCP:
+2. En el **`.env` de la raíz del repo** (CodeIgniter), alinea conexión con el **mismo usuario, base y contraseña real** (no el `$$` de Docker). Con contraseña `Rems20$` en el servidor, ejemplo **correcto** en el `.env` de la raíz:
 
    ```ini
    database.default.DBDriver = MySQLi
    database.default.hostname = rems-mysql
    database.default.port = 3306
-   database.default.database = rems
+   database.default.database = rems_db
    database.default.username = rems
-   database.default.password = <mismo valor que REMS_MYSQL_PASSWORD>
+   database.default.password = "Rems20$"
    ```
 
    En ese mismo `.env` siguen el resto de opciones de la app: `app.baseURL`, `CI_ENVIRONMENT`, `JWT`, webhooks, etc.
