@@ -33,14 +33,17 @@ En la raíz del proyecto, copia y edita (base URL, BD, `JWT`, webhooks, etc.):
 
 Asegúrate de que el host de la base de datos sea alcanzable **desde dentro del contenedor** (a veces `host.docker.internal` o la IP del host en la red bridge, o un contenedor `mysql` en la misma red).
 
-## 3. Permisos `writable/`
+## 3. Error: «The WRITEPATH is not set correctly.»
+
+CodeIgniter needs `writable/` (y subcarpetas) **escribible** para `www-data`. Con volumen hacia el host, el `entrypoint` aplica `chown`/`chmod` al arranque. Si aún falla, en el **host**:
 
 ```bash
-chmod -R 775 writable/
-chown -R www-data:www-data writable/   # ajusta usuario si aplica
+cd /ruta/del/proyecto
+sudo chown -R 33:33 writable
+sudo chmod -R 775 writable
 ```
 
-Dentro del contenedor, Apache corre como `www-data`.
+(`33:33` = `www-data` en Debian; comprobar UID: `docker exec rems-app id www-data`.)
 
 ## 4. Construir y levantar
 

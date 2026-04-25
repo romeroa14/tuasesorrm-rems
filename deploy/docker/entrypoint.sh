@@ -19,4 +19,17 @@ if [ ! -f "vendor/autoload.php" ]; then
   fi
 fi
 
+# CI4: WRITEPATH = writable/ debe existir y ser escribible por Apache (www-data).
+# Un volumen montado desde el host suele quedar con dueño 1000:1000; sin esto, CI4 responde:
+# "The WRITEPATH is not set correctly."
+if [ ! -d "writable" ]; then
+  echo "[rems] FATAL: no existe la carpeta writable/ en /var/www/html"
+  exit 1
+fi
+for d in cache logs session uploads debugbar; do
+  mkdir -p "writable/$d"
+done
+chown -R www-data:www-data writable 2>/dev/null || true
+chmod -R 775 writable 2>/dev/null || chmod -R 777 writable 2>/dev/null || true
+
 exec apache2-foreground
