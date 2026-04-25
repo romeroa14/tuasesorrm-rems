@@ -24,7 +24,23 @@ cd /opt/docker/rems
 # aquí vive el repo subdominio.rems completo
 ```
 
-## 2. Configurar `.env`
+## 2. Assets en `public/vendor/` (CSS/JS; no es Composer)
+
+Las vistas cargan Bootstrap, jQuery, Font Awesome, etc. desde **`public/vendor/`** (URL `/vendor/...`). Eso **no** lo instala Composer: vienen de **`package.json`** (npm).
+
+En la máquina donde preparas el deploy (con Node.js):
+
+```bash
+cd /ruta/del/repo
+npm ci
+npm run sync:public-vendor   # o: ya corre en postinstall tras npm ci
+```
+
+Sube el repo **incluyendo** la carpeta `public/vendor/` generada; en el VPS solo hace falta el volumen montado (no Node en el contenedor PHP).
+
+Si ves la página sin estilos y 404 en `/vendor/bootstrap/...`, falta ejecutar el paso anterior o no se subió `public/vendor/`.
+
+## 3. Configurar `.env`
 
 En la raíz del proyecto, copia y edita (base URL, BD, `JWT`, webhooks, etc.):
 
@@ -33,7 +49,7 @@ En la raíz del proyecto, copia y edita (base URL, BD, `JWT`, webhooks, etc.):
 
 Asegúrate de que el host de la base de datos sea alcanzable **desde dentro del contenedor** (a veces `host.docker.internal` o la IP del host en la red bridge, o un contenedor `mysql` en la misma red).
 
-## 3. Error: «The WRITEPATH is not set correctly.»
+## 4. Error: «The WRITEPATH is not set correctly.»
 
 CodeIgniter needs `writable/` (y subcarpetas) **escribible** para `www-data`. Con volumen hacia el host, el `entrypoint` aplica `chown`/`chmod` al arranque. Si aún falla, en el **host**:
 
@@ -45,7 +61,7 @@ sudo chmod -R 775 writable
 
 (`33:33` = `www-data` en Debian; comprobar UID: `docker exec rems-app id www-data`.)
 
-## 4. Construir y levantar
+## 5. Construir y levantar
 
 Desde la **raíz del repo** (carpeta que contiene `app/` y `deploy/`):
 
@@ -60,7 +76,7 @@ docker ps | grep rems-app
 docker exec rems-app curl -sI -H "Host: localhost" http://127.0.0.1/ | head -5
 ```
 
-## 5. Nginx Proxy Manager (puerto 81)
+## 6. Nginx Proxy Manager (puerto 81)
 
 **Add Proxy Host**
 
@@ -75,13 +91,13 @@ docker exec rems-app curl -sI -H "Host: localhost" http://127.0.0.1/ | head -5
 
 Pestaña **SSL**: certificado **Let's Encrypt**, forzar SSL.
 
-## 6. Probar
+## 7. Probar
 
 Abre `https://rems.admetricas.com/`. Ruta pública de webhook (según [Routes](app/Config/Routes.php)):
 
 `https://rems.admetricas.com/api/webhook/instagram`
 
-## 7. Contenedor en `Restarting` y “sin puerto”
+## 8. Contenedor en `Restarting` y “sin puerto”
 
 - **No hay columna `PORTS`**: en este `docker-compose` **no** se publica `0.0.0.0:80->80` a propósito; Nginx Proxy Manager habla con `rems-app` por la red Docker `proxy-network`. Eso es correcto.
 - **Estado `Restarting`**: el entrypoint o Apache termina con error. En el servidor ejecuta:
@@ -90,6 +106,6 @@ Abre `https://rems.admetricas.com/`. Ruta pública de webhook (según [Routes](a
   ```
   Causas típicas: **falta `composer.json` en el volumen** (ruta de `..` en `docker-compose` apunta a la carpeta incorrecta), **volumen vacío**, **fallo de `composer install`** (red, memoria) o **`.env` no aplica al arranque** (el fallo luego se ve al abrir la web).
 
-## 8. Depuración de red (NPM)
+## 9. Depuración de red (NPM)
 
 Si no resuelve el nombre `rems-app` desde NPM, en la misma red debería funcionar. Si NPM está en otra red, conecta el servicio `rems` a la red de NPM o añade un `ports: "127.0.0.1:9080:80"` y en NPM reenvía a `172.17.0.1:9080` o la IP de bridge del host (menos limpio que una sola red compartida).
