@@ -92,6 +92,14 @@ Misma lógica para `REMS_MYSQL_ROOT_PASSWORD` vs lo que tú guardes para root; e
    - **Contraseña:** `CambiarLaClave1!`  
    Luego cámbiala desde la app o actualiza el registro en MySQL. Si ya importaste un dump con `users` propio, no se inserta el admin duplicado (solo si `users` está vacío).
 
+   **Usuario operativo (Cristian Trejo)** Tras las migraciones, crea o actualiza el usuario con email de producción (contraseña por defecto; puedes fijar `REMS_SEED_CTREJO_PASSWORD` en el `.env` de la raíz para no usar el valor por omisión):
+
+   ```bash
+   docker exec rems-app php spark db:seed CtrejoUserSeeder
+   ```
+
+   (Email: `ctrejo@tuasesorrm.com.ve`; seeder idempotente: si el email ya existe, actualiza nombre y clave.)
+
 5. Comprueba contenedores: `docker ps` debería listar `rems-app` y `rems-mysql` en estado sano.
 
 **Importar un dump** existente: `docker exec -i rems-mysql mysql -u rems -p<password> rems < backup.sql` (o con `root` y redirección a la base que corresponda). Ajustad credenciales y opciones según vuestro dump.
