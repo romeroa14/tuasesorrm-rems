@@ -1,0 +1,35 @@
+# Ubicar en el servidor, por ej: /opt/docker/rems/docker-compose.yml
+# Requisito: la red creada por nginx-proxy (mismo nombre que en /opt/docker/nginx-proxy)
+#
+#   docker compose -f deploy/docker/docker-compose.yml up -d --build
+#   (ejecutar desde la raíz del repo: subdominio.rems)
+#
+# Nginx Proxy Manager: Proxy Host
+#   Domain: rems.admetricas.com
+#   Forward: rems-app  |  Port: 80  |  Scheme: http
+#   SSL: Let's Encrypt
+#
+# Red externa: debe existir (docker network ls | grep proxy)
+
+services:
+  rems:
+    build:
+      context: ../..
+      dockerfile: deploy/docker/Dockerfile
+    image: rems-ci4:local
+    container_name: rems-app
+    restart: unless-stopped
+    volumes:
+      # Raíz del proyecto CodeIgniter (carpeta que contiene /app, /public, /vendor…)
+      - ../..:/var/www/html
+    networks:
+      - proxy-network
+    # Sin ports: el tráfico entra solo por nginx-proxy (red interna)
+    # Descomentar para depurar desde el host:
+    # ports:
+    #   - "127.0.0.1:9080:80"
+
+networks:
+  proxy-network:
+    external: true
+    name: proxy-network
