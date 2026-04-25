@@ -6,7 +6,7 @@ class CrmModule extends Migration
 {
     public function up()
     {
-        // 1. ALTER leads table - add new CRM fields
+        // 1. ALTER leads (nombre en minúscula tras 2024-02-22-160000)
         $this->forge->addColumn('leads', [
             'email' => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => true, 'after' => 'phone'],
             'instagram_username' => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => true, 'after' => 'email'],
@@ -72,8 +72,19 @@ class CrmModule extends Migration
         $this->forge->addKey('lead_id', false, false, 'idx_lead_score');
         $this->forge->createTable('intention_logs');
 
-        // 5. Add new funnel for Instagram DM
+        // 5. funnels: no existía en migraciones previas; en instalaciones antiguas ya está en la BD
         $db = \Config\Database::connect();
+        if (! $db->tableExists('funnels')) {
+            $this->forge->addField([
+                'id'    => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+                'name'  => ['type' => 'VARCHAR', 'constraint' => 255],
+                'user_id' => ['type' => 'INT', 'constraint' => 11, 'null' => true],
+                'created_at' => ['type' => 'DATETIME', 'null' => true],
+            ]);
+            $this->forge->addKey('id', true);
+            $this->forge->createTable('funnels');
+        }
+
         $db->query("INSERT INTO funnels (name, created_at) VALUES ('Instagram DM - Automático', NOW())");
     }
 
