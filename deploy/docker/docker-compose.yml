@@ -1,15 +1,13 @@
-# Ubicar en el servidor, por ej: /opt/docker/rems/docker-compose.yml
-# Requisito: la red creada por nginx-proxy (mismo nombre que en /opt/docker/nginx-proxy)
+# Ubicar en el servidor, por ej: /opt/docker/rems/tuasesorrm-rems
+# Requisito: red creada por nginx-proxy: proxy-network
 #
-#   docker compose -f deploy/docker/docker-compose.yml up -d --build
-#   (ejecutar desde la raíz del repo: subdominio.rems)
+#   1) cp deploy/docker/.env.example deploy/docker/.env  # y editar contraseñas
+#   2) docker compose -f deploy/docker/docker-compose.yml up -d --build
+#   (desde la raíz del repo: carpeta con app/, public/, composer.json)
 #
-# Nginx Proxy Manager: Proxy Host
-#   Domain: rems.admetricas.com
-#   Forward: rems-app  |  Port: 80  |  Scheme: http
-#   SSL: Let's Encrypt
+# Nginx Proxy Manager: Forward rems-app:80. Ver README.md
 #
-# Red externa: debe existir (docker network ls | grep proxy)
+# MySQL: servicio rems-mysql (no expone 3306 al host; solo red interna rems-internal).
 
 services:
   rems:
@@ -19,17 +17,50 @@ services:
     image: rems-ci4:local
     container_name: rems-app
     restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      rems-mysql:
+        condition: service_healthy
     volumes:
-      # Raíz del proyecto CodeIgniter (carpeta que contiene /app, /public, /vendor…)
       - ../..:/var/www/html
     networks:
       - proxy-network
-    # Sin ports: el tráfico entra solo por nginx-proxy (red interna)
-    # Descomentar para depurar desde el host:
+      - rems-internal
     # ports:
     #   - "127.0.0.1:9080:80"
+
+  rems-mysql:
+    image: mysql:8.0
+    container_name: rems-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${REMS_MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${REMS_MYSQL_DATABASE}
+      MYSQL_USER: ${REMS_MYSQL_USER}
+      MYSQL_PASSWORD: ${REMS_MYSQL_PASSWORD}
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - rems-mysql-data:/var/lib/mysql
+    networks:
+      - rems-internal
+    healthcheck:
+      test: ["CMD", "sh", "-c", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 40s
+    # Descomentar para depurar MySQL desde el host (cuidado en producción):
+    # ports:
+    #   - "127.0.0.1:33306:3306"
+
+volumes:
+  rems-mysql-data:
+    name: rems_mysql_data
 
 networks:
   proxy-network:
     external: true
     name: proxy-network
+  rems-internal:
+    driver: bridge

@@ -40,14 +40,92 @@ Sube el repo **incluyendo** la carpeta `public/vendor/` generada; en el VPS solo
 
 Si ves la página sin estilos y 404 en `/vendor/bootstrap/...`, falta ejecutar el paso anterior o no se subió `public/vendor/`.
 
-## 3. Configurar `.env`
+## 3. MySQL dedicado (incluido en `docker-compose.yml`)
 
-En la raíz del proyecto, copia y edita (base URL, BD, `JWT`, webhooks, etc.):
+El compose levanta **`rems-mysql`** (imagen `mysql:8.0`, datos persistidos en el volumen `rems_mysql_data`, **sin** abrir 3306 al host salvo que descomentéis `ports` en el yml). La app y MySQL se ven por la red interna `rems-internal`; el contenedor de PHP alcanza el motor con el **nombre de host DNS** `rems-mysql` (no uses `localhost` en CodeIgniter).
 
-- `app.baseURL = 'https://rems.admetricas.com/'`
-- `CI_ENVIRONMENT = production` (o `development` solo para pruebas)
+1. Crea el fichero de variables **solo** para Docker Compose (no subir a git):
 
-Asegúrate de que el host de la base de datos sea alcanzable **desde dentro del contenedor** (a veces `host.docker.internal` o la IP del host en la red bridge, o un contenedor `mysql` en la misma red).
+   ```bash
+   cp deploy/docker/.env.example deploy/docker/.env
+   # Edita: REMS_MYSQL_ROOT_PASSWORD, REMS_MYSQL_PASSWORD, nombres si quieres
+   ```
+
+2. En el **`.env` de la raíz del repo** (CodeIgniter), alinea conexión con el mismo usuario, base y contraseña que en el paso 1, y host por TCP:
+
+   ```ini
+   database.default.DBDriver = MySQLi
+   database.default.hostname = rems-mysql
+   database.default.port = 3306
+   database.default.database = rems
+   database.default.username = rems
+   database.default.password = <mismo valor que REMS_MYSQL_PASSWORD>
+   ```
+
+   En ese mismo `.env` siguen el resto de opciones de la app: `app.baseURL`, `CI_ENVIRONMENT`, `JWT`, webhooks, etc.
+
+3. Construcción y arranque (desde la **raíz del repo**), opcionalmente con `--env-file` si el `.env` de compose no carga (según vuestro directorio de trabajo):
+
+   ```bash
+   docker compose -f deploy/docker/docker-compose.yml up -d --build
+   ```
+
+4. **Migraciones** (primera vez o tras cambios), dentro del contenedor de la app:
+
+   ```bash
+   docker exec rems-app php spark migrate
+   ```
+
+5. Comprueba contenedores: `docker ps` debería listar `rems-app` y `rems-mysql` en estado sano.
+
+**Importar un dump** existente: `docker exec -i rems-mysql mysql -u rems -p<password> rems < backup.sql` (o con `root` y redirección a la base que corresponda). Ajustad credenciales y opciones según vuestro dump.
+
+### MySQL: «No such file or directory» (o no conecta)
+
+Con `hostname = localhost`, MySQLi intenta un **socket** Unix que **no existe** en la imagen PHP. Usa un host por **TCP**:
+
+| Dónde está MySQL | En `.env` (CodeIgniter) |
+|------------------|-----------|
+| **Servicio `rems-mysql` en este `docker-compose`** (recomendado) | `database.default.hostname = rems-mysql` |
+| Servicio en el **host** (VPS), puerto 3306 | `database.default.hostname = host.docker.internal` (el compose ya añade `extra_hosts: host-gateway`) |
+| **Otro** contenedor (otra red) | Conecta `rems` a esa red y el **nombre del servicio** como `hostname` |
+| Desarrollo **sin** Docker, PHP y MySQL en la misma máquina | `localhost` o `127.0.0.1` según socket/TCP |
+
+Tras cambiar el `.env` de CodeIgniter, aplica: `docker compose -f deploy/docker/docker-compose.yml up -d` (o `--force-recreate` si hace falta recrear contenedores).
+
+**Nota:** La tabla de *host* MySQL aplica a MySQL en el anfitrión u otros contenedores. Con el servicio **`rems-mysql` incluido** no suele hacer falta tocar el bind de MySQL en el host.
+
+### Misma caja con Laravel (Postgre) y este proyecto
+
+En el servidor, Laravel corre contra **Postgre** (`laravel-postgres`, base `fb_google`, etc.). **Este proyecto (REMS) está hecho y probado con MySQL:** migraciones, consultas, `DATE_FORMAT`, `CONCAT`, `DATEDIFF` y similares **no** son intercambiables con **solo** cambiar el `.env` a `Postgre` en CodeIgniter. Reutilizar el **mismo** Postgre de Laravel con REMS hoy implicaría **portar** el esquema y el SQL, no solo la conexión.
+
+**Recomendación práctica:** usad el servicio **MySQL incluido** en `docker-compose.yml` (`rems-mysql`, tabla arriba) o, si no encaja, MySQL en el host u otro contenedor con un `hostname` alcanzable. Laravel y su Postgre quedan independientes. La app REMS se comporta como en el repositorio (MySQLi).
+
+**Si más adelante** migráis a Postgre, la imagen ya incluye `pdo_pgsql` en el `Dockerfile` y en `.env` podría usarse p. ej. `database.default.DBDriver = Postgre` y `port = 5432`, **después** de adaptar migraciones y consultas.
+
+**Solo** para poner el contenedor `rems-app` en la **misma red** que `laravel-postgres` (p. ej. otras pruebas o un proxy interno al mismo contenedor) existe el override `deploy/docker/docker-compose.laravel.yaml`:
+
+1. Averigua el **nombre** de la red de Docker a la que está unido `laravel-postgres`:
+
+   ```bash
+   docker inspect laravel-postgres -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{"\n"}}{{end}}'
+   ```
+
+2. Ese string debe ponerse en `networks: laravel-db: name: ...` dentro de `docker-compose.laravel.yaml` (a veces es `laravel_laravel-network` u otra variante, según el `project` de Compose de Laravel).
+
+3. Arranque con ambos archivos:
+
+   ```bash
+   docker compose -f deploy/docker/docker-compose.yml -f deploy/docker/docker-compose.laravel.yaml up -d
+   ```
+
+4. Mientras REMS use MySQL, el `hostname` de la base en `.env` **no** debe ser `laravel-postgres` (eso es un servidor **Postgre**).
+
+**Alternativa sin tocar el YAML:** con el contenedor ya en marcha, red manual:
+
+`docker network connect <red_de_laravel_postgres> rems-app`
+
+(útil para pruebas; en producción, declararlo en el override es preferible).
 
 ## 4. Error: «The WRITEPATH is not set correctly.»
 
@@ -61,18 +139,19 @@ sudo chmod -R 775 writable
 
 (`33:33` = `www-data` en Debian; comprobar UID: `docker exec rems-app id www-data`.)
 
-## 5. Construir y levantar
+## 5. Construir y levantar (atajo)
 
-Desde la **raíz del repo** (carpeta que contiene `app/` y `deploy/`):
+Misma ruta que en la sección 3, por si buscas solo el comando:
 
 ```bash
+# Requisito: deploy/docker/.env (desde .env.example) y .env de CodeIgniter con rems-mysql
 docker compose -f deploy/docker/docker-compose.yml up -d --build
 ```
 
 Comprueba:
 
 ```bash
-docker ps | grep rems-app
+docker ps | grep -E 'rems-app|rems-mysql'
 docker exec rems-app curl -sI -H "Host: localhost" http://127.0.0.1/ | head -5
 ```
 
