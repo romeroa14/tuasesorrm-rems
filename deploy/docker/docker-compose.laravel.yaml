@@ -1,0 +1,22 @@
+# Opcional: coloca rems-app en la misma red que laravel-postgres.
+#
+# 1) Nombre de red en TU servidor (casi nunca es literalmente "laravel_laravel_network"):
+#    docker inspect laravel-postgres -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}}{{"\n"}}{{end}}'
+# 2) Edita `name:` abajo para que coincida (ej. /opt/docker/laravel a veces: laravel_laravel-network).
+# 3) Levanta:
+#    docker compose -f deploy/docker/docker-compose.yml -f deploy/docker/docker-compose.laravel.yaml up -d
+#
+# NOTA: REMS hoy usa SQL orientado a MySQL (migraciones, modelos, DATE_FORMAT, CONCAT, etc.).
+# Conectar a Postgre no sustituye a MySQL solo con .env: haría falta un porteado. Ver README.
+
+services:
+  rems:
+    networks:
+      - proxy-network
+      - laravel-db
+
+networks:
+  laravel-db:
+    external: true
+    # <- sustituir por el nombre real (paso 1). Ej. frecuente: laravel_laravel-network
+    name: laravel_laravel-network
