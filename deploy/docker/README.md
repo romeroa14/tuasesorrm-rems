@@ -87,6 +87,11 @@ Misma lógica para `REMS_MYSQL_ROOT_PASSWORD` vs lo que tú guardes para root; e
    docker exec rems-app php spark migrate
    ```
 
+   Incluyen la migración `UsersAndRoles` (tablas `users` y `roles` + usuario inicial). Tras un deploy **sin** dump SQL previo, el primer acceso puede ser:
+   - **Email:** `admin@rems.local`  
+   - **Contraseña:** `CambiarLaClave1!`  
+   Luego cámbiala desde la app o actualiza el registro en MySQL. Si ya importaste un dump con `users` propio, no se inserta el admin duplicado (solo si `users` está vacío).
+
 5. Comprueba contenedores: `docker ps` debería listar `rems-app` y `rems-mysql` en estado sano.
 
 **Importar un dump** existente: `docker exec -i rems-mysql mysql -u rems -p<password> rems < backup.sql` (o con `root` y redirección a la base que corresponda). Ajustad credenciales y opciones según vuestro dump.

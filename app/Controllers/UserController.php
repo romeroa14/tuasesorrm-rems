@@ -32,24 +32,6 @@ class UserController extends BaseController
         $email = $this->request->getVar('email');
 		$password = $this->request->getVar('password');
 
-        // DEBUG DIRECTO - Forzar output
-        error_log('[LOGIN DEBUG] Email: ' . $email . ' | Password length: ' . strlen($password));
-        file_put_contents('/tmp/login_debug.log', date('Y-m-d H:i:s') . ' Email: ' . $email . ' | Password: ' . $password . PHP_EOL, FILE_APPEND);
-        
-        // BYPASS MODELO - Consulta directa a la BD
-        $db = \Config\Database::connect();
-        $query = $db->query("SELECT * FROM users WHERE email = ?", [$email]);
-        $userDirect = $query->getRowArray();
-        
-        log_message('debug', '[LOGIN] Direct query result: ' . ($userDirect ? 'FOUND - ' . $userDirect['email'] . ' - hash: ' . substr($userDirect['password'], 0, 30) : 'NULL'));
-        
-        if ($userDirect) {
-            log_message('debug', '[LOGIN] Password verify test: ' . (password_verify($password, $userDirect['password']) ? 'SUCCESS' : 'FAILED'));
-        }
-
-        // Obtén la respuesta del reCAPTCHA enviada por el formulario
-
-        // Obtén la respuesta del reCAPTCHA enviada por el formulario
         $captchaResponse = $this->request->getVar('g-recaptcha-response');
 
         // Verifica el reCAPTCHA utilizando nuestro handler personalizado
@@ -60,32 +42,12 @@ class UserController extends BaseController
             $_SERVER['SERVER_NAME']
         );
 
-        // DEBUG: Log captcha result
-        log_message('debug', '[LOGIN] CAPTCHA Result: ' . json_encode($captchaResult));
-
-        //$user = $this->User->where('email', $email)->where('status', 'activo')->first();
         $user = $this->User->findByEmail($email);
-        
-        // DEBUG: Log user data
-        log_message('debug', '[LOGIN] User found: ' . ($user ? $user['email'] . ' - ' . substr($user['password'], 0, 20) : 'NULL'));
-        
-        // Verifica si el reCAPTCHA está válido o no
+
         if ($captchaResult['success']) {
             if ($user) {
 
-                //if ($password === 'admin123' || password_verify($password, $user['password'])) {
-                $passwordFromForm = $password;
-                $passwordHashFromDB = $user['password'];
-                
-                // DEBUG: Log password comparison details
-                log_message('debug', '[LOGIN] Password from form: ' . $passwordFromForm);
-                log_message('debug', '[LOGIN] Password hash from DB: ' . $passwordHashFromDB);
-                log_message('debug', '[LOGIN] strlen(form): ' . strlen($passwordFromForm) . ', strlen(hash): ' . strlen($passwordHashFromDB));
-                
                 if (password_verify($password, $user['password'])) {
-                    
-                    // DEBUG: Log password verification
-                    log_message('debug', '[LOGIN] Password verify result: SUCCESS');
                     
                     $sessionData = [
                         'id' => $user['id'],
@@ -113,10 +75,10 @@ class UserController extends BaseController
                     return redirect()->to(base_url('/app/dashboard'));
                 }
                 
-                $this->session->setFlashdata(['failed' => $password."|".$user['password'].'¡Datos incorrectos1!  No existen estos datos en nuestro sistema.']);
+                $this->session->setFlashdata(['failed' => 'Datos incorrectos. No existen o la contraseña no coincide.']);
                 return redirect()->to(base_url('/login'));
             }
-            $this->session->setFlashdata(['failed' => '¡Datos incorrectos2! No existen estos datos en nuestro sistema.']);
+            $this->session->setFlashdata(['failed' => 'No existen esos datos en nuestro sistema.']);
             return redirect()->to(base_url('/login'));
         } else {
             // El reCAPTCHA no fue válido, muestra un error específico

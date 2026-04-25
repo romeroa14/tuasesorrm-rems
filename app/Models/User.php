@@ -54,7 +54,9 @@ class User extends Model
     public function findByEmail($email) {
         return $this->select('users.id, users.full_name, users.phone, users.document_ci, users.id_fk_rol, roles.description as rol_name, users.email, users.status, users.created_at, users.password')
         ->join('roles', 'roles.id = users.id_fk_rol')
-        ->where('email', $email)->first();
+        ->where('users.email', $email)
+        ->where('users.status', 'activo')
+        ->first();
     }
 
 }
