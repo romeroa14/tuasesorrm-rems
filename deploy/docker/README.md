@@ -48,7 +48,9 @@ El compose levanta **`rems-mysql`** (imagen `mysql:8.0`, datos persistidos en el
 
    ```bash
    cp deploy/docker/.env.example deploy/docker/.env
-   # Edita: REMS_MYSQL_ROOT_PASSWORD, REMS_MYSQL_PASSWORD, nombres si quieres
+   # Edita y REEMPLAZA los valores: no dejes "cambiar_root_seguro" / "cambiar_user_seguro"
+   # (esos son placehold del ejemplo; si el volumen de MySQL ya se creó con ellos, esa ES la
+   # contraseña real hasta que la cambies con ALTER USER o recrees el volumen).
    ```
 
 2. En el **`.env` de la raíz del repo** (CodeIgniter), alinea conexión con el mismo usuario, base y contraseña que en el paso 1, y host por TCP:
