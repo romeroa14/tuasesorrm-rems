@@ -84,6 +84,12 @@ El compose levanta **`rems-mysql`** (imagen `mysql:8.0`, datos persistidos en el
 
 Ese error es **autenticación** (usuario/clave) o **nombre de base** desalineado entre los dos `.env`. Revisad en este orden:
 
+0. **Contraseña con el carácter `$`** (muy frecuente)  
+   En `deploy/docker/.env` (el que lee **Docker Compose**), un `$` se interpreta como inicio de variable. Si la clave real es p. ej. `Rems20$`, al arrancar el contenedor MySQL puede quedar guardada como `Rems20` mientras en el `.env` de CodeIgniter sigue siendo `Rems20$` → **Access denied**.  
+   - En **`deploy/docker/.env`:** escribid cada `$` como **`$$`**. Ejemplo: `REMS_MYSQL_PASSWORD=Rems20$$` define la clave `Rems20$`.  
+   - Tras corregir, si el volumen de MySQL ya se creó con la clave truncada, haced **`ALTER USER`** (como abajo) o reconfigurad la contraseña.  
+   - En el **`.env` de CodeIgniter**, si usáis caracteres raros, es más seguro poner el valor **entre comillas dobles** (p. ej. `database.default.password = "Rems20$"`).
+
 1. **Misma clave y usuario en ambos sitios**  
    En la **raíz del repo**, el `.env` de CodeIgniter debe usar **exactamente** los mismos valores que `deploy/docker/.env` del compose:
    - `database.default.username` = `REMS_MYSQL_USER`
@@ -91,20 +97,32 @@ Ese error es **autenticación** (usuario/clave) o **nombre de base** desalineado
    - `database.default.database` = `REMS_MYSQL_DATABASE`  
    Y `database.default.hostname = rems-mysql`, `port = 3306`.
 
-2. **Nombre de base**  
-   Si en CodeIgniter tenéis `database.default.database = rems_db` pero en `deploy/docker/.env` sigue `REMS_MYSQL_DATABASE=rems`, el contenedor MySQL solo creó la base `rems` en el primer arranque. **Solución A:** cambiar el `.env` de CodeIgniter a `rems` (recomendado si empezáis de cero). **Solución B:** poner `REMS_MYSQL_DATABASE=rems_db` y **volver a crear** el volumen (paso 4) o crear la base a mano:  
-   `docker exec -it rems-mysql mysql -uroot -p` y `CREATE DATABASE rems_db` + `GRANT ALL ON rems_db.* TO 'rems'@'%';` (ajustar usuario según vuestro `REMS_MYSQL_USER`).
+2. **Nombre de base `rems` vs `rems_db`**  
+   Si en CodeIgniter tenéis `database.default.database = rems_db` pero en `deploy/docker/.env` sigue `REMS_MYSQL_DATABASE=rems`, MySQL solo creó la base `rems` al inicio. **Solución A:** en el `.env` de CodeIgniter usad `database.default.database = rems` (coherente con el ejemplo del repo). **Solución B:** mantener `rems_db` y crear la base y permisos (con `root`):
+
+   ```sql
+   CREATE DATABASE IF NOT EXISTS rems_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   GRANT ALL PRIVILEGES ON rems_db.* TO 'rems'@'%';
+   FLUSH PRIVILEGES;
+   ```
 
 3. **Cambiasteis contraseñas después del primer `docker compose up`**  
    MySQL guarda usuario/clave en el **volumen** (`rems_mysql_data`); al editar `deploy/docker/.env` no se actualizan solas. O bien reconfiguráis el usuario con `mysql` y `ALTER USER`, o —solo si no necesitáis los datos aún— elimináis el volumen y levantáis de nuevo (ver paso 4 del apartado de volumen en este mismo bloque).
 
-4. **Probar credenciales** con el cliente MySQL (misma clave que en `deploy/docker/.env`):
+4. **Probar credenciales** con el cliente MySQL (la clave **efectiva** que deba tener `rems`, la misma que en CodeIgniter):
 
    ```bash
    docker exec -it rems-mysql mysql -urems -p -e "SHOW DATABASES;"
    ```
 
-   Si aquí falla, el contenedor de datos tiene otra contraseña: corregid con `ALTER USER` o recread el volumen (solo si no hay datos que guardar).
+   Si la que probáis es `Rems20$` y falla, pero con `Rems20` (sin dólar) entra, el fallo es el **punto 0** (Compose truncó el `$`).
+
+5. **Arreglar la contraseña de `rems` en MySQL** (si la corregisteis en el `.env` con `$$` pero el volumen ya tenía otra clave), como `root` en el contenedor MySQL:
+
+   ```sql
+   ALTER USER 'rems'@'%' IDENTIFIED BY 'Rems20$';
+   FLUSH PRIVILEGES;
+   ```
 
 ### MySQL: «No such file or directory» (o no conecta)
 
