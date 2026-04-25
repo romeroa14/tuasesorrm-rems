@@ -80,6 +80,32 @@ El compose levanta **`rems-mysql`** (imagen `mysql:8.0`, datos persistidos en el
 
 **Importar un dump** existente: `docker exec -i rems-mysql mysql -u rems -p<password> rems < backup.sql` (o con `root` y redirección a la base que corresponda). Ajustad credenciales y opciones según vuestro dump.
 
+### «Access denied for user … @'172.x.x.x'» al hacer `spark migrate`
+
+Ese error es **autenticación** (usuario/clave) o **nombre de base** desalineado entre los dos `.env`. Revisad en este orden:
+
+1. **Misma clave y usuario en ambos sitios**  
+   En la **raíz del repo**, el `.env` de CodeIgniter debe usar **exactamente** los mismos valores que `deploy/docker/.env` del compose:
+   - `database.default.username` = `REMS_MYSQL_USER`
+   - `database.default.password` = `REMS_MYSQL_PASSWORD`
+   - `database.default.database` = `REMS_MYSQL_DATABASE`  
+   Y `database.default.hostname = rems-mysql`, `port = 3306`.
+
+2. **Nombre de base**  
+   Si en CodeIgniter tenéis `database.default.database = rems_db` pero en `deploy/docker/.env` sigue `REMS_MYSQL_DATABASE=rems`, el contenedor MySQL solo creó la base `rems` en el primer arranque. **Solución A:** cambiar el `.env` de CodeIgniter a `rems` (recomendado si empezáis de cero). **Solución B:** poner `REMS_MYSQL_DATABASE=rems_db` y **volver a crear** el volumen (paso 4) o crear la base a mano:  
+   `docker exec -it rems-mysql mysql -uroot -p` y `CREATE DATABASE rems_db` + `GRANT ALL ON rems_db.* TO 'rems'@'%';` (ajustar usuario según vuestro `REMS_MYSQL_USER`).
+
+3. **Cambiasteis contraseñas después del primer `docker compose up`**  
+   MySQL guarda usuario/clave en el **volumen** (`rems_mysql_data`); al editar `deploy/docker/.env` no se actualizan solas. O bien reconfiguráis el usuario con `mysql` y `ALTER USER`, o —solo si no necesitáis los datos aún— elimináis el volumen y levantáis de nuevo (ver paso 4 del apartado de volumen en este mismo bloque).
+
+4. **Probar credenciales** con el cliente MySQL (misma clave que en `deploy/docker/.env`):
+
+   ```bash
+   docker exec -it rems-mysql mysql -urems -p -e "SHOW DATABASES;"
+   ```
+
+   Si aquí falla, el contenedor de datos tiene otra contraseña: corregid con `ALTER USER` o recread el volumen (solo si no hay datos que guardar).
+
 ### MySQL: «No such file or directory» (o no conecta)
 
 Con `hostname = localhost`, MySQLi intenta un **socket** Unix que **no existe** en la imagen PHP. Usa un host por **TCP**:
