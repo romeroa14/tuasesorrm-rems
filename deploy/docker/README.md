@@ -104,6 +104,30 @@ Misma lógica para `REMS_MYSQL_ROOT_PASSWORD` vs lo que tú guardes para root; e
 
 **Importar un dump** existente: `docker exec -i rems-mysql mysql -u rems -p<password> rems < backup.sql` (o con `root` y redirección a la base que corresponda). Ajustad credenciales y opciones según vuestro dump.
 
+### Local vs producción: «Table rems_db.properties doesn’t exist» (MySQL 1146)
+
+Eso no es un fallo del panel: la base alcanzable por la app **no tiene** la tabla `properties` (y probablemente tampoco muchas otras de negocio). En el repositorio, **`php spark migrate` solo aplica un subconjunto de tablas** (p. ej. `users`/`roles`, partes de CRM, etc.); **no incluye** la migración de `properties` ni el grueso del esquema que la aplicación asume. En un entorno local típico (hosting, dump antiguo) suele existir un MySQL con **decenas** de tablas (`properties`, `status`, `city`, `municipality`, `housingtype`, etc.) mientras que un deploy recién migrado se queda solo con lo que define el git.
+
+**Qué hacer para que el dashboard y el resto de módulos funcionen igual que en local:**
+
+1. **Recomendado (paridad rápida):** generar un volcado desde el MySQL **de referencia** (local o servidor que ya tenga el esquema y datos) e importarlo en el contenedor `rems-mysql` **antes** o **sustituyendo** el estado de la base (según copieis solo estructura o estructura+datos). Ejemplo mínimo con `mysqldump` en la máquina que tiene el origen:
+
+   ```bash
+   mysqldump --single-transaction --routines --triggers -h HOST -u USUARIO -p --databases nombre_base_origen | gzip > rems_ref.sql.gz
+   # En el VPS (descomprimir si hace falta) e importar a la base que use CodeIgniter, p. ej. rems_db:
+   zcat rems_ref.sql.gz | docker exec -i rems-mysql mysql -u rems -p'CONTRASEÑA' rems_db
+   ```
+
+   **Orden de argumentos:** en `mysqldump`, las opciones (`--single-transaction`, `--databases`, etc.) van **antes** del nombre de la base. Lo que vaya *después* del nombre de la base se interpreta como **nombres de tablas**; si pones `--single-transaction` al final, verás: `Couldn't find table: " --single-transaction"`.
+
+   Sustituid `nombre_base_origen` por la base real (en local puede llamarse distinto de `rems_db`). Si el dump define `USE otra_base;`, cread previamente la base destino o editad el SQL. Tras un import con datos, las migraciones pueden estar ya «aplicadas» en la tabla `migrations`; no es obligatorio re-ejecutarlas.
+
+   **Tras un dump, `Table '…' already exists` al hacer `php spark migrate`:** el esquema ya está en la base (tablas creadas fuera o por un dump), pero la tabla `migrations` no lista todos los archivos de `app/Database/Migrations/`. CodeIgniter vuelve a ejecutar p. ej. `BusinessConditions` e intenta crear de nuevo `business_conditions`. **Solución:** rellenar `migrations` con las filas que el repo considera ya aplicadas, y luego `spark migrate` solo aplicará **nuevas** migraciones. En el repo hay un SQL de referencia: `deploy/docker/sql/after-dump_backfill_migrations.sql` (revisad `DESCRIBE migrations;` y que no haya filas duplicadas; en caso duda, haced backup, eliminad solo las filas de `App\\Database\\Migrations` y cargad el SQL). Dar permisos `GRANT … ON *.*` o sobre la base al usuario `rems`@`%` es aparte: ver sección *Access denied … @'172.x.x.x'*.
+
+2. **A largo plazo:** decidir si versionáis el **esquema completo** (migraciones adicionales o un `schema.sql` de referencia en el repo) para que un entorno vacío quede alineado sin depender de un volcado manual. Eso implica cuidar dependencias, `FOREIGN KEY` y convenciones de nombres de tablas (Linux distingue mayúsculas de nombres de tabla según el valor de `lower_case_table_names`).
+
+**Resumen:** el error 1146 sobre `properties` indica **base de datos vacía o incompleta** respecto al producto, no un bug aislado en `DashboardController`. La solución coherente es **importar el esquema (y opcionalmente datos) del entorno de verdad** o ampliar las migraciones hasta cubrir esas tablas.
+
 ### «Access denied for user … @'172.x.x.x'» al hacer `spark migrate`
 
 Ese error es **autenticación** (usuario/clave) o **nombre de base** desalineado entre los dos `.env`. Revisad en este orden:
