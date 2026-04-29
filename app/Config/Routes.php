@@ -137,7 +137,7 @@ $routes->get('/app/trackingstatus/delete/(:num)', 'TrackingStatusController::del
 // CRM Views (requieren autenticación)
 $routes->get('/app/crm/inbox', 'CrmController::inbox', ['filter' => 'auth']); /* CRM Inbox */
 $routes->get('/app/crm/pipeline', 'CrmController::pipeline', ['filter' => 'auth']); /* CRM Pipeline Kanban */
-$routes->get('/app/crm/dashboard', 'CrmController::dashboard', ['filter' => 'auth']); /* CRM Dashboard */
+$routes->get('/app/crm/dashboard', 'CrmController::dashboard', ['filter' => 'auth']); /*  */
 
 // CRM API (requieren autenticación)
 $routes->get('/app/crm/api/conversations', 'CrmController::api_conversations', ['filter' => 'auth']); /* Obtener conversaciones */

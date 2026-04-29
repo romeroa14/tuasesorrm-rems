@@ -78,7 +78,7 @@
     <!-- CRM Module -->
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
-        CRM
+        CRMM
     </div>
     <li class="nav-item <?= ($title == 'CRM Inbox' || $title == 'Pipeline CRM' || $title == 'CRM Dashboard' || $title == 'Estatus de Seguimiento (Pipeline)') ? 'active' : '' ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCRM" aria-expanded="false" aria-controls="collapseCRM">
