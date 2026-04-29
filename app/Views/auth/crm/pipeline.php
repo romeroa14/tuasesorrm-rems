@@ -1,38 +1,58 @@
-<div id="content-wrapper" class="d-flex flex-column">
-    <div id="content">
-        <div class="container-fluid" id="container-wrapper">
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Pipeline CRM</h1>
-                <div>
-                    <a href="/app/crm/inbox" class="btn btn-sm btn-outline-primary">
-                        <i class="fas fa-inbox"></i> Inbox
-                    </a>
-                    <a href="/app/crm/export/meta?score_min=50" class="btn btn-sm btn-outline-success ml-2">
-                        <i class="fas fa-file-export"></i> Exportar a Meta
-                    </a>
-                </div>
-            </div>
-
-            <div id="pipeline-counts-panel" class="card mb-3 shadow-sm" style="display:none;">
-                <div class="card-body py-2">
-                    <div class="d-flex flex-wrap align-items-center justify-content-between">
-                        <div class="small text-muted mb-1 mb-md-0">
-                            <strong>BD:</strong> <code>trackingstatus</code> → <code>assignedclients.trackingstatus_id</code> · un lead → máx.1 fila en <code>assignedclients</code> (<code>lead_id</code> UNIQUE)
-                        </div>
-                        <div id="pipeline-counts-badges" class="d-flex flex-wrap gap-1"></div>
-                    </div>
-                    <div id="pipeline-orphan-hint" class="small text-warning mt-2" style="display:none;"></div>
-                </div>
-            </div>
-
-            <div class="d-flex" id="pipeline-board" style="overflow-x: auto; gap: 12px; height: calc(100vh - 180px); padding-bottom: 12px;">
-                <div class="text-center py-5 w-100"><i class="fas fa-spinner fa-spin fa-2x"></i> Cargando pipeline...</div>
-            </div>
+<?php
+// URLs para AJAX (subcarpeta /index.php si aplica)
+$crmPipelineApi    = site_url('app/crm/api/pipeline');
+$crmPipelineCounts = site_url('app/crm/api/pipeline/counts');
+$crmPipelineMove   = site_url('app/crm/api/pipeline/move');
+$crmInboxBase      = site_url('app/crm/inbox');
+?>
+<div class="crm-pipeline-shell">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Pipeline CRM</h1>
+        <div>
+            <a href="<?= esc(site_url('app/crm/inbox')) ?>" class="btn btn-sm btn-outline-primary">
+                <i class="fas fa-inbox"></i> Inbox
+            </a>
+            <a href="<?= esc(site_url('app/crm/export/meta')) ?>?score_min=50" class="btn btn-sm btn-outline-success ml-2">
+                <i class="fas fa-file-export"></i> Exportar a Meta
+            </a>
         </div>
+    </div>
+
+    <div id="pipeline-counts-panel" class="card mb-3 shadow-sm" style="display:none;">
+        <div class="card-body py-2">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <div class="small text-muted mb-1 mb-md-0">
+                    <strong>BD:</strong> <code>trackingstatus</code> → <code>assignedclients.trackingstatus_id</code> · un lead → máx.1 fila en <code>assignedclients</code> (<code>lead_id</code> UNIQUE)
+                </div>
+                <div id="pipeline-counts-badges" class="d-flex flex-wrap gap-1"></div>
+            </div>
+            <div id="pipeline-orphan-hint" class="small text-warning mt-2" style="display:none;"></div>
+        </div>
+    </div>
+
+    <div class="d-flex pipeline-board-inner" id="pipeline-board">
+        <div class="text-center py-5 w-100"><i class="fas fa-spinner fa-spin fa-2x"></i> Cargando pipeline...</div>
     </div>
 </div>
 
 <style>
+/* Altura del Kanban: usa el alto disponible (sin anidar otro #content-wrapper; ya existe en sidebar/navbar) */
+.crm-pipeline-shell {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 9rem);
+    min-height: 420px;
+}
+#pipeline-board.pipeline-board-inner {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 12px;
+    padding-bottom: 12px;
+    align-items: stretch;
+}
+
 /* Custom Scrollbar for Pipeline Board */
 #pipeline-board::-webkit-scrollbar {
     height: 12px;
@@ -134,8 +154,16 @@ $(document).ready(function() {
     loadPipeline();
 });
 
+/** Evita que el click navegue al Inbox justo después de soltar el drag (comportamiento típico del navegador). */
+var pipelineSuppressCardClick = false;
+
+var CRM_PIPELINE_URL = <?= json_encode($crmPipelineApi) ?>;
+var CRM_PIPELINE_COUNTS_URL = <?= json_encode($crmPipelineCounts) ?>;
+var CRM_PIPELINE_MOVE_URL = <?= json_encode($crmPipelineMove) ?>;
+var CRM_INBOX_URL = <?= json_encode($crmInboxBase) ?>;
+
 function loadPipelineCounts() {
-    $.get('/app/crm/api/pipeline/counts', function(response) {
+    $.get(CRM_PIPELINE_COUNTS_URL, function(response) {
         if (response.status !== 'success' || !response.data) return;
         const d = response.data;
         const panel = $('#pipeline-counts-panel');
@@ -162,7 +190,7 @@ function loadPipelineCounts() {
 }
 
 function loadPipeline() {
-    $.get('/app/crm/api/pipeline', function(response) {
+    $.get(CRM_PIPELINE_URL, function(response) {
         if (response.status === 'success') {
             renderPipeline(response.data);
         }
@@ -193,7 +221,7 @@ function renderPipeline(stages) {
                 const labelColor = getLabelColor(lead.intention_label);
                 const channelIcon = lead.channel ? getChannelIcon(lead.channel) : '[--]';
                 const convId = lead.conversation_id || 0;
-                const inboxUrl = convId ? '/app/crm/inbox?open=' + convId : '#';
+                const inboxUrl = convId ? CRM_INBOX_URL + (CRM_INBOX_URL.indexOf('?') >= 0 ? '&' : '?') + 'open=' + convId : '#';
 
                 html += `
                     <div class="pipeline-card" draggable="true" data-lead-id="${lead.lead_id}" data-conv-id="${convId}" data-tracking-status-id="${stage.id}">
@@ -232,10 +260,15 @@ function bindPipelineDnD(board) {
     board.off('.pipelineDnd');
 
     board.on('click.pipelineDnd', '.pipeline-card', function(e) {
+        if (pipelineSuppressCardClick) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            return false;
+        }
         if ($(e.target).closest('.btn').length) return;
         const convId = $(this).data('conv-id');
         if (convId) {
-            window.location.href = '/app/crm/inbox?open=' + convId;
+            window.location.href = CRM_INBOX_URL + (CRM_INBOX_URL.indexOf('?') >= 0 ? '&' : '?') + 'open=' + convId;
         } else {
             Swal.fire({
                 icon: 'warning',
@@ -249,7 +282,7 @@ function bindPipelineDnD(board) {
     board.on('dragstart.pipelineDnd', '.pipeline-card', function(e) {
         const ev = e.originalEvent;
         if (ev.dataTransfer) {
-            ev.dataTransfer.setData('text/plain', $(this).data('lead-id'));
+            ev.dataTransfer.setData('text/plain', String($(this).data('lead-id')));
             ev.dataTransfer.effectAllowed = 'move';
         }
         $(this).addClass('dragging');
@@ -258,6 +291,10 @@ function bindPipelineDnD(board) {
     board.on('dragend.pipelineDnd', '.pipeline-card', function() {
         $(this).removeClass('dragging');
         board.find('.pipeline-column-body').removeClass('pipeline-drop-target');
+        pipelineSuppressCardClick = true;
+        window.setTimeout(function () {
+            pipelineSuppressCardClick = false;
+        }, 400);
     });
 
     board.on('dragover.pipelineDnd', '.pipeline-column-body', function(e) {
@@ -267,7 +304,9 @@ function bindPipelineDnD(board) {
         $(this).addClass('pipeline-drop-target');
     });
 
-    board.on('dragleave.pipelineDnd', '.pipeline-column-body', function() {
+    board.on('dragleave.pipelineDnd', '.pipeline-column-body', function(e) {
+        var rel = e.relatedTarget;
+        if (rel && this.contains(rel)) return;
         $(this).removeClass('pipeline-drop-target');
     });
 
@@ -277,7 +316,8 @@ function bindPipelineDnD(board) {
         body.removeClass('pipeline-drop-target');
 
         const ev = e.originalEvent;
-        const leadId = ev.dataTransfer ? ev.dataTransfer.getData('text/plain') : null;
+        var leadId = ev.dataTransfer ? ev.dataTransfer.getData('text/plain') : '';
+        leadId = String(leadId || '').trim();
         const newStatusId = body.data('tracking-status-id');
         if (!leadId || !newStatusId) return;
 
@@ -285,7 +325,7 @@ function bindPipelineDnD(board) {
         const fromStatus = card.length ? card.data('tracking-status-id') : null;
         if (fromStatus && String(fromStatus) === String(newStatusId)) return;
 
-        $.post('/app/crm/api/pipeline/move', {
+        $.post(CRM_PIPELINE_MOVE_URL, {
             lead_id: leadId,
             trackingstatus_id: newStatusId
         }, function(res) {
