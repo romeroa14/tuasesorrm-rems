@@ -20,6 +20,9 @@
         <script src="<?= base_url('vendor/jquery/jquery.min.js') ?>"></script>
     </head>
     <body id="page-top"
+    <?php if (! empty($body_class ?? null)): ?>
+        class="<?= esc($body_class, 'attr') ?>"
+    <?php endif ?>
     <?php if (isset($datatable['prefix'])): ?>
         onload="initDataTable('<?= $datatable['prefix'] ?>table')"
     <?php endif ?>

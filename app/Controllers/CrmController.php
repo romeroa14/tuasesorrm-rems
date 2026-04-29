@@ -51,6 +51,7 @@ class CrmController extends BaseController
             'title' => 'Pipeline CRM',
             'slogan' => ' | Asesores RM',
             'view' => 'auth/crm/pipeline',
+            'body_class' => 'page-pipeline-crm',
         ];
 
         return view('template/header/header', $data)

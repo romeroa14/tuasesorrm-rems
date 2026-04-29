@@ -36,12 +36,81 @@ $crmInboxBase      = site_url('app/crm/inbox');
 </div>
 
 <style>
-/* Altura del Kanban: usa el alto disponible (sin anidar otro #content-wrapper; ya existe en sidebar/navbar) */
+/*
+ * Pipeline: alto acotado al viewport (alinea con el sidebar / “Version 3.0”), sin scroll infinito en body.
+ * El tablero usa solo el espacio entre navbar y footer; columnas con scroll interno.
+ */
+body.page-pipeline-crm {
+    overflow-x: hidden;
+}
+body.page-pipeline-crm #wrapper {
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    overflow: hidden;
+    align-items: stretch;
+}
+/* Sidebar mismo alto que viewport; si hay muchos ítems, scroll interno (no empuja la página) */
+body.page-pipeline-crm #wrapper > ul.sidebar,
+body.page-pipeline-crm #wrapper > #accordionSidebar.sidebar {
+    flex-shrink: 0;
+    align-self: stretch;
+    min-height: 0;
+    max-height: 100vh;
+    max-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+body.page-pipeline-crm #wrapper #content-wrapper {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    max-height: 100vh;
+    max-height: 100dvh;
+    overflow: hidden;
+}
+body.page-pipeline-crm #wrapper #content-wrapper #content {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+}
+body.page-pipeline-crm #content > nav.navbar {
+    flex-shrink: 0;
+}
+body.page-pipeline-crm #container-wrapper {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    /* Quita el hueco típico de .container-fluid (1.5rem); el Kanban arranca junto al sidebar */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+body.page-pipeline-crm #container-wrapper > .alert {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+body.page-pipeline-crm .crm-pipeline-shell > .d-sm-flex.mb-4 {
+    flex-shrink: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+body.page-pipeline-crm #pipeline-counts-panel {
+    flex-shrink: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+body.page-pipeline-crm #content-wrapper > footer.sticky-footer {
+    flex-shrink: 0;
+    margin-top: 1rem !important;
+}
 .crm-pipeline-shell {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 9rem);
-    min-height: 420px;
+    flex: 1 1 auto;
+    min-height: 0;
 }
 #pipeline-board.pipeline-board-inner {
     flex: 1 1 auto;
@@ -49,24 +118,26 @@ $crmInboxBase      = site_url('app/crm/inbox');
     overflow-x: auto;
     overflow-y: hidden;
     gap: 12px;
-    padding-bottom: 12px;
+    padding-bottom: 8px;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
     align-items: stretch;
+    scrollbar-width: thin;
 }
 
-/* Custom Scrollbar for Pipeline Board */
+/* Scroll horizontal más discreto (muchas columnas siguen necesitando scroll) */
 #pipeline-board::-webkit-scrollbar {
-    height: 12px;
+    height: 6px;
 }
 #pipeline-board::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 6px;
+    background: transparent;
 }
 #pipeline-board::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 4px;
 }
 #pipeline-board::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.28);
 }
 
 .pipeline-column {
