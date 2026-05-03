@@ -33,9 +33,10 @@ class WebhookController extends ResourceController
      */
     public function verifyInstagram()
     {
-        $mode = $this->request->getGet('hub.mode');
-        $token = $this->request->getGet('hub.verify_token');
-        $challenge = $this->request->getGet('hub.challenge');
+        // Meta envía hub.mode, hub.verify_token, hub.challenge. PHP colapsa '.' → '_' en $_GET.
+        $mode = $this->request->getGet('hub_mode') ?? $this->request->getGet('hub.mode');
+        $token = $this->request->getGet('hub_verify_token') ?? $this->request->getGet('hub.verify_token');
+        $challenge = $this->request->getGet('hub_challenge') ?? $this->request->getGet('hub.challenge');
 
         $verifyToken = getenv('INSTAGRAM_VERIFY_TOKEN');
         $verifyToken = ($verifyToken !== false && trim((string) $verifyToken) !== '')
