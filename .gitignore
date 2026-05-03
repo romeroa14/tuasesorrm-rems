@@ -107,6 +107,9 @@ nbproject/
 build/
 nbbuild/
 dist/
+# Select2 en public (las vistas cargan dist/*.min.*); no ignorar este árbol.
+!public/vendor/select2/dist/
+!public/vendor/select2/dist/**
 nbdist/
 nbactions.xml
 nb-configuration.xml

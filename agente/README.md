@@ -46,6 +46,35 @@ cd agente
 uvicorn agente.server:app --host 0.0.0.0 --port 8090 --reload
 ```
 
+En **producción** suele bastar escuchar solo en localhost y que PHP use `AI_AGENT_URL=http://127.0.0.1:8090/v1/chat`:
+
+```bash
+cd /ruta/al/repo/agente && source .venv/bin/activate
+uvicorn agente.server:app --host 127.0.0.1 --port 8090
+```
+
+Ejemplo **systemd** (ajusta `User` y rutas): archivo `/etc/systemd/system/agente-rems.service`
+
+```ini
+[Unit]
+Description=Agente REMS (FastAPI + DeepSeek)
+After=network.target mysql.service
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/tu-proyecto/agente
+EnvironmentFile=/var/www/tu-proyecto/agente/.env
+ExecStart=/var/www/tu-proyecto/agente/.venv/bin/uvicorn agente.server:app --host 127.0.0.1 --port 8090
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Luego: `sudo systemctl daemon-reload && sudo systemctl enable --now agente-rems`
+
 ### Ejemplo `curl`
 
 ```bash

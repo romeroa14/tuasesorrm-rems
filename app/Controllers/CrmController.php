@@ -349,7 +349,8 @@ class CrmController extends BaseController
     {
         $db = \Config\Database::connect();
 
-        $result = $db->query("
+        try {
+            $result = $db->query("
             SELECT 
                 ts.id as status_id,
                 ts.name as status_name,
@@ -377,6 +378,14 @@ class CrmController extends BaseController
             )
             ORDER BY ts.id, l.intention_score DESC
         ")->getResultArray();
+        } catch (\Throwable $e) {
+            log_message('error', 'api_pipeline SQL: ' . $e->getMessage());
+
+            return $this->response->setStatusCode(500)->setJSON([
+                'status' => 'error',
+                'message' => 'No se pudo cargar el pipeline. Si falta la migración Instagram en `conversations`, ejecute en el servidor: php spark migrate',
+            ]);
+        }
 
         $pipeline = [];
         foreach ($result as $row) {
