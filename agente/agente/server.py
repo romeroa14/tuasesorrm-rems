@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 from agente import __version__
 from agente.config import agente_env_file_path, get_settings
+from agente.contact_extract import phones_from_chat
 from agente.runner import run_agent_turn
 
 app = FastAPI(title="Agente REMS", version=__version__)
@@ -28,6 +29,7 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     reply: str
     debug: list[dict[str, Any]] | None = None
+    extracted_phones: list[str] = Field(default_factory=list)
 
 
 @app.get("/health")
@@ -52,9 +54,14 @@ def chat(req: ChatRequest):
         )
 
     hist = [m.model_dump() for m in req.history]
+    phones = phones_from_chat(req.message, hist)
     try:
         reply, dbg = run_agent_turn(req.message, hist, include_debug=req.debug)
     except RuntimeError as e:
         raise HTTPException(status_code=503, detail=str(e)) from e
 
-    return ChatResponse(reply=reply, debug=dbg if req.debug else None)
+    return ChatResponse(
+        reply=reply,
+        debug=dbg if req.debug else None,
+        extracted_phones=phones,
+    )
