@@ -57,8 +57,9 @@ class WebhookController extends ResourceController
     /**
      * Meta llama esta URL en tiempo real por cada mensaje entrante (no hay que consultar /conversations para ATC).
      *
-     * Allowlist opcional: META_WEBHOOK_ALLOWED_RECIPIENT_IG_IDS = valores de entry.id (suelen ser
-     * instagram_business_account.id; si Meta envía Page id en algún caso, inclúyelo también en la misma lista).
+     * Allowlist opcional: META_WEBHOOK_ALLOWED_RECIPIENT_IG_IDS / META_WEBHOOK_ALLOWED_PAGE_IDS (entry.id y
+     * sender/recipient del negocio). DM entrante = recipient es uno de esos IDs y sender es el cliente;
+     * saliente = sender es negocio y recipient es el cliente. META_WEBHOOK_DM_SENDER_IDS para IDs extra.
      *
      * Seguridad Live: META_WEBHOOK_REQUIRE_SIGNATURE=true y META_APP_SECRET (cabecera X-Hub-Signature-256).
      */
@@ -112,25 +113,31 @@ class WebhookController extends ResourceController
                 $toFieldId = isset($event['recipient']['id']) ? (string) $event['recipient']['id'] : '';
                 $timestamp = (int) ($event['timestamp'] ?? time());
 
-                // La cuenta profesional (entry.id) envió el mensaje → cliente está en recipient.id (Meta Suite / app IG).
-                if (
-                    $recipientIgId !== ''
-                    && $senderId !== ''
-                    && $senderId === $recipientIgId
-                    && ! empty($event['message'])
-                ) {
-                    $customerId = $toFieldId;
-                    $messageText = $event['message']['text'] ?? '';
-                    $messageId = $event['message']['mid'] ?? '';
-                    $contentType = 'text';
-                    $mediaUrl = null;
-                    if (! empty($event['message']['attachments'])) {
-                        $attachment = $event['message']['attachments'][0];
-                        $contentType = $attachment['type'] ?? 'text';
-                        $mediaUrl = $attachment['payload']['url'] ?? null;
-                    }
-                    $this->processInstagramBusinessOutboundMessage(
-                        $customerId,
+                if (empty($event['message'])) {
+                    continue;
+                }
+
+                $messageText = $event['message']['text'] ?? '';
+                $messageId = $event['message']['mid'] ?? '';
+                $contentType = 'text';
+                $mediaUrl = null;
+                if (! empty($event['message']['attachments'])) {
+                    $attachment = $event['message']['attachments'][0];
+                    $contentType = $attachment['type'] ?? 'text';
+                    $mediaUrl = $attachment['payload']['url'] ?? null;
+                }
+
+                // entry.id suele ser instagram_business_account.id pero sender al responder suele ser Page id:
+                // hay que tratar como "nosotros" todos los IDs configurados, no solo sender === entry.id.
+                $bizActorIds = $this->instagramDmBusinessActorIds($recipientIgId);
+                $senderIsUs = $senderId !== '' && in_array($senderId, $bizActorIds, true);
+                $recipientIsUs = $toFieldId !== '' && in_array($toFieldId, $bizActorIds, true);
+
+                // Cliente → negocio (DM entrante real).
+                if ($recipientIsUs && ! $senderIsUs && $senderId !== '') {
+                    $this->processIncomingMessage(
+                        'instagram',
+                        $senderId,
                         $messageText,
                         $messageId,
                         $contentType,
@@ -142,35 +149,26 @@ class WebhookController extends ResourceController
                     continue;
                 }
 
-                if (empty($event['message'])) {
+                // Negocio → cliente (Inbox Meta / app).
+                if ($senderIsUs && ! $recipientIsUs && $toFieldId !== '') {
+                    $this->processInstagramBusinessOutboundMessage(
+                        $toFieldId,
+                        $messageText,
+                        $messageId,
+                        $contentType,
+                        $mediaUrl,
+                        $timestamp,
+                        $recipientIgId
+                    );
+
                     continue;
                 }
 
-                if ($senderId === '') {
-                    continue;
-                }
-
-                $messageText = $event['message']['text'] ?? '';
-                $messageId = $event['message']['mid'] ?? '';
-
-                // Check for media
-                $contentType = 'text';
-                $mediaUrl = null;
-                if (! empty($event['message']['attachments'])) {
-                    $attachment = $event['message']['attachments'][0];
-                    $contentType = $attachment['type'] ?? 'text';
-                    $mediaUrl = $attachment['payload']['url'] ?? null;
-                }
-
-                $this->processIncomingMessage(
-                    'instagram',
-                    $senderId,
-                    $messageText,
-                    $messageId,
-                    $contentType,
-                    $mediaUrl,
-                    $timestamp,
-                    $recipientIgId
+                log_message(
+                    'notice',
+                    'Webhook Instagram: mensaje no clasificado sender=' . $senderId
+                    . ' recipient=' . $toFieldId . ' entry=' . $recipientIgId
+                    . ' (revisa META_WEBHOOK_ALLOWED_* y META_WEBHOOK_DM_SENDER_IDS)'
                 );
             }
         }
@@ -205,6 +203,18 @@ class WebhookController extends ResourceController
             $dup = $this->messageModel->where('external_message_id', $externalMessageId)->first();
             if ($dup !== null) {
                 return (int) $dup['id'];
+            }
+        }
+
+        if ($channel === 'instagram' && $recipientIgId !== '') {
+            $actors = $this->instagramDmBusinessActorIds($recipientIgId);
+            if ($externalId !== '' && in_array($externalId, $actors, true)) {
+                log_message(
+                    'notice',
+                    'processIncomingMessage instagram: ignorando external_id actor negocio=' . $externalId
+                );
+
+                return 0;
             }
         }
 
@@ -454,6 +464,33 @@ class WebhookController extends ResourceController
         }
 
         return array_values(array_unique($out));
+    }
+
+    /**
+     * IDs que Meta puede usar como remitente o destinatario del negocio en DM (entry.id + allowlist + extras).
+     * Incluir aquí Page id e instagram_business_account.id si ambos aparecen en webhooks.
+     *
+     * @return list<string>
+     */
+    protected function instagramDmBusinessActorIds(string $entryId): array
+    {
+        $raw = [];
+        if ($entryId !== '') {
+            $raw[] = $entryId;
+        }
+        foreach ($this->webhookInstagramAllowedEntryIds() as $id) {
+            $raw[] = $id;
+        }
+        $extra = getenv('META_WEBHOOK_DM_SENDER_IDS');
+        if ($extra !== false && trim((string) $extra) !== '') {
+            foreach (preg_split('/\s*,\s*/', trim((string) $extra)) as $p) {
+                if ($p !== '') {
+                    $raw[] = $p;
+                }
+            }
+        }
+
+        return array_values(array_unique(array_filter($raw)));
     }
 
     /**
