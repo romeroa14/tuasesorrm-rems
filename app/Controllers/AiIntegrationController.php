@@ -5,6 +5,7 @@ use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\Leads;
 use App\Models\Funnels;
+use App\Libraries\CrmPipelineEnrollment;
 use CodeIgniter\RESTful\ResourceController;
 
 class AiIntegrationController extends ResourceController
@@ -35,13 +36,14 @@ class AiIntegrationController extends ResourceController
         $channel = $payload['channel'] ?? 'whatsapp';
         $externalId = $payload['external_id'] ?? '';
         $content = $payload['message_content'] ?? '';
-        
+        $recipientIgId = isset($payload['recipient_ig_id']) ? (string) $payload['recipient_ig_id'] : '';
+
         if (empty($externalId) || empty($content)) {
             return $this->failValidationErrors('Missing required fields: external_id or message_content');
         }
 
         // Find or create conversation
-        $conversation = $this->conversationModel->findByExternalId($channel, $externalId);
+        $conversation = $this->conversationModel->findByExternalId($channel, $externalId, $recipientIgId);
 
         if (!$conversation) {
             // Create new lead
@@ -72,12 +74,18 @@ class AiIntegrationController extends ResourceController
                 'channel' => $channel,
                 'external_id' => $externalId,
                 'external_username' => $externalId,
+                'recipient_ig_id' => $recipientIgId,
+                'recipient_ig_username' => $payload['recipient_ig_username'] ?? null,
                 'status' => 'open',
                 'last_message_at' => date('Y-m-d H:i:s'),
                 'unread_count' => 1,
             ]);
 
             $conversation = $this->conversationModel->find($conversationId);
+
+            if ($channel === 'instagram') {
+                CrmPipelineEnrollment::ensureLeadOnPipeline((int) $leadId);
+            }
         } else {
             // Update existing conversation and lead
             $this->conversationModel->update($conversation['id'], [
@@ -95,6 +103,10 @@ class AiIntegrationController extends ResourceController
 
             if (!empty($leadData)) {
                 $this->leadsModel->update($conversation['lead_id'], $leadData);
+            }
+
+            if ($channel === 'instagram') {
+                CrmPipelineEnrollment::ensureLeadOnPipeline((int) $conversation['lead_id']);
             }
         }
 

@@ -6,19 +6,24 @@ class CrmModule extends Migration
 {
     public function up()
     {
-        // 1. ALTER leads (nombre en minúscula tras 2024-02-22-160000)
-        $this->forge->addColumn('leads', [
-            'email' => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => true, 'after' => 'phone'],
-            'instagram_username' => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => true, 'after' => 'email'],
-            'intention_score' => ['type' => 'INT', 'constraint' => 11, 'default' => 0, 'after' => 'instagram_username'],
-            'intention_label' => ['type' => 'ENUM', 'constraint' => ['frio','tibio','caliente','listo'], 'default' => 'frio', 'after' => 'intention_score'],
-            'interest_type' => ['type' => 'VARCHAR', 'constraint' => 100, 'null' => true, 'after' => 'intention_label'],
-            'budget_detected' => ['type' => 'DECIMAL', 'constraint' => '15,2', 'null' => true, 'after' => 'interest_type'],
-            'zone_interest' => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => true, 'after' => 'budget_detected'],
-        ]);
+        $db = \Config\Database::connect();
+
+        // 1. ALTER leads — puede estar ya aplicado en instalaciones existentes
+        if (! $db->fieldExists('email', 'leads')) {
+            $this->forge->addColumn('leads', [
+                'email' => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => true, 'after' => 'phone'],
+                'instagram_username' => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => true, 'after' => 'email'],
+                'intention_score' => ['type' => 'INT', 'constraint' => 11, 'default' => 0, 'after' => 'instagram_username'],
+                'intention_label' => ['type' => 'ENUM', 'constraint' => ['frio','tibio','caliente','listo'], 'default' => 'frio', 'after' => 'intention_score'],
+                'interest_type' => ['type' => 'VARCHAR', 'constraint' => 100, 'null' => true, 'after' => 'intention_label'],
+                'budget_detected' => ['type' => 'DECIMAL', 'constraint' => '15,2', 'null' => true, 'after' => 'interest_type'],
+                'zone_interest' => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => true, 'after' => 'budget_detected'],
+            ]);
+        }
 
         // 2. CREATE conversations table
-        $this->forge->addField([
+        if (! $db->tableExists('conversations')) {
+            $this->forge->addField([
             'id' => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'lead_id' => ['type' => 'INT', 'constraint' => 11],
             'channel' => ['type' => 'ENUM', 'constraint' => ['instagram','whatsapp','web']],
@@ -31,15 +36,17 @@ class CrmModule extends Migration
             'created_at' => ['type' => 'DATETIME', 'null' => true],
             'updated_at' => ['type' => 'DATETIME', 'null' => true],
         ]);
-        $this->forge->addKey('id', true);
-        $this->forge->addKey(['channel', 'external_id'], false, false, 'idx_channel_external');
-        $this->forge->addKey('status', false, false, 'idx_status');
-        $this->forge->addKey('assigned_to', false, false, 'idx_assigned');
-        $this->forge->addKey('lead_id', false, false, 'idx_lead');
-        $this->forge->createTable('conversations');
+            $this->forge->addKey('id', true);
+            $this->forge->addKey(['channel', 'external_id'], false, false, 'idx_channel_external');
+            $this->forge->addKey('status', false, false, 'idx_status');
+            $this->forge->addKey('assigned_to', false, false, 'idx_assigned');
+            $this->forge->addKey('lead_id', false, false, 'idx_lead');
+            $this->forge->createTable('conversations');
+        }
 
         // 3. CREATE messages table
-        $this->forge->addField([
+        if (! $db->tableExists('messages')) {
+            $this->forge->addField([
             'id' => ['type' => 'BIGINT', 'constraint' => 20, 'unsigned' => true, 'auto_increment' => true],
             'conversation_id' => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true],
             'direction' => ['type' => 'ENUM', 'constraint' => ['inbound','outbound']],
@@ -52,13 +59,15 @@ class CrmModule extends Migration
             'read_at' => ['type' => 'DATETIME', 'null' => true],
             'created_at' => ['type' => 'DATETIME', 'null' => true],
         ]);
-        $this->forge->addKey('id', true);
-        $this->forge->addKey(['conversation_id', 'created_at'], false, false, 'idx_conv_date');
-        $this->forge->addKey('external_message_id', false, false, 'idx_ext_msg');
-        $this->forge->createTable('messages');
+            $this->forge->addKey('id', true);
+            $this->forge->addKey(['conversation_id', 'created_at'], false, false, 'idx_conv_date');
+            $this->forge->addKey('external_message_id', false, false, 'idx_ext_msg');
+            $this->forge->createTable('messages');
+        }
 
         // 4. CREATE intention_logs table
-        $this->forge->addField([
+        if (! $db->tableExists('intention_logs')) {
+            $this->forge->addField([
             'id' => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'lead_id' => ['type' => 'INT', 'constraint' => 11],
             'previous_score' => ['type' => 'INT', 'constraint' => 11, 'default' => 0],
@@ -68,12 +77,12 @@ class CrmModule extends Migration
             'ai_reasoning' => ['type' => 'TEXT', 'null' => true],
             'created_at' => ['type' => 'DATETIME', 'null' => true],
         ]);
-        $this->forge->addKey('id', true);
-        $this->forge->addKey('lead_id', false, false, 'idx_lead_score');
-        $this->forge->createTable('intention_logs');
+            $this->forge->addKey('id', true);
+            $this->forge->addKey('lead_id', false, false, 'idx_lead_score');
+            $this->forge->createTable('intention_logs');
+        }
 
         // 5. funnels: no existía en migraciones previas; en instalaciones antiguas ya está en la BD
-        $db = \Config\Database::connect();
         if (! $db->tableExists('funnels')) {
             $this->forge->addField([
                 'id'    => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
@@ -85,7 +94,10 @@ class CrmModule extends Migration
             $this->forge->createTable('funnels');
         }
 
-        $db->query("INSERT INTO funnels (name, created_at) VALUES ('Instagram DM - Automático', NOW())");
+        $exists = $db->query("SELECT id FROM funnels WHERE name = 'Instagram DM - Automático' LIMIT 1")->getRow();
+        if (! $exists) {
+            $db->query("INSERT INTO funnels (name, created_at) VALUES ('Instagram DM - Automático', NOW())");
+        }
     }
 
     public function down()

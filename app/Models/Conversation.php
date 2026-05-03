@@ -9,6 +9,7 @@ class Conversation extends Model
     protected $returnType = 'array';
     protected $allowedFields = [
         'lead_id', 'channel', 'external_id', 'external_username',
+        'recipient_ig_id', 'recipient_ig_username',
         'status', 'assigned_to', 'last_message_at', 'unread_count'
     ];
     protected $useTimestamps = true;
@@ -47,10 +48,14 @@ class Conversation extends Model
         return $builder->findAll();
     }
 
-    public function findByExternalId($channel, $externalId)
+    /**
+     * @param string $recipientIgId ID del receptor en el webhook (entry.id); '' = legado / una sola bandeja
+     */
+    public function findByExternalId($channel, $externalId, string $recipientIgId = '')
     {
         return $this->where('channel', $channel)
             ->where('external_id', $externalId)
+            ->where('recipient_ig_id', $recipientIgId)
             ->first();
     }
 

@@ -268,6 +268,19 @@ Abre `https://rems.admetricas.com/`. Ruta pública de webhook (según [Routes](a
 
 `https://rems.admetricas.com/api/webhook/instagram`
 
+- URLs legales (Meta Developer — política y términos): `https://TU_DOMINIO/legal/privacy-policy` y `https://TU_DOMINIO/legal/terms-of-service`.
+
+### Meta Instagram — webhook en producción (varias cuentas)
+
+1. **App en modo Live** y permisos necesarios revisados (p. ej. `instagram_manage_messages` con Advanced Access cuando aplique).
+2. **HTTPS** accesible desde Internet en la URL anterior (proxy/NPM ya fuerza SSL).
+3. En **Meta Developers → Tu app → Webhooks**: campo **Callback URL** = esa URL; **Verify Token** = mismo valor que `INSTAGRAM_VERIFY_TOKEN` en `.env`.
+4. En cada **Facebook Page** ligada a Instagram Professional: **configuración → Instagram → acceso/conexiones** y suscripción del webhook / mensajes según el flujo Meta actual (Graph API “Subscribe” o herramientas de la app).
+5. En `.env`: `META_WEBHOOK_ALLOWED_RECIPIENT_IG_IDS` y `META_WEBHOOK_ALLOWED_PAGE_IDS` con las tres cuentas objetivo (ver `.env.example`); si ambas vacías, se procesan todos los `entry` suscritos.
+6. Tras estabilizar: `META_WEBHOOK_REQUIRE_SIGNATURE=true` y `META_APP_SECRET` para validar cabecera `X-Hub-Signature-256` en cada POST.
+
+Los mensajes entrantes crean/actualizan conversación y lead y llaman a `CrmPipelineEnrollment` (Kanban); no hace falta el botón “sync Graph” para tiempo real.
+
 ## 8. Contenedor en `Restarting` y “sin puerto”
 
 - **No hay columna `PORTS`**: en este `docker-compose` **no** se publica `0.0.0.0:80->80` a propósito; Nginx Proxy Manager habla con `rems-app` por la red Docker `proxy-network`. Eso es correcto.

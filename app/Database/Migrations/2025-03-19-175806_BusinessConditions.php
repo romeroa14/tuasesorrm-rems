@@ -8,6 +8,10 @@ class BusinessConditions extends Migration
 {
 	public function up()
 	{
+        if (\Config\Database::connect()->tableExists('business_conditions')) {
+            return;
+        }
+
 		$this->forge->addField([
             'id' => [
                 'type' => 'INT',

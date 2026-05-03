@@ -29,7 +29,7 @@
                             <div class="d-flex flex-wrap gap-1">
                                 <select class="form-control form-control-sm mb-1" id="filter-channel" style="font-size: 11px;">
                                     <option value="">Todos los canales</option>
-                                    <option value="instagram">📷 Instagram</option>
+                                    <option value="instagram" selected>📷 Instagram</option>
                                     <option value="whatsapp">💬 WhatsApp</option>
                                     <option value="web">🌐 Web</option>
                                 </select>

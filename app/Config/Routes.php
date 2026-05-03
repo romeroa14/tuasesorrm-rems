@@ -13,6 +13,10 @@ $routes->get('/login', 'UserController::login');
 $routes->post('/login', 'UserController::loginValidate');
 $routes->get('/logout', 'UserController::logout');
 
+// Legal / Meta Developer (público — política de privacidad y términos)
+$routes->get('/legal/privacy-policy', 'LegalPagesController::privacyPolicy');
+$routes->get('/legal/terms-of-service', 'LegalPagesController::termsOfService');
+
 // Dashboard
 $routes->get('/app/dashboard', 'DashboardController::dashboard', ['filter' => 'auth']); /*Página de inicio*/
 $routes->get('/app/properties/total_month_by_month', 'RealStateController::getPropertiesPerMonth', ['filter' => 'auth']); /*Endpoint total de propiedades mes a mes*/
@@ -149,6 +153,7 @@ $routes->post('/app/crm/api/status', 'CrmController::api_update_status', ['filte
 $routes->get('/app/crm/api/pipeline', 'CrmController::api_pipeline', ['filter' => 'auth']); /* Datos del pipeline */
 $routes->get('/app/crm/api/pipeline/counts', 'CrmController::api_pipeline_counts', ['filter' => 'auth']); /* Conteos por estado + relación BD */
 $routes->post('/app/crm/api/pipeline/move', 'CrmController::api_pipeline_move', ['filter' => 'auth']); /* Mover lead entre columnas Kanban */
+$routes->post('/app/crm/api/pipeline/sync-instagram-messages', 'CrmController::api_pipeline_sync_instagram_messages', ['filter' => 'auth']); /* Graph → BD últimos DM */
 $routes->get('/app/crm/api/stats', 'CrmController::api_stats', ['filter' => 'auth']); /* Estadísticas CRM */
 $routes->get('/app/crm/api/rescore/(:num)', 'CrmController::api_rescore/$1', ['filter' => 'auth']); /* Recalcular score */
 $routes->get('/app/crm/export/meta', 'CrmController::export_meta', ['filter' => 'auth']); /* Exportar para Meta */

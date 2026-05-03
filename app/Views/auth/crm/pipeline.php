@@ -1,13 +1,16 @@
 <?php
 // URLs para AJAX (subcarpeta /index.php si aplica)
-$crmPipelineApi    = site_url('app/crm/api/pipeline');
-$crmPipelineCounts = site_url('app/crm/api/pipeline/counts');
-$crmPipelineMove   = site_url('app/crm/api/pipeline/move');
-$crmInboxBase      = site_url('app/crm/inbox');
+$crmPipelineApi  = site_url('app/crm/api/pipeline');
+$crmPipelineMove = site_url('app/crm/api/pipeline/move');
+$crmPipelineSyncIg = site_url('app/crm/api/pipeline/sync-instagram-messages');
+$crmInboxBase    = site_url('app/crm/inbox');
 ?>
 <div class="crm-pipeline-shell">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Pipeline CRM</h1>
+        <div>
+            <h1 class="h3 mb-1 text-gray-800">Pipeline CRM</h1>
+            <p class="text-muted small mb-0">Solo leads con conversación Instagram DM (como bandeja principal).</p>
+        </div>
         <div>
             <a href="<?= esc(site_url('app/crm/inbox')) ?>" class="btn btn-sm btn-outline-primary">
                 <i class="fas fa-inbox"></i> Inbox
@@ -15,18 +18,9 @@ $crmInboxBase      = site_url('app/crm/inbox');
             <a href="<?= esc(site_url('app/crm/export/meta')) ?>?score_min=50" class="btn btn-sm btn-outline-success ml-2">
                 <i class="fas fa-file-export"></i> Exportar a Meta
             </a>
-        </div>
-    </div>
-
-    <div id="pipeline-counts-panel" class="card mb-3 shadow-sm" style="display:none;">
-        <div class="card-body py-2">
-            <div class="d-flex flex-wrap align-items-center justify-content-between">
-                <div class="small text-muted mb-1 mb-md-0">
-                    <strong>BD:</strong> <code>trackingstatus</code> → <code>assignedclients.trackingstatus_id</code> · un lead → máx.1 fila en <code>assignedclients</code> (<code>lead_id</code> UNIQUE)
-                </div>
-                <div id="pipeline-counts-badges" class="d-flex flex-wrap gap-1"></div>
-            </div>
-            <div id="pipeline-orphan-hint" class="small text-warning mt-2" style="display:none;"></div>
+            <button type="button" id="btn-sync-instagram-graph" class="btn btn-sm btn-outline-info ml-2" title="Últimos 5 hilos DM desde Meta Graph → BD (solo conversaciones ya conocidas en el CRM)">
+                <i class="fab fa-instagram"></i> Sync últimos DM (Meta)
+            </button>
         </div>
     </div>
 
@@ -96,11 +90,6 @@ body.page-pipeline-crm .crm-pipeline-shell > .d-sm-flex.mb-4 {
     flex-shrink: 0;
     padding-left: 1rem;
     padding-right: 1rem;
-}
-body.page-pipeline-crm #pipeline-counts-panel {
-    flex-shrink: 0;
-    margin-left: 1rem;
-    margin-right: 1rem;
 }
 body.page-pipeline-crm #content-wrapper > footer.sticky-footer {
     flex-shrink: 0;
@@ -217,47 +206,89 @@ body.page-pipeline-crm #content-wrapper > footer.sticky-footer {
     font-size: 11px;
     font-weight: 700;
 }
+.pipeline-card .card-ig-account {
+    font-size: 11px;
+    font-weight: 600;
+    color: #c13584;
+}
 </style>
 
 <script>
-$(document).ready(function() {
-    loadPipelineCounts();
-    loadPipeline();
-});
-
 /** Evita que el click navegue al Inbox justo después de soltar el drag (comportamiento típico del navegador). */
 var pipelineSuppressCardClick = false;
 
 var CRM_PIPELINE_URL = <?= json_encode($crmPipelineApi) ?>;
-var CRM_PIPELINE_COUNTS_URL = <?= json_encode($crmPipelineCounts) ?>;
 var CRM_PIPELINE_MOVE_URL = <?= json_encode($crmPipelineMove) ?>;
+var CRM_PIPELINE_SYNC_IG_URL = <?= json_encode($crmPipelineSyncIg) ?>;
 var CRM_INBOX_URL = <?= json_encode($crmInboxBase) ?>;
 
-function loadPipelineCounts() {
-    $.get(CRM_PIPELINE_COUNTS_URL, function(response) {
-        if (response.status !== 'success' || !response.data) return;
-        const d = response.data;
-        const panel = $('#pipeline-counts-panel');
-        const badges = $('#pipeline-counts-badges');
-        badges.empty();
-
-        (d.leads_by_tracking_status || []).forEach(function(row) {
-            badges.append(
-                $('<span class="badge badge-light border text-dark mr-1 mb-1"></span>')
-                    .text(row.name + ': ' + row.lead_count)
-            );
-        });
-
-        const orphan = d.crm_leads_with_conversation_but_no_assignedclients_row;
-        const hint = $('#pipeline-orphan-hint');
-        if (orphan > 0) {
-            hint.text('Leads con conversación CRM pero sin fila en assignedclients: ' + orphan + ' (al moverlos desde el Kanban se crea la asignación).').show();
-        } else {
-            hint.hide();
-        }
-
-        panel.show();
+$(document).ready(function() {
+    loadPipeline();
+    $('#btn-sync-instagram-graph').on('click', function () {
+        var $btn = $(this);
+        $btn.prop('disabled', true);
+        $.post(CRM_PIPELINE_SYNC_IG_URL, {
+            threads: 2,
+            messages_per_thread: 10
+        })
+            .done(function (res) {
+                if (res.status === 'success' && res.data) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sincronizado',
+                        html: 'Hilos procesados: <strong>' + (res.data.threads_processed || 0) + '</strong><br>'
+                            + 'Mensajes nuevos: <strong>' + (res.data.messages_inserted || 0) + '</strong><br>'
+                            + 'Sin conv. local (omitidos): <strong>' + (res.data.skipped_no_local_conv || 0) + '</strong>',
+                        confirmButtonColor: '#4e73df'
+                    });
+                    loadPipeline();
+                } else {
+                    var msg = (res.message || 'Error');
+                    if (res.data && res.data.graph_error) {
+                        msg += '<br><small>' + escapeHtml(JSON.stringify(res.data.graph_error)) + '</small>';
+                    }
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Graph API',
+                        html: msg,
+                        confirmButtonColor: '#e74a3b'
+                    });
+                }
+            })
+            .fail(function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Red',
+                    text: 'No se pudo llamar al servidor.',
+                    confirmButtonColor: '#e74a3b'
+                });
+            })
+            .always(function () {
+                $btn.prop('disabled', false);
+            });
     });
+});
+
+function escapeHtml(s) {
+    if (s === null || s === undefined) return '';
+    return String(s).replace(/[&<>"']/g, function(c) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+}
+
+function formatIgBusinessLineHtml(lead) {
+    if (lead.channel !== 'instagram') return '';
+    var uname = (lead.recipient_ig_username || '').replace(/^@/, '').trim();
+    if (uname) {
+        return '<div class="card-ig-account mt-1">ig: @' + escapeHtml(uname) + '</div>';
+    }
+    var rid = lead.recipient_ig_id;
+    if (rid) {
+        var ridStr = String(rid);
+        return '<div class="card-ig-account mt-1 text-muted small" title="' + escapeHtml(ridStr) + '">ig: · '
+            + escapeHtml(ridStr.slice(0, 14)) + (ridStr.length > 14 ? '…' : '') + '</div>';
+    }
+    return '';
 }
 
 function loadPipeline() {
@@ -305,6 +336,7 @@ function renderPipeline(stages) {
                             ${lead.budget_detected ? '<span class="badge badge-success badge-sm mr-1">$' + parseFloat(lead.budget_detected).toLocaleString() + '</span>' : ''}
                             ${lead.zone_interest ? '<span class="badge badge-secondary badge-sm">' + lead.zone_interest + '</span>' : ''}
                         </div>
+                        ${formatIgBusinessLineHtml(lead)}
                         <div class="card-info mt-1 d-flex justify-content-between align-items-center">
                             <span>${lead.agent_name ? '<i class="fas fa-user-check text-success"></i> ' + lead.agent_name : '<i class="fas fa-user-times text-muted"></i> Sin asignar'}</span>
                             ${convId ? '<a href="' + inboxUrl + '" class="btn btn-xs btn-outline-primary btn-sm py-0 px-1">Inbox</a>' : ''}
@@ -401,7 +433,6 @@ function bindPipelineDnD(board) {
             trackingstatus_id: newStatusId
         }, function(res) {
             if (res.status === 'success') {
-                loadPipelineCounts();
                 loadPipeline();
             } else {
                 Swal.fire({

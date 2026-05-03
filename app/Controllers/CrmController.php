@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\IntentionLog;
+use App\Libraries\InstagramDmGraphSync;
 use App\Libraries\ScoringService;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -364,13 +365,15 @@ class CrmController extends BaseController
                 ac.assigned_id,
                 u.full_name as agent_name,
                 c.channel,
-                c.id as conversation_id
+                c.id as conversation_id,
+                c.recipient_ig_id,
+                c.recipient_ig_username
             FROM trackingstatus ts
             LEFT JOIN assignedclients ac ON ac.trackingstatus_id = ts.id
             LEFT JOIN leads l ON l.id = ac.lead_id
             LEFT JOIN users u ON u.id = ac.assigned_id
-            LEFT JOIN conversations c ON c.lead_id = l.id AND c.id = (
-                SELECT MAX(c2.id) FROM conversations c2 WHERE c2.lead_id = l.id
+            INNER JOIN conversations c ON c.lead_id = l.id AND c.channel = 'instagram' AND c.id = (
+                SELECT MAX(c2.id) FROM conversations c2 WHERE c2.lead_id = l.id AND c2.channel = 'instagram'
             )
             ORDER BY ts.id, l.intention_score DESC
         ")->getResultArray();
@@ -396,6 +399,59 @@ class CrmController extends BaseController
         unset($column);
 
         return $this->response->setJSON(['status' => 'success', 'data' => array_values($pipeline)]);
+    }
+
+    /**
+     * Sincroniza desde Graph API los últimos hilos DM de Instagram y fusiona mensajes en BD
+     * solo si ya existe conversación local (external_id del usuario coincide con participante del hilo).
+     *
+     * POST/GET opcional: threads (default 2), messages_per_thread (default 10).
+     * Env: CRM_PIPELINE_SYNC_THREADS, CRM_PIPELINE_SYNC_MESSAGES_PER_THREAD.
+     */
+    public function api_pipeline_sync_instagram_messages()
+    {
+        $threads = (int) ($this->request->getPost('threads') ?: $this->request->getGet('threads'));
+        if ($threads < 1) {
+            $ev = getenv('CRM_PIPELINE_SYNC_THREADS');
+            $threads = ($ev !== false && ctype_digit(trim((string) $ev))) ? (int) trim((string) $ev) : 2;
+        }
+
+        $perThread = (int) ($this->request->getPost('messages_per_thread') ?: $this->request->getGet('messages_per_thread'));
+        if ($perThread < 1) {
+            $evm = getenv('CRM_PIPELINE_SYNC_MESSAGES_PER_THREAD');
+            $perThread = ($evm !== false && ctype_digit(trim((string) $evm))) ? (int) trim((string) $evm) : 10;
+        }
+
+        $result = InstagramDmGraphSync::syncRecentThreads(
+            $this->conversationModel,
+            $this->messageModel,
+            $threads,
+            $perThread
+        );
+
+        if (! ($result['ok'] ?? false)) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => $result['detail'] ?? 'Error al sincronizar con Graph API',
+                'data' => [
+                    'graph_http' => $result['graph_http'] ?? null,
+                    'graph_error' => $result['graph_error'] ?? null,
+                    'threads_processed' => $result['threads_processed'] ?? 0,
+                    'messages_inserted' => $result['messages_inserted'] ?? 0,
+                    'skipped_no_local_conv' => $result['skipped_no_local_conv'] ?? 0,
+                ],
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Sincronización completada',
+            'data' => [
+                'threads_processed' => $result['threads_processed'],
+                'messages_inserted' => $result['messages_inserted'],
+                'skipped_no_local_conv' => $result['skipped_no_local_conv'],
+            ],
+        ]);
     }
 
     /**
