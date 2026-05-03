@@ -135,6 +135,13 @@ $routes->post('/app/trackingstatus/edit/(:num)', 'TrackingStatusController::edit
 $routes->get('/app/trackingstatus/delete/(:num)', 'TrackingStatusController::delete/$1', ['filter' => 'auth']);
 
 // =============================================================================
+// AI — Agente (microservicio Python agente/)
+// =============================================================================
+
+$routes->get('/app/ai/agent-chat', 'AiAgentController::agent_chat', ['filter' => 'auth']);
+$routes->post('/app/ai/chat', 'AiAgentController::api_chat', ['filter' => 'auth']);
+
+// =============================================================================
 // CRM MODULE
 // =============================================================================
 

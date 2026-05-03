@@ -75,6 +75,18 @@
         </a>
     </li>
 
+    <!-- AI Module -->
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+        AI
+    </div>
+    <li class="nav-item <?= $title == 'Agente IA' ? 'active' : '' ?>">
+        <a class="nav-link" href="<?= base_url('/app/ai/agent-chat') ?>">
+            <i class="fas fa-robot"></i>
+            <span>Agente chat</span>
+        </a>
+    </li>
+
     <!-- CRM Module -->
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
