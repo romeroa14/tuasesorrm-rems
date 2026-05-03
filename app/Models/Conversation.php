@@ -10,7 +10,8 @@ class Conversation extends Model
     protected $allowedFields = [
         'lead_id', 'channel', 'external_id', 'external_username',
         'recipient_ig_id', 'recipient_ig_username',
-        'status', 'assigned_to', 'last_message_at', 'unread_count'
+        'status', 'assigned_to', 'last_message_at', 'unread_count',
+        'ai_auto_reply',
     ];
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';

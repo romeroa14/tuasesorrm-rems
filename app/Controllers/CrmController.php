@@ -158,6 +158,7 @@ class CrmController extends BaseController
             'last_message_at' => date('Y-m-d H:i:s'),
             'status' => 'assigned',
             'assigned_to' => $agentId,
+            'ai_auto_reply' => 0,
         ]);
 
         // Send handoff webhook to Python AI
@@ -207,6 +208,7 @@ class CrmController extends BaseController
         $this->conversationModel->update($conversationId, [
             'status' => 'open',
             'assigned_to' => null,
+            'ai_auto_reply' => 1,
         ]);
 
         // Send resume webhook to Python AI

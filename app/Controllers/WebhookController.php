@@ -101,20 +101,62 @@ class WebhookController extends ResourceController
             if (empty($entry['messaging'])) continue;
 
             foreach ($entry['messaging'] as $event) {
-                if (empty($event['message'])) continue;
+                if (! empty($event['read'])) {
+                    continue;
+                }
+                if (! empty($event['delivery'])) {
+                    continue;
+                }
 
                 $senderId = isset($event['sender']['id']) ? (string) $event['sender']['id'] : '';
+                $toFieldId = isset($event['recipient']['id']) ? (string) $event['recipient']['id'] : '';
+                $timestamp = (int) ($event['timestamp'] ?? time());
+
+                // La cuenta profesional (entry.id) envió el mensaje → cliente está en recipient.id (Meta Suite / app IG).
+                if (
+                    $recipientIgId !== ''
+                    && $senderId !== ''
+                    && $senderId === $recipientIgId
+                    && ! empty($event['message'])
+                ) {
+                    $customerId = $toFieldId;
+                    $messageText = $event['message']['text'] ?? '';
+                    $messageId = $event['message']['mid'] ?? '';
+                    $contentType = 'text';
+                    $mediaUrl = null;
+                    if (! empty($event['message']['attachments'])) {
+                        $attachment = $event['message']['attachments'][0];
+                        $contentType = $attachment['type'] ?? 'text';
+                        $mediaUrl = $attachment['payload']['url'] ?? null;
+                    }
+                    $this->processInstagramBusinessOutboundMessage(
+                        $customerId,
+                        $messageText,
+                        $messageId,
+                        $contentType,
+                        $mediaUrl,
+                        $timestamp,
+                        $recipientIgId
+                    );
+
+                    continue;
+                }
+
+                if (empty($event['message'])) {
+                    continue;
+                }
+
                 if ($senderId === '') {
                     continue;
                 }
+
                 $messageText = $event['message']['text'] ?? '';
                 $messageId = $event['message']['mid'] ?? '';
-                $timestamp = $event['timestamp'] ?? time();
 
                 // Check for media
                 $contentType = 'text';
                 $mediaUrl = null;
-                if (!empty($event['message']['attachments'])) {
+                if (! empty($event['message']['attachments'])) {
                     $attachment = $event['message']['attachments'][0];
                     $contentType = $attachment['type'] ?? 'text';
                     $mediaUrl = $attachment['payload']['url'] ?? null;
@@ -159,6 +201,13 @@ class WebhookController extends ResourceController
         int $timestamp = 0,
         string $recipientIgId = ''
     ) {
+        if ($externalMessageId !== '') {
+            $dup = $this->messageModel->where('external_message_id', $externalMessageId)->first();
+            if ($dup !== null) {
+                return (int) $dup['id'];
+            }
+        }
+
         // 1. Find or create conversation
         $conversation = $this->conversationModel->findByExternalId($channel, $externalId, $recipientIgId);
 
@@ -177,7 +226,7 @@ class WebhookController extends ResourceController
                 'name' => 'Instagram User ' . substr($externalId, -6),
                 'phone' => '',
                 'email' => '',
-                'instagram_username' => $externalId,
+                'instagram_username' => '',
                 'id_user' => 1, // System user
                 'id_funnel' => $funnelId,
                 'id_housingtype' => 1,
@@ -192,7 +241,7 @@ class WebhookController extends ResourceController
                 'lead_id' => $leadId,
                 'channel' => $channel,
                 'external_id' => $externalId,
-                'external_username' => $externalId,
+                'external_username' => '',
                 'recipient_ig_id' => $channel === 'instagram' ? $recipientIgId : '',
                 'recipient_ig_username' => $recipientUsername,
                 'status' => 'open',
@@ -233,11 +282,149 @@ class WebhookController extends ResourceController
             'created_at' => date('Y-m-d H:i:s', $timestamp ?: time()),
         ]);
 
+        if ($channel === 'instagram') {
+            $this->enrichInstagramLeadFromParticipant((int) $conversation['lead_id'], (int) $conversation['id'], $externalId);
+            $this->maybeCapturePhoneFromInbound($content, (int) $conversation['lead_id']);
+        }
+
         // 3. Score the conversation
         $scorer = new ScoringService();
         $scorer->scoreConversation($conversation['id'], $conversation['lead_id']);
 
         return $messageId;
+    }
+
+    /**
+     * Mensaje saliente captado por webhook (equipo escribió desde Meta Inbox / Instagram).
+     * Pausa IA automática en ese hilo.
+     */
+    protected function processInstagramBusinessOutboundMessage(
+        string $customerIgScopedId,
+        string $content,
+        string $externalMessageId,
+        string $contentType,
+        ?string $mediaUrl,
+        int $timestamp,
+        string $recipientIgId
+    ): void {
+        if ($customerIgScopedId === '') {
+            return;
+        }
+
+        if ($externalMessageId !== '') {
+            $dup = $this->messageModel->where('external_message_id', $externalMessageId)->first();
+            if ($dup !== null) {
+                return;
+            }
+        }
+
+        $conversation = $this->findInstagramConversationForCustomer($customerIgScopedId, $recipientIgId);
+        if (! $conversation) {
+            log_message(
+                'notice',
+                'Instagram webhook outbound: sin conversación local para participante=' . $customerIgScopedId
+                . ' recipient_ig=' . $recipientIgId
+            );
+
+            return;
+        }
+
+        $sqlTs = date('Y-m-d H:i:s', $timestamp ?: time());
+
+        $this->messageModel->insert([
+            'conversation_id'     => $conversation['id'],
+            'direction'           => 'outbound',
+            'sender_type'         => 'agent',
+            'sender_id'           => null,
+            'content'             => $content !== '' ? $content : '[' . $contentType . ']',
+            'content_type'        => $contentType,
+            'media_url'           => $mediaUrl,
+            'external_message_id' => $externalMessageId,
+            'created_at'          => $sqlTs,
+        ]);
+
+        $patch = [
+            'last_message_at' => $sqlTs,
+            'ai_auto_reply' => 0,
+        ];
+        $this->conversationModel->update((int) $conversation['id'], $patch);
+    }
+
+    /**
+     * Prioriza conversación con mismo receptor IG Business; cae a filas legacy sin recipient_ig_id.
+     *
+     * @return array<string, mixed>|null
+     */
+    protected function findInstagramConversationForCustomer(string $customerIgScopedId, string $recipientIgId): ?array
+    {
+        if ($recipientIgId !== '') {
+            $row = $this->conversationModel->where('channel', 'instagram')
+                ->where('external_id', $customerIgScopedId)
+                ->where('recipient_ig_id', $recipientIgId)
+                ->orderBy('id', 'DESC')
+                ->first();
+            if ($row) {
+                return $row;
+            }
+        }
+
+        return $this->conversationModel->where('channel', 'instagram')
+            ->where('external_id', $customerIgScopedId)
+            ->where('recipient_ig_id', '')
+            ->orderBy('id', 'DESC')
+            ->first();
+    }
+
+    protected function enrichInstagramLeadFromParticipant(int $leadId, int $conversationId, string $participantIgScopedId): void
+    {
+        $profile = MetaInstagramGraph::resolveParticipantProfile($participantIgScopedId);
+        if ($profile === null) {
+            return;
+        }
+
+        $u = trim($profile['username'] ?? '');
+        $name = trim($profile['name'] ?? '');
+        $handle = $u !== '' ? ('@' . ltrim($u, '@')) : '';
+
+        $leadPatch = [];
+        $lead = $this->leadsModel->find($leadId);
+        if ($lead) {
+            if ($handle !== '' && trim((string) ($lead['instagram_username'] ?? '')) === '') {
+                $leadPatch['instagram_username'] = $handle;
+            }
+            $currentName = (string) ($lead['name'] ?? '');
+            if ($name !== '' && ($currentName === '' || str_starts_with($currentName, 'Instagram User '))) {
+                $leadPatch['name'] = $name;
+            } elseif ($handle !== '' && str_starts_with($currentName, 'Instagram User ') && ! isset($leadPatch['name'])) {
+                $leadPatch['name'] = $handle;
+            }
+            if ($leadPatch !== []) {
+                $this->leadsModel->update($leadId, $leadPatch);
+            }
+        }
+
+        $conv = $this->conversationModel->find($conversationId);
+        if ($conv && $handle !== '' && trim((string) ($conv['external_username'] ?? '')) === '') {
+            $this->conversationModel->update($conversationId, ['external_username' => $handle]);
+        }
+    }
+
+    protected function maybeCapturePhoneFromInbound(string $content, int $leadId): void
+    {
+        $content = trim($content);
+        if ($content === '') {
+            return;
+        }
+        $lead = $this->leadsModel->find($leadId);
+        if (! $lead || trim((string) ($lead['phone'] ?? '')) !== '') {
+            return;
+        }
+        if (preg_match('/(?:\+?\s*58\s*)?(?:0\s*)?(4\s*\d{2}[\s\-]?\d{7})/', $content, $m)) {
+            $digits = preg_replace('/\D/', '', $m[1]);
+            if (strlen($digits) >= 10) {
+                $this->leadsModel->update($leadId, ['phone' => $digits]);
+            }
+        }
     }
 
     /**

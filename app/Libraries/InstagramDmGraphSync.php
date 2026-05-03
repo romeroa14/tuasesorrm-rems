@@ -114,8 +114,17 @@ class InstagramDmGraphSync
 
             $local = $conversationModel->where('channel', 'instagram')
                 ->where('external_id', $peerId)
+                ->where('recipient_ig_id', $bizIgId)
                 ->orderBy('id', 'DESC')
                 ->first();
+
+            if (! $local && $bizIgId !== '') {
+                $local = $conversationModel->where('channel', 'instagram')
+                    ->where('external_id', $peerId)
+                    ->where('recipient_ig_id', '')
+                    ->orderBy('id', 'DESC')
+                    ->first();
+            }
 
             if (! $local) {
                 $skipped++;

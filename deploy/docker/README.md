@@ -87,6 +87,8 @@ Misma lógica para `REMS_MYSQL_ROOT_PASSWORD` vs lo que tú guardes para root; e
    docker exec rems-app php spark migrate
    ```
 
+   **No ejecutes `php spark migrate` con el PHP del host del VPS** salvo que tenga la extensión **`intl`** (`Locale`, `IntlDateFormatter`). Si ves `Class "Locale" not found`, o bien ejecuta el comando **dentro de `rems-app`** (arriba), o instala en el host, por ejemplo: `sudo apt install php8.4-intl` (ajusta la versión a la de tu CLI `php -v`). La imagen Docker del proyecto ya compila **`intl`** en el Dockerfile.
+
    Incluyen la migración `UsersAndRoles` (tablas `users` y `roles` + usuario inicial). Tras un deploy **sin** dump SQL previo, el primer acceso puede ser:
    - **Email:** `admin@rems.local`  
    - **Contraseña:** `CambiarLaClave1!`  

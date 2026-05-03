@@ -69,4 +69,50 @@ class MetaInstagramGraph
 
         return (string) $map[$recipientIgId];
     }
+
+    /**
+     * Perfil del participante en DM (usuario de Instagram que escribe).
+     * Requiere token con permisos de mensajería Instagram según tu app en Meta.
+     *
+     * @return array{username: string, name: string}|null
+     */
+    public static function resolveParticipantProfile(string $participantIgScopedId): ?array
+    {
+        if ($participantIgScopedId === '') {
+            return null;
+        }
+
+        $token = getenv('META_GRAPH_ACCESS_TOKEN') ?: getenv('META_PAGE_ACCESS_TOKEN');
+        if (empty($token)) {
+            return null;
+        }
+
+        $version = getenv('META_GRAPH_API_VERSION') ?: 'v21.0';
+
+        try {
+            $client = \Config\Services::curlrequest(['timeout' => 15, 'http_errors' => false]);
+            $response = $client->get(
+                'https://graph.facebook.com/' . $version . '/' . rawurlencode($participantIgScopedId),
+                [
+                    'query' => [
+                        'fields'       => 'name,username',
+                        'access_token' => $token,
+                    ],
+                ]
+            );
+            $body = json_decode((string) $response->getBody(), true);
+            if ($response->getStatusCode() !== 200 || ! is_array($body) || isset($body['error'])) {
+                return null;
+            }
+
+            return [
+                'username' => isset($body['username']) ? (string) $body['username'] : '',
+                'name'     => isset($body['name']) ? (string) $body['name'] : '',
+            ];
+        } catch (\Throwable $e) {
+            log_message('error', 'MetaInstagramGraph::resolveParticipantProfile ' . $e->getMessage());
+
+            return null;
+        }
+    }
 }

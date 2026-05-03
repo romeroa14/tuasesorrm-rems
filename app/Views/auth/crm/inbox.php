@@ -423,13 +423,15 @@ function renderMessages(messages) {
         }
 
         const direction = msg.direction;
-        const senderName = direction === 'outbound' ? (msg.sender_name || 'Agente') : '';
+        const senderLabel = direction === 'outbound'
+            ? (msg.sender_name ? escapeHtml(msg.sender_name) : 'Equipo')
+            : 'Cliente';
         const time = msg.created_at ? msg.created_at.split(' ')[1].substring(0, 5) : '';
 
         html += `
             <div class="d-flex ${direction === 'outbound' ? 'justify-content-end' : 'justify-content-start'}">
                 <div class="message-bubble ${direction}">
-                    ${direction === 'outbound' ? `<div class="msg-sender">${senderName}</div>` : ''}
+                    <div class="msg-sender ${direction === 'outbound' ? '' : 'text-muted'}">${senderLabel}</div>
                     <div>${escapeHtml(msg.content)}</div>
                     <div class="msg-time">${time} ${direction === 'outbound' ? '✓✓' : ''}</div>
                 </div>
