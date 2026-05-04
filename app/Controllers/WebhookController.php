@@ -55,11 +55,17 @@ class WebhookController extends ResourceController
     }
 
     /**
-     * Meta llama esta URL en tiempo real por cada mensaje entrante (no hay que consultar /conversations para ATC).
+     * Meta llama esta URL en tiempo real por cada mensaje (no hay que consultar /conversations para ATC).
      *
-     * Allowlist opcional: META_WEBHOOK_ALLOWED_RECIPIENT_IG_IDS / META_WEBHOOK_ALLOWED_PAGE_IDS (entry.id y
-     * sender/recipient del negocio). DM entrante = recipient es uno de esos IDs y sender es el cliente;
-     * saliente = sender es negocio y recipient es el cliente. META_WEBHOOK_DM_SENDER_IDS para IDs extra.
+     * Los LEADS (personas que escriben) no van en ninguna lista: cada uno llega con sender.id distinto y el CRM
+     * crea conversación/lead si no existe.
+     *
+     * META_WEBHOOK_ALLOWED_* es opcional y solo sirve para multi-app / endurecer seguridad: limitar qué
+     * cuenta profesional (valor de entry.id en el payload) procesamos. Si dejas esas variables vacías o sin
+     * definir, se acepta cualquier entry.id que Meta envíe a esta URL (tantas personas como escriban).
+     *
+     * Clasificación DM: entrante = recipient es ID del negocio y sender es el cliente; saliente al revés.
+     * META_WEBHOOK_DM_SENDER_IDS solo si hace falta otro ID “nosotros”.
      *
      * Seguridad Live: META_WEBHOOK_REQUIRE_SIGNATURE=true y META_APP_SECRET (cabecera X-Hub-Signature-256).
      */
@@ -93,7 +99,9 @@ class WebhookController extends ResourceController
             if (! $this->isWebhookInstagramRecipientAllowed($recipientIgId)) {
                 log_message(
                     'notice',
-                    'Webhook Instagram: entry.id=' . $recipientIgId . ' no está en META_WEBHOOK_ALLOWED_*; ignorado.'
+                    'Webhook Instagram: entry.id=' . $recipientIgId
+                    . ' ignorado (META_WEBHOOK_ALLOWED_* configurada y este entry no está en la lista).'
+                    . ' Para procesar todas las cuentas sin mantener listas, deja vacías esas variables.'
                 );
 
                 continue;
@@ -438,8 +446,8 @@ class WebhookController extends ResourceController
     }
 
     /**
-     * IDs permitidos en payload.entry[].id (instagram_business_account.id y/o Page id, según Meta).
-     * Vacío en ambas variables = aceptar todos los entry suscritos al webhook.
+     * Opcional: IDs de TUS cuentas receptoras en payload.entry[].id — no incluye clientes ni usuarios finales.
+     * Vacío en ambas env vars = no filtrar; procesar todo entry que Meta POSTee a esta URL.
      *
      * @return list<string>
      */
@@ -469,6 +477,7 @@ class WebhookController extends ResourceController
     /**
      * IDs que Meta puede usar como remitente o destinatario del negocio en DM (entry.id + allowlist + extras).
      * Incluir aquí Page id e instagram_business_account.id si ambos aparecen en webhooks.
+     * Con token Graph, se añade la Page vinculada al instagram_business_account (recipient entrante suele ser Page).
      *
      * @return list<string>
      */
@@ -490,11 +499,20 @@ class WebhookController extends ResourceController
             }
         }
 
+        $skipLinkedPage = getenv('META_WEBHOOK_SKIP_LINKED_PAGE_RESOLVE');
+        $skipLinkedPage = $skipLinkedPage !== false && filter_var($skipLinkedPage, FILTER_VALIDATE_BOOLEAN);
+        if (! $skipLinkedPage && $entryId !== '') {
+            $linkedPage = MetaInstagramGraph::linkedFacebookPageIdForInstagramBusiness($entryId);
+            if ($linkedPage !== null && $linkedPage !== '') {
+                $raw[] = $linkedPage;
+            }
+        }
+
         return array_values(array_unique(array_filter($raw)));
     }
 
     /**
-     * @param string $recipientIgId valor de entry.id en el webhook
+     * @param string $recipientIgId valor de entry.id (cuenta profesional / receptor del sistema Meta), no el usuario DM
      */
     protected function isWebhookInstagramRecipientAllowed(string $recipientIgId): bool
     {
