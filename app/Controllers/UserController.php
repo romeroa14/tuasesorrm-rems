@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Libraries\RecaptchaHandler;
+use Config\Recaptcha as RecaptchaConfig;
 
 class UserController extends BaseController
 {
@@ -14,7 +15,11 @@ class UserController extends BaseController
 	///////////////////////////////////////////////////*/
 	public function login()
 	{	
-		$config = [];
+		$recaptchaConfig = new RecaptchaConfig();
+		$config = [
+			'recaptchaEnabled' => $recaptchaConfig->enabled,
+			'recaptchaSiteKey' => $recaptchaConfig->siteKey,
+		];
 		
 		if (session()->get('loggedIn')) {
 			return redirect()->to(base_url('app/dashboard'));

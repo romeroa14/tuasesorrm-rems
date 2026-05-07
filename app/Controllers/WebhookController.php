@@ -240,11 +240,13 @@ class WebhookController extends ResourceController
             $igFunnel = $funnelModel->where('name LIKE', '%Instagram DM%')->first();
             $funnelId = $igFunnel ? $igFunnel['id'] : 33; // fallback to @Tuasesorrm
 
+            // Usamos NULL para phone/email/ig_username porque Instagram no los provee.
+            // MySQL permite múltiples NULL en columnas UNIQUE (a diferencia de '').
             $leadId = $this->leadsModel->insert([
                 'name' => 'Instagram User ' . substr($externalId, -6),
-                'phone' => '',
-                'email' => '',
-                'instagram_username' => '',
+                'phone' => null,
+                'email' => null,
+                'instagram_username' => null,
                 'id_user' => 1, // System user
                 'id_funnel' => $funnelId,
                 'id_housingtype' => 1,

@@ -14,7 +14,7 @@
         <link href="<?= base_url('vendor/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css">
         <link href="<?= base_url('css/ruang-admin.css') ?>" rel="stylesheet">
         <script src="<?= base_url('vendor/jquery/jquery.min.js') ?>"></script>
-        <?php if (ENVIRONMENT !== 'development'): ?>
+        <?php if (($recaptchaEnabled ?? false) && ENVIRONMENT !== 'development'): ?>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <?php endif; ?>
     </head>
@@ -68,9 +68,9 @@
                                                     <label class="custom-control-label" for="customCheck">Mostrar contraseña</label>
                                                 </div>
                                             </div>
-                                            <?php if (ENVIRONMENT !== 'development'): ?>
+                                            <?php if (($recaptchaEnabled ?? false) && ENVIRONMENT !== 'development'): ?>
                                             <div class="d-flex justify-content-center w-100 pb-4">
-                                                <div class="g-recaptcha" data-sitekey="6LfNZYssAAAAAN2-bIc8NnYJbsgCqxNXjtbd25jG"></div>
+                                                <div class="g-recaptcha" data-sitekey="<?= $recaptchaSiteKey ?? '6LfNZYssAAAAAN2-bIc8NnYJbsgCqxNXjtbd25jG' ?>"></div>
                                             </div>
                                             <?php endif; ?>
                                             <div class="form-group">
@@ -99,7 +99,7 @@
         <script src="<?= base_url('vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
         <script src="<?= base_url('vendor/jquery-easing/jquery.easing.min.js') ?>"></script>
         <script src="<?= base_url('js/ruang-admin.min.js') ?>"></script>
-        <?php if (ENVIRONMENT !== 'development'): ?>
+        <?php if (($recaptchaEnabled ?? false) && ENVIRONMENT !== 'development'): ?>
         <script>
             document.getElementById("event_submit").addEventListener("click", function(event) {
                 
@@ -122,7 +122,7 @@
         </script>
         <?php else: ?>
         <script>
-            // [DEV MODE] Submit directo sin validación de reCAPTCHA
+            // [reCAPTCHA deshabilitado] Submit directo sin validación
             document.getElementById("event_submit").addEventListener("click", function(event) {
                 event.preventDefault();
                 document.getElementById("form_login").submit();
