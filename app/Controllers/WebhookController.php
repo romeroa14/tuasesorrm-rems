@@ -143,16 +143,24 @@ class WebhookController extends ResourceController
 
                 // Cliente → negocio (DM entrante real).
                 if ($recipientIsUs && ! $senderIsUs && $senderId !== '') {
-                    $this->processIncomingMessage(
-                        'instagram',
-                        $senderId,
-                        $messageText,
-                        $messageId,
-                        $contentType,
-                        $mediaUrl,
-                        $timestamp,
-                        $recipientIgId
-                    );
+                    try {
+                        $this->processIncomingMessage(
+                            'instagram',
+                            $senderId,
+                            $messageText,
+                            $messageId,
+                            $contentType,
+                            $mediaUrl,
+                            $timestamp,
+                            $recipientIgId
+                        );
+                    } catch (\Throwable $e) {
+                        log_message(
+                            'critical',
+                            'Webhook instagram: processIncomingMessage exception for sender '
+                            . $senderId . ': ' . $e->getMessage()
+                        );
+                    }
 
                     continue;
                 }
@@ -240,13 +248,29 @@ class WebhookController extends ResourceController
             $igFunnel = $funnelModel->where('name LIKE', '%Instagram DM%')->first();
             $funnelId = $igFunnel ? $igFunnel['id'] : 33; // fallback to @Tuasesorrm
 
-            // Usamos NULL para phone/email/ig_username porque Instagram no los provee.
-            // MySQL permite múltiples NULL en columnas UNIQUE (a diferencia de '').
+            // Resolve Instagram profile name BEFORE insert (leads.phone is NULLable UNIQUE → safe for multiple NULLs).
+            $profile = null;
+            $resolvedUsername = null;
+            try {
+                $profile = MetaInstagramGraph::resolveParticipantProfile($externalId);
+                if ($profile !== null && ! empty($profile['username'])) {
+                    $resolvedUsername = '@' . ltrim((string) $profile['username'], '@');
+                }
+            } catch (\Throwable $e) {
+                log_message(
+                    'warning',
+                    'Webhook instagram: resolveParticipantProfile exception for '
+                    . $externalId . ': ' . $e->getMessage()
+                );
+            }
+
+            $leadName = self::buildInstagramLeadName($profile, $externalId);
+
             $leadId = $this->leadsModel->insert([
-                'name' => 'Instagram User ' . substr($externalId, -6),
+                'name' => $leadName,
                 'phone' => null,
                 'email' => null,
-                'instagram_username' => null,
+                'instagram_username' => $resolvedUsername,
                 'id_user' => 1, // System user
                 'id_funnel' => $funnelId,
                 'id_housingtype' => 1,
@@ -534,6 +558,33 @@ class WebhookController extends ResourceController
         }
 
         return filter_var($v, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Build lead display name from Instagram participant profile data.
+     *
+     * Priority: profile['name'] → '@' + profile['username'] → fallback placeholder.
+     *
+     * @param array{name: string, username: string}|null $profile  Result from MetaInstagramGraph::resolveParticipantProfile()
+     * @param string                                     $externalId Instagram scoped sender ID (used for fallback)
+     *
+     * @return string
+     */
+    public static function buildInstagramLeadName(?array $profile, string $externalId): string
+    {
+        if ($profile !== null) {
+            $name = trim((string) ($profile['name'] ?? ''));
+            if ($name !== '') {
+                return $name;
+            }
+
+            $username = trim((string) ($profile['username'] ?? ''));
+            if ($username !== '') {
+                return '@' . ltrim($username, '@');
+            }
+        }
+
+        return 'Instagram User ' . substr($externalId, -6);
     }
 
     /**

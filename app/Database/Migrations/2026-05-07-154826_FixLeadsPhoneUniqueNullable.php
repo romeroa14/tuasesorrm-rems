@@ -35,14 +35,19 @@ class FixLeadsPhoneUniqueNullable extends Migration
             ],
         ]);
 
-        // Re-add UNIQUE (NULL-safe)
-        $this->forge->addUniqueKey('phone');
+        // Re-add UNIQUE (NULL-safe) — must use raw SQL because
+        // CI4 Forge::addUniqueKey queues for createTable() only;
+        // modifyColumn() does NOT process the key queue.
+        $this->db->query('ALTER TABLE leads ADD UNIQUE (phone)');
     }
 
     public function down()
     {
         // Reverse: back to NOT NULL + UNIQUE
         $this->forge->dropKey('leads', 'phone');
+
+        // First update any NULL phones to empty string to satisfy NOT NULL constraint
+        $this->db->query("UPDATE leads SET phone = '' WHERE phone IS NULL");
 
         $this->forge->modifyColumn('leads', [
             'phone' => [
@@ -52,6 +57,7 @@ class FixLeadsPhoneUniqueNullable extends Migration
             ],
         ]);
 
-        $this->forge->addUniqueKey('phone');
+        // Re-add UNIQUE (same raw-SQL fix as up())
+        $this->db->query('ALTER TABLE leads ADD UNIQUE (phone)');
     }
 }
