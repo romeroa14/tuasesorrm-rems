@@ -141,4 +141,46 @@ final class WebhookControllerTest extends CIUnitTestCase
         $result = WebhookController::buildInstagramLeadName($profile, '17841400000000001');
         $this->assertSame('María García', $result);
     }
+
+    /**
+     * Meta sends timestamps in milliseconds; must convert to Unix seconds.
+     * 1714761000123 ms → 1714761000 s.
+     */
+    public function testNormalizeMetaTimestampConvertsMillisecondsToSeconds(): void
+    {
+        $method = new \ReflectionMethod(WebhookController::class, 'normalizeMetaTimestamp');
+        $method->setAccessible(true);
+
+        $event = ['timestamp' => 1714761000123];
+        $result = $method->invoke(null, $event);
+        $this->assertSame(1714761000, $result);
+    }
+
+    /**
+     * Missing timestamp key → fallback to current time (roughly now).
+     */
+    public function testNormalizeMetaTimestampFallsBackToTimeWhenMissing(): void
+    {
+        $method = new \ReflectionMethod(WebhookController::class, 'normalizeMetaTimestamp');
+        $method->setAccessible(true);
+
+        $event = [];
+        $result = $method->invoke(null, $event);
+        $this->assertGreaterThanOrEqual(time() - 5, $result);
+        $this->assertLessThanOrEqual(time() + 5, $result);
+    }
+
+    /**
+     * Message model must allow 'created_at' so inserts persist the field.
+     */
+    public function testMessageModelAllowedFieldsIncludesCreatedAt(): void
+    {
+        $model = new \App\Models\Message();
+        $reflection = new \ReflectionClass($model);
+        $prop = $reflection->getProperty('allowedFields');
+        $prop->setAccessible(true);
+        $allowedFields = $prop->getValue($model);
+
+        $this->assertContains('created_at', $allowedFields);
+    }
 }

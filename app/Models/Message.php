@@ -9,7 +9,7 @@ class Message extends Model
     protected $returnType = 'array';
     protected $allowedFields = [
         'conversation_id', 'direction', 'sender_type', 'sender_id',
-        'content', 'content_type', 'media_url', 'external_message_id', 'read_at'
+        'content', 'content_type', 'media_url', 'external_message_id', 'read_at', 'created_at'
     ];
     protected $useTimestamps = false;
     protected $dateFormat = 'datetime';

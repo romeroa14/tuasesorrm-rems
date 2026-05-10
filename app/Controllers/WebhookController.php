@@ -119,7 +119,7 @@ class WebhookController extends ResourceController
 
                 $senderId = isset($event['sender']['id']) ? (string) $event['sender']['id'] : '';
                 $toFieldId = isset($event['recipient']['id']) ? (string) $event['recipient']['id'] : '';
-                $timestamp = (int) ($event['timestamp'] ?? time());
+                $timestamp = self::normalizeMetaTimestamp($event);
 
                 if (empty($event['message'])) {
                     continue;
@@ -626,5 +626,17 @@ class WebhookController extends ResourceController
         $expected = 'sha256=' . hash_hmac('sha256', $rawBody, $appSecret);
 
         return hash_equals($expected, $signatureHeader);
+    }
+
+    /**
+     * Meta envía timestamps en milisegundos. Convertir a segundos Unix.
+     *
+     * @param array<string,mixed> $event
+     */
+    private static function normalizeMetaTimestamp(array $event): int
+    {
+        $rawTs = $event['timestamp'] ?? null;
+
+        return $rawTs !== null ? (int) ($rawTs / 1000) : time();
     }
 }
