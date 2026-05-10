@@ -59,4 +59,83 @@ final class MetaInstagramGraphTest extends CIUnitTestCase
     {
         $this->assertNull(MetaInstagramGraph::resolveRecipientUsername(''));
     }
+
+    public function testResolveParticipantProfileReturnsNullForEmptyId(): void
+    {
+        $this->assertNull(MetaInstagramGraph::resolveParticipantProfile(''));
+    }
+
+    public function testResolveParticipantProfileReturnsNullWhenNoToken(): void
+    {
+        putenv('META_GRAPH_ACCESS_TOKEN=');
+        putenv('META_PAGE_ACCESS_TOKEN=');
+        $this->assertNull(MetaInstagramGraph::resolveParticipantProfile('17841400000000001'));
+    }
+
+    public function testResolveParticipantProfileReturnsAllFiveFields(): void
+    {
+        putenv('META_GRAPH_ACCESS_TOKEN=test-token');
+
+        $mockResponse = $this->createMock(\CodeIgniter\HTTP\Response::class);
+        $mockResponse->method('getStatusCode')->willReturn(200);
+        $mockResponse->method('getBody')->willReturn(json_encode([
+            'name'             => 'Alfredo',
+            'username'         => 'alfredo.ig',
+            'is_private'       => true,
+            'profile_pic_url'  => 'https://example.com/pic.jpg',
+            'followers_count'  => 150,
+        ]));
+
+        $mockClient = $this->createMock(\CodeIgniter\HTTP\CURLRequest::class);
+        $mockClient->method('get')->willReturn($mockResponse);
+
+        \Config\Services::injectMock('curlrequest', $mockClient);
+
+        $result = MetaInstagramGraph::resolveParticipantProfile('17841400000000002');
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('name', $result);
+        $this->assertArrayHasKey('username', $result);
+        $this->assertArrayHasKey('is_private', $result);
+        $this->assertArrayHasKey('profile_pic_url', $result);
+        $this->assertArrayHasKey('followers_count', $result);
+        $this->assertSame('Alfredo', $result['name']);
+        $this->assertSame('alfredo.ig', $result['username']);
+        $this->assertTrue($result['is_private']);
+        $this->assertSame('https://example.com/pic.jpg', $result['profile_pic_url']);
+        $this->assertSame(150, $result['followers_count']);
+    }
+
+    public function testResolveParticipantProfileReturnsNullOnApiError(): void
+    {
+        putenv('META_GRAPH_ACCESS_TOKEN=test-token');
+
+        $mockResponse = $this->createMock(\CodeIgniter\HTTP\Response::class);
+        $mockResponse->method('getStatusCode')->willReturn(400);
+
+        $mockClient = $this->createMock(\CodeIgniter\HTTP\CURLRequest::class);
+        $mockClient->method('get')->willReturn($mockResponse);
+
+        \Config\Services::injectMock('curlrequest', $mockClient);
+
+        $this->assertNull(MetaInstagramGraph::resolveParticipantProfile('17841400000000003'));
+    }
+
+    public function testResolveParticipantProfileReturnsNullOnGraphApiErrorBody(): void
+    {
+        putenv('META_GRAPH_ACCESS_TOKEN=test-token');
+
+        $mockResponse = $this->createMock(\CodeIgniter\HTTP\Response::class);
+        $mockResponse->method('getStatusCode')->willReturn(200);
+        $mockResponse->method('getBody')->willReturn(json_encode([
+            'error' => ['message' => 'Invalid OAuth token'],
+        ]));
+
+        $mockClient = $this->createMock(\CodeIgniter\HTTP\CURLRequest::class);
+        $mockClient->method('get')->willReturn($mockResponse);
+
+        \Config\Services::injectMock('curlrequest', $mockClient);
+
+        $this->assertNull(MetaInstagramGraph::resolveParticipantProfile('17841400000000004'));
+    }
 }

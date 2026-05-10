@@ -14,6 +14,28 @@ use CodeIgniter\Test\CIUnitTestCase;
  */
 final class WebhookControllerTest extends CIUnitTestCase
 {
+    public function testLeadsModelAllowedFieldsIncludesInstagramEnrichmentColumns(): void
+    {
+        $model = new \App\Models\Leads();
+        $reflection = new \ReflectionClass($model);
+        $prop = $reflection->getProperty('allowedFields');
+        $prop->setAccessible(true);
+        $allowedFields = $prop->getValue($model);
+
+        $required = [
+            'instagram_full_name',
+            'profile_pic',
+            'followers',
+            'is_private',
+            'last_resolution_at',
+            'resolution_status',
+        ];
+
+        foreach ($required as $field) {
+            $this->assertContains($field, $allowedFields, "Leads::\$allowedFields should contain '{$field}'");
+        }
+    }
+
     /**
      * Scenario: Real name resolved from profile → used as lead name.
      */
@@ -70,5 +92,53 @@ final class WebhookControllerTest extends CIUnitTestCase
     {
         $result = WebhookController::buildInstagramLeadName(null, '123');
         $this->assertSame('Instagram User 123', $result);
+    }
+
+    /**
+     * Scenario: Private profile with real name → name takes priority (spec R4).
+     */
+    public function testBuildInstagramLeadNameUsesNameEvenWhenPrivateProfile(): void
+    {
+        $profile = [
+            'name'             => 'Alfredo',
+            'username'         => 'alfredo',
+            'is_private'       => true,
+            'profile_pic_url'  => 'https://example.com/pic.jpg',
+            'followers_count'  => 100,
+        ];
+        $result = WebhookController::buildInstagramLeadName($profile, '17841400000000099');
+        $this->assertSame('Alfredo', $result);
+    }
+
+    /**
+     * Scenario: Private profile with empty name → fallback to @username (spec R4).
+     */
+    public function testBuildInstagramLeadNameFallsBackToAtUsernameWhenPrivateAndNoName(): void
+    {
+        $profile = [
+            'name'             => '',
+            'username'         => 'alfredo',
+            'is_private'       => true,
+            'profile_pic_url'  => null,
+            'followers_count'  => 0,
+        ];
+        $result = WebhookController::buildInstagramLeadName($profile, '17841400000000099');
+        $this->assertSame('@alfredo', $result);
+    }
+
+    /**
+     * Scenario: Public profile with all 5 expanded fields → name takes priority.
+     */
+    public function testBuildInstagramLeadNameWithExpandedProfileFields(): void
+    {
+        $profile = [
+            'name'             => 'María García',
+            'username'         => 'maria.garcia',
+            'is_private'       => false,
+            'profile_pic_url'  => 'https://example.com/maria.jpg',
+            'followers_count'  => 250,
+        ];
+        $result = WebhookController::buildInstagramLeadName($profile, '17841400000000001');
+        $this->assertSame('María García', $result);
     }
 }

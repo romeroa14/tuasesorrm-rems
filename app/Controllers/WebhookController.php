@@ -266,11 +266,18 @@ class WebhookController extends ResourceController
 
             $leadName = self::buildInstagramLeadName($profile, $externalId);
 
+            $isResolved = $profile !== null;
             $leadId = $this->leadsModel->insert([
                 'name' => $leadName,
                 'phone' => null,
                 'email' => null,
                 'instagram_username' => $resolvedUsername,
+                'instagram_full_name' => $isResolved ? (trim((string) ($profile['name'] ?? '')) ?: ($resolvedUsername ?? null)) : null,
+                'profile_pic'     => $isResolved ? ($profile['profile_pic_url'] ?? null) : null,
+                'followers'       => $isResolved ? ($profile['followers_count'] ?? 0) : null,
+                'is_private'      => $isResolved ? ($profile['is_private'] ? 1 : 0) : null,
+                'last_resolution_at' => date('Y-m-d H:i:s'),
+                'resolution_status'  => $isResolved ? 'resolved' : 'failed',
                 'id_user' => 1, // System user
                 'id_funnel' => $funnelId,
                 'id_housingtype' => 1,
@@ -421,8 +428,26 @@ class WebhookController extends ResourceController
 
     protected function enrichInstagramLeadFromParticipant(int $leadId, int $conversationId, string $participantIgScopedId): void
     {
+        $lead = $this->leadsModel->find($leadId);
+        if (! $lead) {
+            return;
+        }
+
+        if (($lead['resolution_status'] ?? null) === 'resolved') {
+            return;
+        }
+
         $profile = MetaInstagramGraph::resolveParticipantProfile($participantIgScopedId);
+
         if ($profile === null) {
+            $currentStatus = $lead['resolution_status'] ?? null;
+            if ($currentStatus === null || $currentStatus === 'pending') {
+                $this->leadsModel->update($leadId, [
+                    'resolution_status'  => 'failed',
+                    'last_resolution_at' => date('Y-m-d H:i:s'),
+                ]);
+            }
+
             return;
         }
 
@@ -431,21 +456,25 @@ class WebhookController extends ResourceController
         $handle = $u !== '' ? ('@' . ltrim($u, '@')) : '';
 
         $leadPatch = [];
-        $lead = $this->leadsModel->find($leadId);
-        if ($lead) {
-            if ($handle !== '' && trim((string) ($lead['instagram_username'] ?? '')) === '') {
-                $leadPatch['instagram_username'] = $handle;
-            }
-            $currentName = (string) ($lead['name'] ?? '');
-            if ($name !== '' && ($currentName === '' || str_starts_with($currentName, 'Instagram User '))) {
-                $leadPatch['name'] = $name;
-            } elseif ($handle !== '' && str_starts_with($currentName, 'Instagram User ') && ! isset($leadPatch['name'])) {
-                $leadPatch['name'] = $handle;
-            }
-            if ($leadPatch !== []) {
-                $this->leadsModel->update($leadId, $leadPatch);
-            }
+        if ($handle !== '' && trim((string) ($lead['instagram_username'] ?? '')) === '') {
+            $leadPatch['instagram_username'] = $handle;
         }
+
+        $currentName = (string) ($lead['name'] ?? '');
+        if ($name !== '' && ($currentName === '' || str_starts_with($currentName, 'Instagram User '))) {
+            $leadPatch['name'] = $name;
+        } elseif ($handle !== '' && str_starts_with($currentName, 'Instagram User ') && ! isset($leadPatch['name'])) {
+            $leadPatch['name'] = $handle;
+        }
+
+        $leadPatch['instagram_full_name'] = $name !== '' ? $name : ($handle !== '' ? $handle : null);
+        $leadPatch['profile_pic']         = $profile['profile_pic_url'] ?? null;
+        $leadPatch['followers']           = $profile['followers_count'] ?? 0;
+        $leadPatch['is_private']          = $profile['is_private'] ? 1 : 0;
+        $leadPatch['last_resolution_at']  = date('Y-m-d H:i:s');
+        $leadPatch['resolution_status']   = 'resolved';
+
+        $this->leadsModel->update($leadId, $leadPatch);
 
         $conv = $this->conversationModel->find($conversationId);
         if ($conv && $handle !== '' && trim((string) ($conv['external_username'] ?? '')) === '') {
@@ -564,11 +593,10 @@ class WebhookController extends ResourceController
      * Build lead display name from Instagram participant profile data.
      *
      * Priority: profile['name'] → '@' + profile['username'] → fallback placeholder.
+     * Private profiles with empty name use @username (spec R4).
      *
-     * @param array{name: string, username: string}|null $profile  Result from MetaInstagramGraph::resolveParticipantProfile()
-     * @param string                                     $externalId Instagram scoped sender ID (used for fallback)
-     *
-     * @return string
+     * @param array{name: string, username: string, is_private: bool, profile_pic_url: ?string, followers_count: int}|null $profile
+     * @param string $externalId Instagram scoped sender ID (used for fallback)
      */
     public static function buildInstagramLeadName(?array $profile, string $externalId): string
     {

@@ -77,7 +77,7 @@ class MetaInstagramGraph
      * Perfil del participante en DM (usuario de Instagram que escribe).
      * Requiere token con permisos de mensajería Instagram según tu app en Meta.
      *
-     * @return array{username: string, name: string}|null
+     * @return array{name: string, username: string, is_private: bool, profile_pic_url: ?string, followers_count: int}|null
      */
     public static function resolveParticipantProfile(string $participantIgScopedId): ?array
     {
@@ -98,7 +98,7 @@ class MetaInstagramGraph
                 'https://graph.facebook.com/' . $version . '/' . rawurlencode($participantIgScopedId),
                 [
                     'query' => [
-                        'fields'       => 'name,username',
+                        'fields'       => 'name,username,is_private,profile_pic_url,followers_count',
                         'access_token' => $token,
                     ],
                 ]
@@ -109,8 +109,11 @@ class MetaInstagramGraph
             }
 
             return [
-                'username' => isset($body['username']) ? (string) $body['username'] : '',
-                'name'     => isset($body['name']) ? (string) $body['name'] : '',
+                'name'            => isset($body['name']) ? (string) $body['name'] : '',
+                'username'        => isset($body['username']) ? (string) $body['username'] : '',
+                'is_private'      => ! empty($body['is_private']),
+                'profile_pic_url' => isset($body['profile_pic_url']) ? (string) $body['profile_pic_url'] : null,
+                'followers_count' => isset($body['followers_count']) ? (int) $body['followers_count'] : 0,
             ];
         } catch (\Throwable $e) {
             log_message('error', 'MetaInstagramGraph::resolveParticipantProfile ' . $e->getMessage());
