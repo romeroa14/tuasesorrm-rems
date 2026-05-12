@@ -75,18 +75,20 @@ class MetaInstagramGraph
 
     /**
      * Perfil del participante en DM (usuario de Instagram que escribe).
-     * Requiere token con permisos de mensajería Instagram según tu app en Meta.
+     * Requiere PAGE ACCESS TOKEN vinculado al Instagram Business Account receptor.
      *
      * @return array{name: string, username: string, is_private: bool, profile_pic_url: ?string, followers_count: int}|null
      */
-    public static function resolveParticipantProfile(string $participantIgScopedId): ?array
+    public static function resolveParticipantProfile(string $participantIgScopedId, string $recipientIgId = ''): ?array
     {
         if ($participantIgScopedId === '') {
             return null;
         }
 
-        $token = getenv('META_GRAPH_ACCESS_TOKEN') ?: getenv('META_PAGE_ACCESS_TOKEN');
-        if (empty($token)) {
+        $pageToken = self::pageAccessTokenForInstagramBusiness($recipientIgId);
+        if ($pageToken === null || $pageToken === '') {
+            log_message('error', 'MetaInstagramGraph::resolveParticipantProfile no page token for recipient_ig=' . $recipientIgId);
+
             return null;
         }
 
@@ -101,7 +103,7 @@ class MetaInstagramGraph
                 [
                     'query' => [
                         'fields'       => 'name,username,is_private,profile_pic_url,followers_count',
-                        'access_token' => $token,
+                        'access_token' => $pageToken,
                     ],
                 ]
             );
@@ -127,6 +129,95 @@ class MetaInstagramGraph
             log_message('error', 'MetaInstagramGraph::resolveParticipantProfile exception=' . $e::class
                 . ' message=' . $e->getMessage() . ' url=' . $endpointUrl
                 . ' id=' . $participantIgScopedId);
+
+            return null;
+        }
+    }
+
+    /**
+     * Obtiene Page Access Token para el Facebook Page vinculado al Instagram Business Account.
+     */
+    public static function pageAccessTokenForInstagramBusiness(string $instagramBusinessAccountId): ?string
+    {
+        if ($instagramBusinessAccountId === '') {
+            return null;
+        }
+
+        $pageId = self::linkedFacebookPageIdForInstagramBusiness($instagramBusinessAccountId);
+        if ($pageId === null || $pageId === '') {
+            return null;
+        }
+
+        return self::pageAccessTokenById($pageId);
+    }
+
+    /** @var array<string, ?string> */
+    private static array $pageTokenCache = [];
+
+    /**
+     * Obtiene el access_token de un Facebook Page por su ID.
+     */
+    private static function pageAccessTokenById(string $pageId): ?string
+    {
+        if (array_key_exists($pageId, self::$pageTokenCache)) {
+            return self::$pageTokenCache[$pageId];
+        }
+
+        $userToken = getenv('META_GRAPH_ACCESS_TOKEN') ?: getenv('META_PAGE_ACCESS_TOKEN');
+        if (empty($userToken)) {
+            self::$pageTokenCache[$pageId] = null;
+
+            return null;
+        }
+
+        $version = getenv('META_GRAPH_API_VERSION') ?: 'v21.0';
+
+        try {
+            $client = \Config\Services::curlrequest(['timeout' => 20, 'http_errors' => false]);
+            $after = null;
+
+            for ($page = 0; $page < 15; $page++) {
+                $query = [
+                    'fields'       => 'id,access_token',
+                    'limit'        => '100',
+                    'access_token' => $userToken,
+                ];
+                if ($after !== null && $after !== '') {
+                    $query['after'] = $after;
+                }
+
+                $response = $client->get(
+                    'https://graph.facebook.com/' . $version . '/me/accounts',
+                    ['query' => $query]
+                );
+                $body = json_decode((string) $response->getBody(), true);
+                if ($response->getStatusCode() !== 200 || ! is_array($body) || isset($body['error'])) {
+                    self::$pageTokenCache[$pageId] = null;
+
+                    return null;
+                }
+
+                foreach ($body['data'] ?? [] as $row) {
+                    if (isset($row['id']) && (string) $row['id'] === $pageId && isset($row['access_token'])) {
+                        $token = (string) $row['access_token'];
+                        self::$pageTokenCache[$pageId] = $token;
+
+                        return $token;
+                    }
+                }
+
+                $after = $body['paging']['cursors']['after'] ?? null;
+                if ($after === null || $after === '') {
+                    break;
+                }
+            }
+
+            self::$pageTokenCache[$pageId] = null;
+
+            return null;
+        } catch (\Throwable $e) {
+            log_message('error', 'MetaInstagramGraph::pageAccessTokenById ' . $e->getMessage());
+            self::$pageTokenCache[$pageId] = null;
 
             return null;
         }

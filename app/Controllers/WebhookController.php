@@ -263,7 +263,7 @@ class WebhookController extends ResourceController
             $profile = null;
             $resolvedUsername = null;
             try {
-                $profile = MetaInstagramGraph::resolveParticipantProfile($externalId);
+                $profile = MetaInstagramGraph::resolveParticipantProfile($externalId, $recipientIgId);
                 if ($profile !== null && ! empty($profile['username'])) {
                     $resolvedUsername = '@' . ltrim((string) $profile['username'], '@');
                 }
@@ -358,7 +358,7 @@ class WebhookController extends ResourceController
         ]);
 
         if ($channel === 'instagram') {
-            $this->enrichInstagramLeadFromParticipant((int) $conversation['lead_id'], (int) $conversation['id'], $externalId);
+            $this->enrichInstagramLeadFromParticipant((int) $conversation['lead_id'], (int) $conversation['id'], $externalId, $recipientIgId);
             $this->maybeCapturePhoneFromInbound($content, (int) $conversation['lead_id']);
         }
 
@@ -450,7 +450,7 @@ class WebhookController extends ResourceController
             ->first();
     }
 
-    protected function enrichInstagramLeadFromParticipant(int $leadId, int $conversationId, string $participantIgScopedId): void
+    protected function enrichInstagramLeadFromParticipant(int $leadId, int $conversationId, string $participantIgScopedId, string $recipientIgId = ''): void
     {
         $lead = $this->leadsModel->find($leadId);
         if (! $lead) {
@@ -461,7 +461,7 @@ class WebhookController extends ResourceController
             return;
         }
 
-        $profile = MetaInstagramGraph::resolveParticipantProfile($participantIgScopedId);
+        $profile = MetaInstagramGraph::resolveParticipantProfile($participantIgScopedId, $recipientIgId);
 
         if ($profile === null) {
             $currentStatus = $lead['resolution_status'] ?? null;
