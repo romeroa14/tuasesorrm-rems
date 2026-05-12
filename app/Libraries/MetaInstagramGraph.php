@@ -102,7 +102,7 @@ class MetaInstagramGraph
                 $endpointUrl,
                 [
                     'query' => [
-                        'fields'       => 'name,username,profile_pic_url,followers_count',
+                        'fields'       => 'name,username',
                         'access_token' => $pageToken,
                     ],
                 ]
@@ -121,9 +121,9 @@ class MetaInstagramGraph
             return [
                 'name'            => isset($body['name']) ? (string) $body['name'] : '',
                 'username'        => isset($body['username']) ? (string) $body['username'] : '',
-                'is_private'      => ! empty($body['is_private']),
-                'profile_pic_url' => isset($body['profile_pic_url']) ? (string) $body['profile_pic_url'] : null,
-                'followers_count' => isset($body['followers_count']) ? (int) $body['followers_count'] : 0,
+                'is_private'      => false,
+                'profile_pic_url' => null,
+                'followers_count' => 0,
             ];
         } catch (\Throwable $e) {
             log_message('error', 'MetaInstagramGraph::resolveParticipantProfile exception=' . $e::class
