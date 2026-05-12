@@ -183,4 +183,49 @@ final class WebhookControllerTest extends CIUnitTestCase
 
         $this->assertContains('created_at', $allowedFields);
     }
+
+    public function testConversationModelAllowedFieldsIncludesReferralColumns(): void
+    {
+        $model = new \App\Models\Conversation();
+        $reflection = new \ReflectionClass($model);
+        $prop = $reflection->getProperty('allowedFields');
+        $prop->setAccessible(true);
+        $allowedFields = $prop->getValue($model);
+
+        $this->assertContains('ad_id', $allowedFields, "Conversation::\$allowedFields should contain 'ad_id'");
+        $this->assertContains('referral_source', $allowedFields, "Conversation::\$allowedFields should contain 'referral_source'");
+    }
+
+    public function testNormalizeMetaTimestampRemovesReferralKeyFromEvent(): void
+    {
+        $method = new \ReflectionMethod(WebhookController::class, 'normalizeMetaTimestamp');
+        $method->setAccessible(true);
+
+        $event = ['timestamp' => 1714761000123, 'referral' => ['source' => 'ads']];
+        $result = $method->invoke(null, $event);
+        $this->assertSame(1714761000, $result);
+    }
+
+    public function testProcessIncomingMessageSignatureAcceptsReferralParams(): void
+    {
+        $method = new \ReflectionMethod(WebhookController::class, 'processIncomingMessage');
+        $params = $method->getParameters();
+
+        $paramNames = [];
+        foreach ($params as $p) {
+            $paramNames[] = $p->getName();
+        }
+
+        $this->assertContains('referralSource', $paramNames);
+        $this->assertContains('referralAdId', $paramNames);
+
+        // Both must have empty string defaults for backward compatibility.
+        $referralSource = $params[array_search('referralSource', $paramNames)];
+        $this->assertTrue($referralSource->isDefaultValueAvailable());
+        $this->assertSame('', $referralSource->getDefaultValue());
+
+        $referralAdId = $params[array_search('referralAdId', $paramNames)];
+        $this->assertTrue($referralAdId->isDefaultValueAvailable());
+        $this->assertSame('', $referralAdId->getDefaultValue());
+    }
 }

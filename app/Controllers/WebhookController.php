@@ -121,6 +121,13 @@ class WebhookController extends ResourceController
                 $toFieldId = isset($event['recipient']['id']) ? (string) $event['recipient']['id'] : '';
                 $timestamp = self::normalizeMetaTimestamp($event);
 
+                $referralSource = '';
+                $referralAdId = '';
+                if (! empty($event['referral'])) {
+                    $referralSource = (string) ($event['referral']['source'] ?? '');
+                    $referralAdId  = (string) ($event['referral']['ad_id'] ?? '');
+                }
+
                 if (empty($event['message'])) {
                     continue;
                 }
@@ -152,7 +159,9 @@ class WebhookController extends ResourceController
                             $contentType,
                             $mediaUrl,
                             $timestamp,
-                            $recipientIgId
+                            $recipientIgId,
+                            $referralSource,
+                            $referralAdId
                         );
                     } catch (\Throwable $e) {
                         log_message(
@@ -213,7 +222,9 @@ class WebhookController extends ResourceController
         string $contentType = 'text',
         ?string $mediaUrl = null,
         int $timestamp = 0,
-        string $recipientIgId = ''
+        string $recipientIgId = '',
+        string $referralSource = '',
+        string $referralAdId = ''
     ) {
         if ($externalMessageId !== '') {
             $dup = $this->messageModel->where('external_message_id', $externalMessageId)->first();
@@ -288,7 +299,7 @@ class WebhookController extends ResourceController
                 'intention_label' => 'frio',
             ]);
 
-            $conversationId = $this->conversationModel->insert([
+            $conversationData = [
                 'lead_id' => $leadId,
                 'channel' => $channel,
                 'external_id' => $externalId,
@@ -298,7 +309,14 @@ class WebhookController extends ResourceController
                 'status' => 'open',
                 'last_message_at' => date('Y-m-d H:i:s', $timestamp ?: time()),
                 'unread_count' => 1,
-            ]);
+            ];
+            if ($referralAdId !== '') {
+                $conversationData['ad_id'] = $referralAdId;
+            }
+            if ($referralSource !== '') {
+                $conversationData['referral_source'] = $referralSource;
+            }
+            $conversationId = $this->conversationModel->insert($conversationData);
 
             $conversation = $this->conversationModel->find($conversationId);
 
@@ -312,6 +330,12 @@ class WebhookController extends ResourceController
             ];
             if ($channel === 'instagram' && $recipientIgId !== '' && empty($conversation['recipient_ig_username'] ?? null) && $recipientUsername) {
                 $update['recipient_ig_username'] = $recipientUsername;
+            }
+            if ($referralAdId !== '' && empty($conversation['ad_id'] ?? null)) {
+                $update['ad_id'] = $referralAdId;
+            }
+            if ($referralSource !== '' && empty($conversation['referral_source'] ?? null)) {
+                $update['referral_source'] = $referralSource;
             }
             $this->conversationModel->update($conversation['id'], $update);
             $conversation = $this->conversationModel->find($conversation['id']);

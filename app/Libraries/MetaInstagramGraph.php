@@ -92,10 +92,12 @@ class MetaInstagramGraph
 
         $version = getenv('META_GRAPH_API_VERSION') ?: 'v21.0';
 
+        $endpointUrl = 'https://graph.facebook.com/' . $version . '/' . rawurlencode($participantIgScopedId);
+
         try {
             $client = \Config\Services::curlrequest(['timeout' => 15, 'http_errors' => false]);
             $response = $client->get(
-                'https://graph.facebook.com/' . $version . '/' . rawurlencode($participantIgScopedId),
+                $endpointUrl,
                 [
                     'query' => [
                         'fields'       => 'name,username,is_private,profile_pic_url,followers_count',
@@ -103,8 +105,14 @@ class MetaInstagramGraph
                     ],
                 ]
             );
+            $statusCode = $response->getStatusCode();
             $body = json_decode((string) $response->getBody(), true);
-            if ($response->getStatusCode() !== 200 || ! is_array($body) || isset($body['error'])) {
+
+            if ($statusCode !== 200 || ! is_array($body) || isset($body['error'])) {
+                log_message('error', 'MetaInstagramGraph::resolveParticipantProfile status=' . $statusCode
+                    . ' url=' . $endpointUrl . ' id=' . $participantIgScopedId
+                    . ' body=' . (string) $response->getBody());
+
                 return null;
             }
 
@@ -116,7 +124,9 @@ class MetaInstagramGraph
                 'followers_count' => isset($body['followers_count']) ? (int) $body['followers_count'] : 0,
             ];
         } catch (\Throwable $e) {
-            log_message('error', 'MetaInstagramGraph::resolveParticipantProfile ' . $e->getMessage());
+            log_message('error', 'MetaInstagramGraph::resolveParticipantProfile exception=' . $e::class
+                . ' message=' . $e->getMessage() . ' url=' . $endpointUrl
+                . ' id=' . $participantIgScopedId);
 
             return null;
         }
