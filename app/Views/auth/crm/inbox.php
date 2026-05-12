@@ -144,6 +144,10 @@
                                     <span id="detail-channel">-</span>
                                 </div>
                                 <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Recibido en</label>
+                                    <span id="detail-recipient-ig">-</span>
+                                </div>
+                                <div class="mb-3">
                                     <label class="font-weight-bold d-block">Instagram</label>
                                     <span id="detail-instagram">-</span>
                                 </div>
@@ -397,7 +401,7 @@ function openConversation(id) {
             // Update header
             const conv = response.data.conversation;
             $('#chat-lead-name').text(conv.lead_name || 'Sin nombre');
-            $('#chat-channel-info').html(getChannelIcon(conv.channel) + ' ' + (conv.external_username || conv.channel));
+            $('#chat-channel-info').html(getChannelIcon(conv.channel) + ' ' + (conv.external_username || conv.channel) + (conv.recipient_ig_username ? ' → @' + conv.recipient_ig_username : ''));
             $('#chat-avatar').text((conv.lead_name || '?')[0].toUpperCase());
 
             // Scroll to bottom
@@ -462,6 +466,7 @@ function renderLeadDetail(conv) {
     $('#detail-name').text(conv.lead_name || '-');
     $('#detail-channel').html(getChannelIcon(conv.channel) + ' ' + (conv.channel || '-'));
     $('#detail-instagram').text(conv.instagram_username || '-');
+    $('#detail-recipient-ig').text(conv.recipient_ig_username ? '@' + conv.recipient_ig_username : '-');
     $('#detail-phone').text(conv.lead_phone || '-');
     $('#detail-email').text(conv.lead_email || '-');
     $('#detail-interest').text(conv.interest_type || 'No detectado');
