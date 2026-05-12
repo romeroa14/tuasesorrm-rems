@@ -102,7 +102,7 @@ class MetaInstagramGraph
                 $endpointUrl,
                 [
                     'query' => [
-                        'fields'       => 'name,username,is_private,profile_pic_url,followers_count',
+                        'fields'       => 'name,username,profile_pic_url,followers_count',
                         'access_token' => $pageToken,
                     ],
                 ]
