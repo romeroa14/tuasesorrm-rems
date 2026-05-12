@@ -12,6 +12,12 @@ $crmInboxBase    = site_url('app/crm/inbox');
             <p class="text-muted small mb-0">Solo leads con conversación Instagram DM (como bandeja principal).</p>
         </div>
         <div>
+            <span class="text-muted small mr-2">Cuenta:</span>
+            <select class="form-control form-control-sm d-inline-block" id="filter-recipient" style="width: auto; min-width: 150px;">
+                <option value="">Todas</option>
+            </select>
+        </div>
+        <div>
             <a href="<?= esc(site_url('app/crm/inbox')) ?>" class="btn btn-sm btn-outline-primary">
                 <i class="fas fa-inbox"></i> Inbox
             </a>
@@ -295,9 +301,44 @@ function loadPipeline() {
     $.get(CRM_PIPELINE_URL, function(response) {
         if (response.status === 'success') {
             renderPipeline(response.data);
+            populateRecipientFilter(response.data);
         }
     });
 }
+
+function populateRecipientFilter(stages) {
+    var usernames = {};
+    stages.forEach(function(stage) {
+        if (stage.leads) {
+            stage.leads.forEach(function(lead) {
+                var uname = (lead.recipient_ig_username || '').replace(/^@/, '').trim();
+                if (uname) usernames[uname] = true;
+            });
+        }
+    });
+    var sel = $('#filter-recipient');
+    sel.find('option:gt(0)').remove();
+    Object.keys(usernames).sort().forEach(function(u) {
+        sel.append('<option value="' + escapeHtml(u) + '">@' + escapeHtml(u) + '</option>');
+    });
+}
+
+$(document).on('change', '#filter-recipient', function() {
+    var val = $(this).val();
+    $('.pipeline-card').each(function() {
+        var cardRecipient = $(this).data('recipient') || '';
+        if (!val || cardRecipient === val) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+    // Update column counts
+    $('.pipeline-column').each(function() {
+        var visible = $(this).find('.pipeline-card:visible').length;
+        $(this).find('.badge').text(visible);
+    });
+});
 
 function renderPipeline(stages) {
     const board = $('#pipeline-board');
@@ -326,7 +367,8 @@ function renderPipeline(stages) {
                 const inboxUrl = convId ? CRM_INBOX_URL + (CRM_INBOX_URL.indexOf('?') >= 0 ? '&' : '?') + 'open=' + convId : '#';
 
                 html += `
-                    <div class="pipeline-card" draggable="true" data-lead-id="${lead.lead_id}" data-conv-id="${convId}" data-tracking-status-id="${stage.id}">
+                    <div class="pipeline-card" draggable="true" data-lead-id="${lead.lead_id}" data-conv-id="${convId}" data-tracking-status-id="${stage.id}" data-recipient="${lead.recipient_ig_username || ''}">
+                        ${formatIgBusinessLineHtml(lead)}
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="card-name">${channelIcon} ${lead.lead_name || 'Sin nombre'}</div>
                             <div class="card-score" style="color: ${labelColor};">${lead.intention_score || 0}%</div>
@@ -336,7 +378,6 @@ function renderPipeline(stages) {
                             ${lead.budget_detected ? '<span class="badge badge-success badge-sm mr-1">$' + parseFloat(lead.budget_detected).toLocaleString() + '</span>' : ''}
                             ${lead.zone_interest ? '<span class="badge badge-secondary badge-sm">' + lead.zone_interest + '</span>' : ''}
                         </div>
-                        ${formatIgBusinessLineHtml(lead)}
                         <div class="card-info mt-1 d-flex justify-content-between align-items-center">
                             <span>${lead.agent_name ? '<i class="fas fa-user-check text-success"></i> ' + lead.agent_name : '<i class="fas fa-user-times text-muted"></i> Sin asignar'}</span>
                             ${convId ? '<a href="' + inboxUrl + '" class="btn btn-xs btn-outline-primary btn-sm py-0 px-1">Inbox</a>' : ''}
