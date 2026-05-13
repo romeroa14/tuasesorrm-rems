@@ -322,19 +322,6 @@ $(document).ready(function() {
         });
     });
 
-    // Check URL param for auto-open
-    const urlParams = new URLSearchParams(window.location.search);
-    const openId = urlParams.get('open');
-    if (openId) {
-        // Focus mode: hide conversation list, expand chat
-        $('#conversation-sidebar').hide();
-        $('#chat-column').removeClass('col-md-5 col-lg-6').addClass('col-md-8 col-lg-9');
-        setTimeout(() => openConversation(parseInt(openId)), 300);
-    } else {
-        // Normal mode: show conversation list
-        $('#conversation-sidebar').show();
-        loadConversations();
-    }
 });
 
 function loadConversations() {
