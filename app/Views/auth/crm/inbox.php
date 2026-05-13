@@ -21,7 +21,7 @@
 
             <div class="row" style="height: calc(100vh - 200px); min-height: 500px;">
                 <!-- Conversation List -->
-                <div class="col-md-4 col-lg-3 pr-0">
+                <div class="col-md-4 col-lg-3 pr-0" id="conversation-sidebar">
                     <div class="card h-100 mb-0" style="border-radius: 0;">
                         <!-- Filters -->
                         <div class="card-header py-2">
@@ -64,7 +64,7 @@
                 </div>
 
                 <!-- Chat Area -->
-                <div class="col-md-5 col-lg-6 px-0">
+                <div class="col-md-5 col-lg-6 px-0" id="chat-column">
                     <div class="card h-100 mb-0" style="border-radius: 0;">
                         <!-- Chat Header -->
                         <div class="card-header py-2 d-flex align-items-center" id="chat-header" style="display: none !important;">
@@ -295,9 +295,20 @@ let conversations = [];
 let refreshInterval = null;
 
 $(document).ready(function() {
-    loadConversations();
-    // Auto-refresh every 10 seconds
-    refreshInterval = setInterval(loadConversations, 10000);
+    // Check URL param for auto-open FIRST
+    const urlParams = new URLSearchParams(window.location.search);
+    const openId = urlParams.get('open');
+    if (openId) {
+        // Focus mode: hide conversation list, expand chat, no polling
+        $('#conversation-sidebar').hide();
+        $('#chat-column').removeClass('col-md-5 col-lg-6').addClass('col-md-8 col-lg-9');
+        setTimeout(() => openConversation(parseInt(openId)), 300);
+    } else {
+        // Normal mode: show conversation list with auto-refresh
+        $('#conversation-sidebar').show();
+        loadConversations();
+        refreshInterval = setInterval(loadConversations, 10000);
+    }
 
     // Filter change handlers
     $('#filter-channel, #filter-label, #filter-status').on('change', loadConversations);
@@ -315,7 +326,14 @@ $(document).ready(function() {
     const urlParams = new URLSearchParams(window.location.search);
     const openId = urlParams.get('open');
     if (openId) {
-        setTimeout(() => openConversation(parseInt(openId)), 500);
+        // Focus mode: hide conversation list, expand chat
+        $('#conversation-sidebar').hide();
+        $('#chat-column').removeClass('col-md-5 col-lg-6').addClass('col-md-8 col-lg-9');
+        setTimeout(() => openConversation(parseInt(openId)), 300);
+    } else {
+        // Normal mode: show conversation list
+        $('#conversation-sidebar').show();
+        loadConversations();
     }
 });
 
