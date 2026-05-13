@@ -7,6 +7,7 @@
                         <i class="fas fa-arrow-left"></i> Pipeline
                     </a>
                     <h1 class="h3 mb-0 text-gray-800 d-inline-block">CRM Inbox</h1>
+                </div>
                 <div>
                     <span class="badge badge-danger" id="unread-badge">0 sin leer</span>
                     <a href="/app/crm/pipeline" class="btn btn-sm btn-outline-primary ml-2">
@@ -63,7 +64,7 @@
                 </div>
 
                 <!-- Chat Area -->
-                <div class="col-md-8 col-lg-9 px-0">
+                <div class="col-md-5 col-lg-6 px-0">
                     <div class="card h-100 mb-0" style="border-radius: 0;">
                         <!-- Chat Header -->
                         <div class="card-header py-2 d-flex align-items-center" id="chat-header" style="display: none !important;">
@@ -114,6 +115,88 @@
                     </div>
                 </div>
 
+                <!-- Lead Detail Panel -->
+                <div class="col-md-3 col-lg-3 pl-0">
+                    <div class="card h-100 mb-0" style="border-radius: 0;">
+                        <div class="card-header py-2">
+                            <h6 class="mb-0"><i class="fas fa-user"></i> Detalle del Lead</h6>
+                        </div>
+                        <div class="card-body" id="lead-detail-panel" style="overflow-y: auto;">
+                            <div class="text-center py-5 text-muted" id="no-lead-selected">
+                                <i class="fas fa-user fa-3x mb-3"></i>
+                                <p>Selecciona una conversación</p>
+                            </div>
+
+                            <div id="lead-detail-content" style="display: none;">
+                                <!-- Score Bar -->
+                                <div class="mb-3">
+                                    <label class="font-weight-bold">Score de Intención</label>
+                                    <div class="progress" style="height: 25px;">
+                                        <div class="progress-bar" id="score-bar" role="progressbar" style="width: 0%">
+                                            <span id="score-text">0%</span>
+                                        </div>
+                                    </div>
+                                    <span class="badge mt-1" id="score-label-badge">-</span>
+                                </div>
+
+                                <!-- Lead Info -->
+                                <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Nombre</label>
+                                    <span id="detail-name">-</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Canal</label>
+                                    <span id="detail-channel">-</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Recibido en</label>
+                                    <span id="detail-recipient-ig">-</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Instagram</label>
+                                    <span id="detail-instagram">-</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Teléfono</label>
+                                    <span id="detail-phone">-</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Email</label>
+                                    <span id="detail-email">-</span>
+                                </div>
+                                <hr>
+                                <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Interés Detectado</label>
+                                    <span id="detail-interest" class="badge badge-info">-</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Presupuesto</label>
+                                    <span id="detail-budget">-</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Zona de Interés</label>
+                                    <span id="detail-zone">-</span>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="font-weight-bold d-block">Agente Asignado</label>
+                                    <span id="detail-agent">Sin asignar</span>
+                                </div>
+                                <hr>
+                                <!-- Actions -->
+                                <div class="mb-2">
+                                    <a href="#" id="detail-lead-link" class="btn btn-sm btn-block btn-outline-primary">
+                                        <i class="fas fa-external-link-alt"></i> Ver Lead Completo
+                                    </a>
+                                </div>
+                                <div class="mb-2">
+                                    <button class="btn btn-sm btn-block btn-outline-success" onclick="exportSingleLead()">
+                                        <i class="fas fa-file-export"></i> Exportar para Meta
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -314,22 +397,19 @@ function openConversation(id) {
     $.get(`/app/crm/api/messages/${id}`, function(response) {
         if (response.status === 'success') {
             renderMessages(response.data.messages);
+            renderLeadDetail(response.data.conversation);
             
             // Show input area
             $('#message-input-area').show();
             $('#chat-header').css('display', '').removeClass('d-none').show();
             
-            // Update header with score + IG account
+            // Update header
             const conv = response.data.conversation;
-            const score = parseInt(conv.intention_score) || 0;
-            const label = conv.intention_label || 'frio';
-            const labelColor = getLabelColor(label);
-            const labelText = getLabelText(label);
             $('#chat-lead-name').text(conv.lead_name || 'Sin nombre');
             $('#chat-channel-info').html(
                 getChannelIcon(conv.channel) + ' ' + (conv.external_username || conv.channel) 
                 + (conv.recipient_ig_username ? ' → @' + conv.recipient_ig_username : '')
-                + ' <span class=\"badge ml-1\" style=\"background:' + labelColor + ';color:white;font-size:10px\">' + labelText + ' ' + score + '%</span>'
+                + ' <span class="badge ml-1" style="background:' + getLabelColor(conv.intention_label) + ';color:white;font-size:10px">' + getLabelText(conv.intention_label) + ' ' + (conv.intention_score || 0) + '%</span>'
             );
             $('#chat-avatar').text((conv.lead_name || '?')[0].toUpperCase());
 
@@ -373,6 +453,128 @@ function renderMessages(messages) {
     });
 
     $('#messages-area').html(html);
+}
+
+function renderLeadDetail(conv) {
+    if (!conv) return;
+
+    $('#no-lead-selected').hide();
+    $('#lead-detail-content').show();
+
+    const score = parseInt(conv.intention_score) || 0;
+    const label = conv.intention_label || 'frio';
+    const labelColor = getLabelColor(label);
+    const labelText = getLabelText(label);
+
+    // Score bar
+    $('#score-bar').css('width', score + '%').css('background-color', labelColor).attr('aria-valuenow', score);
+    $('#score-text').text(score + '%');
+    $('#score-label-badge').text(labelText).css('background-color', labelColor).css('color', 'white');
+
+    // Lead info
+    $('#detail-name').text(conv.lead_name || '-');
+    $('#detail-channel').html(getChannelIcon(conv.channel) + ' ' + (conv.channel || '-'));
+    $('#detail-instagram').text(conv.instagram_username || '-');
+    $('#detail-recipient-ig').text(conv.recipient_ig_username ? '@' + conv.recipient_ig_username : '-');
+    $('#detail-phone').text(conv.lead_phone || '-');
+    $('#detail-email').text(conv.lead_email || '-');
+    $('#detail-interest').text(conv.interest_type || 'No detectado');
+    $('#detail-budget').text(conv.budget_detected ? '$' + parseFloat(conv.budget_detected).toLocaleString() : 'No detectado');
+    $('#detail-zone').text(conv.zone_interest || 'No detectada');
+    $('#detail-agent').text(conv.agent_name || 'Sin asignar');
+    $('#detail-lead-link').attr('href', '/app/leads/edit/' + conv.lead_id);
+}
+
+function sendMessage() {
+    const content = $('#message-input').val().trim();
+    if (!content || !currentConversationId) return;
+
+    $.post('/app/crm/api/send', {
+        conversation_id: currentConversationId,
+        content: content
+    }, function(response) {
+        if (response.status === 'success') {
+            // Add message to chat
+            const now = new Date();
+            const time = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+            const html = `
+                <div class="d-flex justify-content-end">
+                    <div class="message-bubble outbound">
+                        <div class="msg-sender"><?= session()->get('full_name') ?></div>
+                        <div>${escapeHtml(content)}</div>
+                        <div class="msg-time">${time} ✓✓</div>
+                    </div>
+                </div>
+            `;
+            $('#messages-area').append(html);
+            $('#message-input').val('');
+            scrollToBottom();
+        }
+    });
+}
+
+function assignToMe() {
+    if (!currentConversationId) return;
+    $.post('/app/crm/api/assign', {
+        conversation_id: currentConversationId,
+        agent_id: <?= session()->get('id') ?>
+    }, function() {
+        loadConversations();
+        openConversation(currentConversationId);
+    });
+}
+
+function resolveConversation() {
+    if (!currentConversationId) return;
+    $.post('/app/crm/api/status', {
+        conversation_id: currentConversationId,
+        status: 'resolved'
+    }, function() {
+        loadConversations();
+    });
+}
+
+function returnToAi() {
+    if (!currentConversationId) return;
+    if (!confirm('¿Estás seguro de devolver esta conversación a la IA?')) return;
+    
+    $.post('/app/crm/api/return_to_ai', {
+        conversation_id: currentConversationId
+    }, function(response) {
+        if (response.status === 'success') {
+            alert(response.message || 'Conversación devuelta a la IA');
+            loadConversations();
+            openConversation(currentConversationId);
+        } else {
+            alert(response.message || 'Error al devolver a la IA');
+        }
+    });
+}
+
+function rescoreConversation() {
+    if (!currentConversationId) return;
+    $.get('/app/crm/api/rescore/' + currentConversationId, function(response) {
+        if (response.status === 'success') {
+            alert('Score actualizado: ' + response.data.score + '% (' + response.data.label + ')\n' + response.data.reasoning);
+            openConversation(currentConversationId);
+            loadConversations();
+        }
+    });
+}
+
+function exportSingleLead() {
+    // TODO: Implement single lead export
+    alert('Funcionalidad de exportación disponible pronto');
+}
+
+// Utility functions
+function getChannelIcon(channel) {
+    switch(channel) {
+        case 'instagram': return '📷';
+        case 'whatsapp': return '💬';
+        case 'web': return '🌐';
+        default: return '📩';
+    }
 }
 
 function getLabelColor(label) {
