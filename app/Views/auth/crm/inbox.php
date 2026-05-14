@@ -21,7 +21,7 @@
 
             <div class="row" style="height: calc(100vh - 200px); min-height: 500px;">
                 <!-- Conversation List -->
-                <div class="col-md-4 col-lg-3 pr-0" id="conversation-sidebar">
+                <div class="col-md-4 col-lg-3 pr-0" id="conversation-sidebar" style="display:none">
                     <div class="card h-100 mb-0" style="border-radius: 0;">
                         <!-- Filters -->
                         <div class="card-header py-2">
@@ -64,7 +64,7 @@
                 </div>
 
                 <!-- Chat Area -->
-                <div class="col-md-5 col-lg-6 px-0" id="chat-column">
+                <div class="col-md-8 col-lg-9 px-0" id="chat-column">
                     <div class="card h-100 mb-0" style="border-radius: 0;">
                         <!-- Chat Header -->
                         <div class="card-header py-2 d-flex align-items-center" id="chat-header" style="display: none !important;">
@@ -299,13 +299,12 @@ $(document).ready(function() {
     const urlParams = new URLSearchParams(window.location.search);
     const openId = urlParams.get('open');
     if (openId) {
-        // Focus mode: hide conversation list, expand chat, no polling
-        $('#conversation-sidebar').hide();
-        $('#chat-column').removeClass('col-md-5 col-lg-6').addClass('col-md-8 col-lg-9');
+        // Focus mode: hide sidebar (default), no polling
         setTimeout(() => openConversation(parseInt(openId)), 300);
     } else {
-        // Normal mode: show conversation list with auto-refresh
+        // Normal mode: show sidebar + shrink chat
         $('#conversation-sidebar').show();
+        $('#chat-column').removeClass('col-md-8 col-lg-9').addClass('col-md-5 col-lg-6');
         loadConversations();
         refreshInterval = setInterval(loadConversations, 10000);
     }
