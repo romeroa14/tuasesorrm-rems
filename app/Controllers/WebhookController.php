@@ -289,7 +289,7 @@ class WebhookController extends ResourceController
                 'is_private'      => $isResolved ? ($profile['is_private'] ? 1 : 0) : null,
                 'last_resolution_at' => date('Y-m-d H:i:s'),
                 'resolution_status'  => $isResolved ? 'resolved' : 'failed',
-                'id_user' => 1, // System user
+                'id_user' => null, // Sin asignar — se asigna después vía ATC
                 'id_funnel' => $funnelId,
                 'id_housingtype' => 1,
                 'id_businessmodel' => 1,
