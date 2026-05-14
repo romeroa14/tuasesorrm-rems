@@ -395,12 +395,14 @@ function openConversation(id) {
     $('.conversation-item').removeClass('active');
     $(`.conversation-item[data-id="${id}"]`).addClass('active');
 
-    // Show loading
+    // Show subtle loading — don't clear current messages
     $('#no-chat-selected').hide();
-    $('#messages-area').html('<div class="text-center py-5"><i class="fas fa-spinner fa-spin fa-2x"></i></div>');
+    $('.chat-loading-overlay').remove();
+    $('#chat-column').append('<div class="chat-loading-overlay" style="position:absolute;top:60px;left:0;right:0;text-align:center;z-index:5;padding-top:20px;"><i class="fas fa-spinner fa-spin text-primary"></i></div>');
     
     $.get(`/app/crm/api/messages/${id}`, function(response) {
         if (response.status === 'success') {
+            $('.chat-loading-overlay').remove();
             renderMessages(response.data.messages);
             renderLeadDetail(response.data.conversation);
             
