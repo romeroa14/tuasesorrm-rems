@@ -29,6 +29,7 @@
         ]],
         ['id' => 'account_number', 'label' => 'Nro. Cuenta', 'type' => 'text', 'col' => 6],
         ['id' => 'initial_balance', 'label' => 'Saldo Inicial', 'type' => 'number', 'col' => 6, 'attrs' => 'step="0.01" min="0"'],
+        ['id' => 'currency_id', 'label' => '', 'type' => 'hidden', 'col' => 0, 'value' => '1'],
     ],
     'entity' => 'accounts'
 ]) ?>

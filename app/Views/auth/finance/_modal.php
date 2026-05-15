@@ -12,6 +12,9 @@
                     <input type="hidden" name="entity" value="<?= $entity ?? '' ?>">
                     <div class="row">
                         <?php foreach ($fields as $f): ?>
+                        <?php if (($f['type'] ?? 'text') === 'hidden'): ?>
+                            <input type="hidden" id="<?= $f['id'] ?>" name="<?= $f['id'] ?>" value="<?= $f['value'] ?? '' ?>">
+                        <?php else: ?>
                         <div class="col-md-<?= $f['col'] ?? 12 ?>">
                             <div class="form-group">
                                 <label for="<?= $f['id'] ?>"><?= $f['label'] ?><?= !empty($f['required']) ? ' <span class="text-danger">*</span>' : '' ?></label>
@@ -32,6 +35,7 @@
                                 <?php endif; ?>
                             </div>
                         </div>
+                        <?php endif; ?>
                         <?php endforeach; ?>
                     </div>
                 </div>
