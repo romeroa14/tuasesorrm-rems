@@ -518,8 +518,8 @@ class WebhookController extends ResourceController
                 $digits = preg_replace('/\D/', '', $m[0]);
                 // Normalize: remove leading 0
                 $digits = ltrim($digits, '0');
-                // VE mobile: 412XXXXXXX (11 digits starting with 4) -> 58412XXXXXXX
-                if (strlen($digits) === 11 && $digits[0] === '4') {
+                // VE mobile: 412XXXXXXX (10 digits starting with 4) -> 58412XXXXXXX
+                if (strlen($digits) === 10 && $digits[0] === '4') {
                     $phoneFound = '58' . $digits;
                     break;
                 }
