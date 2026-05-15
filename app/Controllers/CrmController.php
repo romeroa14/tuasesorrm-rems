@@ -382,8 +382,10 @@ class CrmController extends BaseController
             ORDER BY ts.id, l.intention_score DESC
             ")->getResultArray();
 
-            // Unassigned leads (not in assignedclients)
-            $unassigned = $db->query("
+            // Unassigned leads (not in assignedclients) — solo para admins
+            $unassigned = [];
+            if (in_array(session()->get('id_fk_rol'), [2, 3, 6, 8])) {
+                $unassigned = $db->query("
                 SELECT 
                     NULL as status_id,
                     'Sin Asignar' as status_name,
@@ -408,6 +410,7 @@ class CrmController extends BaseController
                 WHERE ac.id IS NULL
                 ORDER BY l.id DESC
             ")->getResultArray();
+            }
 
             $result = array_merge($unassigned, $result);
         } catch (\Throwable $e) {
