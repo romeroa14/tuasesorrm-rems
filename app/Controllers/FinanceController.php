@@ -158,9 +158,17 @@ class FinanceController extends BaseController
     {
         $this->settings['title'] = 'Proyectos';
         $this->settings['url']   = 'auth/finance/projects';
-
         $this->body['entity'] = 'projects';
-
         $this->generate_template($this->settings['url']);
     }
+
+    public function exchangeRatesFetch()
+    {
+        $command = new \App\Commands\FinanceFetchRates();
+        ob_start();
+        $command->run([]);
+        $output = ob_get_clean();
+        return $this->response->setJSON(['status' => 'success', 'message' => $output]);
+    }
+}
 }

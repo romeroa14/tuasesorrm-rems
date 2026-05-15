@@ -62,7 +62,7 @@ $(document).ready(function() {
         var entity = $('[name="entity"]').val();
         var url = '/app/finance/api/'+entity+(id ? '/'+id : '/create');
         $.ajax({
-            url: base_url+url, method:'POST', data: $(this).serialize(), dataType:'json',
+            url: '<?= base_url('/app/finance/api/') ?>'+entity+(id ? '/'+id : '/create'), method:'POST', data: $(this).serialize(), dataType:'json',
             success: function(r) {
                 if (r.status==='success') { $('#financeModal').modal('hide'); if (typeof loadTable==='function') loadTable(); }
                 else alert('Error: '+(r.message||'Operación fallida'));

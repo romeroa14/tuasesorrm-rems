@@ -130,6 +130,27 @@ class FinanceApiController extends BaseController
         return session()->get('loggedIn') === true;
     }
 
+    /**
+     * Convert empty strings to NULL for FK fields to avoid constraint errors.
+     */
+    protected function sanitizeForModel($model, array $data): array
+    {
+        // Known FK fields across finance tables
+        $fkFields = [
+            'account_id', 'category_id', 'currency_id', 'user_id', 'parent_id',
+            'company_id', 'department_id', 'project_id', 'expense_type_id',
+            'payment_type_id', 'approved_by', 'created_by', 'manager_id'
+        ];
+        foreach ($fkFields as $fk) {
+            if (array_key_exists($fk, $data) && $data[$fk] === '') {
+                $data[$fk] = null;
+            }
+        }
+        // Remove 'id' and 'entity' from insert data
+        unset($data['id'], $data['entity']);
+        return $data;
+    }
+
     // ─────────────────────────────────────────────
     //  API Endpoints
     // ─────────────────────────────────────────────
@@ -223,6 +244,9 @@ class FinanceApiController extends BaseController
                 return $this->jsonError('No data provided');
             }
 
+            // Convert empty strings to NULL for FK fields
+            $data = $this->sanitizeForModel($model, $data);
+
             if (! $model->insert($data)) {
                 $errors = $model->errors();
 
@@ -274,6 +298,8 @@ class FinanceApiController extends BaseController
             if (empty($data)) {
                 return $this->jsonError('No data provided');
             }
+
+            $data = $this->sanitizeForModel($model, $data);
 
             if (! $model->update($id, $data)) {
                 $errors = $model->errors();

@@ -14,6 +14,7 @@
 <div class="modal fade" id="financeModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
     <div class="modal-header bg-primary text-white"><h5 class="modal-title" id="modalTitle">Nuevo Presupuesto</h5><button type="button" class="close text-white" data-dismiss="modal">&times;</button></div>
     <form id="financeForm"><div class="modal-body"><input type="hidden" id="record_id" name="id">
+        <input type="hidden" name="user_id" value="<?= session()->get('id') ?>">
         <div class="row"><div class="col-md-6"><div class="form-group"><label>Categoría <span class="text-danger">*</span></label><select class="form-control" id="category_id" name="category_id" required><option value="">Cargando...</option></select></div></div>
         <div class="col-md-6"><div class="form-group"><label>Monto $ <span class="text-danger">*</span></label><input type="number" step="0.01" class="form-control" id="amount" name="amount" required min="0"></div></div></div>
         <div class="row"><div class="col-md-4"><div class="form-group"><label>Período</label><select class="form-control" id="period_type" name="period_type"><option value="monthly">Mensual</option><option value="quarterly">Trimestral</option><option value="yearly">Anual</option></select></div></div>
