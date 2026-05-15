@@ -41,6 +41,8 @@ class FinanceExpense extends Model
         'original_currency',
         'exchange_rate',
         'notes',
+        'recipient',
+        'provider',
         'internal_notes',
         'attachment_path',
         'date',

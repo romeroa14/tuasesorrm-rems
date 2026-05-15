@@ -52,6 +52,21 @@
                         <div class="col-md-6"><div class="form-group"><label>Nro. Factura</label><input type="text" class="form-control" id="invoice_number" name="invoice_number"></div></div>
                     </div>
                     <div class="form-group"><label>Descripción</label><textarea class="form-control" id="description" name="description" rows="2"></textarea></div>
+                    <div class="row">
+                        <div class="col-md-6"><div class="form-group">
+                            <label>Destinatario del Gasto</label>
+                            <input type="text" class="form-control" id="recipient" name="recipient" placeholder="Supermercado XYZ, Juan Pérez..."
+                            list="recipient-list">
+                            <datalist id="recipient-list"></datalist>
+                            <small class="text-muted">👤 Escribe para buscar opciones existentes o crear una nueva</small>
+                        </div></div>
+                        <div class="col-md-6"><div class="form-group">
+                            <label>Proveedor</label>
+                            <input type="text" class="form-control" id="provider" name="provider" placeholder="Nombre del proveedor"
+                            list="provider-list">
+                            <datalist id="provider-list"></datalist>
+                        </div></div>
+                    </div>
                 </div>
                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success">Guardar</button></div>
             </form>
@@ -90,6 +105,20 @@ function showModal(mode,id) {
     $('#financeForm')[0].reset(); $('#modalTitle').text(mode==='create'?'Nuevo Gasto':'Editar Gasto');
     loadDropdowns();
     if(mode==='edit'&&id)$.get(apiBase+'/'+id,function(r){if(r.status==='success'){var d=r.data; Object.keys(d).forEach(function(k){var el=$('[name="'+k+'"]'); if(el.length) el.val(d[k]); }); $('#record_id').val(d.id);}});
+    // Load existing recipients and providers for autocomplete
+    $.post(apiBase, function(r) {
+        if (r.status==='success') {
+            var recipients = {}, providers = {};
+            r.data.forEach(function(d) {
+                if (d.recipient) recipients[d.recipient] = true;
+                if (d.provider) providers[d.provider] = true;
+            });
+            var rList = $('#recipient-list').empty();
+            Object.keys(recipients).sort().forEach(function(v) { rList.append('<option value="'+v+'">'); });
+            var pList = $('#provider-list').empty();
+            Object.keys(providers).sort().forEach(function(v) { pList.append('<option value="'+v+'">'); });
+        }
+    });
     $('#financeModal').modal('show');
 }
 function edit(id){showModal('edit',id);}
