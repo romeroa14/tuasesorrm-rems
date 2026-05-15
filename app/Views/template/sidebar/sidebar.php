@@ -209,7 +209,7 @@
         </div>
         <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 7 || session()->get('id_fk_rol') == 8): ?>
             <li class="nav-item <?= $title == 'ATC Leads' ? 'active' : '' ?>">
-                <a class="nav-link" href="<?= base_url('/app/leads/all') ?>">
+                <a class="nav-link" href="<?= base_url('/app/leads/atc/all') ?>">
                     <i class="fa fa-users menu-icon"></i>
                     <span>ATC leads</span>
                 </a>
