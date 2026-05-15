@@ -246,19 +246,25 @@
                     method: "GET",
                     dataType: "json",
                     success: function (funnelsResponse) {
-                        funnelsOptions = funnelsResponse.data;
+                        funnelsOptions = funnelsResponse.data || [];
+                    },
+                    complete: function() {
                         $.ajax({
                             url: get_businessmodel,
                             method: "GET",
                             dataType: "json",
                             success: function (businessmodelResponse) {
-                                businessmodelOptions = businessmodelResponse.data;
+                                businessmodelOptions = businessmodelResponse.data || [];
+                            },
+                            complete: function() {
                                 $.ajax({
                                     url: get_housingtype,
                                     method: "GET",
                                     dataType: "json",
                                     success: function (housingResponse) {
-                                        housingOptions = housingResponse.data;
+                                        housingOptions = housingResponse.data || [];
+                                    },
+                                    complete: function() {
                                         loadTableData();
                                     }
                                 });
