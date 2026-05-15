@@ -3,6 +3,14 @@
     <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
+    <div class="d-flex align-items-center small text-muted" style="gap:12px;font-size:11px;" id="rate-bar-nav">
+        <span class="font-weight-bold text-dark"><i class="fas fa-exchange-alt"></i></span>
+        <span id="rate-usd-oficial"><i class="fas fa-spinner fa-spin"></i></span>
+        <span id="rate-usd-paralelo"></span>
+        <span id="rate-eur-oficial"></span>
+        <span id="rate-eur-paralelo"></span>
+        <span class="text-warning font-weight-bold">💵 <span id="rate-efectivo">—</span></span>
+    </div>
     <ul class="navbar-nav ml-auto">
         <!--<li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
@@ -187,30 +195,19 @@
         </li>
     </ul>
 </nav>
-
-<!-- Exchange Rates Bar -->
-<div id="rate-bar" class="bg-dark text-white small py-1 px-3 d-flex align-items-center justify-content-center" style="font-size:12px;gap:15px;flex-wrap:wrap;">
-    <span class="text-muted mr-1"><i class="fas fa-exchange-alt"></i> Tasas:</span>
-    <span id="rate-usd-oficial" class="mx-1"><i class="fas fa-spinner fa-spin"></i></span>
-    <span id="rate-usd-paralelo" class="mx-1"></span>
-    <span id="rate-eur-oficial" class="mx-1"></span>
-    <span id="rate-eur-paralelo" class="mx-1"></span>
-    <span class="ml-2 text-warning mx-1">💵 Efectivo: <span id="rate-efectivo">—</span></span>
-</div>
 <script>
 $.post('<?= base_url('/app/finance/api/exchange_rates') ?>', function(r) {
     if (r.status==='success' && Array.isArray(r.data)) {
         var rates = {};
         r.data.forEach(function(d) { rates[(d.currency_code||'')+'-'+d.source] = parseFloat(d.rate).toFixed(2); });
-        $('#rate-usd-oficial').html('<span class="badge badge-primary">$</span> Of: '+ (rates['USD-oficial']||'—'));
-        $('#rate-usd-paralelo').html('<span class="badge badge-warning text-dark">$</span> Par: '+ (rates['USD-paralelo']||'—'));
-        $('#rate-eur-oficial').html('<span class="badge badge-info">€</span> Of: '+ (rates['EUR-oficial']||'—'));
-        $('#rate-eur-paralelo').html('<span class="badge badge-secondary">€</span> Par: '+ (rates['EUR-paralelo']||'—'));
+        $('#rate-usd-oficial').html('<span class="badge badge-primary px-1" style="font-size:10px">$</span> Of:'+ (rates['USD-oficial']||'—'));
+        $('#rate-usd-paralelo').html(' <span class="badge badge-warning text-dark px-1" style="font-size:10px">$</span> Par:'+ (rates['USD-paralelo']||'—'));
+        $('#rate-eur-oficial').html(' <span class="badge badge-info px-1" style="font-size:10px">€</span> Of:'+ (rates['EUR-oficial']||'—'));
+        $('#rate-eur-paralelo').html(' <span class="badge badge-secondary px-1" style="font-size:10px">€</span> Par:'+ (rates['EUR-paralelo']||'—'));
         if (rates['USD-efectivo']) $('#rate-efectivo').text(rates['USD-efectivo']);
     }
 });
 </script>
-
 <!-- Topbar -->
 
 <!-- Container Fluid-->
