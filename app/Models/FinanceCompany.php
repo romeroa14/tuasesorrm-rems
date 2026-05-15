@@ -18,6 +18,18 @@ class FinanceCompany extends Model
         'name',
         'rif',
         'active',
+        'business_name',
+        'tax_id',
+        'address',
+        'phone',
+        'email',
+        'contact_person',
+        'contact_phone',
+        'website',
+        'country',
+        'city',
+        'status',
+        'notes',
     ];
 
     // Dates

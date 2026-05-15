@@ -18,6 +18,13 @@ class FinanceProject extends Model
         'name',
         'department_id',
         'active',
+        'code',
+        'budget',
+        'start_date',
+        'end_date',
+        'manager',
+        'status',
+        'description',
     ];
 
     // Dates

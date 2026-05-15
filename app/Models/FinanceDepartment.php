@@ -18,6 +18,9 @@ class FinanceDepartment extends Model
         'name',
         'manager_id',
         'budget',
+        'description',
+        'manager',
+        'status',
     ];
 
     // Dates

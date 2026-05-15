@@ -18,6 +18,7 @@ class FinanceCategory extends Model
         'name',
         'type',
         'parent_id',
+        'description',
     ];
 
     // Dates

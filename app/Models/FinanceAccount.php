@@ -19,6 +19,9 @@ class FinanceAccount extends Model
         'type',
         'currency_id',
         'balance',
+        'account_number',
+        'initial_balance',
+        'current_balance',
     ];
 
     // Dates

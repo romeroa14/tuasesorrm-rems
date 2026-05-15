@@ -20,6 +20,9 @@ class FinanceBudget extends Model
         'period_month',
         'period_year',
         'amount',
+        'period_type',
+        'start_date',
+        'end_date',
     ];
 
     // Dates
