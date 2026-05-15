@@ -3,8 +3,8 @@
     <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
         <i class="fa fa-bars"></i>
     </button>
-    <div class="d-flex align-items-center small text-muted" style="gap:12px;font-size:11px;" id="rate-bar-nav">
-        <span class="font-weight-bold text-dark"><i class="fas fa-exchange-alt"></i></span>
+    <div class="d-flex align-items-center text-white" style="gap:15px;font-size:13px;font-weight:500;" id="rate-bar-nav">
+        <span class="font-weight-bold text-white-50"><i class="fas fa-exchange-alt"></i></span>
         <span id="rate-usd-oficial"><i class="fas fa-spinner fa-spin"></i></span>
         <span id="rate-usd-paralelo"></span>
         <span id="rate-eur-oficial"></span>
