@@ -89,7 +89,7 @@ function showModal(mode,id) {
     editId=mode==='edit'?id:null; $('#record_id').val('');
     $('#financeForm')[0].reset(); $('#modalTitle').text(mode==='create'?'Nuevo Gasto':'Editar Gasto');
     loadDropdowns();
-    if(mode==='edit'&&id)$.post(apiBase+'/'+id,function(r){if(r.status==='success'){var d=r.data; Object.keys(d).forEach(function(k){var el=$('[name="'+k+'"]'); if(el.length) el.val(d[k]); }); $('#record_id').val(d.id);}});
+    if(mode==='edit'&&id)$.get(apiBase+'/'+id,function(r){if(r.status==='success'){var d=r.data; Object.keys(d).forEach(function(k){var el=$('[name="'+k+'"]'); if(el.length) el.val(d[k]); }); $('#record_id').val(d.id);}});
     $('#financeModal').modal('show');
 }
 function edit(id){showModal('edit',id);}

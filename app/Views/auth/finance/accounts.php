@@ -51,7 +51,7 @@ function loadTable() {
             dom:'Bfrtip', buttons:['excel','pdf']});
     });
 }
-function showModal(mode,id){ window._editId=id||null; $('#modalTitle').text(mode==='create'?'Nueva Cuenta':'Editar Cuenta'); $('#financeForm')[0].reset(); $('#record_id').val(''); if(mode==='edit'&&id)$.post(apiBase+'/'+id,function(r){if(r.status==='success'){var d=r.data; Object.keys(d).forEach(function(k){var el=$('[name="'+k+'"]'); if(el.length) el.val(d[k]); }); $('#record_id').val(d.id); }}); $('#financeModal').modal('show'); }
+function showModal(mode,id){ window._editId=id||null; $('#modalTitle').text(mode==='create'?'Nueva Cuenta':'Editar Cuenta'); $('#financeForm')[0].reset(); $('#record_id').val(''); if(mode==='edit'&&id)$.get(apiBase+'/'+id,function(r){if(r.status==='success'){var d=r.data; Object.keys(d).forEach(function(k){var el=$('[name="'+k+'"]'); if(el.length) el.val(d[k]); }); $('#record_id').val(d.id); }}); $('#financeModal').modal('show'); }
 function edit(id){ showModal('edit',id); }
 window.showModalForm = showModal;
 $(document).ready(function(){ loadTable(); });

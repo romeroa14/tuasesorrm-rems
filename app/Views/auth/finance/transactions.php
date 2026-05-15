@@ -195,7 +195,7 @@ function showModal(mode, id) {
     loadDropdowns();
 
     if (mode === 'edit' && id) {
-        $.post(apiBase.replace('/transactions','/transactions/' + id), function(res) {
+        $.get(apiBase + '/' + id, function(res) {
             if (res.status === 'success') {
                 var d = res.data;
                 $('#record_id').val(d.id);

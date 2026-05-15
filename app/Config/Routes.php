@@ -227,6 +227,7 @@ $routes->group('app/finance', ['filter' => 'auth'], function($routes) {
     $routes->get('(:segment)', 'FinanceController::$1');
     $routes->post('exchange_rates/fetch', 'FinanceController::exchangeRatesFetch');
     $routes->post('api/(:segment)', 'FinanceApiController::apiList/$1');
+    $routes->get('api/(:segment)/(:num)', 'FinanceApiController::apiGet/$1/$2');
     $routes->post('api/(:segment)/create', 'FinanceApiController::apiCreate/$1');
     $routes->post('api/(:segment)/(:num)', 'FinanceApiController::apiUpdate/$1/$2');
     $routes->post('api/(:segment)/(:num)/delete', 'FinanceApiController::apiDelete/$1/$2');
