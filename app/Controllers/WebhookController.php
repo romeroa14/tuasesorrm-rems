@@ -150,26 +150,17 @@ class WebhookController extends ResourceController
 
                 // Cliente → negocio (DM entrante real).
                 if ($recipientIsUs && ! $senderIsUs && $senderId !== '') {
-                    try {
-                        $this->processIncomingMessage(
-                            'instagram',
-                            $senderId,
-                            $messageText,
-                            $messageId,
-                            $contentType,
-                            $mediaUrl,
-                            $timestamp,
-                            $recipientIgId,
-                            $referralSource,
-                            $referralAdId
-                        );
-                    } catch (\Throwable $e) {
-                        log_message(
-                            'critical',
-                            'Webhook instagram: processIncomingMessage exception for sender '
-                            . $senderId . ': ' . $e->getMessage()
-                        );
-                    }
+                    $this->handleInboundMessageAsync(
+                        $senderId,
+                        $messageText,
+                        $messageId,
+                        $contentType,
+                        $mediaUrl,
+                        $timestamp,
+                        $recipientIgId,
+                        $referralSource,
+                        $referralAdId
+                    );
 
                     continue;
                 }
@@ -662,5 +653,63 @@ class WebhookController extends ResourceController
         $rawTs = $event['timestamp'] ?? null;
 
         return $rawTs !== null ? (int) ($rawTs / 1000) : time();
+    }
+
+    /**
+     * Encuela el evento en Redis (async). Si Redis no está disponible,
+     * procesa de forma síncrona (fallback).
+     */
+    private function handleInboundMessageAsync(
+        string $senderId,
+        string $messageText,
+        string $messageId,
+        string $contentType,
+        ?string $mediaUrl,
+        int $timestamp,
+        string $recipientIgId,
+        string $referralSource,
+        string $referralAdId
+    ): void {
+        $payload = [
+            'channel'         => 'instagram',
+            'sender_id'       => $senderId,
+            'message_text'    => $messageText,
+            'message_id'      => $messageId,
+            'content_type'    => $contentType,
+            'media_url'       => $mediaUrl,
+            'timestamp'       => $timestamp,
+            'recipient_ig_id' => $recipientIgId,
+            'referral_source' => $referralSource,
+            'referral_ad_id'  => $referralAdId,
+            'attempts'        => 0,
+        ];
+
+        $queue = new \App\Libraries\RedisQueue();
+        if ($queue->enqueue($payload)) {
+            return;
+        }
+
+        // Redis no disponible — fallback síncrono
+        log_message('warning', 'RedisQueue fallback: procesando síncrono sender=' . $senderId);
+        try {
+            $this->processIncomingMessage(
+                'instagram',
+                $senderId,
+                $messageText,
+                $messageId,
+                $contentType,
+                $mediaUrl,
+                $timestamp,
+                $recipientIgId,
+                $referralSource,
+                $referralAdId
+            );
+        } catch (\Throwable $e) {
+            log_message(
+                'critical',
+                'Webhook instagram (sync fallback): exception for sender '
+                . $senderId . ': ' . $e->getMessage()
+            );
+        }
     }
 }
