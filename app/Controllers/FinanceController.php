@@ -171,4 +171,3 @@ class FinanceController extends BaseController
         return $this->response->setJSON(['status' => 'success', 'message' => $output]);
     }
 }
-}
