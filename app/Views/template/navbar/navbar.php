@@ -187,6 +187,30 @@
         </li>
     </ul>
 </nav>
+
+<!-- Exchange Rates Bar -->
+<div id="rate-bar" class="bg-dark text-white small py-1 px-3 d-flex align-items-center justify-content-center" style="font-size:12px;gap:15px;flex-wrap:wrap;">
+    <span class="text-muted mr-1"><i class="fas fa-exchange-alt"></i> Tasas:</span>
+    <span id="rate-usd-oficial" class="mx-1"><i class="fas fa-spinner fa-spin"></i></span>
+    <span id="rate-usd-paralelo" class="mx-1"></span>
+    <span id="rate-eur-oficial" class="mx-1"></span>
+    <span id="rate-eur-paralelo" class="mx-1"></span>
+    <span class="ml-2 text-warning mx-1">💵 Efectivo: <span id="rate-efectivo">—</span></span>
+</div>
+<script>
+$.post('<?= base_url('/app/finance/api/exchange_rates') ?>', function(r) {
+    if (r.status==='success' && Array.isArray(r.data)) {
+        var rates = {};
+        r.data.forEach(function(d) { rates[(d.currency_code||'')+'-'+d.source] = parseFloat(d.rate).toFixed(2); });
+        $('#rate-usd-oficial').html('<span class="badge badge-primary">$</span> Of: '+ (rates['USD-oficial']||'—'));
+        $('#rate-usd-paralelo').html('<span class="badge badge-warning text-dark">$</span> Par: '+ (rates['USD-paralelo']||'—'));
+        $('#rate-eur-oficial').html('<span class="badge badge-info">€</span> Of: '+ (rates['EUR-oficial']||'—'));
+        $('#rate-eur-paralelo').html('<span class="badge badge-secondary">€</span> Par: '+ (rates['EUR-paralelo']||'—'));
+        if (rates['USD-efectivo']) $('#rate-efectivo').text(rates['USD-efectivo']);
+    }
+});
+</script>
+
 <!-- Topbar -->
 
 <!-- Container Fluid-->
