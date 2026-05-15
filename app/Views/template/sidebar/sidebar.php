@@ -251,7 +251,7 @@
         </li>
         <hr class="sidebar-divider">
     <?php endif; ?>
-    <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 6 || session()->get('id_fk_rol') == 8): ?>
+    <?php if(session()->get('id_fk_rol') == 2): ?>
     <!-- Finanzas Module -->
     <hr class="sidebar-divider">
     <div class="sidebar-heading">Finanzas</div>
