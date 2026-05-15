@@ -121,16 +121,17 @@
                         success: function (response) {
                             var tableData = [];
                             $.each(response.data, function (i, lead) {
+                                var htmlId = '<a href="/app/leads/edit/' + lead.id + '" class="font-weight-bold">#' + lead.id + '</a>';
                                 tableData.push([
-                                    lead.id,
-                                    { funnels_name: lead.funnels_name, funnels_id: lead.funnels_id },
-                                    { businessmodel_name: lead.businessmodel_name, businessmodel_id: lead.businessmodel_id },
-                                    { housingtype_name: lead.housingtype_name, housingtype_id: lead.housingtype_id },
+                                    htmlId,
+                                    lead.funnels_name || '—',
+                                    lead.businessmodel_name || '—',
+                                    lead.housingtype_name || '—',
                                     lead.name,
-                                    lead.phone,
-                                    lead.observation,
-                                    lead.created_at,
-                                    lead.assigned_agent_name || '<span class="text-muted">—</span>'
+                                    lead.phone || '—',
+                                    lead.observation || '—',
+                                    lead.assigned_agent_name || '<span class="text-muted small">Sin asignar</span>',
+                                    lead.created_at
                                 ]);
                             });
 
@@ -139,68 +140,16 @@
                             } else {
                                 dt = $('#leadsAtcTable').DataTable({
                                     data: tableData,
-                                    columns: [
+                                    columns: columns: [
                                         { title: "ID" },
-                                        {
-                                            title: "Proviene",
-                                            render: function (data) {
-                                                var select = '<select data-field="funnels_id" data-default="' + data.funnels_id + '" style="font-size:10px; width:200px;" class="form-control form-control-sm">';
-                                                for (var i = 0; i < funnelsOptions.length; i++) {
-                                                    var selected = (funnelsOptions[i].id === data.funnels_id) ? 'selected' : '';
-                                                    select += '<option value="' + funnelsOptions[i].id + '" ' + selected + '>' + funnelsOptions[i].name + '</option>';
-                                                }
-                                                select += '</select>';
-                                                return select;
-                                            }
-                                        },
-                                        {
-                                            title: "Negocio",
-                                            render: function (data) {
-                                                var select = '<select data-field="businessmodel_id" data-default="' + data.businessmodel_id + '" style="font-size:10px; width:200px;" class="form-control form-control-sm">';
-                                                for (var i = 0; i < businessmodelOptions.length; i++) {
-                                                    var selected = (businessmodelOptions[i].id === data.businessmodel_id) ? 'selected' : '';
-                                                    select += '<option value="' + businessmodelOptions[i].id + '" ' + selected + '>' + businessmodelOptions[i].name + '</option>';
-                                                }
-                                                select += '</select>';
-                                                return select;
-                                            }
-                                        },
-                                        {
-                                            title: "Interés",
-                                            render: function (data) {
-                                                var select = '<select data-field="housingtype_id" data-default="' + data.housingtype_id + '" style="font-size:10px; width:200px;" class="form-control form-control-sm">';
-                                                for (var i = 0; i < housingOptions.length; i++) {
-                                                    var selected = (housingOptions[i].id === data.housingtype_id) ? 'selected' : '';
-                                                    select += '<option value="' + housingOptions[i].id + '" ' + selected + '>' + housingOptions[i].name + '</option>';
-                                                }
-                                                select += '</select>';
-                                                return select;
-                                            }
-                                        },
-                                        {
-                                            title: "Participante",
-                                            render: function (data) {
-                                                var font = "16px sans-serif";
-                                                var width = Math.ceil(getTextWidth(data, font));
-                                                return '<div class="input-group input-group-sm"><input type="text" data-field="name" data-default="' + data + '" class="form-control" value="' + data + '" style="font-size:10px; width:' + (width * 1.1) + 'px;"></div>';
-                                            }
-                                        },
-                                        {
-                                            title: "Teléfono",
-                                            render: function (data) {
-                                                var font = "16px sans-serif";
-                                                var width = Math.ceil(getTextWidth(data, font));
-                                                return '<div class="input-group input-group-sm"><input type="text" data-field="phone" data-default="' + data + '" class="form-control" value="' + data + '" style="font-size:10px; width:' + (width * 1.1) + 'px;"></div>';
-                                            }
-                                        },
-                                        {
-                                            title: "Observación",
-                                            render: function (data) {
-                                                return '<div class="form-group"><textarea data-field="observation" data-default="' + data + '" class="form-control" rows="1" style="font-size:10px; width:250px; height:26.5px;">' + data + '</textarea></div>';
-                                            }
-                                        },
-                                        { title: "Fecha de registro" },
-                                { title: "Asignado ATC" }
+                                        { title: "Proviene" },
+                                        { title: "Negocio" },
+                                        { title: "Interés" },
+                                        { title: "Participante" },
+                                        { title: "Teléfono" },
+                                        { title: "Observación" },
+                                        { title: "Asignado ATC" },
+                                        { title: "Fecha de registro" }
                                     ]
                                 });
                             }
