@@ -375,6 +375,9 @@ class CrmController extends BaseController
             'first_contact_at'  => '0000-00-00',
         ]);
 
+        // Update conversations.assigned_to to show agent name in inbox
+        $db->query("UPDATE conversations SET assigned_to = ? WHERE lead_id = ?", [$assignedId, $leadId]);
+
         return $this->response->setJSON(['status' => 'success']);
     }
 

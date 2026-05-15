@@ -18,8 +18,9 @@ class Conversation extends Model
 
     public function getWithLead($id)
     {
-        return $this->select('conversations.*, leads.name as lead_name, leads.phone as lead_phone, leads.email as lead_email, leads.instagram_username, leads.intention_score, leads.intention_label, leads.interest_type, leads.budget_detected, leads.zone_interest')
+        return $this->select('conversations.*, leads.name as lead_name, leads.phone as lead_phone, leads.email as lead_email, leads.instagram_username, leads.intention_score, leads.intention_label, leads.interest_type, leads.budget_detected, leads.zone_interest, users.full_name as agent_name')
             ->join('leads', 'leads.id = conversations.lead_id')
+            ->join('users', 'users.id = conversations.assigned_to', 'left')
             ->find($id);
     }
 
