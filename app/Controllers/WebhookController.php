@@ -516,12 +516,15 @@ class WebhookController extends ResourceController
         foreach ($patterns as $pattern) {
             if (preg_match($pattern, $content, $m)) {
                 $digits = preg_replace('/\D/', '', $m[0]);
-                // Normalize: remove leading 0, prepend 58
+                // Normalize: remove leading 0
                 $digits = ltrim($digits, '0');
-                if (strlen($digits) === 10 && $digits[0] === '4') {
-                    $digits = '58' . $digits;
+                // VE mobile: 412XXXXXXX (11 digits starting with 4) -> 58412XXXXXXX
+                if (strlen($digits) === 11 && $digits[0] === '4') {
+                    $phoneFound = '58' . $digits;
+                    break;
                 }
-                if (strlen($digits) >= 11 && $digits[0] === '5' && $digits[1] === '8') {
+                // International: 58412XXXXXXX (12 digits starting with 58)
+                if (strlen($digits) === 12 && substr($digits, 0, 2) === '58') {
                     $phoneFound = $digits;
                     break;
                 }
