@@ -230,23 +230,22 @@ var CRM_INBOX_URL = <?= json_encode($crmInboxBase) ?>;
 
 $(document).ready(function() {
     loadPipeline();
-    $('#btn-sync-instagram-graph').on('click', function () {
-        var $btn = $(this);
-        $btn.prop('disabled', true);
-        $.post(CRM_PIPELINE_SYNC_IG_URL, {
-            threads: 2,
-            messages_per_thread: 10
-        })
-            .done(function (res) {
-                if (res.status === 'success' && res.data) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Sincronizado',
-                        html: 'Hilos procesados: <strong>' + (res.data.threads_processed || 0) + '</strong><br>'
-                            + 'Mensajes nuevos: <strong>' + (res.data.messages_inserted || 0) + '</strong><br>'
-                            + 'Sin conv. local (omitidos): <strong>' + (res.data.skipped_no_local_conv || 0) + '</strong>',
-                        confirmButtonColor: '#4e73df'
-                    });
+    // Load ATC users for assignment
+    $.get('/app/options/get_atc_users', function(r) {
+        window.atcUsers = r.data || [];
+    });
+    // Assign lead to ATC on select change
+    $(document).on('change', '.assign-atc', function() {
+        var userId = $(this).val();
+        var leadId = $(this).data('lead-id');
+        var convId = $(this).data('conv-id');
+        if (!userId) return;
+        $.post('/app/crm/api/pipeline/assign', {lead_id: leadId, assigned_id: userId, conv_id: convId}, function(r) {
+            if (r.status === 'success') loadPipeline();
+            else alert('Error: ' + (r.message || 'No se pudo asignar'));
+        });
+    });
+});
                     loadPipeline();
                 } else {
                     var msg = (res.message || 'Error');
@@ -382,6 +381,13 @@ function renderPipeline(stages) {
                             <span>${lead.agent_name ? '<i class="fas fa-user-check text-success"></i> ' + lead.agent_name : '<i class="fas fa-user-times text-muted"></i> Sin asignar'}</span>
                             ${convId ? '<a href="' + inboxUrl + '" class="btn btn-xs btn-outline-primary btn-sm py-0 px-1">Inbox</a>' : ''}
                         </div>
+                        ${stage.id === 'unassigned' ? `
+                        <div class="mt-1">
+                            <select class="form-control form-control-sm assign-atc" data-lead-id="${lead.lead_id}" data-conv-id="${convId}" style="font-size:11px;">
+                                <option value="">Asignar a ATC...</option>
+                                ${(window.atcUsers || []).map(function(u) { return '<option value="'+u.id+'">'+u.full_name+'</option>'; }).join('')}
+                            </select>
+                        </div>` : ''}
                     </div>
                 `;
             });

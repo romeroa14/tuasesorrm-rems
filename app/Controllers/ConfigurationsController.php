@@ -49,4 +49,16 @@ class ConfigurationsController extends BaseController
             ]
         );
     }
+
+    /* Listar usuarios ATC (rol 7) para asignación en pipeline */
+    public function get_atc_users()
+    {
+        $atc_users = $this->User
+            ->select('users.id, users.full_name')
+            ->where('users.id_fk_rol', 7)
+            ->where('users.status', 'activo')
+            ->findAll();
+
+        return $this->response->setJSON(['data' => $atc_users]);
+    }
 }

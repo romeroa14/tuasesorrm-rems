@@ -121,6 +121,8 @@ $routes->post('/app/commission_sheets/calculate', 'CommissionSheetController::ca
 $routes->get('/app/options/get_funnels', 'ConfigurationsController::get_funnels', ['filter' => 'auth']); /*Endpoint de embudos*/
 $routes->get('/app/options/get_housingtype', 'ConfigurationsController::get_housingtype', ['filter' => 'auth']); /*Endpoint de tipos de propiedades*/
 $routes->get('/app/options/get_businessmodel', 'ConfigurationsController::get_businessmodel', ['filter' => 'auth']); /*Endpoint de tipos de propiedades*/
+$routes->post('/app/crm/api/pipeline/assign', 'CrmController::api_pipeline_assign', ['filter' => 'auth']); /*Asignar lead a ATC*/
+$routes->get('/app/options/get_atc_users', 'ConfigurationsController::get_atc_users', ['filter' => 'auth']); /*Listar usuarios ATC*/
 
 
 

@@ -345,6 +345,40 @@ class CrmController extends BaseController
     }
 
     /**
+     * Asignar lead sin asignar a un agente ATC desde el pipeline.
+     */
+    public function api_pipeline_assign()
+    {
+        $leadId = (int) $this->request->getPost('lead_id');
+        $assignedId = (int) $this->request->getPost('assigned_id');
+
+        if ($leadId < 1 || $assignedId < 1) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Datos inválidos']);
+        }
+
+        $assignedModel = new \App\Models\AssignedClients();
+        $existing = $assignedModel->where('lead_id', $leadId)->first();
+        if ($existing) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'El lead ya está asignado']);
+        }
+
+        $db = \Config\Database::connect();
+        $statusRow = $db->query("SELECT id FROM trackingstatus ORDER BY id ASC LIMIT 1")->getRow();
+        $statusId = $statusRow ? (int) $statusRow->id : 1;
+
+        $assignedModel->insert([
+            'delegate_id'       => $assignedId,
+            'assigned_id'       => $assignedId,
+            'lead_id'           => $leadId,
+            'trackingstatus_id' => $statusId,
+            'assignment_at'     => date('Y-m-d'),
+            'first_contact_at'  => '0000-00-00',
+        ]);
+
+        return $this->response->setJSON(['status' => 'success']);
+    }
+
+    /**
      * Get pipeline data grouped by trackingstatus
      */
     public function api_pipeline()
