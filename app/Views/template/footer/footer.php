@@ -140,7 +140,7 @@
                             } else {
                                 dt = $('#leadsAtcTable').DataTable({
                                     data: tableData,
-                                    columns: columns: [
+                                    columns: [
                                         { title: "ID" },
                                         { title: "Proviene" },
                                         { title: "Negocio" },
