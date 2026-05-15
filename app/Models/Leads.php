@@ -87,11 +87,14 @@ class Leads extends Model
             leads.observation,
             leads.status,
             leads.instagram_username,
-            leads.created_at
+            leads.created_at,
+            assigned_users.full_name as assigned_agent_name
         ')
         ->join('businessmodel', 'businessmodel.id = leads.id_businessmodel', 'left')
         ->join('housingtype', 'housingtype.id = leads.id_housingtype', 'left')
         ->join('funnels', 'funnels.id = leads.id_funnel')
+        ->join('assignedclients', 'assignedclients.lead_id = leads.id', 'left')
+        ->join('users as assigned_users', 'assigned_users.id = assignedclients.assigned_id', 'left')
         ->where('leads.status', 'Activo');
 
         if ($isSuperadmin) {

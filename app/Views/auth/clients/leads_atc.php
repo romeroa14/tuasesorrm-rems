@@ -15,6 +15,7 @@
                     <th>Participante</th>
                     <th>Teléfono</th>
                     <th>Observación</th>
+                    <th>Asignado ATC</th>
                     <th>Fecha de registro</th>
                 </tr>
             </thead>

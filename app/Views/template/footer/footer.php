@@ -129,7 +129,8 @@
                                     lead.name,
                                     lead.phone,
                                     lead.observation,
-                                    lead.created_at
+                                    lead.created_at,
+                                    lead.assigned_agent_name || '<span class="text-muted">—</span>'
                                 ]);
                             });
 
@@ -198,7 +199,8 @@
                                                 return '<div class="form-group"><textarea data-field="observation" data-default="' + data + '" class="form-control" rows="1" style="font-size:10px; width:250px; height:26.5px;">' + data + '</textarea></div>';
                                             }
                                         },
-                                        { title: "Fecha de registro" }
+                                        { title: "Fecha de registro" },
+                                { title: "Asignado ATC" }
                                     ]
                                 });
                             }
