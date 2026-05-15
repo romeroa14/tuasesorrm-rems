@@ -352,6 +352,7 @@ class CrmController extends BaseController
         $db = \Config\Database::connect();
 
         try {
+            // Tracked leads (with assignedclients)
             $result = $db->query("
             SELECT 
                 ts.id as status_id,
@@ -379,7 +380,36 @@ class CrmController extends BaseController
                 SELECT MAX(c2.id) FROM conversations c2 WHERE c2.lead_id = l.id AND c2.channel = 'instagram'
             )
             ORDER BY ts.id, l.intention_score DESC
-        ")->getResultArray();
+            ")->getResultArray();
+
+            // Unassigned leads (not in assignedclients)
+            $unassigned = $db->query("
+                SELECT 
+                    NULL as status_id,
+                    'Sin Asignar' as status_name,
+                    l.id as lead_id,
+                    l.name as lead_name,
+                    l.phone,
+                    l.instagram_username,
+                    l.intention_score,
+                    l.intention_label,
+                    l.interest_type,
+                    l.budget_detected,
+                    l.zone_interest,
+                    NULL as assigned_id,
+                    NULL as agent_name,
+                    c.channel,
+                    c.id as conversation_id,
+                    c.recipient_ig_id,
+                    c.recipient_ig_username
+                FROM leads l
+                INNER JOIN conversations c ON c.lead_id = l.id AND c.channel = 'instagram'
+                LEFT JOIN assignedclients ac ON ac.lead_id = l.id
+                WHERE ac.id IS NULL
+                ORDER BY l.id DESC
+            ")->getResultArray();
+
+            $result = array_merge($unassigned, $result);
         } catch (\Throwable $e) {
             log_message('error', 'api_pipeline SQL: ' . $e->getMessage());
 
@@ -390,7 +420,21 @@ class CrmController extends BaseController
         }
 
         $pipeline = [];
+        // Put unassigned first with a special key
+        $pipeline['unassigned'] = [
+            'id' => 'unassigned',
+            'name' => '📥 Sin Asignar',
+            'leads' => [],
+        ];
+
         foreach ($result as $row) {
+            if ($row['status_id'] === null) {
+                // Unassigned lead
+                if ($row['lead_id']) {
+                    $pipeline['unassigned']['leads'][$row['lead_id']] = $row;
+                }
+                continue;
+            }
             $statusId = $row['status_id'];
             if (!isset($pipeline[$statusId])) {
                 $pipeline[$statusId] = [
