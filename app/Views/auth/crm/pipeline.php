@@ -246,31 +246,25 @@ $(document).ready(function() {
         });
     });
 });
-                    loadPipeline();
-                } else {
-                    var msg = (res.message || 'Error');
-                    if (res.data && res.data.graph_error) {
-                        msg += '<br><small>' + escapeHtml(JSON.stringify(res.data.graph_error)) + '</small>';
-                    }
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Graph API',
-                        html: msg,
-                        confirmButtonColor: '#e74a3b'
-                    });
-                }
-            })
-            .fail(function () {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Red',
-                    text: 'No se pudo llamar al servidor.',
-                    confirmButtonColor: '#e74a3b'
-                });
-            })
-            .always(function () {
-                $btn.prop('disabled', false);
-            });
+
+// Sync Instagram messages
+$(document).on('click', '#btn-sync-instagram-graph', function() {
+    var $btn = $(this).prop('disabled', true);
+    $.post(CRM_PIPELINE_SYNC_IG_URL, function(res) {
+        if (res.status === 'success') {
+            loadPipeline();
+            Swal.fire({icon: 'success', title: 'Sincronizado', text: 'Mensajes actualizados.', confirmButtonColor: '#1cc88a', timer: 2000});
+        } else {
+            var msg = (res.message || 'Error');
+            if (res.data && res.data.graph_error) {
+                msg += '<br><small>' + escapeHtml(JSON.stringify(res.data.graph_error)) + '</small>';
+            }
+            Swal.fire({icon: 'error', title: 'Graph API', html: msg, confirmButtonColor: '#e74a3b'});
+        }
+    }).fail(function() {
+        Swal.fire({icon: 'error', title: 'Red', text: 'No se pudo llamar al servidor.', confirmButtonColor: '#e74a3b'});
+    }).always(function() {
+        $btn.prop('disabled', false);
     });
 });
 
