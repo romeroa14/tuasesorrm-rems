@@ -101,7 +101,6 @@
         </div>
     </div>
 </div>
-</div>
 <script>
 var dt, apiBase = '<?= base_url('/app/finance/api/expenses') ?>', editId = null;
 function loadTable() {
