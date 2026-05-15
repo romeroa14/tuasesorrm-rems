@@ -205,7 +205,10 @@ class WebhookController extends ResourceController
     /**
      * Process incoming message from any channel
      */
-    protected function processIncomingMessage(
+    /**
+     * Público para que QueueProcess worker lo llame desde la cola Redis.
+     */
+    public function processIncomingMessage(
         string $channel,
         string $externalId,
         string $content,
