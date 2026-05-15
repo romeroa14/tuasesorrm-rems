@@ -6,6 +6,7 @@ use App\Controllers\WebhookController;
 use App\Libraries\RedisQueue;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
+use Config\Services;
 
 class QueueProcess extends BaseCommand
 {
@@ -58,7 +59,11 @@ class QueueProcess extends BaseCommand
 
             try {
                 if ($controller === null) {
+                    $request  = Services::request();
+                    $response = Services::response();
+                    $logger   = Services::logger();
                     $controller = new WebhookController();
+                    $controller->initController($request, $response, $logger);
                 }
 
                 $controller->processIncomingMessage(
