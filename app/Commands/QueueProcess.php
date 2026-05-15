@@ -41,9 +41,6 @@ class QueueProcess extends BaseCommand
         CLI::write('Worker iniciado. Esperando mensajes...', 'green');
         $processed = 0;
 
-        // Initialize a temporary controller to reuse processIncomingMessage
-        $controller = null;
-
         while (true) {
             $payload = $queue->dequeue(5); // timeout 5s, returns null if empty
 
@@ -58,13 +55,12 @@ class QueueProcess extends BaseCommand
             $senderId  = $payload['sender_id'] ?? 'unknown';
 
             try {
-                if ($controller === null) {
-                    $request  = Services::request();
-                    $response = Services::response();
-                    $logger   = Services::logger();
-                    $controller = new WebhookController();
-                    $controller->initController($request, $response, $logger);
-                }
+                // Fresh controller + DB connection per message (prevents "MySQL has gone away")
+                $request  = Services::request();
+                $response = Services::response();
+                $logger   = Services::logger();
+                $controller = new WebhookController();
+                $controller->initController($request, $response, $logger);
 
                 $controller->processIncomingMessage(
                     $payload['channel'] ?? 'instagram',
