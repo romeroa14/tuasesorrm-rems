@@ -381,13 +381,7 @@ function renderPipeline(stages) {
                             <span>${lead.agent_name ? '<i class="fas fa-user-check text-success"></i> ' + lead.agent_name : '<i class="fas fa-user-times text-muted"></i> Sin asignar'}</span>
                             ${convId ? '<a href="' + inboxUrl + '" class="btn btn-xs btn-outline-primary btn-sm py-0 px-1">Inbox</a>' : ''}
                         </div>
-                        ${stage.id === 'unassigned' ? `
-                        <div class="mt-1">
-                            <select class="form-control form-control-sm assign-atc" data-lead-id="${lead.lead_id}" data-conv-id="${convId}" style="font-size:11px;">
-                                <option value="">Asignar a ATC...</option>
-                                ${(window.atcUsers || []).map(u => '<option value="'+u.id+'">'+u.full_name+'</option>').join('')}
-                            </select>
-                        </div>` : ''}
+                        ${stage.id === 'unassigned' ? '<div class="mt-1"><select class="form-control form-control-sm assign-atc" data-lead-id="' + lead.lead_id + '" data-conv-id="' + convId + '" style="font-size:11px;"><option value="">Asignar a ATC...</option>' + (window.atcUsers || []).map(u => '<option value="' + u.id + '">' + u.full_name + '</option>').join('') + '</select></div>' : ''}
                     </div>
                 `;
             });
