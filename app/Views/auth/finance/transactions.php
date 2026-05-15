@@ -41,74 +41,56 @@
 <div class="modal fade" id="financeModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="modalTitle">Agregar Transacción</h5>
+            <div class="modal-header bg-gradient-primary text-white">
+                <h5 class="modal-title" id="modalTitle"><i class="fas fa-exchange-alt"></i> Transacción</h5>
                 <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
             </div>
             <form id="financeForm">
                 <div class="modal-body">
                     <input type="hidden" id="record_id" name="id">
                     <input type="hidden" name="user_id" value="<?= session()->get('id') ?>">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="type">Tipo</label>
-                                <select class="form-control" id="type" name="type" required>
-                                    <option value="">Seleccionar...</option>
-                                    <option value="income">Ingreso</option>
-                                    <option value="expense">Gasto</option>
-                                </select>
+
+                    <!-- Section: Info General -->
+                    <div class="card bg-light mb-3">
+                        <div class="card-header py-2"><i class="fas fa-info-circle text-primary"></i> <strong>Información General</strong></div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6"><div class="form-group"><label><i class="fas fa-arrows-alt-h text-muted"></i> Tipo <span class="text-danger">*</span></label>
+                                    <select class="form-control select2-finance" id="type" name="type" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="income">💰 Ingreso</option>
+                                        <option value="expense">💸 Gasto</option>
+                                    </select>
+                                </div></div>
+                                <div class="col-md-6"><div class="form-group"><label><i class="fas fa-dollar-sign text-muted"></i> Monto <span class="text-danger">*</span></label>
+                                    <input type="number" step="0.01" class="form-control" id="amount" name="amount" required min="0" placeholder="0.00">
+                                </div></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6"><div class="form-group"><label><i class="fas fa-coins text-muted"></i> Moneda <span class="text-danger">*</span></label>
+                                    <select class="form-control select2-finance" id="currency_id" name="currency_id" required><option value="">Cargando...</option></select>
+                                </div></div>
+                                <div class="col-md-6"><div class="form-group"><label><i class="fas fa-university text-muted"></i> Cuenta</label>
+                                    <select class="form-control select2-finance" id="account_id" name="account_id"><option value="">Seleccionar...</option></select>
+                                </div></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6"><div class="form-group"><label><i class="fas fa-tags text-muted"></i> Categoría</label>
+                                    <select class="form-control select2-finance" id="category_id" name="category_id"><option value="">Seleccionar...</option></select>
+                                </div></div>
+                                <div class="col-md-6"><div class="form-group"><label><i class="fas fa-calendar text-muted"></i> Fecha <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="date" name="date" required>
+                                </div></div>
+                            </div>
+                            <div class="form-group"><label><i class="fas fa-comment text-muted"></i> Descripción</label>
+                                <textarea class="form-control" id="description" name="description" rows="2" placeholder="Detalle de la transacción..."></textarea>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="amount">Monto</label>
-                                <input type="number" step="0.01" class="form-control" id="amount" name="amount" required min="0">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="currency_id">Moneda</label>
-                                <select class="form-control" id="currency_id" name="currency_id" required>
-                                    <option value="">Cargando...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="account_id">Cuenta</label>
-                                <select class="form-control" id="account_id" name="account_id">
-                                    <option value="">Seleccionar...</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="category_id">Categoría</label>
-                                <select class="form-control" id="category_id" name="category_id">
-                                    <option value="">Seleccionar...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="date">Fecha</label>
-                                <input type="date" class="form-control" id="date" name="date" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Descripción</label>
-                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
                 </div>
             </form>
         </div>
@@ -164,27 +146,14 @@ function loadTable() {
 }
 
 function loadDropdowns() {
-    // Load currencies
-    $.post('<?= base_url('/app/finance/api/currencies') ?>', function(res) {
-        var sel = $('#currency_id').empty().append('<option value="">Seleccionar...</option>');
-        if (res.status === 'success') {
-            res.data.forEach(function(c) { sel.append('<option value="' + c.id + '">' + c.name + ' (' + c.code + ')</option>'); });
-        }
+    ['currencies','accounts','categories'].forEach(function(e) {
+        $.post('<?= base_url('/app/finance/api/') ?>'+e, function(r) {
+            var sel = $('#'+e.replace('currencies','currency_id').replace('accounts','account_id').replace('categories','category_id')).empty().append('<option value="">Seleccionar...</option>');
+            if (r.status==='success') r.data.forEach(function(d) { sel.append('<option value="'+d.id+'">'+(d.name||d.code||'')+'</option>'); });
+            $('#'+e.replace('currencies','currency_id').replace('accounts','account_id').replace('categories','category_id')).select2({dropdownParent: $('#financeModal'), width:'100%', allowClear: true});
+        });
     });
-    // Load accounts
-    $.post('<?= base_url('/app/finance/api/accounts') ?>', function(res) {
-        var sel = $('#account_id').empty().append('<option value="">Seleccionar...</option>');
-        if (res.status === 'success') {
-            res.data.forEach(function(a) { sel.append('<option value="' + a.id + '">' + a.name + '</option>'); });
-        }
-    });
-    // Load categories
-    $.post('<?= base_url('/app/finance/api/categories') ?>', function(res) {
-        var sel = $('#category_id').empty().append('<option value="">Seleccionar...</option>');
-        if (res.status === 'success') {
-            res.data.forEach(function(c) { sel.append('<option value="' + c.id + '">' + c.name + '</option>'); });
-        }
-    });
+    $('.select2-finance').not('[id*="currency_id"],[id*="account_id"],[id*="category_id"]').select2({dropdownParent: $('#financeModal'), width:'100%', allowClear: true});
 }
 
 function showModal(mode, id) {
@@ -199,16 +168,7 @@ function showModal(mode, id) {
             if (res.status === 'success') {
                 var d = res.data;
                 $('#record_id').val(d.id);
-                $('#type').val(d.type);
-                $('#amount').val(d.amount);
-                $('#description').val(d.description || '');
-                $('#date').val(d.date);
-                // Set dropdowns after they load
-                setTimeout(function() {
-                    $('#currency_id').val(d.currency_id);
-                    $('#account_id').val(d.account_id);
-                    $('#category_id').val(d.category_id);
-                }, 500);
+                Object.keys(d).forEach(function(k) { var el = $('[name="'+k+'"]'); if (el.length) el.val(d[k]).trigger('change'); });
             }
         });
     }

@@ -101,49 +101,6 @@
         </div>
     </div>
 </div>
-                    <div class="row">
-                        <div class="col-md-4"><div class="form-group"><label>Monto USD <span class="text-danger">*</span></label><input type="number" step="0.01" class="form-control" id="amount_usd" name="amount_usd" required min="0" onchange="document.getElementById('amount').value=this.value"></div></div>
-                        <div class="col-md-4"><div class="form-group"><label>IVA</label><input type="number" step="0.01" class="form-control" id="tax_amount_usd" name="tax_amount_usd" value="0" min="0"></div></div>
-                        <div class="col-md-4"><div class="form-group"><label>Moneda Origen</label><input type="text" class="form-control" id="original_currency" name="original_currency" placeholder="USD/VES"></div></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6"><div class="form-group"><label>Empresa</label><select class="form-control" id="company_id" name="company_id"><option value="">Seleccionar...</option></select></div></div>
-                        <div class="col-md-6"><div class="form-group"><label>Departamento</label><select class="form-control" id="department_id" name="department_id"><option value="">Seleccionar...</option></select></div></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><div class="form-group"><label>Proyecto</label><select class="form-control" id="project_id" name="project_id"><option value="">Seleccionar...</option></select></div></div>
-                        <div class="col-md-4"><div class="form-group"><label>Categoría <span class="text-danger">*</span></label><select class="form-control" id="category_id" name="category_id" required><option value="">Cargando...</option></select></div></div>
-                        <div class="col-md-4"><div class="form-group"><label>Forma de Pago <span class="text-danger">*</span></label><select class="form-control" id="payment_type_id" name="payment_type_id" required><option value="">Cargando...</option></select></div></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><div class="form-group"><label>Fecha Gasto <span class="text-danger">*</span></label><input type="date" class="form-control" id="expense_date" name="expense_date" required></div></div>
-                        <div class="col-md-4"><div class="form-group"><label>Prioridad</label><select class="form-control" id="priority" name="priority"><option value="medium">Media</option><option value="low">Baja</option><option value="high">Alta</option></select></div></div>
-                        <div class="col-md-4"><div class="form-group"><label>Estado</label><select class="form-control" id="status" name="status"><option value="pending">Pendiente</option><option value="approved">Aprobado</option><option value="paid">Pagado</option><option value="rejected">Rechazado</option></select></div></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6"><div class="form-group">
-                            <label>Destinatario del Gasto</label>
-                            <input type="text" class="form-control" id="recipient" name="recipient" placeholder="Supermercado XYZ, Juan Pérez..."
-                            list="recipient-list">
-                            <datalist id="recipient-list"></datalist>
-                            <small class="text-muted">👤 Escribe para buscar opciones existentes o crear una nueva</small>
-                        </div></div>
-                        <div class="col-md-6"><div class="form-group">
-                            <label>Proveedor</label>
-                            <input type="text" class="form-control" id="provider" name="provider" placeholder="Nombre del proveedor"
-                            list="provider-list">
-                            <datalist id="provider-list"></datalist>
-                        </div></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6"><div class="form-group"><label>Nro. Factura</label><input type="text" class="form-control" id="invoice_number" name="invoice_number"></div></div>
-                    </div>
-                    <div class="form-group"><label>Descripción</label><textarea class="form-control" id="description" name="description" rows="2"></textarea></div>
-                </div>
-                <div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success">Guardar</button></div>
-            </form>
-        </div>
-    </div>
 </div>
 <script>
 var dt, apiBase = '<?= base_url('/app/finance/api/expenses') ?>', editId = null;
