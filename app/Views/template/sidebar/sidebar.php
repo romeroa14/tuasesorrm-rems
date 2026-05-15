@@ -251,6 +251,31 @@
         </li>
         <hr class="sidebar-divider">
     <?php endif; ?>
+    <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 6 || session()->get('id_fk_rol') == 8): ?>
+    <!-- Finanzas Module -->
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">Finanzas</div>
+    <li class="nav-item <?= strpos($title ?? '', 'Finanza') !== false ? 'active' : '' ?>">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance" aria-expanded="false" aria-controls="collapseFinance">
+            <i class="fas fa-coins"></i>
+            <span>Finanzas</span>
+        </a>
+        <div id="collapseFinance" class="collapse <?= strpos($title ?? '', 'Finanza') !== false ? 'show' : '' ?>">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item <?= $title == 'Finanzas Dashboard' ? 'active' : '' ?>" href="<?= base_url('/app/finance') ?>"><i class="fas fa-chart-pie"></i> Dashboard</a>
+                <a class="collapse-item <?= $title == 'Finanzas Transacciones' ? 'active' : '' ?>" href="<?= base_url('/app/finance/transactions') ?>"><i class="fas fa-exchange-alt"></i> Transacciones</a>
+                <a class="collapse-item <?= $title == 'Finanzas Gastos' ? 'active' : '' ?>" href="<?= base_url('/app/finance/expenses') ?>"><i class="fas fa-receipt"></i> Gastos</a>
+                <a class="collapse-item <?= $title == 'Finanzas Cuentas' ? 'active' : '' ?>" href="<?= base_url('/app/finance/accounts') ?>"><i class="fas fa-university"></i> Cuentas</a>
+                <a class="collapse-item <?= $title == 'Finanzas Categorías' ? 'active' : '' ?>" href="<?= base_url('/app/finance/categories') ?>"><i class="fas fa-tags"></i> Categorías</a>
+                <a class="collapse-item <?= $title == 'Finanzas Presupuestos' ? 'active' : '' ?>" href="<?= base_url('/app/finance/budgets') ?>"><i class="fas fa-chart-line"></i> Presupuestos</a>
+                <a class="collapse-item <?= $title == 'Finanzas Tasas' ? 'active' : '' ?>" href="<?= base_url('/app/finance/exchange_rates') ?>"><i class="fas fa-dollar-sign"></i> Tasas de Cambio</a>
+                <a class="collapse-item <?= $title == 'Finanzas Empresas' ? 'active' : '' ?>" href="<?= base_url('/app/finance/companies') ?>"><i class="fas fa-building"></i> Empresas</a>
+                <a class="collapse-item <?= $title == 'Finanzas Departamentos' ? 'active' : '' ?>" href="<?= base_url('/app/finance/departments') ?>"><i class="fas fa-sitemap"></i> Departamentos</a>
+                <a class="collapse-item <?= $title == 'Finanzas Proyectos' ? 'active' : '' ?>" href="<?= base_url('/app/finance/projects') ?>"><i class="fas fa-tasks"></i> Proyectos</a>
+            </div>
+        </div>
+    </li>
+    <?php endif; ?>
     <?php if(session()->get('id_fk_rol') == 2): ?>
         <hr class="sidebar-divider">
         <div class="sidebar-heading">

@@ -218,3 +218,15 @@ $routes->post('/api/v1/login', 'AuthApiController::login');
 $routes->group('', ['filter' => 'authApi'], function($routes) {
     // Tus rutas protegidas aquí
 });
+
+// =============================================================================
+// MÓDULO FINANZAS
+// =============================================================================
+$routes->group('app/finance', ['filter' => 'auth'], function($routes) {
+    $routes->get('/', 'FinanceController::index');
+    $routes->get('(:segment)', 'FinanceController::$1');
+    $routes->post('api/(:segment)', 'FinanceApiController::apiList/$1');
+    $routes->post('api/(:segment)/create', 'FinanceApiController::apiCreate/$1');
+    $routes->post('api/(:segment)/(:num)', 'FinanceApiController::apiUpdate/$1/$2');
+    $routes->post('api/(:segment)/(:num)/delete', 'FinanceApiController::apiDelete/$1/$2');
+});
