@@ -48,6 +48,7 @@
             <form id="financeForm">
                 <div class="modal-body">
                     <input type="hidden" id="record_id" name="id">
+                    <input type="hidden" name="user_id" value="<?= session()->get('id') ?>">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
