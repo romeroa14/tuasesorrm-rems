@@ -72,7 +72,7 @@ class Leads extends Model
         ->first();
     }
     
-    public function getLeadsAtc($id)
+    public function getLeadsAtc($id, $isSuperadmin = false)
     {
         $query = $this->select('
             leads.id,
@@ -86,16 +86,24 @@ class Leads extends Model
             leads.phone,
             leads.observation,
             leads.status,
+            leads.instagram_username,
             leads.created_at
         ')
-        ->join('users', 'users.id = leads.id_user')
-        ->join('businessmodel', 'businessmodel.id = leads.id_businessmodel')
-        ->join('housingtype', 'housingtype.id = leads.id_housingtype')
+        ->join('businessmodel', 'businessmodel.id = leads.id_businessmodel', 'left')
+        ->join('housingtype', 'housingtype.id = leads.id_housingtype', 'left')
         ->join('funnels', 'funnels.id = leads.id_funnel')
-        ->where('leads.status', 'Activo')
-        ->where('leads.id_user', $id)
-        ->findAll();
+        ->where('leads.status', 'Activo');
 
-        return $query;
+        if ($isSuperadmin) {
+            // Superadmin: todos los leads activos
+        } else {
+            // ATC agent: sus leads asignados + leads sin asignar
+            $query->groupStart()
+                ->where('leads.id_user', $id)
+                ->orWhere('leads.id_user IS NULL')
+            ->groupEnd();
+        }
+
+        return $query->orderBy('leads.id', 'DESC')->findAll();
     }
 }

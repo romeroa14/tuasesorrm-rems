@@ -1294,7 +1294,8 @@ class ClientsController extends BaseController
     /* Listar leads atc */
     public function get_leads_atc()
     {
-        $leads_data = $this->Leads->getLeadsAtc(session()->get('id'));
+        $isSuperadmin = (session()->get('id_fk_rol') == 2);
+        $leads_data = $this->Leads->getLeadsAtc(session()->get('id'), $isSuperadmin);
 
         // Devuelve los datos y los enlaces de paginación como una respuesta JSON
         return $this->response->setJSON(
