@@ -149,7 +149,15 @@ class FinanceApiController extends BaseController
 
         try {
             $model = $this->resolveModel($entity);
-            $records = $model->findAll();
+
+            // Special join for exchange_rates to include currency code
+            if ($entity === 'exchange_rates') {
+                $records = $model->select('finance_exchange_rates.*, finance_currencies.code AS currency_code')
+                    ->join('finance_currencies', 'finance_currencies.id = finance_exchange_rates.currency_id', 'left')
+                    ->findAll();
+            } else {
+                $records = $model->findAll();
+            }
 
             return $this->jsonSuccess($records);
         } catch (\InvalidArgumentException $e) {
