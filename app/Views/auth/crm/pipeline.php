@@ -385,7 +385,7 @@ function renderPipeline(stages) {
                         <div class="mt-1">
                             <select class="form-control form-control-sm assign-atc" data-lead-id="${lead.lead_id}" data-conv-id="${convId}" style="font-size:11px;">
                                 <option value="">Asignar a ATC...</option>
-                                ${(window.atcUsers || []).map(function(u) { return '<option value="'+u.id+'">'+u.full_name+'</option>'; }).join('')}
+                                ${(window.atcUsers || []).map(u => '<option value="'+u.id+'">'+u.full_name+'</option>').join('')}
                             </select>
                         </div>` : ''}
                     </div>
