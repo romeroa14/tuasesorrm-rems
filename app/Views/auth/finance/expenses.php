@@ -49,10 +49,6 @@
                         <div class="col-md-4"><div class="form-group"><label>Estado</label><select class="form-control" id="status" name="status"><option value="pending">Pendiente</option><option value="approved">Aprobado</option><option value="paid">Pagado</option><option value="rejected">Rechazado</option></select></div></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6"><div class="form-group"><label>Nro. Factura</label><input type="text" class="form-control" id="invoice_number" name="invoice_number"></div></div>
-                    </div>
-                    <div class="form-group"><label>Descripción</label><textarea class="form-control" id="description" name="description" rows="2"></textarea></div>
-                    <div class="row">
                         <div class="col-md-6"><div class="form-group">
                             <label>Destinatario del Gasto</label>
                             <input type="text" class="form-control" id="recipient" name="recipient" placeholder="Supermercado XYZ, Juan Pérez..."
@@ -67,6 +63,10 @@
                             <datalist id="provider-list"></datalist>
                         </div></div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6"><div class="form-group"><label>Nro. Factura</label><input type="text" class="form-control" id="invoice_number" name="invoice_number"></div></div>
+                    </div>
+                    <div class="form-group"><label>Descripción</label><textarea class="form-control" id="description" name="description" rows="2"></textarea></div>
                 </div>
                 <div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success">Guardar</button></div>
             </form>
