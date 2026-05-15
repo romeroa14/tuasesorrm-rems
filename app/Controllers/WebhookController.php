@@ -314,7 +314,6 @@ class WebhookController extends ResourceController
 
             $conversation = $this->conversationModel->find($conversationId);
 
-            CrmPipelineEnrollment::ensureLeadOnPipeline((int) $leadId);
         } else {
             // Update existing conversation
             $update = [
@@ -333,10 +332,6 @@ class WebhookController extends ResourceController
             }
             $this->conversationModel->update($conversation['id'], $update);
             $conversation = $this->conversationModel->find($conversation['id']);
-
-            if ($channel === 'instagram') {
-                CrmPipelineEnrollment::ensureLeadOnPipeline((int) $conversation['lead_id']);
-            }
         }
 
         // 2. Save message
