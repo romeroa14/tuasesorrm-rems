@@ -348,11 +348,11 @@ class WebhookController extends ResourceController
 
         if ($channel === 'instagram') {
             $this->enrichInstagramLeadFromParticipant((int) $conversation['lead_id'], (int) $conversation['id'], $externalId, $recipientIgId);
-            $this->maybeCapturePhoneFromInbound($content, (int) $conversation['lead_id']);
+            $this->maybeCapturePhoneFromInbound($content, (int) $conversation['lead_id'], (int) $conversation['id']);
         }
 
-        // 3. Score the conversation
-        $scorer = new ScoringService();
+        // 3. Score the conversation (LLM-based with keyword fallback)
+        $scorer = new \App\Libraries\AiScoringService();
         $scorer->scoreConversation($conversation['id'], $conversation['lead_id']);
 
         return $messageId;
@@ -495,21 +495,56 @@ class WebhookController extends ResourceController
         }
     }
 
-    protected function maybeCapturePhoneFromInbound(string $content, int $leadId): void
+    protected function maybeCapturePhoneFromInbound(string $content, int $leadId, int $conversationId = 0): void
     {
         $content = trim($content);
         if ($content === '') {
             return;
         }
         $lead = $this->leadsModel->find($leadId);
-        if (! $lead || trim((string) ($lead['phone'] ?? '')) !== '') {
+        if (! $lead) {
             return;
         }
-        if (preg_match('/(?:\+?\s*58\s*)?(?:0\s*)?(4\s*\d{2}[\s\-]?\d{7})/', $content, $m)) {
-            $digits = preg_replace('/\D/', '', $m[1]);
-            if (strlen($digits) >= 10) {
-                $this->leadsModel->update($leadId, ['phone' => $digits]);
+
+        // Better regex: +58 412-xxx, 0412-xxx, 58412xxxxxx, 412xxxxxxx
+        $patterns = [
+            '/(?:\+58|0058)[-\s]?(4\d{2})[-\s]?\d{3}[-\s]?\d{4}/',
+            '/(?:^|[^\d])0?(4\d{2})[-\s]?\d{3}[-\s]?\d{4}(?:[^\d]|$)/',
+        ];
+        $phoneFound = null;
+
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $content, $m)) {
+                $digits = preg_replace('/\D/', '', $m[0]);
+                // Normalize: remove leading 0, prepend 58
+                $digits = ltrim($digits, '0');
+                if (strlen($digits) === 10 && $digits[0] === '4') {
+                    $digits = '58' . $digits;
+                }
+                if (strlen($digits) >= 11 && $digits[0] === '5' && $digits[1] === '8') {
+                    $phoneFound = $digits;
+                    break;
+                }
             }
+        }
+
+        if ($phoneFound === null) return;
+
+        // Update lead phone if empty
+        if (trim((string) ($lead['phone'] ?? '')) === '') {
+            $this->leadsModel->update($leadId, ['phone' => $phoneFound]);
+        }
+
+        // Insert into clientes_whatsapp
+        $db = \Config\Database::connect();
+        $existing = $db->query("SELECT id FROM clientes_whatsapp WHERE phone = ?", [$phoneFound])->getRow();
+        if (!$existing) {
+            $db->query("
+                INSERT INTO clientes_whatsapp (lead_id, phone, name, channel, last_contact, status)
+                VALUES (?, ?, ?, 'instagram', NOW(), 'nuevo')
+            ", [$leadId, $phoneFound, $lead['name'] ?? null]);
+        } else {
+            $db->query("UPDATE clientes_whatsapp SET last_contact = NOW(), lead_id = ? WHERE id = ?", [$leadId, $existing->id]);
         }
     }
 
