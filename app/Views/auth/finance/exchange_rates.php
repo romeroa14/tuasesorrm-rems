@@ -13,14 +13,16 @@
     </div></div>
 </div>
 <div class="modal fade" id="financeModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
-    <div class="modal-header bg-primary text-white"><h5 class="modal-title" id="modalTitle">Nueva Tasa Manual</h5><button type="button" class="close text-white" data-dismiss="modal">&times;</button></div>
+    <div class="modal-header bg-gradient-primary text-white"><h5 class="modal-title" id="modalTitle"><i class="fas fa-dollar-sign"></i> Tasa Manual</h5><button type="button" class="close text-white" data-dismiss="modal">&times;</button></div>
     <form id="financeForm"><div class="modal-body"><input type="hidden" id="record_id" name="id">
-        <div class="row"><div class="col-md-6"><div class="form-group"><label>Moneda <span class="text-danger">*</span></label><select class="form-control" id="currency_id" name="currency_id" required><option value="">Cargando...</option></select></div></div>
-        <div class="col-md-6"><div class="form-group"><label>Fuente <span class="text-danger">*</span></label><select class="form-control" id="source" name="source" required><option value="">Seleccionar...</option><option value="oficial">Oficial</option><option value="paralelo">Paralelo</option><option value="promedio_usdt">Promedio USDT</option><option value="efectivo">Efectivo</option></select></div></div></div>
-        <div class="row"><div class="col-md-6"><div class="form-group"><label>Tasa (Bs.) <span class="text-danger">*</span></label><input type="number" step="0.0001" class="form-control" id="rate" name="rate" required min="0"></div></div>
-        <div class="col-md-6"><div class="form-group"><label>Fecha <span class="text-danger">*</span></label><input type="date" class="form-control" id="rate_date" name="rate_date" required></div></div></div>
-        <input type="hidden" name="is_auto" value="0">
-    </div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-success">Guardar</button></div></form>
+        <div class="card bg-light mb-3"><div class="card-header py-2"><i class="fas fa-info-circle text-primary"></i> <strong>Registrar Tasa</strong></div><div class="card-body">
+            <div class="row"><div class="col-md-6"><div class="form-group"><label><i class="fas fa-coins text-muted"></i> Moneda <span class="text-danger">*</span></label><select class="form-control" id="currency_id" name="currency_id" required><option value="">Cargando...</option></select></div></div>
+            <div class="col-md-6"><div class="form-group"><label><i class="fas fa-tag text-muted"></i> Fuente <span class="text-danger">*</span></label><select class="form-control" id="source" name="source" required><option value="">Seleccionar...</option><option value="oficial">Oficial</option><option value="paralelo">Paralelo</option><option value="promedio_usdt">Promedio USDT</option><option value="efectivo">Efectivo</option></select></div></div></div>
+            <div class="row"><div class="col-md-6"><div class="form-group"><label><i class="fas fa-dollar-sign text-muted"></i> Tasa (Bs.) <span class="text-danger">*</span></label><input type="number" step="0.0001" class="form-control" id="rate" name="rate" required min="0" placeholder="0.00"></div></div>
+            <div class="col-md-6"><div class="form-group"><label><i class="fas fa-calendar text-muted"></i> Fecha <span class="text-danger">*</span></label><input type="date" class="form-control" id="rate_date" name="rate_date" required></div></div></div>
+            <input type="hidden" name="is_auto" value="0">
+        </div></div>
+    </div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button><button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button></div></form>
 </div></div></div>
 <script>
 var dt, apiBase='<?= base_url('/app/finance/api/exchange_rates') ?>';
