@@ -77,9 +77,10 @@ function loadTable() {
     });
 }
 function loadDropdowns() {
+    var fieldMap = {'expense_types':'expense_type_id','companies':'company_id','departments':'department_id','projects':'project_id','payment_types':'payment_type_id','categories':'category_id'};
     ['expense_types','companies','departments','projects','payment_types','categories'].forEach(function(e) {
         $.post('<?= base_url('/app/finance/api/') ?>'+e, function(r) {
-            var sel = $('#'+e.replace('types','type_id').replace('ies','ies_id')).empty().append('<option value="">Seleccionar...</option>');
+            var sel = $('#'+fieldMap[e]).empty().append('<option value="">Seleccionar...</option>');
             if (r.status==='success') r.data.forEach(function(d) { sel.append('<option value="'+d.id+'">'+(d.name||d.title||'')+'</option>'); });
         });
     });
