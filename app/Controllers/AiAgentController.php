@@ -75,29 +75,32 @@ class AiAgentController extends BaseController
             ? trim((string) $url)
             : self::DEFAULT_AGENT_CHAT_URL;
 
-        $outgoing = [
-            'message' => $message,
-            'history' => $history,
-            'debug' => $debug,
-        ];
+        // Try Python agent first, fallback to PHP DeepSeek
+        if ($url !== self::DEFAULT_AGENT_CHAT_URL && $url !== '') {
+            $result = $this->callPythonAgent($message, $history, $debug, $url);
+            if ($result !== null) return $result;
+        }
+
+        // Fallback: use PHP DeepSeekClient directly
+        return $this->callPhpDeepSeek($message, $history, $debug);
+    }
+
+    /**
+     * Try calling the Python agent microservice.
+     */
+    private function callPythonAgent(string $message, array $history, bool $debug, string $url): ?ResponseInterface
+    {
+        $outgoing = ['message' => $message, 'history' => $history, 'debug' => $debug];
 
         try {
             $client = Services::curlrequest(['timeout' => 120, 'http_errors' => false]);
             $r = $client->post($url, [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                    'Accept'       => 'application/json',
-                ],
+                'headers' => ['Content-Type' => 'application/json', 'Accept' => 'application/json'],
                 'body' => json_encode($outgoing, JSON_UNESCAPED_UNICODE),
             ]);
         } catch (\Throwable $e) {
-            log_message('error', 'AiAgentController::api_chat upstream error: ' . $e->getMessage());
-
-            return $this->response->setStatusCode(502)->setJSON([
-                'status' => 'error',
-                'message' => 'No se pudo contactar al servicio de agente.',
-                'detail' => ENVIRONMENT === 'development' ? $e->getMessage() : null,
-            ]);
+            log_message('warning', 'Python agent unreachable, falling back to PHP DeepSeek: ' . $e->getMessage());
+            return null;
         }
 
         $code = $r->getStatusCode();
@@ -108,11 +111,98 @@ class AiAgentController extends BaseController
             return $this->response->setStatusCode($code)->setJSON($json);
         }
 
-        return $this->response->setStatusCode($code >= 400 ? $code : 502)->setJSON([
-            'status' => 'error',
-            'message' => 'Respuesta no JSON del agente.',
-            'raw' => ENVIRONMENT === 'development' ? mb_substr($body, 0, 2000) : null,
-        ]);
+        return null;
+    }
+
+    /**
+     * Direct PHP DeepSeek + tools as fallback.
+     */
+    private function callPhpDeepSeek(string $message, array $history, bool $debug): ResponseInterface
+    {
+        $tools = \App\Libraries\CrmAiPropertyToolRunner::toolDefinitions();
+
+        $messages = [];
+        $messages[] = ['role' => 'system', 'content' => file_exists(ROOTPATH . 'agente/agente/prompts.py')
+            ? $this->extractSystemPrompt()
+            : 'Eres el asistente virtual de Asesores RM. Ayudas a clientes a encontrar propiedades.'];
+
+        foreach ($history as $h) {
+            $messages[] = ['role' => $h['role'], 'content' => $h['content']];
+        }
+        $messages[] = ['role' => 'user', 'content' => $message];
+
+        try {
+            $response = \App\Libraries\DeepSeekClient::chatCompletions([
+                'model' => getenv('DEEPSEEK_MODEL') ?: 'deepseek-chat',
+                'messages' => $messages,
+                'tools' => $tools,
+                'max_tokens' => 2000,
+                'temperature' => 0.7,
+            ]);
+
+            $choice = $response['choices'][0] ?? [];
+            $reply = $choice['message']['content'] ?? '';
+            $toolCalls = $choice['message']['tool_calls'] ?? [];
+            $toolResults = [];
+
+            // Handle tool calls
+            foreach ($toolCalls as $tc) {
+                $fn = $tc['function'];
+                $args = json_decode($fn['arguments'] ?? '{}', true) ?: [];
+                $result = \App\Libraries\CrmAiPropertyToolRunner::execute($fn['name'], $fn['arguments'] ?? '{}');
+                $toolResults[] = [
+                    'name' => $fn['name'],
+                    'arguments' => $fn['arguments'],
+                    'result' => $result,
+                ];
+
+                // Feed tool result back to LLM for final answer
+                $messages[] = $choice['message'];
+                $messages[] = [
+                    'role' => 'tool',
+                    'content' => is_string($result) ? $result : json_encode($result, JSON_UNESCAPED_UNICODE),
+                    'tool_call_id' => $tc['id'],
+                ];
+
+                $finalResponse = \App\Libraries\DeepSeekClient::chatCompletions([
+                    'model' => getenv('DEEPSEEK_MODEL') ?: 'deepseek-chat',
+                    'messages' => $messages,
+                    'max_tokens' => 2000,
+                    'temperature' => 0.7,
+                ]);
+                $reply = $finalResponse['choices'][0]['message']['content'] ?? $reply;
+            }
+
+            return $this->response->setJSON([
+                'reply' => $reply ?: 'Lo siento, no pude procesar tu solicitud.',
+                'debug' => $debug ? $toolResults : null,
+            ]);
+
+        } catch (\Throwable $e) {
+            log_message('error', 'AiAgentController::callPhpDeepSeek: ' . $e->getMessage());
+            return $this->response->setStatusCode(502)->setJSON([
+                'status' => 'error',
+                'message' => 'Error al contactar el servicio de IA.',
+                'detail' => ENVIRONMENT === 'development' ? $e->getMessage() : null,
+            ]);
+        }
+    }
+
+    /**
+     * Extract system prompt from Python prompts.py file.
+     */
+    private function extractSystemPrompt(): string
+    {
+        $path = ROOTPATH . 'agente/agente/prompts.py';
+        if (!file_exists($path)) return '';
+
+        $content = file_get_contents($path);
+        // Extract the SYSTEM_PROMPT string between triple quotes
+        if (preg_match('/SYSTEM_PROMPT\s*=\s*"""(.*?)"""/s', $content, $m)) {
+            return trim($m[1]);
+        }
+        return '';
+    }
     }
 
     /**
