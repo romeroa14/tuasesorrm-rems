@@ -166,17 +166,11 @@ class WebhookController extends ResourceController
                 }
 
                 // Negocio → cliente (Inbox Meta / app).
+                // DESACTIVADO temporalmente: el CRM ya guarda los mensajes salientes via api_send_message.
+                // El webhook duplicaba el registro y generaba errores 500 que Meta reintentaba sin parar.
                 if ($senderIsUs && ! $recipientIsUs && $toFieldId !== '') {
-                    $this->processInstagramBusinessOutboundMessage(
-                        $toFieldId,
-                        $messageText,
-                        $messageId,
-                        $contentType,
-                        $mediaUrl,
-                        $timestamp,
-                        $recipientIgId
-                    );
-
+                    // Solo registrar en log, sin procesar (evita ciclos de reintento de Meta).
+                    log_message('info', 'Webhook Instagram: mensaje saliente ignorado (procesado por CRM), to=' . $toFieldId);
                     continue;
                 }
 
@@ -303,6 +297,7 @@ class WebhookController extends ResourceController
                 'status' => 'open',
                 'last_message_at' => date('Y-m-d H:i:s', $timestamp ?: time()),
                 'unread_count' => 1,
+                'ai_auto_reply' => 0, // Desactivado: respuestas automáticas deshabilitadas
             ];
             if ($referralAdId !== '') {
                 $conversationData['ad_id'] = $referralAdId;
