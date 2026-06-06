@@ -1,0 +1,91 @@
+{
+  "participants": [
+    {
+      "name": "Judith"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779289507663,
+      "content": "$60 el condominio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779289380383,
+      "content": "Quedo atenta!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779289377661,
+      "content": "Si gusta le comparte su WhatsApp para asistir a nuestro OPEN el d\u00c3\u00ada de ma\u00c3\u00b1ana",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779289363111,
+      "content": "La ponen en las hora de la noche\n3 d\u00c3\u00adas a la semana  | Tienen tanque de agua de 1,000 litros cada uno",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779289319891,
+      "content": "Hola! C\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Judith",
+      "timestamp_ms": 1779226479598,
+      "content": "Ok gracias , \u00f0\u009f\u0099\u008f el tema de agua como es en el edificio ? Alguna referencia del condominio ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779201975980,
+      "audio_files": [
+        {
+          "uri": "your_instagram_activity/messages/inbox/judith_2037191211014745/audio/1003074332161290.mp4",
+          "creation_timestamp": 1779201973
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Judith",
+      "timestamp_ms": 1779145990227,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Judith",
+      "timestamp_ms": 1779145989872,
+      "content": "Judith envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DYfzvIggN4r/?id=3900063341648862763_53287868330",
+        "share_text": "\u00f0\u009f\u009a\u00a8 \u00c2\u00a1ATENCI\u00c3\u0093N ASESORES INMOBILIARIOS! \u00f0\u009f\u009a\u00a8\n\n\u00c2\u00bfBuscas la propiedad ideal para tu cartera de clientes exclusivos? Te invitamos a nuestro pr\u00c3\u00b3ximo OPEN HOUSE en Los Samanes. \u00f0\u009f\u008f\u00a2\u00e2\u009c\u00a8\n\n\u00f0\u009f\u0093\u008d \u00c2\u00bfD\u00c3\u00b3nde? Los Samanes.\n\u00f0\u009f\u0093\u0085 \u00c2\u00bfCu\u00c3\u00a1ndo? Este jueves 21.\n\u00e2\u008f\u00b0 \u00c2\u00bfHora? De 10:00 a.m. a 2:00 p.m.\n\nVen a conocer este espectacular penthouse que lo tiene todo:\n\u00e2\u009c\u0085 Doble entrada para mayor privacidad.\n\u00e2\u009c\u0085 4 amplias habitaciones.\n\u00e2\u009c\u0085 Una terraza incre\u00c3\u00adble con vista de 180 grados y parrillera (\u00c2\u00a1el sue\u00c3\u00b1o de cualquiera!).\n\u00e2\u009c\u0085 Precio de oportunidad.\n\n\u00f0\u009f\u0092\u00bc \u00c2\u00a1Trae a tu cliente y hagamos negocios juntos! Para m\u00c3\u00a1s informaci\u00c3\u00b3n o confirmar tu asistencia, escr\u00c3\u00adbenos al DM. \u00f0\u009f\u0093\u00a5",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Judith",
+  "is_still_participant": true,
+  "thread_path": "inbox/judith_2037191211014745",
+  "magic_words": [
+    
+  ]
+}

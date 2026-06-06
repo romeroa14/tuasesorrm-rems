@@ -1,0 +1,121 @@
+{
+  "participants": [
+    {
+      "name": "MAG"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776426641208,
+      "content": "Lo va a contactar nuestra directora la Sra rossana migliore para  asistir  la visita (edited)",
+      "is_geoblocked_for_viewer": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776426630828,
+      "content": "Lo va a contactar nuestra directora la Sra rossana migliore para  asistir  la cita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776426594953,
+      "content": "Hola buen d\u00c3\u00ada si claro cuando podr\u00c3\u00ada ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MAG",
+      "timestamp_ms": 1776425475055,
+      "content": "Ok",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MAG",
+      "timestamp_ms": 1776425472642,
+      "content": "Podremos reuniremos el nuestras ofc",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776425471841,
+      "content": "En breve me comunico con usted",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776425455059,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MAG",
+      "timestamp_ms": 1776425454330,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MAG",
+      "timestamp_ms": 1776425453883,
+      "content": "04242024505",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776425453431,
+      "content": "Un gust\u00c3\u00b3 saludarle le escribe Alejandra velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776425441417,
+      "content": "Buenos d\u00c3\u00adas",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MAG",
+      "timestamp_ms": 1776425425119,
+      "content": "El de valle a",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MAG",
+      "timestamp_ms": 1776425418703,
+      "content": "Me envias tu telf",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MAG",
+      "timestamp_ms": 1776425410960,
+      "content": "Edtoy interesado en el terreno",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MAG",
+      "timestamp_ms": 1776425403152,
+      "content": "Buenos dias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "MAG",
+  "is_still_participant": true,
+  "thread_path": "inbox/mag_2064751604923479",
+  "magic_words": [
+    
+  ]
+}

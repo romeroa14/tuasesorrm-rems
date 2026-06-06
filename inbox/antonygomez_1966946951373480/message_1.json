@@ -1,0 +1,84 @@
+{
+  "participants": [
+    {
+      "name": "Antony Gomez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774998402297,
+      "content": "Av principal de Chuao.\n\nTotalmente remodelada:\n- Salones de oficionas\n- Puestos de trabajo \n- Incluye habitaci\u00c3\u00b3n con terraza  \n- Cafeter\u00c3\u00ada interna \n\nPrecio: $1,200,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774998265684,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774998261725,
+      "content": "Hola, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Antony Gomez",
+      "timestamp_ms": 1774977698574,
+      "content": "Costo",
+      "share": {
+        "link": "https://www.instagram.com/stories/realtors.rm/3864984886339973856"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Antony Gomez",
+      "timestamp_ms": 1774926272474,
+      "content": "Gracias \u00f0\u009f\u0099\u008f\u00f0\u009f\u008f\u00bd",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774918885033,
+      "content": "Est\u00c3\u00a1 disponible en 1.200.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774918805502,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774826621312,
+      "content": "Antony Gomez replied to an ad. View ad(https://www.instagram.com/p/DWbrPG-gMYO/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Antony Gomez",
+      "timestamp_ms": 1774826620701,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Antony Gomez",
+  "is_still_participant": true,
+  "thread_path": "inbox/antonygomez_1966946951373480",
+  "magic_words": [
+    
+  ]
+}

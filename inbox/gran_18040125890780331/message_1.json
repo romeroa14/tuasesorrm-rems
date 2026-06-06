@@ -1,0 +1,67 @@
+{
+  "participants": [
+    {
+      "name": "Gran"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775920165618,
+      "content": "Hola buen d\u00c3\u00ada! Nos comparte su WhatsApp por favor",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Gran",
+      "timestamp_ms": 1775879705292,
+      "content": "Link?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775877292006,
+      "content": "Podemos aceptar un financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775877284712,
+      "content": "Est\u00c3\u00a1 disponible en 1.950.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775877274952,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775864564047,
+      "content": "Gran replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Gran",
+      "timestamp_ms": 1775864563434,
+      "content": "\u00c2\u00bfEst\u00c3\u00a1 disponible para la venta ahora?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Gran",
+  "is_still_participant": true,
+  "thread_path": "inbox/gran_18040125890780331",
+  "magic_words": [
+    
+  ]
+}

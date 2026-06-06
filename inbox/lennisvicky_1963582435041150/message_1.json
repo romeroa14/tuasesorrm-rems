@@ -1,0 +1,98 @@
+{
+  "participants": [
+    {
+      "name": "lennisvicky"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774729924982,
+      "content": "En Premium La Escondida tenemos 2 apartamentos disponibles:\n\n\u00e2\u0080\u00a2Un Planta Baja, 186m2 en 170.000$ \n\u00e2\u0080\u00a2Uno en piso 5, 153m2 en 220.000$ \n\nNegociables, podemos aceptar un financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774729923517,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774728950739,
+      "content": "lennisvicky replied to an ad. View ad(https://www.instagram.com/p/DWbpoKBgEnK/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "lennisvicky",
+      "timestamp_ms": 1774728950016,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773753301599,
+      "content": "La casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada\u00e2\u0080\u00a6 Su valor es de 1.700.000$ negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House, la entrada es totalmente gratuita \n\u00c2\u00bfle gustar\u00c3\u00ada asistir?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773753298089,
+      "photos": [
+        {
+          "uri": "your_instagram_activity/messages/inbox/lennisvicky_1963582435041150/photos/2134887120606948.jpg",
+          "creation_timestamp": 1773753297
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773753296303,
+      "photos": [
+        {
+          "uri": "your_instagram_activity/messages/inbox/lennisvicky_1963582435041150/photos/1894599371224979.jpg",
+          "creation_timestamp": 1773753295
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773753286354,
+      "content": "Hola buenos d\u00c3\u00adas, un gusto Barbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773751623127,
+      "content": "lennisvicky replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "lennisvicky",
+      "timestamp_ms": 1773751622348,
+      "content": "\u00c2\u00bfPuedo reservar una cita?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "lennisvicky",
+  "is_still_participant": true,
+  "thread_path": "inbox/lennisvicky_1963582435041150",
+  "magic_words": [
+    
+  ]
+}

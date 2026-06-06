@@ -1,0 +1,63 @@
+{
+  "participants": [
+    {
+      "name": "YuliettSleiman"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "YuliettSleiman",
+      "timestamp_ms": 1778682378667,
+      "content": "Qued\u00c3\u00b3 atenta",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "YuliettSleiman",
+      "timestamp_ms": 1778681667244,
+      "content": "Yo pertenezco a Renta House los Samanes . En una oportunidad quise agendar una visita a un cliente y me comentaron que ya hab\u00c3\u00ada recibido una.oferta ?",
+      "share": {
+        "share_text": "Yo pertenezco a Renta House los Samanes . En una oportunidad quise agendar una visita a un cliente y me comentaron que ya hab\u00c3\u00ada recibido una.oferta ?"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778681607061,
+      "content": "Est\u00c3\u00a1 disponible en 1.950.000$ negociable hasta 1.750.000$ es un terreno para iniciar proyecto tiene zonificaci\u00c3\u00b3n v6 si gusta podemos agendar una visita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778681547238,
+      "content": "Buen D\u00c3\u00ada Odra Cede\u00c3\u00b1o un Gusto saludarle del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778681538041,
+      "content": "YuliettSleiman replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "YuliettSleiman",
+      "timestamp_ms": 1778681537354,
+      "content": "\u00c2\u00bfEst\u00c3\u00a1 disponible para la venta ahora?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "YuliettSleiman",
+  "is_still_participant": true,
+  "thread_path": "inbox/yuliettsleiman_1989469725787952",
+  "magic_words": [
+    
+  ]
+}

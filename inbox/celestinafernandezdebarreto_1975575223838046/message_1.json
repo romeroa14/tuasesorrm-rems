@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Celestina Fernandez de Barreto"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774289104862,
+      "content": "El precio de la casa en Cumbres de Curumo es de $690,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774289091322,
+      "content": "Hola buenas tardes!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Celestina Fernandez de Barreto",
+  "is_still_participant": true,
+  "thread_path": "inbox/celestinafernandezdebarreto_1975575223838046",
+  "magic_words": [
+    
+  ]
+}

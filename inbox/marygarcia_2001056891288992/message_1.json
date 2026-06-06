@@ -1,0 +1,51 @@
+{
+  "participants": [
+    {
+      "name": "Mary Garcia"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778776179534,
+      "content": "Punta Pacifico, Playa Moreno |  Penthouse con vista al Mar | Cruzando la calle estas en el mar.\n\nLa habitaci\u00c3\u00b3n principal con ba\u00c3\u00b1o y vestier\n2 habitaciones auxiliares con ba\u00c3\u00b1o\nCocina Ferrara\n\u00c3\u0081rea de lavandero\nTerraza con vista al mar\n2 puestos de estacionamiento\n\nEl condominio cuenta con c\u00c3\u00b3modas  \u00c3\u00a1reas sociales: piscina para adultos y piscina infantil para el disfrute de toda la familia. Cancha de tennis Vigilancia privada las 24 horas,Lobby con acceso a wifi, Planta electrica.\n\n\u00f0\u009f\u0092\u00b2Precio: $450,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778776176342,
+      "content": "Buen D\u00c3\u00ada Odra Cede\u00c3\u00b1o un Gusto saludarle del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mary Garcia",
+      "timestamp_ms": 1778776165679,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mary Garcia",
+      "timestamp_ms": 1778776165033,
+      "content": "Mary envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DYTU1FzgDSx/?id=3896549711900849329_53287868330",
+        "share_text": "\u00f0\u009f\u008c\u00b4 Lujo, Vistas y Exclusividad en Punta Pac\u00c3\u00adfico \u00f0\u009f\u008c\u008a\n\nAsesores RM te presenta este espectacular Pent House en venta, ubicado en una de las zonas m\u00c3\u00a1s cotizadas y hermosas del Estado Nueva Esparta: Playa Moreno, Punta Pac\u00c3\u00adfico\n\n\u00f0\u009f\u0093\u008c Caracter\u00c3\u00adsticas del Inmueble:\n-Habitaciones: 3 c\u00c3\u00b3modas habitaciones, ideales para el descanso familiar o para recibir invitados\n-Ba\u00c3\u00b1os: 2 ba\u00c3\u00b1os completos con excelente distribuci\u00c3\u00b3n\n-Estacionamiento: 2 puestos asignados para tu total comodidad y seguridad\n-Acceso: Edificio moderno con ascensores operativos\n\n\u00f0\u009f\u008f\u0096\u00ef\u00b8\u008f Amenidades y Exteriores:\n-Terraza: Un espacio inigualable para relajarte, sentir la brisa marina y disfrutar de los mejores atardeceres\n-Piscina: Rel\u00c3\u00a1jate y disfruta del sol de Margarita sin salir de tu residencia\n-Sal\u00c3\u00b3n de Fiestas: \u00c3\u0081reas sociales perfectamente dise\u00c3\u00b1adas para tus reuniones y celebraciones exclusivas\n\n\u00c2\u00a1Haz de la Isla de Margarita tu refugio de lujo definitivo! \n\u00f0\u009f\u0093\u00b2 Cont\u00c3\u00a1ctanos por mensaje directo o a trav\u00c3\u00a9s de nuestros canales de atenci\u00c3\u00b3n para conocer todos los detalles y agendar tu visita exclusiva con el equipo de Asesores RM",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Mary Garcia",
+  "is_still_participant": true,
+  "thread_path": "inbox/marygarcia_2001056891288992",
+  "magic_words": [
+    
+  ]
+}

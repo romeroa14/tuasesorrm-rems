@@ -1,0 +1,74 @@
+{
+  "participants": [
+    {
+      "name": "Carlos Jaraba"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777207462281,
+      "content": "El precio es de 1.950.000k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777207438796,
+      "content": "Buenos d\u00c3\u00adas un gusto saludarle le escribe Alejandra velasco d\u00c3\u00a9 Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777207367853,
+      "content": "Carlos Jaraba replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carlos Jaraba",
+      "timestamp_ms": 1777207367164,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491850612,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772382841675,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada asistir al Open house?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772382780215,
+      "content": "El precio del Pent House es de 240.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772382755200,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Carlos Jaraba",
+  "is_still_participant": true,
+  "thread_path": "inbox/carlosjaraba_1806423234078076",
+  "magic_words": [
+    
+  ]
+}

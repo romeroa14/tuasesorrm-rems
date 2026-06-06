@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Mois\u00c3\u00a9s Torres"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775920146898,
+      "content": "La zonificaci\u00c3\u00b3n es solo residencia R3 se puede construir un edificio de 3-4 pisos",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775920121393,
+      "content": "$650,000 podemos negociar",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775920112018,
+      "content": "\u00f0\u009f\u009f\u00a2 Valery Mendoza en l\u00c3\u00adnea",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775920107329,
+      "content": "Hola se\u00c3\u00b1or Mois\u00c3\u00a9s, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mois\u00c3\u00a9s Torres",
+      "timestamp_ms": 1775902008302,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mois\u00c3\u00a9s Torres",
+      "timestamp_ms": 1775902007374,
+      "content": "Mois\u00c3\u00a9s envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Mois\u00c3\u00a9s Torres",
+  "is_still_participant": true,
+  "thread_path": "inbox/moisestorres_17958017355089881",
+  "magic_words": [
+    
+  ]
+}

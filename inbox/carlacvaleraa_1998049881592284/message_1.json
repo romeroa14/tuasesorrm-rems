@@ -1,0 +1,59 @@
+{
+  "participants": [
+    {
+      "name": "Carla C Valera A"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Carla C Valera A",
+      "timestamp_ms": 1774278788484,
+      "content": "Reacted \u00f0\u009f\u0091\u008d to your message ",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774274209039,
+      "content": "Imponente propiedad ubicada en cumbres de curumo valorada en $690000 totalmente negociable",
+      "reactions": [
+        {
+          "reaction": "\u00f0\u009f\u0091\u008d",
+          "actor": "Carla C Valera A"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774274172198,
+      "content": "Placer saludarle, soy Alejandro Flores del equipo de Asesores RM inmobiliaria \u00f0\u009f\u0098\u0083",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774271936640,
+      "content": "Carla C Valera A replied to an ad. View ad(https://www.instagram.com/p/DVhvV7mgNtC/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carla C Valera A",
+      "timestamp_ms": 1774271935964,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Carla C Valera A",
+  "is_still_participant": true,
+  "thread_path": "inbox/carlacvaleraa_1998049881592284",
+  "magic_words": [
+    
+  ]
+}

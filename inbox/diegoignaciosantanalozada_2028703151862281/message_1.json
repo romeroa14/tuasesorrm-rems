@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Diego Ignacio Santana Lozada"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776863516523,
+      "content": "Trabajamos con alianza! Sin embargo \n\nSolo estamos buscando cliente directo para este terreno!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776863444246,
+      "content": "Buenos d\u00c3\u00adas, c\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776863419792,
+      "content": "Diego Ignacio Santana Lozada replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Diego Ignacio Santana Lozada",
+      "timestamp_ms": 1776863418679,
+      "content": "Buenos d\u00c3\u00adas trabajas con otros corredores compartido?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Diego Ignacio Santana Lozada",
+  "is_still_participant": true,
+  "thread_path": "inbox/diegoignaciosantanalozada_2028703151862281",
+  "magic_words": [
+    
+  ]
+}

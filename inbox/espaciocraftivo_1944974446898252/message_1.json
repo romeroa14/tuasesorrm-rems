@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Espacio Craftivo"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Espacio Craftivo",
+      "timestamp_ms": 1775686186990,
+      "content": "Ya compr\u00c3\u00a9 muchas gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491933411,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772894720184,
+      "content": "El apartamento de las esmeraldas sigue disponible su precio es de $140,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772894704197,
+      "content": "Hola buen d\u00c3\u00ada c\u00c3\u00b3mo est\u00c3\u00a1? mi nombre es Valery!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Espacio Craftivo",
+  "is_still_participant": true,
+  "thread_path": "inbox/espaciocraftivo_1944974446898252",
+  "magic_words": [
+    
+  ]
+}

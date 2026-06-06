@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Cesar Leonardo Urbaneja Noblot"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774712522148,
+      "content": "Tenemos disponibilidad en \nPREMIUM LA ESCONDIDA de dos unidades:\n\n\u00f0\u009f\u0094\u00b8 Planta Baja de 186 m\u00c2\u00b2 en $170,000\n\u00f0\u009f\u0094\u00b8Y un apartamento de 153 m\u00c2\u00b2 $220,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774712518465,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774712514439,
+      "content": "Saludos C\u00c3\u00a9sar!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774712117707,
+      "content": "Cesar Leonardo Urbaneja replied to an ad. View ad(https://www.instagram.com/p/DWbpoKBgEnK/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Cesar Leonardo Urbaneja Noblot",
+      "timestamp_ms": 1774712117097,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Cesar Leonardo Urbaneja Noblot",
+  "is_still_participant": true,
+  "thread_path": "inbox/cesarleonardourbanejanoblot_2047018113363212",
+  "magic_words": [
+    
+  ]
+}

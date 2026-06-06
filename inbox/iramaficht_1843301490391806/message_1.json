@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Irama Ficht"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774735101552,
+      "content": "Tenemos disponibilidad en \nPREMIUM LA ESCONDIDA de dos unidades:\n\n\u00f0\u009f\u0094\u00b8 Planta Baja de 186 m\u00c2\u00b2 en $170,000\n\u00f0\u009f\u0094\u00b8Y un apartamento de 153 m\u00c2\u00b2 $220,000\n\nAmbas opciones est\u00c3\u00a1n en obra gris",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774735100739,
+      "content": "Saludos Irama!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Irama Ficht",
+  "is_still_participant": true,
+  "thread_path": "inbox/iramaficht_1843301490391806",
+  "magic_words": [
+    
+  ]
+}

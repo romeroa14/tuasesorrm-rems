@@ -1,0 +1,57 @@
+{
+  "participants": [
+    {
+      "name": "Eddith Cuberos"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491896170,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772811424627,
+      "content": "Est\u00c3\u00a1 ubicado en Urb. Los Naranjos de las Mercedes , Res. Jade Loft.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772811132123,
+      "content": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670381\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670314",
+      "share": {
+        "link": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346",
+        "share_text": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670381\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670314"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772811124318,
+      "content": "Aqu\u00c3\u00ad le comparto informaci\u00c3\u00b3n de la unidades disponibles, est\u00c3\u00a1n en obra gris \nPodemos negociar",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772811077243,
+      "content": "Saludos Eddith! por aqu\u00c3\u00ad Valery Mendoza",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Eddith Cuberos",
+  "is_still_participant": true,
+  "thread_path": "inbox/eddithcuberos_1926823348708414",
+  "magic_words": [
+    
+  ]
+}

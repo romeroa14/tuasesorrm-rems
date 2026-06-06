@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Abg. Alfredo Carabet"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774319193847,
+      "content": "$2,600,000 negociable y con opci\u00c3\u00b3n de financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Abg. Alfredo Carabet",
+      "timestamp_ms": 1774319176999,
+      "content": "Buenas noches, disculpe el precio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774319125369,
+      "content": "\u00f0\u009f\u008f\u0099\u00ef\u00b8\u008f Residencias Valle Arriba Domus | Exclusividad que trasciende\n\nEn una de las zonas m\u00c3\u00a1s prestigiosas de Caracas se encuentra este apartamento de 557 m\u00c2\u00b2, dise\u00c3\u00b1ado para quienes valoran el lujo, la amplitud y la privacidad.\n\nUn edificio exclusivo de solo 8 apartamentos, donde cada espacio fue concebido para ofrecer confort y funcionalidad en alto est\u00c3\u00a1ndar.\n\n\u00e2\u009c\u00a8 Sala\u00e2\u0080\u0093comedor con m\u00c3\u00a1rmol travertino\n\u00f0\u009f\u008d\u00bd\u00ef\u00b8\u008f Cocina equipada con acabados premium\n\u00f0\u009f\u009b\u008f\u00ef\u00b8\u008f 4 habitaciones con ba\u00c3\u00b1o\n\u00f0\u009f\u009b\u008b\u00ef\u00b8\u008f Sala familiar + oficina privada\n\u00f0\u009f\u008e\u00af Cuarto de juegos con acceso a la terraza\n\u00f0\u009f\u00a7\u00ba \u00c3\u0081rea y habitaci\u00c3\u00b3n de servicio independientes\n\n\u00f0\u009f\u008c\u0084 Terraza con vista directa al \u00c3\u0081vila y \u00c3\u00a1rea privada de parrilla.\n\n\u00f0\u009f\u008f\u008a Piscina climatizada con acceso VIP\n\u00f0\u009f\u008f\u008b\u00ef\u00b8\u008f Espacio para gimnasio y \u00c3\u00a1rea social\n\u00f0\u009f\u009a\u0097 3 puestos de estacionamiento + visitantes\n\u00f0\u009f\u0092\u00a7 Tanque de 100.000 litros y servicios garantizados\n\u00f0\u009f\u0094\u0092 Conjunto cerrado con seguridad permanente",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774319122381,
+      "content": "Valery Mendoza por aqu\u00c3\u00ad!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774319116491,
+      "content": "Hola, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Abg. Alfredo Carabet",
+      "timestamp_ms": 1774319097398,
+      "content": "\u00c2\u00a1Hola! Quiero m\u00c3\u00a1s informaci\u00c3\u00b3n.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Abg. Alfredo Carabet",
+  "is_still_participant": true,
+  "thread_path": "inbox/abgalfredocarabet_2001152427951198",
+  "magic_words": [
+    
+  ]
+}

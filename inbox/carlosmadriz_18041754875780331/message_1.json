@@ -1,0 +1,108 @@
+{
+  "participants": [
+    {
+      "name": "Carlos Madriz"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777293752047,
+      "content": "Gracias, ya me comunico",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777286271488,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carlos Madriz",
+      "timestamp_ms": 1777286270401,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carlos Madriz",
+      "timestamp_ms": 1777286270117,
+      "content": "Buen d\u00c3\u00ada amig@\nMi contacto es el 424-3796409",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777045496236,
+      "content": "C\u00c3\u00b3mo vas est\u00c3\u00a1s Carlos? Vale podr\u00c3\u00ada enviarte opciones. Enviame por favor tu n\u00c3\u00bamero de tel\u00c3\u00a9fono para contactarte",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carlos Madriz",
+      "timestamp_ms": 1776966730395,
+      "content": "Con acabados \nPreferiblemente sin mobiliario pero no es excluyente est\u00c3\u00a1 condici\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776962733932,
+      "content": "Vale \u00c2\u00bfy lo buscas ya listo? \nPorque tenemos en obra gris, con financiamiento tambi\u00c3\u00a9n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carlos Madriz",
+      "timestamp_ms": 1776959569679,
+      "content": "Disculpa\u00e2\u0080\u00a6 estaba viendo varios contactos inmobiliarios pero busco apto residencial por la zona de las mercedes, la castellana o cerca del country club",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carlos Madriz",
+      "timestamp_ms": 1776959508806,
+      "content": "Hola Alejandro \nC\u00c3\u00b3mo est\u00c3\u00a1s ?\nMucho gusto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776956815943,
+      "content": "Placer saludarle, soy Alejandro Flores del equipo de Asesores RM inmobiliaria \u00f0\u009f\u0098\u0083",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776956809274,
+      "content": "Este fondo de comercio de 188m2  se encuentra disponible para la venta por 170.000$ totalmente negociable \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nUbicado en excelentes zona de alto tr\u00c3\u00a1fico",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776956702158,
+      "content": "Carlos Madriz replied to an ad. View ad(https://www.instagram.com/p/DXdNVZfAGBj/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carlos Madriz",
+      "timestamp_ms": 1776956701472,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1les son los detalles adicionales del local?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Carlos Madriz",
+  "is_still_participant": true,
+  "thread_path": "inbox/carlosmadriz_18041754875780331",
+  "magic_words": [
+    
+  ]
+}

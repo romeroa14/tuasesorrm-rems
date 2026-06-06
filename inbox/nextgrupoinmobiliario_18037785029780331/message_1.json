@@ -1,0 +1,25 @@
+{
+  "participants": [
+    {
+      "name": "NEXT Grupo Inmobiliario"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774311388231,
+      "content": "Mi vida env\u00c3\u00adamelo",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "NEXT Grupo Inmobiliario",
+  "is_still_participant": true,
+  "thread_path": "inbox/nextgrupoinmobiliario_18037785029780331",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "participants": [
+    {
+      "name": "Daniel De Andrade"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776871489149,
+      "content": "Vale estamos para ayudarle feliz tarde",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Daniel De Andrade",
+      "timestamp_ms": 1776871359847,
+      "content": "Jejeje,demasiado viejo hermano,el precio no se ajusta a la antig\u00c3\u00bcedad del edificio,gracias igualmente.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776871259272,
+      "content": "Le gustar\u00c3\u00ada agendar una visita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776866794807,
+      "content": "60 a\u00c3\u00b1os",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776866665441,
+      "content": "Daniel De Andrade replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Daniel De Andrade",
+      "timestamp_ms": 1776866664434,
+      "content": "Disculpa,cuantos a\u00c3\u00b1os de construcci\u00c3\u00b3n tiene el edificio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776453436196,
+      "content": "Este Apartamento se encuentra en una excelente ubicaci\u00c3\u00b3n en los Palos Grandes su precio de venta es 249000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776453386893,
+      "content": "Buen d\u00c3\u00ada gusto saludarle! Odra Cede\u00c3\u00b1o \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776449410404,
+      "content": "Daniel De Andrade replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Daniel De Andrade",
+      "timestamp_ms": 1776449409714,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Daniel De Andrade",
+  "is_still_participant": true,
+  "thread_path": "inbox/danieldeandrade_2016639329737654",
+  "magic_words": [
+    
+  ]
+}

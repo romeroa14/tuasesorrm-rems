@@ -1,0 +1,74 @@
+{
+  "participants": [
+    {
+      "name": "Clavijo Jose"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775852397461,
+      "content": "600k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775852355662,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Clavijo Jose",
+      "timestamp_ms": 1775851584056,
+      "content": ". cu\u00c3\u00a1l es el precio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775851569423,
+      "content": "Clavijo Jose replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Clavijo Jose",
+      "timestamp_ms": 1775851568805,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Clavijo Jose",
+      "timestamp_ms": 1775851563900,
+      "content": "Clavijo envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Clavijo Jose",
+      "timestamp_ms": 1775851558692,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Clavijo Jose",
+      "timestamp_ms": 1775851555171,
+      "content": "Clavijo envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Clavijo Jose",
+  "is_still_participant": true,
+  "thread_path": "inbox/clavijojose_18040109093780331",
+  "magic_words": [
+    
+  ]
+}

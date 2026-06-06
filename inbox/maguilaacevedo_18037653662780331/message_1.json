@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Maguila Acevedo"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774285366459,
+      "content": "Me podr\u00c3\u00ada indicar en qu\u00c3\u00a9 se encuentra interesada? Por favor",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774285346591,
+      "content": "Hola buenas tardes. Un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Maguila Acevedo",
+      "timestamp_ms": 1774233032294,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Maguila Acevedo",
+  "is_still_participant": true,
+  "thread_path": "inbox/maguilaacevedo_18037653662780331",
+  "magic_words": [
+    
+  ]
+}

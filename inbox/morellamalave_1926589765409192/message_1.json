@@ -1,0 +1,52 @@
+{
+  "participants": [
+    {
+      "name": "Morella Malave"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778091017273,
+      "content": "En breve ser\u00c3\u00a1 atendida",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778090931141,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778090930179,
+      "content": "Morella Malave replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Morella Malave",
+      "timestamp_ms": 1778090930007,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Morella Malave",
+      "timestamp_ms": 1778090929479,
+      "content": "Hola buenas tardes! Soy Morella Malav\u00c3\u00a9 de Hay Propiedades Inmobiliaria, me puedes enviar informaci\u00c3\u00b3n al privado! 0412-328-23-79",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Morella Malave",
+  "is_still_participant": true,
+  "thread_path": "inbox/morellamalave_1926589765409192",
+  "magic_words": [
+    
+  ]
+}

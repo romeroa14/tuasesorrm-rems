@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Ver\u00c3\u00b3nica Barbe"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778730017002,
+      "content": "Su precio es de 450.000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778729993807,
+      "content": "Es un Pent House, ubicado en Playa Moreno, con hermosa vista al mar \n\n3 habitaciones, la principal con vestier y ba\u00c3\u00b1o\nTiene 3 ba\u00c3\u00b1os \nCocina Ferrara \n\u00c3\u0081rea de lavandero \nTerraza \n2 puestos de estacionamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778729879378,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778729843398,
+      "content": "Ver\u00c3\u00b3nica Barbe replied to an ad. View ad(https://www.instagram.com/p/DYTU1FzgDSx/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ver\u00c3\u00b3nica Barbe",
+      "timestamp_ms": 1778729842675,
+      "content": "Hello, can I get more info on this?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Ver\u00c3\u00b3nica Barbe",
+  "is_still_participant": true,
+  "thread_path": "inbox/veronicabarbe_2011586666901418",
+  "magic_words": [
+    
+  ]
+}

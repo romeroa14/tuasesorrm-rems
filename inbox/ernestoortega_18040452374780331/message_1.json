@@ -1,0 +1,25 @@
+{
+  "participants": [
+    {
+      "name": "Ernesto Ortega"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Ernesto Ortega",
+      "timestamp_ms": 1776093380308,
+      "content": "Brutal\u00f0\u009f\u0094\u00a5\u00f0\u009f\u0094\u00a5\u00f0\u009f\u0094\u00a5",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Ernesto Ortega",
+  "is_still_participant": true,
+  "thread_path": "inbox/ernestoortega_18040452374780331",
+  "magic_words": [
+    
+  ]
+}

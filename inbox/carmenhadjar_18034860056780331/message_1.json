@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Carmen Hadjar"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491850322,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772593530037,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore \n\nNos quedan pocos cupos disponibles para el Open House en el Pen House en venta, ubicado en Lomas de Las Mercedes \n\nSi me facilita su n\u00c3\u00bamero telef\u00c3\u00b3nico, le reservo su lugar a la brevedad! La entrada es totalmente gratuita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772592815086,
+      "content": "Carmen Hadjar replied to an ad. View ad(https://www.instagram.com/p/DVJ0QqTAPUw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carmen Hadjar",
+      "timestamp_ms": 1772592814396,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Carmen Hadjar",
+  "is_still_participant": true,
+  "thread_path": "inbox/carmenhadjar_18034860056780331",
+  "magic_words": [
+    
+  ]
+}

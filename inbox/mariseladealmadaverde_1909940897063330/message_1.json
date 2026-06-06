@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Marisela De Almada Verde"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773941210803,
+      "content": "Hoy es la experiencia en el Cafetal! \n\nLe gustar\u00c3\u00ada acercarse? quedo atenta!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773941183328,
+      "content": "La casa ubicada en Los Naranjos del Cafetal es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada\u00e2\u0080\u00a6 Su valor es de $1.700.000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773941134232,
+      "content": "Se\u00c3\u00b1ora Marisela! \nPor aqu\u00c3\u00ad Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Marisela De Almada Verde",
+  "is_still_participant": true,
+  "thread_path": "inbox/mariseladealmadaverde_1909940897063330",
+  "magic_words": [
+    
+  ]
+}

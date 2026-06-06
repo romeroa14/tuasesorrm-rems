@@ -1,0 +1,71 @@
+{
+  "participants": [
+    {
+      "name": "AUTOLIMITED"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774729368817,
+      "content": "Residencial",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774728453109,
+      "content": "Su precio es totalmente negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774728444070,
+      "content": "https://info.wasi.co/terreno-venta-altamira/9704566",
+      "share": {
+        "link": "https://info.wasi.co/terreno-venta-altamira/9704566",
+        "share_text": "https://info.wasi.co/terreno-venta-altamira/9704566"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774728438913,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "AUTOLIMITED",
+      "timestamp_ms": 1774725154102,
+      "content": "Buenas tardes es comercial o residencial",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774725134347,
+      "content": "AUTOLIMITED replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "AUTOLIMITED",
+      "timestamp_ms": 1774725133533,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "AUTOLIMITED",
+  "is_still_participant": true,
+  "thread_path": "inbox/autolimited_1957040625686723",
+  "magic_words": [
+    
+  ]
+}

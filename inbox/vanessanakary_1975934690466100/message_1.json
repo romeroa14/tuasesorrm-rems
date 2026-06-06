@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Vanessa Nakary"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776690065725,
+      "content": "El inmueble por el que consulto, en un Pent House ubicado en Mirador de Los Campitos en una urbanizaci\u00c3\u00b3n nueva, cerrada y exclusiva.\n\n320m2\n\u00e2\u0080\u00a2 Amplia habitaci\u00c3\u00b3n master con amplio vestier con doble ba\u00c3\u00b1o y dos walking closets\n\u00e2\u0080\u00a2 2 habitaciones con ba\u00c3\u00b1o\n\u00e2\u0080\u00a2 4 puestos de estacionamiento\n\u00e2\u0080\u00a2 6 ba\u00c3\u00b1os\n\nSe entrega totalmente remodelado, equipado \u00d1\u0083 amoblado, con muebles italianos de alta gama.\nSu precio es de 1270.000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776689989277,
+      "content": "Buenos d\u00c3\u00adas un gusto saludarle le escribe Alejandra velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776683523849,
+      "content": "Vanessa Nakary replied to an ad. View ad(https://www.instagram.com/p/DXVf8NngBUq/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Vanessa Nakary",
+      "timestamp_ms": 1776683523294,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Vanessa Nakary",
+  "is_still_participant": true,
+  "thread_path": "inbox/vanessanakary_1975934690466100",
+  "magic_words": [
+    
+  ]
+}

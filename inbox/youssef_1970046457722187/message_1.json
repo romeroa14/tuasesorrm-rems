@@ -1,0 +1,74 @@
+{
+  "participants": [
+    {
+      "name": "Youssef"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776786739157,
+      "content": "Se encuentra buscando terrenos o Casas en oportunidad.\n\nEn esa zona?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776786720087,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1?\nPor aqu\u00c3\u00ad Valery Mendoza",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Youssef",
+      "timestamp_ms": 1776781434014,
+      "content": "Gracias de todas maneras muy amable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Youssef",
+      "timestamp_ms": 1776781408950,
+      "content": "Como es eso",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Youssef",
+      "timestamp_ms": 1776781406512,
+      "content": "En el video dices 600mil negociables y aca me dices 650mio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776722755889,
+      "content": "Buen d\u00c3\u00ada disponible su precio es de 650.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Youssef",
+      "timestamp_ms": 1776720811461,
+      "content": "\u00c2\u00a1Hola! Quiero m\u00c3\u00a1s informaci\u00c3\u00b3n.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Youssef",
+      "timestamp_ms": 1776720811077,
+      "content": "Youssef envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Youssef",
+  "is_still_participant": true,
+  "thread_path": "inbox/youssef_1970046457722187",
+  "magic_words": [
+    
+  ]
+}

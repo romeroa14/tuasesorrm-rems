@@ -1,0 +1,79 @@
+{
+  "participants": [
+    {
+      "name": "Jos\u00c3\u00a9 Gregorio Blanco Gonto"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774236948569,
+      "content": "$450,000 negociable se entrega amoblado",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jos\u00c3\u00a9 Gregorio Blanco Gonto",
+      "timestamp_ms": 1774236934345,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jos\u00c3\u00a9 Gregorio Blanco Gonto",
+      "timestamp_ms": 1774236933266,
+      "content": "Jos\u00c3\u00a9 envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DWKSHqEgA0L/?id=3857975721842445579_53287868330",
+        "share_text": "\u00c2\u00bfTe imaginas vivir en lo m\u00c3\u00a1s alto y con la mejor vista de Playa Moreno? \u00f0\u009f\u008c\u008a Asesores RM lo hace posible\n\nTenemos en venta este exclusivo Pent House ubicado en Punta Pac\u00c3\u00adfico. \u00c2\u00a1Un verdadero para\u00c3\u00adso!\n\nEl confort est\u00c3\u00a1 garantizado: cuenta con 3 amplias habitaciones y 2 ba\u00c3\u00b1os dise\u00c3\u00b1ados para el descanso y la privacidad de toda tu familia\n\n\u00c2\u00bfEl toque final? Una incre\u00c3\u00adble terraza privada para relajarte o compartir, adem\u00c3\u00a1s de 2 puestos de estacionamiento totalmente asegurados\n\nEsta es tu oportunidad de invertir en la Perla de Caribe. Cont\u00c3\u00a1ctanos para m\u00c3\u00a1s informaci\u00c3\u00b3n sobre este inmueble \u00f0\u009f\u008f\u00a0\u00f0\u009f\u0093\u00a9",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774236805364,
+      "content": "$690,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774236799184,
+      "content": "Casa\nEstilo:Multipes Niveles\n\u00c3\u0081rea Privada:991 m2 Info\nTerreno:991 m2 Info\nEstado Del Inmueble:Usado\nDormitorios:4\nTotal Ba\u00c3\u00b1os:6\nBa\u00c3\u00b1os Completos:4\nMedios Ba\u00c3\u00b1os:2\nTipo de Estacionamiento:Cubierto\nPuestos De Estacionamiento:7\nAmoblado:No\n\u00e2\u009c\u0085Dormitorio De Servicio:Si\nCalle:Calle Ciega",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774236793543,
+      "content": "Hola buenas noches \nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774236775995,
+      "content": "Jos\u00c3\u00a9 Gregorio Blanco Gonto replied to an ad. View ad(https://www.instagram.com/p/DVhvV7mgNtC/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jos\u00c3\u00a9 Gregorio Blanco Gonto",
+      "timestamp_ms": 1774236774500,
+      "content": "Informaci\u00c3\u00b3n de la casa de cumbres de curumo",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jos\u00c3\u00a9 Gregorio Blanco Gonto",
+  "is_still_participant": true,
+  "thread_path": "inbox/josegregorioblancogonto_1906055484118259",
+  "magic_words": [
+    
+  ]
+}

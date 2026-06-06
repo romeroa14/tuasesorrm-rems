@@ -1,0 +1,66 @@
+{
+  "participants": [
+    {
+      "name": "oasis_imperial"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779381568103,
+      "content": "En breve me comunicare",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779380424178,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "oasis_imperial",
+      "timestamp_ms": 1779380423270,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "oasis_imperial",
+      "timestamp_ms": 1779380422961,
+      "content": "+584128887751",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "oasis_imperial",
+      "timestamp_ms": 1779380418209,
+      "content": "Esta en la inf",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779297994752,
+      "content": "Si gusta nos comparte su WhatsApp para contactarnos ya que nos coment\u00c3\u00b3 que vende un Hotel!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779297972114,
+      "content": "Hola buenas tardes, c\u00c3\u00b3mo est\u00c3\u00a1?\n\nSoy Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "oasis_imperial",
+  "is_still_participant": true,
+  "thread_path": "inbox/oasis_imperial_862354202903948",
+  "magic_words": [
+    
+  ]
+}

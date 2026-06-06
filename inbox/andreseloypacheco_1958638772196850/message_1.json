@@ -1,0 +1,51 @@
+{
+  "participants": [
+    {
+      "name": "Andres Eloy Pacheco"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774360876295,
+      "content": "Tenemos en obra gris y obra blanca desde 300k",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774360566282,
+      "content": "Buenos d\u00c3\u00adas un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Andres Eloy Pacheco",
+      "timestamp_ms": 1774354280714,
+      "content": "Buen dia, que precio tiene?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Andres Eloy Pacheco",
+      "timestamp_ms": 1774354280450,
+      "content": "Andres envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/reel/DVOX2xTkur8/?id=3841112451056855804_53287868330",
+        "share_text": "\u00f0\u009f\u008f\u0094\u00ef\u00b8\u008f VIVE CON CLIMA DE MONTA\u00c3\u0091A EN LOS NARANJOS DE LAS MERCEDES\nAsesores RM pone a tu disposici\u00c3\u00b3n este exclusivo apartamento en el Municipio Baruta, el lienzo perfecto para quienes buscan dise\u00c3\u00b1ar un espacio a su medida desde cero.\n\nUbicado en un entorno seguro y privilegiado, este inmueble en obra gris destaca por su versatilidad y su conexi\u00c3\u00b3n con la naturaleza.\n\n\u00f0\u009f\u0093\u0090 Caracter\u00c3\u00adsticas del Inmueble\nSuperficie: 140 m\u00c2\u00b2 de terreno/\u00c3\u00a1rea total.\nHabitaciones: 2\nBa\u00c3\u00b1os: 3\nEstacionamiento: 2 puestos + Maletero.\n\n\u00f0\u009f\u0092\u008e Potencial y Comodidades\nLa propiedad est\u00c3\u00a1 dise\u00c3\u00b1ada para ofrecer funcionalidad y confort en un conjunto cerrado:\n\nExteriores: Amplia Terraza y Jard\u00c3\u00adn privado para disfrutar del aire puro.\nTecnolog\u00c3\u00ada: Suministro el\u00c3\u00a9ctrico 110/220V y trif\u00c3\u00a1sica, ideal para equipos de alta gama.\nSeguridad: Caseta de vigilancia, cerca el\u00c3\u00a9ctrica y estacionamiento para visitantes.\nServicios: Tanque de agua residencial, ascensores y TV por suscripci\u00c3\u00b3n.\n\n\u00f0\u009f\u0093\u008d Ubicaci\u00c3\u00b3n y Entorno\nDisfruta de la comodidad de tener todo a la mano en una zona de alta revalorizaci\u00c3\u00b3n:\n\nAdyacencias: Cercano a Centros Comerciales, Restaurantes, Colegios y Automercados.\nAccesibilidad: A pie de calle en \u00c3\u00a1rea comercial con todos los servicios m\u00c3\u00a9dicos y automotrices cerca.\n\n\u00c2\u00bfQuieres convertir esta obra gris en el hogar de tus sue\u00c3\u00b1os? La ubicaci\u00c3\u00b3n y el clima de esta propiedad son incomparables. \u00c2\u00a1Agenda tu visita con nosotros!\n\n\u00f0\u009f\u0093\u008c Cont\u00c3\u00a1ctanos para m\u00c3\u00a1s informaci\u00c3\u00b3n",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Andres Eloy Pacheco",
+  "is_still_participant": true,
+  "thread_path": "inbox/andreseloypacheco_1958638772196850",
+  "magic_words": [
+    
+  ]
+}

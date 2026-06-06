@@ -1,0 +1,64 @@
+{
+  "participants": [
+    {
+      "name": "Jesus Gonzalez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774144249992,
+      "content": "https://info.wasi.co/apartamento-venta-caracas-baruta/9837600",
+      "share": {
+        "link": "https://info.wasi.co/apartamento-venta-caracas-baruta/9837600",
+        "share_text": "https://info.wasi.co/apartamento-venta-caracas-baruta/9837600"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774144246361,
+      "content": "Aqu\u00c3\u00ad te comparto el wassi",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jesus Gonzalez",
+      "timestamp_ms": 1774143260903,
+      "content": "Necesito m\u00c3\u00a1s informaci\u00c3\u00b3n sobre la propiedad.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774143243314,
+      "content": "Buenas noches un gusto el precio es de 1.300.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jesus Gonzalez",
+      "timestamp_ms": 1774143185298,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jesus Gonzalez",
+      "timestamp_ms": 1774143184674,
+      "content": "Jesus envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jesus Gonzalez",
+  "is_still_participant": true,
+  "thread_path": "inbox/jesusgonzalez_1841824040554596",
+  "magic_words": [
+    
+  ]
+}

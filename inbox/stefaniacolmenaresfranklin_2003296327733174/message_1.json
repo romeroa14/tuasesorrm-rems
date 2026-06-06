@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Stefania Colmenares Franklin"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774234241431,
+      "content": "$690,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774234236173,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774234232714,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774234043970,
+      "content": "Stefania Colmenares Franklin replied to an ad. View ad(https://www.instagram.com/p/DVhvV7mgNtC/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Stefania Colmenares Franklin",
+      "timestamp_ms": 1774234043121,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Stefania Colmenares Franklin",
+  "is_still_participant": true,
+  "thread_path": "inbox/stefaniacolmenaresfranklin_2003296327733174",
+  "magic_words": [
+    
+  ]
+}

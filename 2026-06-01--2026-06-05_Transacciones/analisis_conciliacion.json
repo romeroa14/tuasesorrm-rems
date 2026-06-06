@@ -1,0 +1,3391 @@
+{
+    "generated_at": "2026-06-04T16:12:28+00:00",
+    "period": "2026-06-01 a 2026-06-05",
+    "account_id": "431268476471047",
+    "summary": {
+        "total_pdfs": 36,
+        "paid_count": 2,
+        "error_count": 34,
+        "paid_total_usd": 964.04,
+        "error_attempts_total_usd": 17653.89,
+        "unique_invoice_groups": 10,
+        "unique_campaigns": 1
+    },
+    "reconciliation": {
+        "pagado_efectivo": {
+            "transacciones": 2,
+            "monto_usd": 964.04,
+            "detalle": [
+                {
+                    "id": "27255314207491688-27126831507006630",
+                    "fecha": "1 jun. 2026, 2:22 p. m.",
+                    "monto": 628.14,
+                    "referencia": "DP2BJRDBT2"
+                },
+                {
+                    "id": "27544928965196872-27142634355426345",
+                    "fecha": "2 jun. 2026, 3:43 p. m.",
+                    "monto": 335.9,
+                    "referencia": "KU9EJRRBT2"
+                }
+            ]
+        },
+        "intentos_fallidos_error": {
+            "transacciones": 34,
+            "monto_sumado_intentos": 17653.89,
+            "nota": "Suma de todos los PDF con estado Error; muchos son reintentos de la misma factura con distinta tarjeta."
+        },
+        "facturas_unicas": {
+            "pagadas": 2,
+            "monto_pagado_unico_usd": 964.04,
+            "pendientes_o_sin_cobro": 8,
+            "monto_pendiente_unico_usd": 3722.21
+        },
+        "conciliacion": {
+            "total_cobrado_real": 964.04,
+            "total_pendiente_estimado": 3722.21,
+            "diferencia_acumulado_vs_pagado": 3722.21,
+            "formula": "Acumulado pendiente = facturas únicas sin estado Pagado. Pagado real = facturas únicas con al menos 1 PDF Pagado."
+        }
+    },
+    "paid_transactions": [
+        {
+            "file": "2026-06-01T14-22 Transacción n.º 27255314207491688-27126831507006630.pdf",
+            "transaction_id": "27255314207491688-27126831507006630",
+            "datetime": "1 jun. 2026, 2:22 p. m.",
+            "status": "Pagado",
+            "amount": 628.14,
+            "reference": "DP2BJRDBT2",
+            "card": "Visa ****4267",
+            "payment_note": "Realizaste este pago manual",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 52.08,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "13.379",
+                    "amount": 52.08
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "6.340",
+                    "amount": 45.83
+                },
+                {
+                    "name": "�� ¡Eleva el nivel de tu...",
+                    "impressions": "9.168",
+                    "amount": 62.52
+                },
+                {
+                    "name": "¿El lienzo en blanco...",
+                    "impressions": "13.164",
+                    "amount": 56.19
+                },
+                {
+                    "name": "¿Listo para elevar tu...",
+                    "impressions": "14.625",
+                    "amount": 73.64
+                },
+                {
+                    "name": "�� ¡EL LUGAR DONDE TU...",
+                    "impressions": "15.414",
+                    "amount": 78.72
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.221",
+                    "amount": 20.34
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "7.783",
+                    "amount": 47.27
+                },
+                {
+                    "name": "¡El nuevo hogar de tu...",
+                    "impressions": "16.903",
+                    "amount": 64.35
+                },
+                {
+                    "name": "\"�� Lujo, Vistas y Exclusividad en Punta Pacífico ��\"",
+                    "impressions": "65.620",
+                    "amount": 91.65
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "5.699",
+                    "amount": 35.55
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 45.83
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Eleva el nivel de tu...",
+                    "impressions": "",
+                    "amount": 62.52
+                },
+                {
+                    "name": "Publicación de Instagram: ¿El lienzo en blanco...",
+                    "impressions": "",
+                    "amount": 56.19
+                },
+                {
+                    "name": "Publicación de Instagram: ¿Listo para elevar tu...",
+                    "impressions": "",
+                    "amount": 73.64
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡EL LUGAR DONDE TU...",
+                    "impressions": "",
+                    "amount": 78.72
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 67.61
+                },
+                {
+                    "name": "Publicación de Instagram: ¡El nuevo hogar de tu...",
+                    "impressions": "",
+                    "amount": 64.35
+                },
+                {
+                    "name": "Publicación: \"�� Lujo, Vistas y Exclusividad en Punta Pacífico ��\"",
+                    "impressions": "",
+                    "amount": 91.65
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 35.55
+                }
+            ],
+            "campaigns_total": 52.08,
+            "ads_total": 1204.2
+        },
+        {
+            "file": "2026-06-02T15-43 Transacción n.º 27544928965196872-27142634355426345.pdf",
+            "transaction_id": "27544928965196872-27142634355426345",
+            "datetime": "2 jun. 2026, 3:43 p. m.",
+            "status": "Pagado",
+            "amount": 335.9,
+            "reference": "KU9EJRRBT2",
+            "card": "Visa ****1136",
+            "payment_note": "Realizaste este pago manual",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "85.656",
+                    "amount": 158.6
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "2.848",
+                    "amount": 17.68
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "15.948",
+                    "amount": 56.62
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "7.847",
+                    "amount": 33.43
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "16.763",
+                    "amount": 69.57
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 74.3
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 33.43
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 69.57
+                }
+            ],
+            "campaigns_total": 158.6,
+            "ads_total": 513.2
+        }
+    ],
+    "invoice_groups": [
+        {
+            "datetime": "1 jun. 2026, 2:20 p. m.",
+            "amount": 628.14,
+            "statuses": [
+                "Error"
+            ],
+            "transaction_ids": [
+                "27222786674077770-27148790751477371"
+            ],
+            "references": [
+                "2NWZFS9BT2"
+            ],
+            "cards": [
+                "Visa ****4267"
+            ],
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 52.08,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "paid_count": 0,
+            "error_count": 1
+        },
+        {
+            "datetime": "1 jun. 2026, 2:22 p. m.",
+            "amount": 628.14,
+            "statuses": [
+                "Pagado"
+            ],
+            "transaction_ids": [
+                "27255314207491688-27126831507006630"
+            ],
+            "references": [
+                "DP2BJRDBT2"
+            ],
+            "cards": [
+                "Visa ****4267"
+            ],
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 52.08,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "paid_count": 1,
+            "error_count": 0
+        },
+        {
+            "datetime": "2 jun. 2026, 7:30 a. m.",
+            "amount": 335.9,
+            "statuses": [
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error"
+            ],
+            "transaction_ids": [
+                "27224043263952117-27159032610453185",
+                "27233046209718483-27337872232569220",
+                "27265573979799044-27539259829097119",
+                "27337874525902324-27233048443051593",
+                "27343448868678218-27233046913051746"
+            ],
+            "references": [
+                "8CTNURMBT2",
+                "FWE7WQZBT2",
+                "K7WZ4SHBT2",
+                "QKF7WQZBT2",
+                "2DRCHSVBT2"
+            ],
+            "cards": [
+                "Mastercard ****8597",
+                "Visa ****0666",
+                "Visa ****7656",
+                "Visa ****1136",
+                "Mastercard ****6539"
+            ],
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "paid_count": 0,
+            "error_count": 5
+        },
+        {
+            "datetime": "2 jun. 2026, 7:31 a. m.",
+            "amount": 335.9,
+            "statuses": [
+                "Error",
+                "Error",
+                "Error"
+            ],
+            "transaction_ids": [
+                "27159036197119493-27239609375728836",
+                "27233050096384761-27343452502011188",
+                "27294746863548421-27337875962568847"
+            ],
+            "references": [
+                "EDUNURMBT2",
+                "E8NSGRRBT2",
+                "F8SCHSVBT2"
+            ],
+            "cards": [
+                "Visa ****4173",
+                "Mastercard ****1212",
+                "Visa ****4267"
+            ],
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "paid_count": 0,
+            "error_count": 3
+        },
+        {
+            "datetime": "2 jun. 2026, 7:46 a. m.",
+            "amount": 41.99,
+            "statuses": [
+                "Error"
+            ],
+            "transaction_ids": [
+                "27224216773934766-27137197752636672"
+            ],
+            "references": [
+                "3P7UGRRBT2"
+            ],
+            "cards": [
+                "Mastercard ****8597"
+            ],
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 7.89,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "paid_count": 0,
+            "error_count": 1
+        },
+        {
+            "datetime": "2 jun. 2026, 3:43 p. m.",
+            "amount": 335.9,
+            "statuses": [
+                "Pagado"
+            ],
+            "transaction_ids": [
+                "27544928965196872-27142634355426345"
+            ],
+            "references": [
+                "KU9EJRRBT2"
+            ],
+            "cards": [
+                "Visa ****1136"
+            ],
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "paid_count": 1,
+            "error_count": 0
+        },
+        {
+            "datetime": "3 jun. 2026, 5:44 p. m.",
+            "amount": 593.21,
+            "statuses": [
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error"
+            ],
+            "transaction_ids": [
+                "27180274081662371-27364756333214138",
+                "27245372178485892-27359198303769946",
+                "27254350470921390-27359198763769900",
+                "27286926057663836-27158257947197319",
+                "27286927020997073-27286927107663731",
+                "27316056721417435-27286928584330250",
+                "27316057231417384-27245373511819092",
+                "27364757483214023-27316055028084271"
+            ],
+            "references": [
+                "6CBS2SMBT2",
+                "U6CYVQ5CT2",
+                "QQZ4BSHBT2",
+                "JLYFPSVBT2",
+                "ASBS2SMBT2",
+                "C8CS2SMBT2",
+                "9DS4HU5BT2",
+                "ERR4HU5BT2"
+            ],
+            "cards": [
+                "Mastercard ****8597",
+                "Visa ****1136",
+                "Visa ****4173",
+                "Visa ****0666",
+                "Visa ****7656",
+                "Visa ****4267",
+                "Mastercard ****1212",
+                "Mastercard ****6539"
+            ],
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "paid_count": 0,
+            "error_count": 8
+        },
+        {
+            "datetime": "4 jun. 2026, 3:26 a. m.",
+            "amount": 593.21,
+            "statuses": [
+                "Error"
+            ],
+            "transaction_ids": [
+                "27250705204619256-27266323843057389"
+            ],
+            "references": [
+                "M5VMJU5BT2"
+            ],
+            "cards": [
+                "Mastercard ****8597"
+            ],
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "paid_count": 0,
+            "error_count": 1
+        },
+        {
+            "datetime": "4 jun. 2026, 3:27 a. m.",
+            "amount": 593.21,
+            "statuses": [
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error"
+            ],
+            "transaction_ids": [
+                "27185612257795220-27566062359750199",
+                "27250706234619153-27292282737128168",
+                "27259683213721449-27266324416390665",
+                "27292284867127955-27364540846569025",
+                "27321388070884300-27163594633330317",
+                "27364541333235643-27566064016416700",
+                "27566062853083483-27259685637054540"
+            ],
+            "references": [
+                "JVVYQSVBT2",
+                "XMTMCSHBT2",
+                "G9RS5RZBT2",
+                "92WMJU5BT2",
+                "C97HXQ5CT2",
+                "REUMCSHBT2",
+                "3VRS5RZBT2"
+            ],
+            "cards": [
+                "Visa ****1136",
+                "Mastercard ****6539",
+                "Visa ****0666",
+                "Visa ****4267",
+                "Visa ****7656",
+                "Mastercard ****1212",
+                "Visa ****4173"
+            ],
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "paid_count": 0,
+            "error_count": 7
+        },
+        {
+            "datetime": "4 jun. 2026, 6:59 a. m.",
+            "amount": 600.65,
+            "statuses": [
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error",
+                "Error"
+            ],
+            "transaction_ids": [
+                "27165603613129419-27568065569549878",
+                "27165605029795944-27372098879146550",
+                "27252717051084738-27372094732480298",
+                "27252718374417939-27366559849700458",
+                "27261699000186537-27568067779549657",
+                "27366560536367056-27187621770927602",
+                "27568063389550096-27366559076367202",
+                "27568066219549813-27568066262883142"
+            ],
+            "references": [
+                "N66ZQRRBT2",
+                "E298KU5BT2",
+                "8R78KU5BT2",
+                "5788KU5BT2",
+                "LPEKRSVBT2",
+                "UH88DSHBT2",
+                "H7K3YQ5CT2",
+                "BYXV4SMBT2"
+            ],
+            "cards": [
+                "Visa ****1136",
+                "Visa ****4267",
+                "Mastercard ****8597",
+                "Mastercard ****6539",
+                "Mastercard ****1212",
+                "Visa ****7656",
+                "Visa ****0666",
+                "Visa ****4173"
+            ],
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 261.05,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 11:59 p. m.",
+                    "ads": []
+                }
+            ],
+            "paid_count": 0,
+            "error_count": 8
+        }
+    ],
+    "all_transactions": [
+        {
+            "file": "2026-06-01T14-20 Transacción n.º 27222786674077770-27148790751477371.pdf",
+            "transaction_id": "27222786674077770-27148790751477371",
+            "datetime": "1 jun. 2026, 2:20 p. m.",
+            "status": "Error",
+            "amount": 628.14,
+            "reference": "2NWZFS9BT2",
+            "card": "Visa ****4267",
+            "payment_note": "Realizaste este pago manual",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 52.08,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "13.379",
+                    "amount": 52.08
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "6.340",
+                    "amount": 45.83
+                },
+                {
+                    "name": "�� ¡Eleva el nivel de tu...",
+                    "impressions": "9.168",
+                    "amount": 62.52
+                },
+                {
+                    "name": "¿El lienzo en blanco...",
+                    "impressions": "13.164",
+                    "amount": 56.19
+                },
+                {
+                    "name": "¿Listo para elevar tu...",
+                    "impressions": "14.625",
+                    "amount": 73.64
+                },
+                {
+                    "name": "�� ¡EL LUGAR DONDE TU...",
+                    "impressions": "15.414",
+                    "amount": 78.72
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.221",
+                    "amount": 20.34
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "7.783",
+                    "amount": 47.27
+                },
+                {
+                    "name": "¡El nuevo hogar de tu...",
+                    "impressions": "16.903",
+                    "amount": 64.35
+                },
+                {
+                    "name": "\"�� Lujo, Vistas y Exclusividad en Punta Pacífico ��\"",
+                    "impressions": "65.620",
+                    "amount": 91.65
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "5.699",
+                    "amount": 35.55
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 45.83
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Eleva el nivel de tu...",
+                    "impressions": "",
+                    "amount": 62.52
+                },
+                {
+                    "name": "Publicación de Instagram: ¿El lienzo en blanco...",
+                    "impressions": "",
+                    "amount": 56.19
+                },
+                {
+                    "name": "Publicación de Instagram: ¿Listo para elevar tu...",
+                    "impressions": "",
+                    "amount": 73.64
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡EL LUGAR DONDE TU...",
+                    "impressions": "",
+                    "amount": 78.72
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 67.61
+                },
+                {
+                    "name": "Publicación de Instagram: ¡El nuevo hogar de tu...",
+                    "impressions": "",
+                    "amount": 64.35
+                },
+                {
+                    "name": "Publicación: \"�� Lujo, Vistas y Exclusividad en Punta Pacífico ��\"",
+                    "impressions": "",
+                    "amount": 91.65
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 35.55
+                }
+            ],
+            "campaigns_total": 52.08,
+            "ads_total": 1204.2
+        },
+        {
+            "file": "2026-06-01T14-22 Transacción n.º 27255314207491688-27126831507006630.pdf",
+            "transaction_id": "27255314207491688-27126831507006630",
+            "datetime": "1 jun. 2026, 2:22 p. m.",
+            "status": "Pagado",
+            "amount": 628.14,
+            "reference": "DP2BJRDBT2",
+            "card": "Visa ****4267",
+            "payment_note": "Realizaste este pago manual",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 52.08,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "13.379",
+                    "amount": 52.08
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "6.340",
+                    "amount": 45.83
+                },
+                {
+                    "name": "�� ¡Eleva el nivel de tu...",
+                    "impressions": "9.168",
+                    "amount": 62.52
+                },
+                {
+                    "name": "¿El lienzo en blanco...",
+                    "impressions": "13.164",
+                    "amount": 56.19
+                },
+                {
+                    "name": "¿Listo para elevar tu...",
+                    "impressions": "14.625",
+                    "amount": 73.64
+                },
+                {
+                    "name": "�� ¡EL LUGAR DONDE TU...",
+                    "impressions": "15.414",
+                    "amount": 78.72
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.221",
+                    "amount": 20.34
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "7.783",
+                    "amount": 47.27
+                },
+                {
+                    "name": "¡El nuevo hogar de tu...",
+                    "impressions": "16.903",
+                    "amount": 64.35
+                },
+                {
+                    "name": "\"�� Lujo, Vistas y Exclusividad en Punta Pacífico ��\"",
+                    "impressions": "65.620",
+                    "amount": 91.65
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "5.699",
+                    "amount": 35.55
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 45.83
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Eleva el nivel de tu...",
+                    "impressions": "",
+                    "amount": 62.52
+                },
+                {
+                    "name": "Publicación de Instagram: ¿El lienzo en blanco...",
+                    "impressions": "",
+                    "amount": 56.19
+                },
+                {
+                    "name": "Publicación de Instagram: ¿Listo para elevar tu...",
+                    "impressions": "",
+                    "amount": 73.64
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡EL LUGAR DONDE TU...",
+                    "impressions": "",
+                    "amount": 78.72
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 67.61
+                },
+                {
+                    "name": "Publicación de Instagram: ¡El nuevo hogar de tu...",
+                    "impressions": "",
+                    "amount": 64.35
+                },
+                {
+                    "name": "Publicación: \"�� Lujo, Vistas y Exclusividad en Punta Pacífico ��\"",
+                    "impressions": "",
+                    "amount": 91.65
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 35.55
+                }
+            ],
+            "campaigns_total": 52.08,
+            "ads_total": 1204.2
+        },
+        {
+            "file": "2026-06-02T07-30 Transacción n.º 27224043263952117-27159032610453185.pdf",
+            "transaction_id": "27224043263952117-27159032610453185",
+            "datetime": "2 jun. 2026, 7:30 a. m.",
+            "status": "Error",
+            "amount": 335.9,
+            "reference": "8CTNURMBT2",
+            "card": "Mastercard ****8597",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "85.656",
+                    "amount": 158.6
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "2.848",
+                    "amount": 17.68
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "15.948",
+                    "amount": 56.62
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "7.847",
+                    "amount": 33.43
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "16.763",
+                    "amount": 69.57
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 74.3
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 33.43
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 69.57
+                }
+            ],
+            "campaigns_total": 158.6,
+            "ads_total": 513.2
+        },
+        {
+            "file": "2026-06-02T07-30 Transacción n.º 27233046209718483-27337872232569220.pdf",
+            "transaction_id": "27233046209718483-27337872232569220",
+            "datetime": "2 jun. 2026, 7:30 a. m.",
+            "status": "Error",
+            "amount": 335.9,
+            "reference": "FWE7WQZBT2",
+            "card": "Visa ****0666",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "85.656",
+                    "amount": 158.6
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "2.848",
+                    "amount": 17.68
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "15.948",
+                    "amount": 56.62
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "7.847",
+                    "amount": 33.43
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "16.763",
+                    "amount": 69.57
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 74.3
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 33.43
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 69.57
+                }
+            ],
+            "campaigns_total": 158.6,
+            "ads_total": 513.2
+        },
+        {
+            "file": "2026-06-02T07-30 Transacción n.º 27265573979799044-27539259829097119.pdf",
+            "transaction_id": "27265573979799044-27539259829097119",
+            "datetime": "2 jun. 2026, 7:30 a. m.",
+            "status": "Error",
+            "amount": 335.9,
+            "reference": "K7WZ4SHBT2",
+            "card": "Visa ****7656",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "85.656",
+                    "amount": 158.6
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "2.848",
+                    "amount": 17.68
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "15.948",
+                    "amount": 56.62
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "7.847",
+                    "amount": 33.43
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "16.763",
+                    "amount": 69.57
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 74.3
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 33.43
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 69.57
+                }
+            ],
+            "campaigns_total": 158.6,
+            "ads_total": 513.2
+        },
+        {
+            "file": "2026-06-02T07-30 Transacción n.º 27337874525902324-27233048443051593.pdf",
+            "transaction_id": "27337874525902324-27233048443051593",
+            "datetime": "2 jun. 2026, 7:30 a. m.",
+            "status": "Error",
+            "amount": 335.9,
+            "reference": "QKF7WQZBT2",
+            "card": "Visa ****1136",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "85.656",
+                    "amount": 158.6
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "2.848",
+                    "amount": 17.68
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "15.948",
+                    "amount": 56.62
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "7.847",
+                    "amount": 33.43
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "16.763",
+                    "amount": 69.57
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 74.3
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 33.43
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 69.57
+                }
+            ],
+            "campaigns_total": 158.6,
+            "ads_total": 513.2
+        },
+        {
+            "file": "2026-06-02T07-30 Transacción n.º 27343448868678218-27233046913051746.pdf",
+            "transaction_id": "27343448868678218-27233046913051746",
+            "datetime": "2 jun. 2026, 7:30 a. m.",
+            "status": "Error",
+            "amount": 335.9,
+            "reference": "2DRCHSVBT2",
+            "card": "Mastercard ****6539",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "85.656",
+                    "amount": 158.6
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "2.848",
+                    "amount": 17.68
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "15.948",
+                    "amount": 56.62
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "7.847",
+                    "amount": 33.43
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "16.763",
+                    "amount": 69.57
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 74.3
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 33.43
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 69.57
+                }
+            ],
+            "campaigns_total": 158.6,
+            "ads_total": 513.2
+        },
+        {
+            "file": "2026-06-02T07-31 Transacción n.º 27159036197119493-27239609375728836.pdf",
+            "transaction_id": "27159036197119493-27239609375728836",
+            "datetime": "2 jun. 2026, 7:31 a. m.",
+            "status": "Error",
+            "amount": 335.9,
+            "reference": "EDUNURMBT2",
+            "card": "Visa ****4173",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "85.656",
+                    "amount": 158.6
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "2.848",
+                    "amount": 17.68
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "15.948",
+                    "amount": 56.62
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "7.847",
+                    "amount": 33.43
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "16.763",
+                    "amount": 69.57
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 74.3
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 33.43
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 69.57
+                }
+            ],
+            "campaigns_total": 158.6,
+            "ads_total": 513.2
+        },
+        {
+            "file": "2026-06-02T07-31 Transacción n.º 27233050096384761-27343452502011188.pdf",
+            "transaction_id": "27233050096384761-27343452502011188",
+            "datetime": "2 jun. 2026, 7:31 a. m.",
+            "status": "Error",
+            "amount": 335.9,
+            "reference": "E8NSGRRBT2",
+            "card": "Mastercard ****1212",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "85.656",
+                    "amount": 158.6
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "2.848",
+                    "amount": 17.68
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "15.948",
+                    "amount": 56.62
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "7.847",
+                    "amount": 33.43
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "16.763",
+                    "amount": 69.57
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 74.3
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 33.43
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 69.57
+                }
+            ],
+            "campaigns_total": 158.6,
+            "ads_total": 513.2
+        },
+        {
+            "file": "2026-06-02T07-31 Transacción n.º 27294746863548421-27337875962568847.pdf",
+            "transaction_id": "27294746863548421-27337875962568847",
+            "datetime": "2 jun. 2026, 7:31 a. m.",
+            "status": "Error",
+            "amount": 335.9,
+            "reference": "F8SCHSVBT2",
+            "card": "Visa ****4267",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "85.656",
+                    "amount": 158.6
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "2.848",
+                    "amount": 17.68
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "15.948",
+                    "amount": 56.62
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "7.847",
+                    "amount": 33.43
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "16.763",
+                    "amount": 69.57
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 74.3
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 33.43
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 69.57
+                }
+            ],
+            "campaigns_total": 158.6,
+            "ads_total": 513.2
+        },
+        {
+            "file": "2026-06-02T07-46 Transacción n.º 27224216773934766-27137197752636672.pdf",
+            "transaction_id": "27224216773934766-27137197752636672",
+            "datetime": "2 jun. 2026, 7:46 a. m.",
+            "status": "Error",
+            "amount": 41.99,
+            "reference": "3P7UGRRBT2",
+            "card": "Mastercard ****8597",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 7.89,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "12.452",
+                    "amount": 7.89
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "413",
+                    "amount": 4.55
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "2.756",
+                    "amount": 12.15
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "1.337",
+                    "amount": 10.14
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "1.487",
+                    "amount": 7.26
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 16.7
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 10.14
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 7.26
+                }
+            ],
+            "campaigns_total": 7.89,
+            "ads_total": 76.09
+        },
+        {
+            "file": "2026-06-02T15-43 Transacción n.º 27544928965196872-27142634355426345.pdf",
+            "transaction_id": "27544928965196872-27142634355426345",
+            "datetime": "2 jun. 2026, 3:43 p. m.",
+            "status": "Pagado",
+            "amount": 335.9,
+            "reference": "KU9EJRRBT2",
+            "card": "Visa ****1136",
+            "payment_note": "Realizaste este pago manual",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 158.6,
+                    "period": "",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "85.656",
+                    "amount": 158.6
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "2.848",
+                    "amount": 17.68
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "15.948",
+                    "amount": 56.62
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "7.847",
+                    "amount": 33.43
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "16.763",
+                    "amount": 69.57
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 74.3
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 33.43
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 69.57
+                }
+            ],
+            "campaigns_total": 158.6,
+            "ads_total": 513.2
+        },
+        {
+            "file": "2026-06-03T17-44 Transacción n.º 27180274081662371-27364756333214138.pdf",
+            "transaction_id": "27180274081662371-27364756333214138",
+            "datetime": "3 jun. 2026, 5:44 p. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "6CBS2SMBT2",
+            "card": "Mastercard ****8597",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-03T17-44 Transacción n.º 27245372178485892-27359198303769946.pdf",
+            "transaction_id": "27245372178485892-27359198303769946",
+            "datetime": "3 jun. 2026, 5:44 p. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "U6CYVQ5CT2",
+            "card": "Visa ****1136",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-03T17-44 Transacción n.º 27254350470921390-27359198763769900.pdf",
+            "transaction_id": "27254350470921390-27359198763769900",
+            "datetime": "3 jun. 2026, 5:44 p. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "QQZ4BSHBT2",
+            "card": "Visa ****4173",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-03T17-44 Transacción n.º 27286926057663836-27158257947197319.pdf",
+            "transaction_id": "27286926057663836-27158257947197319",
+            "datetime": "3 jun. 2026, 5:44 p. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "JLYFPSVBT2",
+            "card": "Visa ****0666",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-03T17-44 Transacción n.º 27286927020997073-27286927107663731.pdf",
+            "transaction_id": "27286927020997073-27286927107663731",
+            "datetime": "3 jun. 2026, 5:44 p. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "ASBS2SMBT2",
+            "card": "Visa ****7656",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-03T17-44 Transacción n.º 27316056721417435-27286928584330250.pdf",
+            "transaction_id": "27316056721417435-27286928584330250",
+            "datetime": "3 jun. 2026, 5:44 p. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "C8CS2SMBT2",
+            "card": "Visa ****4267",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-03T17-44 Transacción n.º 27316057231417384-27245373511819092.pdf",
+            "transaction_id": "27316057231417384-27245373511819092",
+            "datetime": "3 jun. 2026, 5:44 p. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "9DS4HU5BT2",
+            "card": "Mastercard ****1212",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-03T17-44 Transacción n.º 27364757483214023-27316055028084271.pdf",
+            "transaction_id": "27364757483214023-27316055028084271",
+            "datetime": "3 jun. 2026, 5:44 p. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "ERR4HU5BT2",
+            "card": "Mastercard ****6539",
+            "payment_note": "Se solicitó un pago manual en esta cuenta",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-04T03-26 Transacción n.º 27250705204619256-27266323843057389.pdf",
+            "transaction_id": "27250705204619256-27266323843057389",
+            "datetime": "4 jun. 2026, 3:26 a. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "M5VMJU5BT2",
+            "card": "Mastercard ****8597",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-04T03-27 Transacción n.º 27185612257795220-27566062359750199.pdf",
+            "transaction_id": "27185612257795220-27566062359750199",
+            "datetime": "4 jun. 2026, 3:27 a. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "JVVYQSVBT2",
+            "card": "Visa ****1136",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-04T03-27 Transacción n.º 27250706234619153-27292282737128168.pdf",
+            "transaction_id": "27250706234619153-27292282737128168",
+            "datetime": "4 jun. 2026, 3:27 a. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "XMTMCSHBT2",
+            "card": "Mastercard ****6539",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-04T03-27 Transacción n.º 27259683213721449-27266324416390665.pdf",
+            "transaction_id": "27259683213721449-27266324416390665",
+            "datetime": "4 jun. 2026, 3:27 a. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "G9RS5RZBT2",
+            "card": "Visa ****0666",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-04T03-27 Transacción n.º 27292284867127955-27364540846569025.pdf",
+            "transaction_id": "27292284867127955-27364540846569025",
+            "datetime": "4 jun. 2026, 3:27 a. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "92WMJU5BT2",
+            "card": "Visa ****4267",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-04T03-27 Transacción n.º 27321388070884300-27163594633330317.pdf",
+            "transaction_id": "27321388070884300-27163594633330317",
+            "datetime": "4 jun. 2026, 3:27 a. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "C97HXQ5CT2",
+            "card": "Visa ****7656",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-04T03-27 Transacción n.º 27364541333235643-27566064016416700.pdf",
+            "transaction_id": "27364541333235643-27566064016416700",
+            "datetime": "4 jun. 2026, 3:27 a. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "REUMCSHBT2",
+            "card": "Mastercard ****1212",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-04T03-27 Transacción n.º 27566062853083483-27259685637054540.pdf",
+            "transaction_id": "27566062853083483-27259685637054540",
+            "datetime": "4 jun. 2026, 3:27 a. m.",
+            "status": "Error",
+            "amount": 593.21,
+            "reference": "3VRS5RZBT2",
+            "card": "Visa ****4173",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 258.12,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 5:44 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "143.028",
+                    "amount": 258.12
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "13.926",
+                    "amount": 77.68
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.558",
+                    "amount": 85.42
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.838",
+                    "amount": 24.43
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "16.887",
+                    "amount": 78.89
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.232",
+                    "amount": 56
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 77.68
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.42
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 103.32
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56
+                }
+            ],
+            "campaigns_total": 258.12,
+            "ads_total": 902.96
+        },
+        {
+            "file": "2026-06-04T06-59 Transacción n.º 27165603613129419-27568065569549878.pdf",
+            "transaction_id": "27165603613129419-27568065569549878",
+            "datetime": "4 jun. 2026, 6:59 a. m.",
+            "status": "Error",
+            "amount": 600.65,
+            "reference": "N66ZQRRBT2",
+            "card": "Visa ****1136",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 261.05,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 11:59 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "145.168",
+                    "amount": 261.05
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "14.053",
+                    "amount": 78.42
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.736",
+                    "amount": 85.82
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.904",
+                    "amount": 24.74
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "17.158",
+                    "amount": 80.31
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.384",
+                    "amount": 56.97
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 78.42
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.82
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 105.05
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56.97
+                }
+            ],
+            "campaigns_total": 261.05,
+            "ads_total": 913.57
+        },
+        {
+            "file": "2026-06-04T06-59 Transacción n.º 27165605029795944-27372098879146550.pdf",
+            "transaction_id": "27165605029795944-27372098879146550",
+            "datetime": "4 jun. 2026, 6:59 a. m.",
+            "status": "Error",
+            "amount": 600.65,
+            "reference": "E298KU5BT2",
+            "card": "Visa ****4267",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 261.05,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 11:59 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "145.168",
+                    "amount": 261.05
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "14.053",
+                    "amount": 78.42
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.736",
+                    "amount": 85.82
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.904",
+                    "amount": 24.74
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "17.158",
+                    "amount": 80.31
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.384",
+                    "amount": 56.97
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 78.42
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.82
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 105.05
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56.97
+                }
+            ],
+            "campaigns_total": 261.05,
+            "ads_total": 913.57
+        },
+        {
+            "file": "2026-06-04T06-59 Transacción n.º 27252717051084738-27372094732480298.pdf",
+            "transaction_id": "27252717051084738-27372094732480298",
+            "datetime": "4 jun. 2026, 6:59 a. m.",
+            "status": "Error",
+            "amount": 600.65,
+            "reference": "8R78KU5BT2",
+            "card": "Mastercard ****8597",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 261.05,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 11:59 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "145.168",
+                    "amount": 261.05
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "14.053",
+                    "amount": 78.42
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.736",
+                    "amount": 85.82
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.904",
+                    "amount": 24.74
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "17.158",
+                    "amount": 80.31
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.384",
+                    "amount": 56.97
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 78.42
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.82
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 105.05
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56.97
+                }
+            ],
+            "campaigns_total": 261.05,
+            "ads_total": 913.57
+        },
+        {
+            "file": "2026-06-04T06-59 Transacción n.º 27252718374417939-27366559849700458.pdf",
+            "transaction_id": "27252718374417939-27366559849700458",
+            "datetime": "4 jun. 2026, 6:59 a. m.",
+            "status": "Error",
+            "amount": 600.65,
+            "reference": "5788KU5BT2",
+            "card": "Mastercard ****6539",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 261.05,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 11:59 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "145.168",
+                    "amount": 261.05
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "14.053",
+                    "amount": 78.42
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.736",
+                    "amount": 85.82
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.904",
+                    "amount": 24.74
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "17.158",
+                    "amount": 80.31
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.384",
+                    "amount": 56.97
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 78.42
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.82
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 105.05
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56.97
+                }
+            ],
+            "campaigns_total": 261.05,
+            "ads_total": 913.57
+        },
+        {
+            "file": "2026-06-04T06-59 Transacción n.º 27261699000186537-27568067779549657.pdf",
+            "transaction_id": "27261699000186537-27568067779549657",
+            "datetime": "4 jun. 2026, 6:59 a. m.",
+            "status": "Error",
+            "amount": 600.65,
+            "reference": "LPEKRSVBT2",
+            "card": "Mastercard ****1212",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 261.05,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 11:59 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "145.168",
+                    "amount": 261.05
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "14.053",
+                    "amount": 78.42
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.736",
+                    "amount": 85.82
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.904",
+                    "amount": 24.74
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "17.158",
+                    "amount": 80.31
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.384",
+                    "amount": 56.97
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 78.42
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.82
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 105.05
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56.97
+                }
+            ],
+            "campaigns_total": 261.05,
+            "ads_total": 913.57
+        },
+        {
+            "file": "2026-06-04T06-59 Transacción n.º 27366560536367056-27187621770927602.pdf",
+            "transaction_id": "27366560536367056-27187621770927602",
+            "datetime": "4 jun. 2026, 6:59 a. m.",
+            "status": "Error",
+            "amount": 600.65,
+            "reference": "UH88DSHBT2",
+            "card": "Visa ****7656",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 261.05,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 11:59 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "145.168",
+                    "amount": 261.05
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "14.053",
+                    "amount": 78.42
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.736",
+                    "amount": 85.82
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.904",
+                    "amount": 24.74
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "17.158",
+                    "amount": 80.31
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.384",
+                    "amount": 56.97
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 78.42
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.82
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 105.05
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56.97
+                }
+            ],
+            "campaigns_total": 261.05,
+            "ads_total": 913.57
+        },
+        {
+            "file": "2026-06-04T06-59 Transacción n.º 27568063389550096-27366559076367202.pdf",
+            "transaction_id": "27568063389550096-27366559076367202",
+            "datetime": "4 jun. 2026, 6:59 a. m.",
+            "status": "Error",
+            "amount": 600.65,
+            "reference": "H7K3YQ5CT2",
+            "card": "Visa ****0666",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 261.05,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 11:59 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "145.168",
+                    "amount": 261.05
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "14.053",
+                    "amount": 78.42
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.736",
+                    "amount": 85.82
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.904",
+                    "amount": 24.74
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "17.158",
+                    "amount": 80.31
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.384",
+                    "amount": 56.97
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 78.42
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.82
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 105.05
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56.97
+                }
+            ],
+            "campaigns_total": 261.05,
+            "ads_total": 913.57
+        },
+        {
+            "file": "2026-06-04T06-59 Transacción n.º 27568066219549813-27568066262883142.pdf",
+            "transaction_id": "27568066219549813-27568066262883142",
+            "datetime": "4 jun. 2026, 6:59 a. m.",
+            "status": "Error",
+            "amount": 600.65,
+            "reference": "BYXV4SMBT2",
+            "card": "Visa ****4173",
+            "payment_note": "",
+            "account_id": "431268476471047",
+            "campaigns": [
+                {
+                    "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+                    "amount": 261.05,
+                    "period": "1 jun. 2026, 12:00 a. m. a 3 jun. 2026, 11:59 p. m.",
+                    "ads": []
+                }
+            ],
+            "ads": [
+                {
+                    "name": "70526",
+                    "impressions": "145.168",
+                    "amount": 261.05
+                },
+                {
+                    "name": "�� ¡Lujo, tecnología y...",
+                    "impressions": "14.053",
+                    "amount": 78.42
+                },
+                {
+                    "name": "�� ¡El epicentro...",
+                    "impressions": "27.736",
+                    "amount": 85.82
+                },
+                {
+                    "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "3.904",
+                    "amount": 24.74
+                },
+                {
+                    "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+                    "impressions": "17.158",
+                    "amount": 80.31
+                },
+                {
+                    "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "12.384",
+                    "amount": 56.97
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+                    "impressions": "",
+                    "amount": 78.42
+                },
+                {
+                    "name": "Publicación de Instagram: �� ¡El epicentro...",
+                    "impressions": "",
+                    "amount": 85.82
+                },
+                {
+                    "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+                    "impressions": "",
+                    "amount": 105.05
+                },
+                {
+                    "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+                    "impressions": "",
+                    "amount": 56.97
+                }
+            ],
+            "campaigns_total": 261.05,
+            "ads_total": 913.57
+        }
+    ],
+    "campaigns_by_spend": [
+        {
+            "name": "TUASESORRM 27 AL 03 JUNIO 2026",
+            "total": 7757.7699999999995,
+            "transactions": [
+                "27222786674077770-27148790751477371",
+                "27255314207491688-27126831507006630",
+                "27224043263952117-27159032610453185",
+                "27233046209718483-27337872232569220",
+                "27265573979799044-27539259829097119",
+                "27337874525902324-27233048443051593",
+                "27343448868678218-27233046913051746",
+                "27159036197119493-27239609375728836",
+                "27233050096384761-27343452502011188",
+                "27294746863548421-27337875962568847",
+                "27224216773934766-27137197752636672",
+                "27544928965196872-27142634355426345",
+                "27180274081662371-27364756333214138",
+                "27245372178485892-27359198303769946",
+                "27254350470921390-27359198763769900",
+                "27286926057663836-27158257947197319",
+                "27286927020997073-27286927107663731",
+                "27316056721417435-27286928584330250",
+                "27316057231417384-27245373511819092",
+                "27364757483214023-27316055028084271",
+                "27250705204619256-27266323843057389",
+                "27185612257795220-27566062359750199",
+                "27250706234619153-27292282737128168",
+                "27259683213721449-27266324416390665",
+                "27292284867127955-27364540846569025",
+                "27321388070884300-27163594633330317",
+                "27364541333235643-27566064016416700",
+                "27566062853083483-27259685637054540",
+                "27165603613129419-27568065569549878",
+                "27165605029795944-27372098879146550",
+                "27252717051084738-27372094732480298",
+                "27252718374417939-27366559849700458",
+                "27261699000186537-27568067779549657",
+                "27366560536367056-27187621770927602",
+                "27568063389550096-27366559076367202",
+                "27568066219549813-27568066262883142"
+            ]
+        }
+    ],
+    "top_ads": [
+        {
+            "name": "70526",
+            "total": 7757.7699999999995,
+            "count": 36
+        },
+        {
+            "name": "Publicación: \"¡El punto estratégico que tu negocio merece en...\"",
+            "total": 3314.1400000000012,
+            "count": 36
+        },
+        {
+            "name": "�� ¡Lujo, tecnología y...",
+            "total": 2595.2900000000013,
+            "count": 36
+        },
+        {
+            "name": "Publicación de Instagram: �� ¡Lujo, tecnología y...",
+            "total": 2595.2900000000013,
+            "count": 36
+        },
+        {
+            "name": "\"�� ¿BUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO E...",
+            "total": 2520.9900000000007,
+            "count": 36
+        },
+        {
+            "name": "�� ¡El epicentro...",
+            "total": 2053.2799999999997,
+            "count": 24
+        },
+        {
+            "name": "Publicación de Instagram: �� ¡El epicentro...",
+            "total": 2053.2799999999997,
+            "count": 24
+        },
+        {
+            "name": "\"El Refugio que tu Familia Merece en Cumbres de...\"",
+            "total": 1733.8700000000003,
+            "count": 36
+        },
+        {
+            "name": "Publicación: \"El Refugio que tu Familia Merece en Cumbres de...\"",
+            "total": 1733.8700000000003,
+            "count": 36
+        },
+        {
+            "name": "\"¡El punto estratégico que tu negocio merece en...\"",
+            "total": 793.15,
+            "count": 36
+        },
+        {
+            "name": "\"�� Lujo, Vistas y Exclusividad en Punta Pacífico ��\"",
+            "total": 183.3,
+            "count": 2
+        },
+        {
+            "name": "Publicación: \"�� Lujo, Vistas y Exclusividad en Punta Pacífico ��\"",
+            "total": 183.3,
+            "count": 2
+        },
+        {
+            "name": "�� ¡EL LUGAR DONDE TU...",
+            "total": 157.44,
+            "count": 2
+        },
+        {
+            "name": "Publicación de Instagram: �� ¡EL LUGAR DONDE TU...",
+            "total": 157.44,
+            "count": 2
+        },
+        {
+            "name": "¿Listo para elevar tu...",
+            "total": 147.28,
+            "count": 2
+        },
+        {
+            "name": "Publicación de Instagram: ¿Listo para elevar tu...",
+            "total": 147.28,
+            "count": 2
+        },
+        {
+            "name": "¡El nuevo hogar de tu...",
+            "total": 128.7,
+            "count": 2
+        },
+        {
+            "name": "Publicación de Instagram: ¡El nuevo hogar de tu...",
+            "total": 128.7,
+            "count": 2
+        },
+        {
+            "name": "�� ¡Eleva el nivel de tu...",
+            "total": 125.04,
+            "count": 2
+        },
+        {
+            "name": "Publicación de Instagram: �� ¡Eleva el nivel de tu...",
+            "total": 125.04,
+            "count": 2
+        },
+        {
+            "name": "¿El lienzo en blanco...",
+            "total": 112.38,
+            "count": 2
+        },
+        {
+            "name": "Publicación de Instagram: ¿El lienzo en blanco...",
+            "total": 112.38,
+            "count": 2
+        }
+    ]
+}

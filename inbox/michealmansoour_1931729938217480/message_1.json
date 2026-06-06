@@ -1,0 +1,51 @@
+{
+  "participants": [
+    {
+      "name": "Micheal Mansoour"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777301375148,
+      "content": "Saludos, Alejandro Flores\u00f0\u009f\u009f\u00a2 Paso por aqu\u00c3\u00ad para saber si tiene alguna b\u00c3\u00basqueda inmobiliaria o desea vender alguna propiedad?\n Asesores RM para servirle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776648694447,
+      "content": "Hola a\u00c3\u00ban disponible su precio es de 1950.000& negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Micheal Mansoour",
+      "timestamp_ms": 1776648657016,
+      "content": "\u00c2\u00bfEst\u00c3\u00a1 disponible para la venta ahora?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Micheal Mansoour",
+      "timestamp_ms": 1776648656647,
+      "content": "Micheal envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DW6mBeugIaw/?id=3871574057157691056_53287868330",
+        "share_text": "\u00f0\u009f\u0093\u008d \u00c2\u00a1EL PUNTO ESTRAT\u00c3\u0089GICO QUE TU NEGOCIO NECESITA!\n\nSi buscas presencia y rentabilidad en la zona m\u00c3\u00a1s exclusiva de Caracas, esta oportunidad en la Calle Londres de Las Mercedes es para ti. \u00f0\u009f\u009a\u0080\n\nTienes dos caminos para ganar:\n\u00e2\u009c\u0085 Aprovechar la estructura actual de 520 m\u00c2\u00b2 aprox. para una remodelaci\u00c3\u00b3n r\u00c3\u00a1pida.\n\u00e2\u009c\u0085 Desarrollar un proyecto desde cero sobre este terreno de 788 m\u00c2\u00b2 aprox.\n\nVersatilidad, ubicaci\u00c3\u00b3n y metros. \u00c2\u00a1Todo en un solo lugar! \u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f\n\n\u00f0\u009f\u0093\u00b2 \u00c2\u00bfQuieres conocerlo? Cont\u00c3\u00a1ctame al DM para agendar una visita.\n\n#LasMercedes #Caracas #BienesRaicesVenezuela #LocalComercial #InversionCaracas #CalleLondres #RealEstateCaracas #OportunidadDeInversion #LocalesEnVenta",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Micheal Mansoour",
+  "is_still_participant": true,
+  "thread_path": "inbox/michealmansoour_1931729938217480",
+  "magic_words": [
+    
+  ]
+}

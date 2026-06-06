@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Pedro Bravo"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Pedro Bravo",
+      "timestamp_ms": 1775493068654,
+      "content": "No tengo apuro puedo esperar alguna buena oportunidad",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Pedro Bravo",
+      "timestamp_ms": 1775493030421,
+      "content": "Estoy buscando algo en la Guaira puede ser quiz\u00c3\u00a1 suba buena oportunidad en caracas",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491434249,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Pedro Bravo",
+  "is_still_participant": true,
+  "thread_path": "inbox/pedrobravo_1465545168167725",
+  "magic_words": [
+    
+  ]
+}

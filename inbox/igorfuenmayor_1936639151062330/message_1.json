@@ -1,0 +1,88 @@
+{
+  "participants": [
+    {
+      "name": "Igor Fuenmayor"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776522293792,
+      "content": "Hola son 788 metros",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Igor Fuenmayor",
+      "timestamp_ms": 1776518956002,
+      "content": "Ese es el terreno de 520?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776517709843,
+      "content": "El precio es de 1.950.000k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776517694635,
+      "content": "Buenos d\u00c3\u00adas un gusto saludarle le escribe Alejandra velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776512520649,
+      "content": "Igor Fuenmayor replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Igor Fuenmayor",
+      "timestamp_ms": 1776512519915,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774729990427,
+      "content": "En Premium La Escondida tenemos 2 apartamentos disponibles:\n\n\u00e2\u0080\u00a2Un Planta Baja, 186m2 en 170.000$ \n\u00e2\u0080\u00a2Uno en piso 5, 153m2 en 220.000$ \n\nNegociables, podemos aceptar un financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774729989103,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774721981462,
+      "content": "Igor Fuenmayor replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Igor Fuenmayor",
+      "timestamp_ms": 1774721980522,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Igor Fuenmayor",
+  "is_still_participant": true,
+  "thread_path": "inbox/igorfuenmayor_1936639151062330",
+  "magic_words": [
+    
+  ]
+}

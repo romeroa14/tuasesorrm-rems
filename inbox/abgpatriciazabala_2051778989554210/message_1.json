@@ -1,0 +1,70 @@
+{
+  "participants": [
+    {
+      "name": "Abg. Patricia Zabala"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Abg. Patricia Zabala",
+      "timestamp_ms": 1778335565280,
+      "content": "Liked a message",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778335378954,
+      "content": "En breve ser\u00c3\u00a1 atendida por Alejandra Velasco",
+      "reactions": [
+        {
+          "reaction": "\u00e2\u009d\u00a4",
+          "actor": "Abg. Patricia Zabala"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778333917268,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Abg. Patricia Zabala",
+      "timestamp_ms": 1778333916126,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Abg. Patricia Zabala",
+      "timestamp_ms": 1778333915639,
+      "content": "Buen d\u00c3\u00ada tengo cliente interesado en este inmueble pudieran enviarme la informaci\u00c3\u00b3n? Les dejo mi WhatsApp 04242047051",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Abg. Patricia Zabala",
+      "timestamp_ms": 1778333915244,
+      "content": "Abg. envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/reel/DX-AVgdEYNV/?id=3890548606051124053_53287868330",
+        "share_text": "\u00f0\u009f\u0093\u008d \u00c2\u00bfBUSCAS EL LUGAR PERFECTO PARA TU NEGOCIO EN CARACAS?\n\n\u00c2\u00a1Oportunidad \u00c3\u00banica en la zona m\u00c3\u00a1s exclusiva de la capital! \u00f0\u009f\u008c\u009f\n\nEn Las Mercedes, Calle Londres, encontrar\u00c3\u00a1s:\n\u00f0\u009f\u008f\u00a2 Una estructura existente de 520 m\u00c2\u00b2 lista para transformarse\n\u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f O la libertad de crear desde cero en 788 m\u00c2\u00b2 de terreno\n\nLa elecci\u00c3\u00b3n es tuya:\n\u00e2\u009c\u0088\u00ef\u00b8\u008f Remodelar r\u00c3\u00a1pido y empezar a generar\n\u00f0\u009f\u008e\u00ad Desarrollar tu visi\u00c3\u00b3n \u00c3\u00banica desde los cimientos\n\nUbicaci\u00c3\u00b3n premium + flexibilidad + potencial ilimitado\n\n\u00f0\u009f\u0093\u00a9 \u00c2\u00bfQuieres detalles? Env\u00c3\u00ada mensaje para programar tu visita exclusiva.\n\n#LasMercedes #Caracas #Venezuela #CalleLondres #Ubicaci\u00c3\u00b3nPremium",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Abg. Patricia Zabala",
+  "is_still_participant": true,
+  "thread_path": "inbox/abgpatriciazabala_2051778989554210",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Yelitza Carrizalez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776781081563,
+      "content": "Aqu\u00c3\u00ad le comparto m\u00c3\u00a1s detalles del apartamento:\n\nApartamento de 318 m\u00c2\u00b2 totalmente remodelado y equipado \n3 habitaciones  + 2 de servicio\n6 ba\u00c3\u00b1os en totales\nSala | Family Room | Cocina + desayunador \nComedor  | Terraza con vista al \u00c3\u0081vila \n\nSu precio es de $1,270,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776781023625,
+      "content": "Buen d\u00c3\u00ada se\u00c3\u00b1ora Yelitza, c\u00c3\u00b3mo est\u00c3\u00a1?\n\nValery Mendoza del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Yelitza Carrizalez",
+  "is_still_participant": true,
+  "thread_path": "inbox/yelitzacarrizalez_1970392467685541",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Franke!"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774271533160,
+      "content": "Si gusta me comparte su WhatsApp",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Franke!",
+      "timestamp_ms": 1774269808562,
+      "content": "Hola machito 2024",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774229013307,
+      "content": "Ser\u00c3\u00ada cuesti\u00c3\u00b3n que pasen una oferta, qu\u00c3\u00a9 auto ser\u00c3\u00ada?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774228923454,
+      "content": "Respondo a tu comentario",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774228920456,
+      "content": "Hola buenas noches!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Franke!",
+  "is_still_participant": true,
+  "thread_path": "inbox/franke_1895125801878389",
+  "magic_words": [
+    
+  ]
+}

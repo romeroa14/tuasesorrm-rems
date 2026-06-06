@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Ramon Carrasco"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773619907977,
+      "content": "Buenas noches un gusto el precio de la misma es de 1700.000 $ pero en la reserva estaremos  ofreciendo todos nuestros proyectos",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773618522757,
+      "content": "Ramon Carrasco replied to an ad. View ad(https://www.instagram.com/p/DVzkVHWgJM4/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ramon Carrasco",
+      "timestamp_ms": 1773618522059,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 propiedades est\u00c3\u00a1n disponibles?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Ramon Carrasco",
+  "is_still_participant": true,
+  "thread_path": "inbox/ramoncarrasco_18036450272780331",
+  "magic_words": [
+    
+  ]
+}

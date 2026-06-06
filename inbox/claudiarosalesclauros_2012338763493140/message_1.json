@@ -1,0 +1,113 @@
+{
+  "participants": [
+    {
+      "name": "Claudia Rosales Clauros"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Claudia Rosales Clauros",
+      "timestamp_ms": 1776105036541,
+      "content": "Estoy atenta, muchas gracias",
+      "reactions": [
+        {
+          "reaction": "\u00e2\u009d\u00a4",
+          "actor": "Claudia Rosales Clauros"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Claudia Rosales Clauros",
+      "timestamp_ms": 1776105023578,
+      "content": "Reacted \u00f0\u009f\u0099\u008f to your message ",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776086864130,
+      "content": "Perfecto! Ya le comparto la informaci\u00c3\u00b3n al WhatsApp",
+      "reactions": [
+        {
+          "reaction": "\u00f0\u009f\u0099\u008f",
+          "actor": "Claudia Rosales Clauros"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776086808497,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Claudia Rosales Clauros",
+      "timestamp_ms": 1776086807685,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Claudia Rosales Clauros",
+      "timestamp_ms": 1776086807319,
+      "content": "+584222519670\nClaudia Rosales",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Claudia Rosales Clauros",
+      "timestamp_ms": 1776086792517,
+      "content": "Un gusto colega Claudia Rosales asesora independiente. \nTengo un cliente buscando en la zona pero no tiene ese presupuesto. Peroooo puedo intentar \nPuedes compartirme la memoria e im\u00c3\u00a1genes para pasarlo y evaluar, por favor.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776086304167,
+      "content": "Le gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776086284137,
+      "content": "$650,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776086276566,
+      "content": "Saludos un placer\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776085807576,
+      "content": "Claudia Rosales Clauros replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Claudia Rosales Clauros",
+      "timestamp_ms": 1776085806818,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Claudia Rosales Clauros",
+  "is_still_participant": true,
+  "thread_path": "inbox/claudiarosalesclauros_2012338763493140",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "participants": [
+    {
+      "name": "CADL"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774919200667,
+      "content": "Ubicaci\u00c3\u00b3n \nAv transversal 6 de la avenida 12 de Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774919181388,
+      "content": "Terreno en Altamira \n$600,000 precio de oportunidad se encuentra en una av donde hay nuevas edificaciones en Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774919176216,
+      "content": "https://info.wasi.co/terreno-venta-altamira/9704566",
+      "share": {
+        "link": "https://info.wasi.co/terreno-venta-altamira/9704566",
+        "share_text": "https://info.wasi.co/terreno-venta-altamira/9704566"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774919150280,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774783755760,
+      "content": "CADL replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "CADL",
+      "timestamp_ms": 1774783755146,
+      "content": "Que parte de altamira esta?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "CADL",
+  "is_still_participant": true,
+  "thread_path": "inbox/cadl_1850923809629344",
+  "magic_words": [
+    
+  ]
+}

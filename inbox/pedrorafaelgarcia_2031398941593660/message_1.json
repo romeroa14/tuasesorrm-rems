@@ -1,0 +1,74 @@
+{
+  "participants": [
+    {
+      "name": "Pedro Rafael Garcia"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776689278888,
+      "content": "Lo podemos contactar",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776689239780,
+      "content": "Si nos envia su n\u00c3\u00bamero de contacto con Todo gusto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Pedro Rafael Garcia",
+      "timestamp_ms": 1776689221037,
+      "content": "Creo que no hay ningun lugar en ccs con el precio de ese metro cuadrado",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776689214374,
+      "content": "Mi nombre es rossana migliore un placer",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776689202384,
+      "content": "Hola buen d\u00c3\u00ada c\u00c3\u00b3mo est\u00c3\u00a1!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776688440195,
+      "content": "El inmueble por el que consulto, en un Pent House ubicado en Mirador de Los Campitos en una urbanizaci\u00c3\u00b3n nueva, cerrada y exclusiva.\n\n320m2\n\u00e2\u0080\u00a2 Amplia habitaci\u00c3\u00b3n master con amplio vestier con doble ba\u00c3\u00b1o y dos walking closets\n\u00e2\u0080\u00a2 2 habitaciones con ba\u00c3\u00b1o\n\u00e2\u0080\u00a2 4 puestos de estacionamiento\n\u00e2\u0080\u00a2 6 ba\u00c3\u00b1os\n\nSe entrega totalmente remodelado, equipado \u00d1\u0083 amoblado, con muebles italianos de alta gama.\nSu precio es de 1270.000& negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776686341127,
+      "content": "Pedro Rafael Garcia replied to an ad. View ad(https://www.instagram.com/p/DXVf8NngBUq/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Pedro Rafael Garcia",
+      "timestamp_ms": 1776686340427,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Pedro Rafael Garcia",
+  "is_still_participant": true,
+  "thread_path": "inbox/pedrorafaelgarcia_2031398941593660",
+  "magic_words": [
+    
+  ]
+}

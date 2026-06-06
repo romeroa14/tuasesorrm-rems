@@ -1,0 +1,44 @@
+{
+  "participants": [
+    {
+      "name": "Pilar Mart\u00c3\u00adn de P\u00c3\u00a9rez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774150952967,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Pilar Mart\u00c3\u00adn de P\u00c3\u00a9rez",
+      "timestamp_ms": 1774150941025,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 incluye la experiencia de Realidad Virtual?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Pilar Mart\u00c3\u00adn de P\u00c3\u00a9rez",
+      "timestamp_ms": 1774150940748,
+      "content": "Pilar envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DWKSHM2gIUW/?id=3857975690469082390_53287868330",
+        "share_text": "\u00c2\u00a1Tu pr\u00c3\u00b3ximo espacio en Las Mercedes te espera, y con facilidades de pago! \u00f0\u009f\u008f\u0099\u00e2\u009c\u00a8\n\nOBT\u00c3\u0089N TU PROPIEDAD RESIDENCIAL O COMERCIAL CON FINANCIAMIENTO:\n\u00e2\u009c\u0085 Solo 30% de inicial.\n\u00e2\u009c\u0085 24 meses sin intereses.\n\nAcomp\u00c3\u00a1\u00c3\u00b1anos junto a Asesores RM a un recorrido exclusivo de Promenade. Vive el proyecto a trav\u00c3\u00a9s de nuestra experiencia de Realidad Virtual (VR) \u00f0\u009f\u0095\u00b6\u00ef\u00b8\u008f y s\u00c3\u00a9 el primero en conocer todo lo nuevo que trae esta imponente obra.\n\n\u00f0\u009f\u0093\u008d Las Mercedes\n\u00f0\u009f\u0093\u0085 Jueves, 19 de marzo | \u00f0\u009f\u0095\u009c 10:00 a.m.\n\n\u00f0\u009f\u0093\u00a9 \u00c2\u00a1Asegura tu lugar hoy mismo! Escr\u00c3\u00adbenos al DM (Cupos limitados).\n\n#LasMercedes #Promenade #AsesoresRM #RealidadVirtual #GrupoBinian",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Pilar Mart\u00c3\u00adn de P\u00c3\u00a9rez",
+  "is_still_participant": true,
+  "thread_path": "inbox/pilarmartindeperez_1974292687295427",
+  "magic_words": [
+    
+  ]
+}

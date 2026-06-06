@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "luis guillermo"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774745691834,
+      "content": "$115,000 o $100,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "luis guillermo",
+      "timestamp_ms": 1774745652231,
+      "content": "Cu\u00c3\u00a1l es la negociaci\u00c3\u00b3n actual",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774734786581,
+      "content": "De cu\u00c3\u00a1nto ser\u00c3\u00ada la oferta de la oficina en la Torre financiera",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774734748871,
+      "content": "Hola se\u00c3\u00b1or Luis!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "luis guillermo",
+  "is_still_participant": true,
+  "thread_path": "inbox/luisguillermo_2017197926345000",
+  "magic_words": [
+    
+  ]
+}

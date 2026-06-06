@@ -1,0 +1,88 @@
+{
+  "participants": [
+    {
+      "name": "Cristymar"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Cristymar",
+      "timestamp_ms": 1776080812251,
+      "content": "No, solo estoy poniendo un n\u00c3\u00bamero a un sue\u00c3\u00b1o de un terreno propio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776080126699,
+      "content": "Esta evaluando otras opciones?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Cristymar",
+      "timestamp_ms": 1776080112186,
+      "content": "Hola! Muchas Gracias Valery!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776080101609,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776080095992,
+      "content": "$650,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776080089319,
+      "content": "Hola buen d\u00c3\u00ada! Feliz lunes",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Cristymar",
+      "timestamp_ms": 1776080070567,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Cristymar",
+      "timestamp_ms": 1776080070205,
+      "content": "Cristymar envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Cristymar",
+      "timestamp_ms": 1776080067804,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Cristymar",
+      "timestamp_ms": 1776080067051,
+      "content": "Cristymar envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Cristymar",
+  "is_still_participant": true,
+  "thread_path": "inbox/cristymar_2038396264225655",
+  "magic_words": [
+    
+  ]
+}

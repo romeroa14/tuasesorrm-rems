@@ -1,0 +1,81 @@
+{
+  "participants": [
+    {
+      "name": "Chino Brito"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778767469723,
+      "content": "Su precio es  de 450k",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778767460813,
+      "content": "Es un Pent House, ubicado en Playa Moreno, con hermosa vista al mar \n\n3 habitaciones, la principal con vestier y ba\u00c3\u00b1o\nTiene 3 ba\u00c3\u00b1os \nCocina Ferrara \n\u00c3\u0081rea de lavandero \nTerraza \n2 puestos de estacionamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778767426483,
+      "content": "Buenos d\u00c3\u00adas un gusto saludarle le escribe Alejandra Velasco de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778767412836,
+      "content": "Chino Brito replied to an ad. View ad(https://www.instagram.com/p/DYTU1FzgDSx/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Chino Brito",
+      "timestamp_ms": 1778767412113,
+      "content": "\u00c2\u00a1Hola! Quiero m\u00c3\u00a1s informaci\u00c3\u00b3n.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774197321053,
+      "content": "Si desea mayor informaci\u00c3\u00b3n, en cuanto al plan de ventas y el brochure de la propiedad, por favor ind\u00c3\u00adqueme su n\u00c3\u00bamero de tel\u00c3\u00a9fono y le estar\u00c3\u00a9 contactando \n\nFeliz fin de semana",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774197318836,
+      "content": "Placer saludarle, soy Alejandro Flores del equipo de Asesores RM inmobiliaria \u00f0\u009f\u0098\u0083",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774192344496,
+      "content": "Chino Brito replied to an ad. View ad(https://www.instagram.com/p/DWKSHk5AMl2/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Chino Brito",
+      "timestamp_ms": 1774192343875,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Chino Brito",
+  "is_still_participant": true,
+  "thread_path": "inbox/chinobrito_1925068858884068",
+  "magic_words": [
+    
+  ]
+}

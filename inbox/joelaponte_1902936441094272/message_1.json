@@ -1,0 +1,38 @@
+{
+  "participants": [
+    {
+      "name": "Joel Aponte"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778784665303,
+      "content": "Gustar\u00c3\u00ada que pudi\u00c3\u00a9ramos agendar una visita ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778784652173,
+      "content": "Muy buenas tardes! Que tal est\u00c3\u00a1 ? Por ac\u00c3\u00a1 le habla le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nPude ver a trav\u00c3\u00a9s de los comentarios que consult\u00c3\u00b3 por mayor informaci\u00c3\u00b3n sobre el terreno ubicado en la calle Londres de las Mercedes \n\nEste imponente local comercial se encuentra disponible para la venta por 1.950.000$ NEGOCIABLES! \n\nCaracter\u00c3\u00adsticas: \n\n\u00c3\u0081rea de terreno total: 778m2  \n\n\u00c3\u0081rea de construcci\u00c3\u00b3n total: 750m2 \n\nPlanta baja: 500m2 \n\nPlanta alta: 250m2 (edited)",
+      "is_geoblocked_for_viewer": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778784607937,
+      "content": "Muy buenas tardes! Que tal est\u00c3\u00a1 ? Por ac\u00c3\u00a1 le habla le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nPude ver a trav\u00c3\u00a9s de los comentarios que consult\u00c3\u00b3 por mayor informaci\u00c3\u00b3n sobre el terreno ubicado en la calle Londres de las Mercedes \n\nEste imponente local comercial se encuentra disponible para la venta por 1.950.000$ NEGOCIABLES! \n\nCaracter\u00c3\u00adsticas: \n\n\u00c3\u0081rea de terreno total: 788m2  \n\n\u00c3\u0081rea de construcci\u00c3\u00b3n total: 750m2 \n\nPlanta baja: 500m2 \n\nPlanta alta: 250m2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Joel Aponte",
+  "is_still_participant": true,
+  "thread_path": "inbox/joelaponte_1902936441094272",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "participants": [
+    {
+      "name": "LD"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776680098497,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n? (edited)",
+      "is_geoblocked_for_viewer": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776680094461,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n (",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776680089261,
+      "content": "El terreno tiene un precio de $650,000\nLa zonificaci\u00c3\u00b3n es solo residencial y puede construirse un Edificio hasta tres pisos solo residencial",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776680042319,
+      "content": "Feliz lunes",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776680038735,
+      "content": "Hola buen d\u00c3\u00ada! Soy Valery Mendoza del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "LD",
+      "timestamp_ms": 1776673804201,
+      "content": "\u00c2\u00a1Hola! Quiero m\u00c3\u00a1s informaci\u00c3\u00b3n.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "LD",
+      "timestamp_ms": 1776673803573,
+      "share": {
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776647644711,
+      "content": "Buen d\u00c3\u00ada su precio es de 1950.000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "LD",
+      "timestamp_ms": 1776647243629,
+      "content": "M\u00c3\u00a1s informaci\u00c3\u00b3n por favor Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776647214960,
+      "content": "LD replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "LD",
+      "timestamp_ms": 1776647214256,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "LD",
+  "is_still_participant": true,
+  "thread_path": "inbox/ld_1923808515678471",
+  "magic_words": [
+    
+  ]
+}

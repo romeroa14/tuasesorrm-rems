@@ -1,0 +1,44 @@
+{
+  "participants": [
+    {
+      "name": "Belkis Hernandez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773795875245,
+      "content": "Buenas noches un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Belkis Hernandez",
+      "timestamp_ms": 1773789603704,
+      "content": "\u00c2\u00bfC\u00c3\u00b3mo puedo reservar una propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Belkis Hernandez",
+      "timestamp_ms": 1773789603027,
+      "content": "Belkis envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DV9ZXCkgEky/?id=3854348390569625906_53287868330",
+        "share_text": "Donde la exclusividad encuentra su hogar. \u00e2\u009c\u00a8 Te invitamos a una experiencia sensorial de alto nivel. Ven e invierte en Los Naranjos del Cafetal , con espacios dise\u00c3\u00b1ados para quienes aprecian el verdadero lujo.\n\n\u00f0\u009f\u0097\u0093\u00ef\u00b8\u008f Jueves 19 de marzo | \u00e2\u008f\u00b0 10:30 AM\n\u00f0\u009f\u0093\u008d Asesores RM\n\n#asesoresrm #inversi\u00c3\u00b3ninteligente #bienesra\u00c3\u00adcescaracas #exclusivaspropiedades #realestatevenezuela",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Belkis Hernandez",
+  "is_still_participant": true,
+  "thread_path": "inbox/belkishernandez_1943461443714333",
+  "magic_words": [
+    
+  ]
+}

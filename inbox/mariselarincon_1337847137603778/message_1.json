@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Marisela Rinco\u00cc\u0081n"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Marisela Rinco\u00cc\u0081n",
+      "timestamp_ms": 1776122936514,
+      "content": "Hola ! $1.250.000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775788589360,
+      "content": "Holaa precio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Marisela Rinco\u00cc\u0081n",
+  "is_still_participant": true,
+  "thread_path": "inbox/mariselarincon_1337847137603778",
+  "magic_words": [
+    
+  ]
+}

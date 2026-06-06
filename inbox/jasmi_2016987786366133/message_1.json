@@ -1,0 +1,64 @@
+{
+  "participants": [
+    {
+      "name": "Jasmi"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774144482175,
+      "content": "https://info.wasi.co/apartamento-venta-caracas-baruta/9837600",
+      "share": {
+        "link": "https://info.wasi.co/apartamento-venta-caracas-baruta/9837600",
+        "share_text": "https://info.wasi.co/apartamento-venta-caracas-baruta/9837600"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774144476451,
+      "content": "Aqu\u00c3\u00ad te comparto el wassi",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774144413067,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774144401848,
+      "content": "Hola buenas noches, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774144373165,
+      "content": "Jasmi replied to an ad. View ad(https://www.instagram.com/p/DWKSHk5AMl2/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jasmi",
+      "timestamp_ms": 1774144372524,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jasmi",
+  "is_still_participant": true,
+  "thread_path": "inbox/jasmi_2016987786366133",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "\u00e2\u0099\u00a1\u00f0\u009d\u0095\u0084\u00f0\u009d\u0095\u0092\u00f0\u009d\u0095\u00a6"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773868239780,
+      "content": "\u00e2\u0099\u00a1\u00f0\u009d\u0095\u0084\u00f0\u009d\u0095\u0092\u00f0\u009d\u0095\u00a6 replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "\u00e2\u0099\u00a1\u00f0\u009d\u0095\u0084\u00f0\u009d\u0095\u0092\u00f0\u009d\u0095\u00a6",
+      "timestamp_ms": 1773868238976,
+      "content": "Hola para reserva de 3 d\u00c3\u00adas y 2 noches",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "\u00e2\u0099\u00a1\u00f0\u009d\u0095\u0084\u00f0\u009d\u0095\u0092\u00f0\u009d\u0095\u00a6",
+  "is_still_participant": true,
+  "thread_path": "inbox/mau_1505186617699191",
+  "magic_words": [
+    
+  ]
+}

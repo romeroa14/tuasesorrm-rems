@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Blue Vega | Escritor"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774295519056,
+      "content": "La casa est\u00c3\u00a1 disponible en 1.700.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774295493930,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara, Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773888639881,
+      "content": "Blue Vega | Escritor replied to an ad. View ad(https://www.instagram.com/p/DVwwYl_gKFK/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Blue Vega | Escritor",
+      "timestamp_ms": 1773888639317,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 incluye la experiencia?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Blue Vega | Escritor",
+  "is_still_participant": true,
+  "thread_path": "inbox/bluevegaescritor_17920733952277378",
+  "magic_words": [
+    
+  ]
+}

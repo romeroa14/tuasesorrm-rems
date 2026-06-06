@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Oscar"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777119071552,
+      "content": "Apartamento en los palos grandes de dos habitaciones Y dos ba\u00c3\u00b1os en una excelente zona de Caracas precio de 250,000 totalmente negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777119046081,
+      "content": "Placer servirle, Alejandro Flores de Asesores RM inmobiliaria \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777118294319,
+      "content": "Oscar replied to an ad. View ad(https://www.instagram.com/p/DXiQ6EJADwe/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Oscar",
+      "timestamp_ms": 1777118293594,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 servicios ofrecen?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Oscar",
+  "is_still_participant": true,
+  "thread_path": "inbox/oscar_2014516259949422",
+  "magic_words": [
+    
+  ]
+}

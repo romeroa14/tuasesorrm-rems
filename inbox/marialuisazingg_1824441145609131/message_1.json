@@ -1,0 +1,67 @@
+{
+  "participants": [
+    {
+      "name": "Maria Luisa Zingg"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778236030442,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778236023266,
+      "content": "Hola buen d\u00c3\u00ada! su precio es de $249,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Maria Luisa Zingg",
+      "timestamp_ms": 1778145319354,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio del apartamento?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778118666089,
+      "content": "Este apartamento de 83 m\u00c2\u00b2 \nTiene 2 hab | 2 ba\u00c3\u00b1os \nSala cocina totalmente equipada \nEl apartamento tiene pozo de agua",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778118198918,
+      "content": "Hola buenas noches, c\u00c3\u00b3mo est\u00c3\u00a1?\nMi nombre es Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778113953960,
+      "content": "Maria Luisa Zingg replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Maria Luisa Zingg",
+      "timestamp_ms": 1778113953162,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1les son los detalles de la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Maria Luisa Zingg",
+  "is_still_participant": true,
+  "thread_path": "inbox/marialuisazingg_1824441145609131",
+  "magic_words": [
+    
+  ]
+}

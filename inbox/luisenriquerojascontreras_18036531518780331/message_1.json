@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Luis Enrique rojas Contreras"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773784365137,
+      "content": "Todo es negociable, es cuesti\u00c3\u00b3n que si usted le gusta la casa, nos pase una oferta",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Luis Enrique rojas Contreras",
+      "timestamp_ms": 1773673111696,
+      "content": "Bueno d\u00c3\u00adas dime c\u00c3\u00b3mo financean",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773672798356,
+      "content": "Placer saludarle, soy Alejandro Flores del equipo de Asesores RM inmobiliaria \u00f0\u009f\u0098\u00831700000$ negociable, estamos trabajando bajo la modalidad de financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773669167565,
+      "content": "Luis Enrique rojas Contreras replied to an ad. View ad(https://www.instagram.com/p/DVzkVHWgJM4/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Luis Enrique rojas Contreras",
+      "timestamp_ms": 1773669166863,
+      "content": "Dime de qu\u00c3\u00a9 cetratas",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Luis Enrique rojas Contreras",
+  "is_still_participant": true,
+  "thread_path": "inbox/luisenriquerojascontreras_18036531518780331",
+  "magic_words": [
+    
+  ]
+}

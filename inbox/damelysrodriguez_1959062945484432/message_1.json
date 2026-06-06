@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Damelys Rodriguez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776862948354,
+      "content": "Me regala su n\u00c3\u00bamero de contacto para agendar la visita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776862935535,
+      "content": "La parcela  tiene un precio de 650000$ es una oportunidad de inversi\u00c3\u00b3n. En una Excelente Ubicaci\u00c3\u00b3n en Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776862917964,
+      "content": "Feliz D\u00c3\u00ada gusto en Saludarle por ac\u00c3\u00a1 Odra Cede\u00c3\u00b1o",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Damelys Rodriguez",
+      "timestamp_ms": 1776858723793,
+      "content": "\u00c2\u00bfC\u00c3\u00b3mo puedo programar una visita?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Damelys Rodriguez",
+      "timestamp_ms": 1776858723080,
+      "content": "Damelys envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Damelys Rodriguez",
+  "is_still_participant": true,
+  "thread_path": "inbox/damelysrodriguez_1959062945484432",
+  "magic_words": [
+    
+  ]
+}

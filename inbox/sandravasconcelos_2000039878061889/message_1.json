@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "\u00e2\u0098\u0086\u00ea\u00a7\u0081Sandra Vasconcelos\u00ea\u00a7\u0082\u00e2\u0098\u0086"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773803127333,
+      "content": "La casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada\u00e2\u0080\u00a6 Su valor es de $1.700.000 negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House, la entrada es totalmente gratuita \n\n\u00c2\u00bfle gustar\u00c3\u00ada asistir?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773803124246,
+      "content": "Saludos Sandra!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "\u00e2\u0098\u0086\u00ea\u00a7\u0081Sandra Vasconcelos\u00ea\u00a7\u0082\u00e2\u0098\u0086",
+  "is_still_participant": true,
+  "thread_path": "inbox/sandravasconcelos_2000039878061889",
+  "magic_words": [
+    
+  ]
+}

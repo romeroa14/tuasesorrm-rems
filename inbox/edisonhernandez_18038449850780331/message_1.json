@@ -1,0 +1,58 @@
+{
+  "participants": [
+    {
+      "name": "Edison Hernandez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774720388936,
+      "content": "Tenemos disponibilidad en \nPREMIUM LA ESCONDIDA de dos unidades:\n\n\u00f0\u009f\u0094\u00b8 Planta Baja de 186 m\u00c2\u00b2 en $170,000\n\u00f0\u009f\u0094\u00b8Y un apartamento de 153 m\u00c2\u00b2 $220,000\n\nAmbas opciones est\u00c3\u00a1n en obra gris",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774720384308,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774720381351,
+      "content": "Saludos, feliz s\u00c3\u00a1bado",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Edison Hernandez",
+      "timestamp_ms": 1774720360172,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Edison Hernandez",
+      "timestamp_ms": 1774720359787,
+      "content": "Edison envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DWbpoKBgEnK/?id=3862864184848959946_53287868330",
+        "share_text": "Un refugio de amplitud y naturaleza en el coraz\u00c3\u00b3n de Baruta \u00f0\u009f\u008c\u00b3\u00e2\u009c\u00a8\n\nEste espectacular apartamento en La Escondida ofrece una experiencia de vida \u00c3\u00banica en Caracas. Dise\u00c3\u00b1ado para quienes valoran la privacidad y el contacto con el exterior, destaca por su generosa distribuci\u00c3\u00b3n y sus \u00c3\u00a1reas verdes privadas\n\nCon 186 m\u00c2\u00b2 de construcci\u00c3\u00b3n, el inmueble cuenta con:\n\n\u00f0\u009f\u009b\u008f\u00ef\u00b8\u008f 1 Habitaci\u00c3\u00b3n  amplia y con excelente iluminaci\u00c3\u00b3n\n\u00f0\u009f\u009a\u00bd 2 Ba\u00c3\u00b1os (incluyendo ba\u00c3\u00b1o de visitas para mayor comodidad)\n\u00f0\u009f\u008c\u00bf Terraza y Jard\u00c3\u00adn privados: Un espacio exclusivo para el descanso o el entretenimiento al aire libre\n\u00f0\u009f\u009a\u0097 1 Puesto de estacionamiento\n\u00f0\u009f\u009b\u0097 Edificio con ascensores operativos y mantenimiento impecable\n\nUbicado en una de las zonas m\u00c3\u00a1s serenas y seguras del Distrito Capital, este hogar combina modernidad con la tranquilidad de un entorno natural\n\n\u00f0\u009f\u0093\u008d Ubicaci\u00c3\u00b3n: La Escondida, Baruta\n\nPara m\u00c3\u00a1s informaci\u00c3\u00b3n o para agendar una visita, contactar por mensaje directo \u00f0\u009f\u0093\u00a9\n\n#BienesRaicesCaracas #ApartamentoEnVenta #Baruta #LaEscondida #LujoCaracas #InmueblesVenezuela #VentaApartamento",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Edison Hernandez",
+  "is_still_participant": true,
+  "thread_path": "inbox/edisonhernandez_18038449850780331",
+  "magic_words": [
+    
+  ]
+}

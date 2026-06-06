@@ -1,0 +1,74 @@
+{
+  "participants": [
+    {
+      "name": "userandle"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "userandle",
+      "timestamp_ms": 1773372493767,
+      "content": "Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773372228860,
+      "content": "Pero tambi\u00c3\u00a9n brindaremos otras oportunidades",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "userandle",
+      "timestamp_ms": 1773372198949,
+      "content": "Ok muchas gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773372175075,
+      "content": "Si tal cual",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "userandle",
+      "timestamp_ms": 1773372121702,
+      "content": "Es decir una casa en venta?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773372091014,
+      "content": "Buenas noches estamos ofreciendo una oportunidad inmobiliaria",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773370856884,
+      "content": "userandle replied to an ad. View ad(https://www.instagram.com/p/DVwwYl_gKFK/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "userandle",
+      "timestamp_ms": 1773370856188,
+      "content": "Buenas noches de qu\u00c3\u00a9 trata?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "userandle",
+  "is_still_participant": true,
+  "thread_path": "inbox/userandle_2021688422561115",
+  "magic_words": [
+    
+  ]
+}

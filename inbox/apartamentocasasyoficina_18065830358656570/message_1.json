@@ -1,0 +1,42 @@
+{
+  "participants": [
+    {
+      "name": "Apartamento Casas y Oficina"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773008091310,
+      "content": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670381\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670314",
+      "share": {
+        "link": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773008082223,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore \n\nPor ac\u00c3\u00a1 le dejo la informaci\u00c3\u00b3n de los apartamentos en venta, ubicados en Los Naranjos de Las Mercedes",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773008081934,
+      "content": "Enviaste una respuesta privada a un comentario de tu publicaci\u00c3\u00b3n de Instagram.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Apartamento Casas y Oficina",
+  "is_still_participant": true,
+  "thread_path": "inbox/apartamentocasasyoficina_18065830358656570",
+  "magic_words": [
+    
+  ]
+}

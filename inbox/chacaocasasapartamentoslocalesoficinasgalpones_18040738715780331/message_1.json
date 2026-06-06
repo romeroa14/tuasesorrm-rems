@@ -1,0 +1,70 @@
+{
+  "participants": [
+    {
+      "name": "Chacao | Casas | Apartamentos | Locales | Oficinas | Galpones"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776288463483,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Chacao | Casas | Apartamentos | Locales | Oficinas | Galpones",
+      "timestamp_ms": 1776288462967,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Chacao | Casas | Apartamentos | Locales | Oficinas | Galpones",
+      "timestamp_ms": 1776288462270,
+      "content": "Wwa.me/4241987414\n\nMe compartes el link al WhatsApp",
+      "share": {
+        "link": "http://wwa.me/4241987414",
+        "share_text": "Wwa.me/4241987414\n\nMe compartes el link al WhatsApp"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Chacao | Casas | Apartamentos | Locales | Oficinas | Galpones",
+      "timestamp_ms": 1776288423613,
+      "content": "Feliz tarde me compartes la informaci\u00c3\u00b3n gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Chacao | Casas | Apartamentos | Locales | Oficinas | Galpones",
+      "timestamp_ms": 1776288423204,
+      "content": "Chacao envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776288402789,
+      "content": "Chacao | Casas | Apartamentos | Locales | Oficinas | Galpones replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Chacao | Casas | Apartamentos | Locales | Oficinas | Galpones",
+      "timestamp_ms": 1776288401962,
+      "content": "\u00c2\u00a1Hola! Gracias por contactarme, como puedo ayudarte? realtors.rm",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Chacao | Casas | Apartamentos | Locales | Oficinas | Galpones",
+  "is_still_participant": true,
+  "thread_path": "inbox/chacaocasasapartamentoslocalesoficinasgalpones_18040738715780331",
+  "magic_words": [
+    
+  ]
+}

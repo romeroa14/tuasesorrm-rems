@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Me"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774288584295,
+      "content": "El pent house de margarita est\u00c3\u00a1 en 450k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774288573044,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco asistente de Rossana Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Me",
+  "is_still_participant": true,
+  "thread_path": "inbox/me_18037751243780331",
+  "magic_words": [
+    
+  ]
+}

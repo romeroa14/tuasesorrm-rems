@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Johan Ni\u00c3\u00b1o"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775787257787,
+      "content": "Podemos aceptar un financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775787249475,
+      "content": "Est\u00c3\u00a1 disponible en 1.900.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775787142392,
+      "content": "Hola buena noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Johan Ni\u00c3\u00b1o",
+      "timestamp_ms": 1775785843105,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775784895677,
+      "content": "Johan Ni\u00c3\u00b1o replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Johan Ni\u00c3\u00b1o",
+      "timestamp_ms": 1775784895082,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Johan Ni\u00c3\u00b1o",
+  "is_still_participant": true,
+  "thread_path": "inbox/johannino_1928769035180600",
+  "magic_words": [
+    
+  ]
+}

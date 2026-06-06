@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Mildry Sanchez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775328522613,
+      "content": "Muy buenas tardes! Que tal est\u00c3\u00a1 ? Le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nSi gusta se puede comunicar a este n\u00c3\u00bamero 04141260327",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mildry Sanchez",
+      "timestamp_ms": 1775305950217,
+      "content": "Numero por favor",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Mildry Sanchez",
+  "is_still_participant": true,
+  "thread_path": "inbox/mildrysanchez_18039320948780331",
+  "magic_words": [
+    
+  ]
+}

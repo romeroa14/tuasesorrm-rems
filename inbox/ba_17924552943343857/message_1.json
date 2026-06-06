@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "ba"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778760699110,
+      "content": "Buenos d\u00c3\u00adas un gusto saludarle le escribe Alejandra Velasco de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "ba",
+      "timestamp_ms": 1778758529817,
+      "content": "\u00c2\u00a1Hola! Quiero m\u00c3\u00a1s informaci\u00c3\u00b3n.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "ba",
+  "is_still_participant": true,
+  "thread_path": "inbox/ba_17924552943343857",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Iraida \u00c3\u0081vila de Martino"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779657355033,
+      "content": "Soy Valery Mendoza quedo atenta a su comentario",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779657348068,
+      "content": "Aqu\u00c3\u00ad le comparto las caracter\u00c3\u00adsticas de este penthouse de 172 m\u00c2\u00b2 ubicado en los Samanes! \n\n4 habitaciones | 3 ba\u00c3\u00b1os | Sala, cocina, lavandero, Vestier, habitaci\u00c3\u00b3n de servicio, ba\u00c3\u00b1o de visitas, Balc\u00c3\u00b3n y Bar\n\nSu precio es de $185,000 negociable \n\n\u00c2\u00bfTe gustar\u00c3\u00ada conocerlo?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779657336910,
+      "content": "_____",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779657301502,
+      "content": "El apartamento ubicado en los Naranjos del cafetal tiene un precio de $245,000\nSon 135 m\u00c2\u00b2 , cuenta con  3 Habitaciones | 2 Ba\u00c3\u00b1os",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779657282562,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Iraida \u00c3\u0081vila de Martino",
+  "is_still_participant": true,
+  "thread_path": "inbox/iraidaavilademartino_984267061022053",
+  "magic_words": [
+    
+  ]
+}

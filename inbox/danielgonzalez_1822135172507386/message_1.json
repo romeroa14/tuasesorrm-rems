@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Daniel Gonzalez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777300810098,
+      "content": "Saludos, Alejandro Flores\u00f0\u009f\u009f\u00a2 Paso por aqu\u00c3\u00ad para saber si tiene alguna b\u00c3\u00basqueda inmobiliaria o desea vender alguna propiedad?\n Asesores RM para servirle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777000910266,
+      "content": "Est\u00c3\u00a1 Parcela en una exclusiva zona de Altamira disponible para iniciar un proyecto se encuentra en precio de 650000$ si le gustar\u00c3\u00ada agendar una visita  nos comparte su WhatsApp por favor",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777000835194,
+      "content": "Buenas Noches Odra Cede\u00c3\u00b1o Gusto en Saludarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Daniel Gonzalez",
+  "is_still_participant": true,
+  "thread_path": "inbox/danielgonzalez_1822135172507386",
+  "magic_words": [
+    
+  ]
+}

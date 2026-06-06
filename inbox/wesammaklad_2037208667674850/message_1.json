@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Wesam Maklad"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778779892529,
+      "content": "Su precio es de 450k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778779883380,
+      "content": "\u00c2\u00a1Hermoso  Penthouse de oportunidad en Playa Moreno! \nUbicaci\u00c3\u00b3n privilegiada en Punta Pac\u00c3\u00adfico: cruzas la calle y ya est\u00c3\u00a1s en el mar. \nLo mejor de esta propiedad:\nCocina Ferrara y acabados de lujo.\n3 Habitaciones con ba\u00c3\u00b1o privado (Principal con vestier).\nTerraza panor\u00c3\u00a1mica con vista frontal al oc\u00c3\u00a9ano.\n\u00c3\u0081reas VIP: Piscinas, tenis, planta el\u00c3\u00a9ctrica y m\u00c3\u00a1xima vigilancia.\n\u00f0\u009f\u0093\u008d 2 puestos de estacionamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778779832743,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778779698639,
+      "content": "Wesam Maklad replied to an ad. View ad(https://www.instagram.com/p/DYTU1FzgDSx/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Wesam Maklad",
+      "timestamp_ms": 1778779697439,
+      "content": "Precio porfavor",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Wesam Maklad",
+  "is_still_participant": true,
+  "thread_path": "inbox/wesammaklad_2037208667674850",
+  "magic_words": [
+    
+  ]
+}

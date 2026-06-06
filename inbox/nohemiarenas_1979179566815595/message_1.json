@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Nohemi Arenas"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774736136267,
+      "content": "Muy buenas tardes! \n\nEsta hermosa casa se encuentra ubicada en Santa Paula, cuenta con un metraje de 1300m2 de construcci\u00c3\u00b3n y 630m2 de terrero, 7 habitaciones, 8 ba\u00c3\u00b1os 8 puestos de estacionamiento adem\u00c3\u00a1s de piscina, parrillera, terraza, gimnasio, cancha deportiva. \n\nEst\u00c3\u00a1 hermosa casa tiene un valor de 1.200.000$ totalmente negociable \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774735129961,
+      "content": "Nohemi Arenas replied to an ad. View ad(https://www.instagram.com/p/DWbrPG-gMYO/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Nohemi Arenas",
+      "timestamp_ms": 1774735129274,
+      "content": "Buenas tardes \nMe puede informar en qu\u00c3\u00a9 lugar en Caracas, est\u00c3\u00a1 ubicada esta propiedad.\nY cu\u00c3\u00a1l es el precio \nMuchas gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774734888868,
+      "content": "Muy buenas tardes! Que tal est\u00c3\u00a1 ? Le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nEl PB por el cual consulta es de 186m2 y tiene un valor de 170.000$ totalmente negociable \n\nMe permite alg\u00c3\u00ban n\u00c3\u00bamero telef\u00c3\u00b3nico para enviarle un material audiovisual y que pueda conocerlo ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774734673813,
+      "content": "Nohemi Arenas replied to an ad. View ad(https://www.instagram.com/p/DWbpoKBgEnK/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Nohemi Arenas",
+      "timestamp_ms": 1774734673277,
+      "content": "Buenas tardes \nEl apartamento tiene solo 1 habitacion\nCu\u00c3\u00a1l es el precio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Nohemi Arenas",
+  "is_still_participant": true,
+  "thread_path": "inbox/nohemiarenas_1979179566815595",
+  "magic_words": [
+    
+  ]
+}

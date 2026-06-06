@@ -1,0 +1,95 @@
+{
+  "participants": [
+    {
+      "name": "Adriana Barrios"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Adriana Barrios",
+      "timestamp_ms": 1776621304063,
+      "content": "Ok",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776621291471,
+      "content": "Le comento este apartamento es solo para cliente directo \u00f0\u009f\u0099\u008c",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Adriana Barrios",
+      "timestamp_ms": 1776621274419,
+      "content": "Tengo un cliente buscando esto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Adriana Barrios",
+      "timestamp_ms": 1776621264075,
+      "content": "Un gusto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Adriana Barrios",
+      "timestamp_ms": 1776621260286,
+      "content": "Soy asesora tambi\u00c3\u00a9n de Abitu Inmobiliaria",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776621258415,
+      "content": "Un gusto!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Adriana Barrios",
+      "timestamp_ms": 1776621250157,
+      "content": "Hola Valery",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776621240080,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776621236805,
+      "content": "Hola se\u00c3\u00b1ora Adriana!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776621223426,
+      "content": "Adriana Barrios replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Adriana Barrios",
+      "timestamp_ms": 1776621222924,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1les son los detalles de la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Adriana Barrios",
+  "is_still_participant": true,
+  "thread_path": "inbox/adrianabarrios_1961965878527826",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "maiguitaf"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774285492327,
+      "content": "Con financiamiento, 30% de inicial, de 18 a 24 meses de financiamiento, todo totalmente negociable\n\nYa nos quedan muy pocas unidades y podemos congelar el precio con un 10%",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774285485607,
+      "content": "En Promenade tenemos apartamentos y oficinas disponibles, a partir de los 37m2 desde 222.000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774285476237,
+      "content": "Hola buenas tardes. Un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774222604229,
+      "content": "maiguitaf replied to an ad. View ad(https://www.instagram.com/p/DWKSHM2gIUW/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "maiguitaf",
+      "timestamp_ms": 1774222603583,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio aproximado?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "maiguitaf",
+  "is_still_participant": true,
+  "thread_path": "inbox/maiguitaf_1792843302102210",
+  "magic_words": [
+    
+  ]
+}

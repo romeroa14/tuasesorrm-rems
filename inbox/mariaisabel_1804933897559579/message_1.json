@@ -1,0 +1,67 @@
+{
+  "participants": [
+    {
+      "name": "Mari\u00cc\u0081a Isabel"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774747977064,
+      "content": "En Premium La Escondida tenemos 2 apartamentos disponibles:\n\n\u00e2\u0080\u00a2Un Planta Baja, 186m2 en 170.000$ \n\u00e2\u0080\u00a2Uno en piso 5, 153m2 en 220.000$ \n\nNegociables, podemos aceptar un financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774747975709,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774738599426,
+      "content": "Mari\u00cc\u0081a Isabel replied to an ad. View ad(https://www.instagram.com/p/DWbpoKBgEnK/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mari\u00cc\u0081a Isabel",
+      "timestamp_ms": 1774738598570,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773796038388,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore \n\nLa casa ubicada en Los Naranjos del Cafetal es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada\u00e2\u0080\u00a6 Su valor es de 1.700.000$ negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House, la entrada es totalmente gratuita \n\n\u00c2\u00bfle gustar\u00c3\u00ada asistir?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773792474498,
+      "content": "Mari\u00cc\u0081a Isabel replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mari\u00cc\u0081a Isabel",
+      "timestamp_ms": 1773792473598,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Mari\u00cc\u0081a Isabel",
+  "is_still_participant": true,
+  "thread_path": "inbox/mariaisabel_1804933897559579",
+  "magic_words": [
+    
+  ]
+}

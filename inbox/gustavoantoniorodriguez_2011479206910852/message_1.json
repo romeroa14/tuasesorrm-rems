@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Gustavo Antonio Rodriguez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778099204418,
+      "content": "Precio 650000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778099167897,
+      "content": "Buen D\u00c3\u00ada Odra Cede\u00c3\u00b1o un Gusto saludarle del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Gustavo Antonio Rodriguez",
+  "is_still_participant": true,
+  "thread_path": "inbox/gustavoantoniorodriguez_2011479206910852",
+  "magic_words": [
+    
+  ]
+}

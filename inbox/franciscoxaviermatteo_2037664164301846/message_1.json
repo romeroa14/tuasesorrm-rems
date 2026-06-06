@@ -1,0 +1,51 @@
+{
+  "participants": [
+    {
+      "name": "Francisco Xavier Matteo"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778681774613,
+      "content": "Soy Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d \n\n\u00c2\u00a1Quedo atenta a su comentario! \u00f0\u009f\u0098\u0089",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778681757430,
+      "photos": [
+        {
+          "uri": "your_instagram_activity/messages/inbox/franciscoxaviermatteo_2037664164301846/photos/1523476799484730.jpg",
+          "creation_timestamp": 1778681756
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778681753812,
+      "content": "Se trata de una parcela excepcional ubicada en el coraz\u00c3\u00b3n de Las Mercedes, ideal para inversionistas que buscan alta rentabilidad y desarrollo en el sector de mayor dinamismo de la ciudad. \u00f0\u009f\u008f\u0099\u00ef\u00b8\u008f\n\nCon un valor de $1,950,000\nUbicaci\u00c3\u00b3n Premium \n\n\u00f0\u009f\u0093\u008d Ubicaci\u00c3\u00b3n y Superficie\n\u00c3\u0081rea Total: 778 m\u00c2\u00b2 \nFrente: 20 metros lineales \n\n\u00f0\u009f\u0093\u0088Zonificaci\u00c3\u00b3n: V6-CT \n(Para construir un edificio, con locales, oficinas y viviendas de lujo) \n\n\u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f Potencial de Desarrollo \nUbicaci\u00c3\u00b3n M\u00c3\u00a1xima: 60% \nAltura Permitida: Hasta 24 metros (6 pisos) \n\n\u00f0\u009f\u008f\u00a0 Local Comercial existente de dos plantas:\n\u00c3\u0081rea Total Construida: 750 m\u00c2\u00b2 \u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f\nPlanta Baja: 500 m\u00c2\u00b2 aprox.\nPlanta Alta: 250 m\u00c2\u00b2 aprox.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778681750892,
+      "content": "Saludos se\u00c3\u00b1or Francisco, c\u00c3\u00b3mo est\u00c3\u00a1?\nLe comparto informaci\u00c3\u00b3n acerca de esta oportunidad de inversi\u00c3\u00b3n en la Calle Londres de las Mercedes!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Francisco Xavier Matteo",
+  "is_still_participant": true,
+  "thread_path": "inbox/franciscoxaviermatteo_2037664164301846",
+  "magic_words": [
+    
+  ]
+}

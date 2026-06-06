@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Jorge L Rincon"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778279568100,
+      "content": "1900.000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778278695836,
+      "content": "Jorge L Rincon replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jorge L Rincon",
+      "timestamp_ms": 1778278695280,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jorge L Rincon",
+  "is_still_participant": true,
+  "thread_path": "inbox/jorgelrincon_1867298701324897",
+  "magic_words": [
+    
+  ]
+}

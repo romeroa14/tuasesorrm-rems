@@ -1,0 +1,58 @@
+{
+  "participants": [
+    {
+      "name": "Jose Sakal"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778034473797,
+      "content": "Uso residencial",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778034464267,
+      "content": "Est\u00c3\u00a1 disponible en 650.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778034455609,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jose Sakal",
+      "timestamp_ms": 1778029417093,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 usos se permiten en la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jose Sakal",
+      "timestamp_ms": 1778029416388,
+      "content": "Jose envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DXfXl92AJjV/?id=3881925167911311573_53287868330",
+        "share_text": "\u00f0\u009f\u0093\u008d Oportunidad de Inversi\u00c3\u00b3n: Terreno Estrat\u00c3\u00a9gico en Altamira\n\nUbicado en el coraz\u00c3\u00b3n del Municipio Chacao, presentamos una propiedad con un potencial extraordinario para quienes buscan desarrollar proyectos de alto nivel o establecer una sede corporativa en una ubicaci\u00c3\u00b3n privilegiada\n\nEste terreno combina visibilidad, accesibilidad y el prestigio que solo Altamira puede ofrecer\n\nCaracter\u00c3\u00adsticas Principales:\n\nSuperficie Total: 786 m\u00c2\u00b2 de terreno\n\u00c3\u0081rea de Construcci\u00c3\u00b3n: 450 m\u00c2\u00b2\n\nUbicaci\u00c3\u00b3n: A pie de calle, garantizando un acceso sencillo y gran exposici\u00c3\u00b3n\n\nEstado: Espacios abiertos listos para ser transformados seg\u00c3\u00ban los requerimientos de su proyecto\n\nVentajas Competitivas:\nEntorno Premium: Situado en una de las zonas de mayor revalorizaci\u00c3\u00b3n del Distrito Capital\n\nVersatilidad: Ideal para desarrollos residenciales de baja densidad, oficinas boutique o uso comercial especializado\n\nConectividad: Cercan\u00c3\u00ada inmediata a las principales v\u00c3\u00adas de comunicaci\u00c3\u00b3n y servicios de lujo de la zona\n\nContacta, reserva y visita con Asesores RM, de la mano contigo\n\n#Altamira #Chacao #BienesRaicesVenezuela #InmueblesCaracas #TerrenosEnVenta #RealEstateCaracas #InversionInmobiliaria #DesarrolloInmobiliario #OficinasCaracas #DistritoCapital",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jose Sakal",
+  "is_still_participant": true,
+  "thread_path": "inbox/josesakal_2046790346716597",
+  "magic_words": [
+    
+  ]
+}

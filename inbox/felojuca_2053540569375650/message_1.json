@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "felojuca"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774288690483,
+      "content": "El pent house de margarita tiene un precio de 450k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774288679142,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco asistente de Rossana Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "felojuca",
+  "is_still_participant": true,
+  "thread_path": "inbox/felojuca_2053540569375650",
+  "magic_words": [
+    
+  ]
+}

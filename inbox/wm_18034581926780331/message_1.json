@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "WM"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491850607,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772388130787,
+      "content": "Soy Valery Mendoza del Equipo de Asesores RM \n\nCon gusto le comparto m\u00c3\u00a1s detalles de la casa a trav\u00c3\u00a9s de WhatsApp!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772388109925,
+      "content": "Hola buenas tardes! C\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "WM",
+  "is_still_participant": true,
+  "thread_path": "inbox/wm_18034581926780331",
+  "magic_words": [
+    
+  ]
+}

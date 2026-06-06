@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Ahmad Salim"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774800923418,
+      "content": "Negociables",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774800920727,
+      "content": "Hola buen d\u00c3\u00ada su precio es de 650.000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774792069996,
+      "content": "Ahmad Salim replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ahmad Salim",
+      "timestamp_ms": 1774792069478,
+      "content": "Buen d\u00c3\u00ada cu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Ahmad Salim",
+  "is_still_participant": true,
+  "thread_path": "inbox/ahmadsalim_1913908009999474",
+  "magic_words": [
+    
+  ]
+}

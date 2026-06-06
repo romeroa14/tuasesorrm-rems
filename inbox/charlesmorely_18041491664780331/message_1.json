@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Charles Morely"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776778439500,
+      "content": "Perfecto me comparte su WhatsApp para coordinar la visita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Charles Morely",
+      "timestamp_ms": 1776778377386,
+      "content": "Hola, s\u00c3\u00ad",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776778352491,
+      "content": "Gustar\u00c3\u00ada agendar una visita ? \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776778342161,
+      "content": "Muy buenos d\u00c3\u00adas! Que tal est\u00c3\u00a1 ? Le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb \n\nEste terreno de 786m2 tiene un valor de 650.000$ totalmente negociable \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Charles Morely",
+      "timestamp_ms": 1776778270566,
+      "content": "Hola",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Charles Morely",
+      "timestamp_ms": 1776778269505,
+      "content": "Charles envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Charles Morely",
+  "is_still_participant": true,
+  "thread_path": "inbox/charlesmorely_18041491664780331",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Antonio Parisi"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776954915324,
+      "content": "Si gusta me podr\u00c3\u00ada compartir alg\u00c3\u00ban n\u00c3\u00bamero telef\u00c3\u00b3nico para que podamos conversar sobre los detalles \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776954884464,
+      "content": "Muy buenos d\u00c3\u00adas! Que tal est\u00c3\u00a1 ? Le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nEste fondo de comercio de 188m2  se encuentra disponible para la venta por 170.000$ totalmente negociable \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\n\u00e2\u0080\u00a2La terraza ser\u00c3\u00ada de 60m2 \n\u00e2\u0080\u00a2 el inmueble se queda equipado \n\u00e2\u0080\u00a2 piso de granito \n\u00e2\u0080\u00a2 techo de Dry Wall",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776948266279,
+      "content": "Antonio Parisi replied to an ad. View ad(https://www.instagram.com/p/DXdNVZfAGBj/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Antonio Parisi",
+      "timestamp_ms": 1776948265505,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1les son los detalles adicionales del local?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Antonio Parisi",
+  "is_still_participant": true,
+  "thread_path": "inbox/antonioparisi_1984844336240051",
+  "magic_words": [
+    
+  ]
+}

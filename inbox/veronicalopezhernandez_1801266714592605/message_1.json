@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Veronica L\u00c3\u00b3pez Hern\u00c3\u00a1ndez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778098743327,
+      "content": "Precio 249000$ puesto asignado por condominio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778098731902,
+      "content": "Buen D\u00c3\u00ada Odra Cede\u00c3\u00b1o un Gusto saludarle del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Veronica L\u00c3\u00b3pez Hern\u00c3\u00a1ndez",
+  "is_still_participant": true,
+  "thread_path": "inbox/veronicalopezhernandez_1801266714592605",
+  "magic_words": [
+    
+  ]
+}

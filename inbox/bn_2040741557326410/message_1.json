@@ -1,0 +1,56 @@
+{
+  "participants": [
+    {
+      "name": "BN"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777300454300,
+      "content": "Saludos, Alejandro Flores\u00f0\u009f\u009f\u00a2 Paso por aqu\u00c3\u00ad para saber si tiene alguna b\u00c3\u00basqueda inmobiliaria o desea vender alguna propiedad?\n Asesores RM para servirle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776948607413,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776948603044,
+      "content": "Ubicada en Chuao a toda pie de Calle esta casa comercial tiene un precio de $1,300,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776948485291,
+      "content": "Hola buen d\u00c3\u00ada!\nMi nombre es Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "BN",
+      "timestamp_ms": 1776913869077,
+      "content": "Precio",
+      "share": {
+        "link": "https://www.instagram.com/p/DXdNwrpAC-h/"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "BN",
+  "is_still_participant": true,
+  "thread_path": "inbox/bn_2040741557326410",
+  "magic_words": [
+    
+  ]
+}

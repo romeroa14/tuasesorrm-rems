@@ -1,0 +1,64 @@
+{
+  "participants": [
+    {
+      "name": "Jimmy"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733416858,
+      "content": "Av transversal 6 de la avenida 12 de Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733398980,
+      "content": "Terreno en Altamira \n$600,000 precio de oportunidad se encuentra en una av donde hay nuevas edificaciones en Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733388594,
+      "content": "https://l.instagram.com/?u=https%3A%2F%2Finfo.wasi.co%2Fterreno-venta-altamira%2F9704566&e=AT4wUGA9YSeKemG-x_HuLOaD4kGZ7k6vRJJ2UL8QuxTBs70ocoNiqy5xbhZ02KkrHU8QXvg2tLwvKNeUXwaQCHHoDlxgugmNx4F19DIntUyp18oOUVDRweQCakyp",
+      "share": {
+        "link": "https://info.wasi.co/terreno-venta-altamira/9704566",
+        "share_text": "https://l.instagram.com/?u=https%3A%2F%2Finfo.wasi.co%2Fterreno-venta-altamira%2F9704566&e=AT4wUGA9YSeKemG-x_HuLOaD4kGZ7k6vRJJ2UL8QuxTBs70ocoNiqy5xbhZ02KkrHU8QXvg2tLwvKNeUXwaQCHHoDlxgugmNx4F19DIntUyp18oOUVDRweQCakyp"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733372534,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774732717280,
+      "content": "Jimmy replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jimmy",
+      "timestamp_ms": 1774732715881,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jimmy",
+  "is_still_participant": true,
+  "thread_path": "inbox/jimmy_1998635698203834",
+  "magic_words": [
+    
+  ]
+}

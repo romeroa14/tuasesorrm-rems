@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Alex Salazar"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778767818103,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1? Le gustar\u00c3\u00ada evaluar otras opciones",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778766436234,
+      "content": "Soy Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778766424961,
+      "content": "Este penthouse tiene un precio de $450,000 negociable con vista al mar \n\nUbicado en Playa Moreno - Residencia punta pac\u00c3\u00adfico \n\n3 habitaciones, la principal con vestier y ba\u00c3\u00b1o\n3 ba\u00c3\u00b1os \nCocina Ferrara \n\u00c3\u0081rea de lavandero \nTerraza \n2 puestos de estacionamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778766360161,
+      "content": "Hola buen d\u00c3\u00ada se\u00c3\u00b1or Alex! un placer",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778766262421,
+      "content": "Alex Salazar replied to an ad. View ad(https://www.instagram.com/p/DYTU1FzgDSx/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Alex Salazar",
+      "timestamp_ms": 1778766261799,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Alex Salazar",
+  "is_still_participant": true,
+  "thread_path": "inbox/alexsalazar_1839083057478281",
+  "magic_words": [
+    
+  ]
+}

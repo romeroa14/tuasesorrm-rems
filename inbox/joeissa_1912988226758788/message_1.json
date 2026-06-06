@@ -1,0 +1,81 @@
+{
+  "participants": [
+    {
+      "name": "Joe Issa"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775782903488,
+      "content": "$650,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775782894841,
+      "content": "\u00f0\u009f\u009f\u00a2 Valery Mendoza en l\u00c3\u00adnea",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775782887740,
+      "content": "Hola buenas noches!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775782863372,
+      "content": "Joe Issa replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Joe Issa",
+      "timestamp_ms": 1775782862887,
+      "content": "Precio xfa?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Joe Issa",
+      "timestamp_ms": 1775782862554,
+      "content": "Joe envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774791505305,
+      "content": "Muy buenos d\u00c3\u00adas! Qu\u00c3\u00a9 tal est\u00c3\u00a1 ? Le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nEl valor de este terreno es de 600.000$ totalmente negociable \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Joe Issa",
+      "timestamp_ms": 1774791328799,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Joe Issa",
+      "timestamp_ms": 1774791328297,
+      "content": "Joe envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Joe Issa",
+  "is_still_participant": true,
+  "thread_path": "inbox/joeissa_1912988226758788",
+  "magic_words": [
+    
+  ]
+}

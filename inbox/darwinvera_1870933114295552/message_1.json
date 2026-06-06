@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "DARWIN VERA"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773501028877,
+      "content": "Feliz s\u00c3\u00a1bado Darwin, un placer conocerle soy Alejandro Flores del equipo de asesores RM inmobiliaria desea informaci\u00c3\u00b3n sobre la propiedad publicada?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773473180026,
+      "content": "DARWIN VERA replied to an ad. View ad(https://www.instagram.com/p/DVzkVHWgJM4/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "DARWIN VERA",
+      "timestamp_ms": 1773473179300,
+      "content": "Quiero una consultar\u00c3\u00ada con un almuerzo",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "DARWIN VERA",
+  "is_still_participant": true,
+  "thread_path": "inbox/darwinvera_1870933114295552",
+  "magic_words": [
+    
+  ]
+}

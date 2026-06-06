@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Artesan\u00c3\u00ada"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775836185678,
+      "content": "Est\u00c3\u00a1 para la venta en 1.900.000k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775836170441,
+      "content": "Buenas un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775836131697,
+      "content": "Artesan\u00c3\u00ada replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Artesan\u00c3\u00ada",
+      "timestamp_ms": 1775836130791,
+      "content": "Costo de alquiler y requisitos",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Artesan\u00c3\u00ada",
+  "is_still_participant": true,
+  "thread_path": "inbox/artesania_1875615080493463",
+  "magic_words": [
+    
+  ]
+}

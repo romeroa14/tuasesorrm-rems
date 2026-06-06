@@ -1,0 +1,64 @@
+{
+  "participants": [
+    {
+      "name": "Luis Enrique Flores"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779731133097,
+      "content": "Buen d\u00c3\u00ada un gusto saludarle Odra Cede\u00c3\u00b1o del Equipo de Asesores RM quer\u00c3\u00ada saber si hab\u00c3\u00ada revisado la informaci\u00c3\u00b3n enviada tambi\u00c3\u00a9n dispongo de otras opciones que pudieran ayudarle me gustar\u00c3\u00ada conocer un poco que b\u00c3\u00basqueda requiere para ayudarle \n\nQuedo atenta Mil Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779587212375,
+      "content": "Hola su precio es de 1270.000$ el mismo queda con todo equipado con acabados de lujo sus muebles son todos tra\u00c3\u00addo de Italia y el propietario podr\u00c3\u00ada evaluar un financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779495681928,
+      "content": "Por aqu\u00c3\u00ad Alejandra Velasco de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779495677237,
+      "content": "https://info.wasi.co/apartamento-venta-caracas-baruta/9931810",
+      "share": {
+        "link": "https://info.wasi.co/apartamento-venta-caracas-baruta/9931810",
+        "share_text": "https://info.wasi.co/apartamento-venta-caracas-baruta/9931810"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779495673379,
+      "content": "Buenas noches se\u00c3\u00b1or Luis",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Luis Enrique Flores",
+      "timestamp_ms": 1779484162143,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Luis Enrique Flores",
+  "is_still_participant": true,
+  "thread_path": "inbox/luisenriqueflores_994557513078118",
+  "magic_words": [
+    
+  ]
+}

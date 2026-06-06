@@ -1,0 +1,43 @@
+{
+  "participants": [
+    {
+      "name": "Yessica De Faria"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773097300960,
+      "content": "Aqu\u00c3\u00ad le comparto las unidades disponibles, est\u00c3\u00a1n en obra blanca y gris junto a sus precios:\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9329346\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670381\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670314",
+      "share": {
+        "link": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346",
+        "share_text": "Aqu\u00c3\u00ad le comparto las unidades disponibles, est\u00c3\u00a1n en obra blanca y gris junto a sus precios:\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9329346\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670381\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670314"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773097293921,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773097291477,
+      "content": "Saludos Yessica! \u00f0\u009f\u0091\u008b",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Yessica De Faria",
+  "is_still_participant": true,
+  "thread_path": "inbox/yessicadefaria_1945057570220215",
+  "magic_words": [
+    
+  ]
+}

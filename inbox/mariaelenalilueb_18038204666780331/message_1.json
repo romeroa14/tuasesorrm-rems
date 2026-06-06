@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Mar\u00c3\u00ada Elena Lilue B"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774821108439,
+      "content": "Hola colega!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2 \n\nSolo buscando clientes directos \n\nSin embargo contamos con otras opciones en las Mercedes en la Torre Nest tower y Chacao! Tanto en venta como alquiler \n\nQuedo atenta, si le gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mar\u00c3\u00ada Elena Lilue B",
+      "timestamp_ms": 1774562736296,
+      "content": "Hola buenas tardes me podr\u00c3\u00ada enviar la oficina en venta de Bello monte",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Mar\u00c3\u00ada Elena Lilue B",
+  "is_still_participant": true,
+  "thread_path": "inbox/mariaelenalilueb_18038204666780331",
+  "magic_words": [
+    
+  ]
+}

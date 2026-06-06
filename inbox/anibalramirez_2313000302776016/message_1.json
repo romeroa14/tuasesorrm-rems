@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Anibal Ramirez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779553108874,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779553104325,
+      "content": "El apartamento ubicado en los Naranjos del cafetal tiene un precio de $245,000\nSon 135 m\u00c2\u00b2 , cuenta con  3 Habitaciones | 2 Ba\u00c3\u00b1os",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779552983430,
+      "content": "Se\u00c3\u00b1ora Anibal, feliz s\u00c3\u00a1bado!\nMi nombre es Valery Mendoza del Equipo RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Anibal Ramirez",
+  "is_still_participant": true,
+  "thread_path": "inbox/anibalramirez_2313000302776016",
+  "magic_words": [
+    
+  ]
+}

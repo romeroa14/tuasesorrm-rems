@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Jose Moya"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773662124216,
+      "content": "La casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada!\n\nSu valor es de $1.700.000 negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House \n\u00c2\u00bfle gustar\u00c3\u00ada asistir?\u00f0\u009f\u008d\u00b7",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773662115472,
+      "content": "Buenos d\u00c3\u00adas! \nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773634033120,
+      "content": "Jose Moya replied to an ad. View ad(https://www.instagram.com/p/DVzkVHWgJM4/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jose Moya",
+      "timestamp_ms": 1773634032478,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio de las viviendas en Los Naranjos del Cafetal?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jose Moya",
+  "is_still_participant": true,
+  "thread_path": "inbox/josemoya_18036479825780331",
+  "magic_words": [
+    
+  ]
+}

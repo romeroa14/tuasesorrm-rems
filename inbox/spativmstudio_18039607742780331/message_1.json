@@ -1,0 +1,42 @@
+{
+  "participants": [
+    {
+      "name": "SPATIVM, Studio"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775505504147,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "SPATIVM, Studio",
+      "timestamp_ms": 1775505504069,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "SPATIVM, Studio",
+      "timestamp_ms": 1775505502858,
+      "content": "Hola Realtors RM, un gusto saludarte. Soy Catherine Rodr\u00c3\u00adguez de SPATIVM Studio.\n\nConocemos tu trayectoria en el sector inmobiliario y nos gustar\u00c3\u00ada invitarte a formar parte de nuestros aliados. En SPATIVM Studio, integramos el arte con la arquitectura y el dise\u00c3\u00b1o para elevar el valor de cualquier propiedad.  \n\nContamos con un cat\u00c3\u00a1logo de m\u00c3\u00a1s de 120 dise\u00c3\u00b1os disponibles para entrega inmediata, ideales para esos clientes que buscan est\u00c3\u00a9tica y calidad para sus espacios.\n\nBeneficios para tus proyectos inmobiliarios:\n -  Acompa\u00c3\u00b1amiento personalizado para tus clientes.\n -  Establecer una alianza comercial con incentivos por venta concretada.  \n -  Acceso a piezas \u00c3\u00banicas de arte contempor\u00c3\u00a1neo.  \n\nWhatsapp:+58 4242941163\nDirecci\u00c3\u00b3n: Antigua sede AUDI, Av. Ppal de La Castellana\nHorarios:Lunes a s\u00c3\u00a1bado de 10:00 a.m. a 7:00 p.m.\nP\u00c3\u00a1gina web: spativm.com",
+      "share": {
+        "link": "http://www.spativm.com/",
+        "share_text": "SPATIVM Studio, tiene como prop\u00c3\u00b3sito y pasi\u00c3\u00b3n acompa\u00c3\u00b1arte a AlCANZAR TU VISI\u00c3\u0093N a trav\u00c3\u00a9s de la integraci\u00c3\u00b3n del Arte con la Arquitectura y el Dise\u00c3\u00b1o, para que juntos alcancemos soluciones que permitan aumentar la calidad y estilo de vida."
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "SPATIVM, Studio",
+  "is_still_participant": true,
+  "thread_path": "inbox/spativmstudio_18039607742780331",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "GL"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779553801111,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada asistir a nuestro OPEN HOUSE?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779553791461,
+      "content": "El apartamento ubicado en los Naranjos del cafetal tiene un precio de $245,000\nSon 135 m\u00c2\u00b2 , cuenta con  3 Habitaciones | 2 Ba\u00c3\u00b1os",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779553776152,
+      "content": "Hola buenos d\u00c3\u00adas, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "GL",
+  "is_still_participant": true,
+  "thread_path": "inbox/gl_1328842029195597",
+  "magic_words": [
+    
+  ]
+}

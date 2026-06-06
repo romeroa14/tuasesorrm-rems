@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Gustavo Rada"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774740149073,
+      "content": "Su permisolog\u00c3\u00ada permite edificio de hasta 4 pisos \n\nYa que es una zona residencial en Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774740139685,
+      "content": "Hola se\u00c3\u00b1or Gustavo!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774739946577,
+      "content": "Gustavo Rada replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Gustavo Rada",
+      "timestamp_ms": 1774739945745,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 usos se permiten en la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Gustavo Rada",
+  "is_still_participant": true,
+  "thread_path": "inbox/gustavorada_1997138991676728",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "participants": [
+    {
+      "name": "\u00e7\u009f\u00a5\u00e8\u00b6\u00b3\u00e5\u00b8\u00b8\u00e4\u00b9\u0090"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "\u00e7\u009f\u00a5\u00e8\u00b6\u00b3\u00e5\u00b8\u00b8\u00e4\u00b9\u0090",
+      "timestamp_ms": 1776608836300,
+      "content": "No gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776608826844,
+      "content": "Negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776608069809,
+      "content": "Buen d\u00c3\u00ada su precio es de 250.000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776608046904,
+      "content": "\u00e7\u009f\u00a5\u00e8\u00b6\u00b3\u00e5\u00b8\u00b8\u00e4\u00b9\u0090 replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "\u00e7\u009f\u00a5\u00e8\u00b6\u00b3\u00e5\u00b8\u00b8\u00e4\u00b9\u0090",
+      "timestamp_ms": 1776608046539,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "\u00e7\u009f\u00a5\u00e8\u00b6\u00b3\u00e5\u00b8\u00b8\u00e4\u00b9\u0090",
+      "timestamp_ms": 1776608045799,
+      "content": "\u00e7\u009f\u00a5\u00e8\u00b6\u00b3\u00e5\u00b8\u00b8\u00e4\u00b9\u0090 envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DXMgwr4AHNn/?id=3876617462392845159_53287868330",
+        "share_text": "\u00c2\u00a1Lo que buscabas en Los Palos Grandes finalmente apareci\u00c3\u00b3! \u00f0\u009f\u008f\u0099\u00ef\u00b8\u008f\u00e2\u009c\u00a8\n\nSabemos que encontrar una propiedad lista para mudarse en la zona m\u00c3\u00a1s top de Caracas es un reto, pero aqu\u00c3\u00ad tienes la joya de la corona. Totalmente actualizado en 2026, amueblado con piezas italianas y acabados de primera. \u00f0\u009f\u009b\u008b\u00ef\u00b8\u008f\n\n\u00f0\u009f\u0093\u008d 3ra Avenida de Los Palos Grandes.\n\n\u00f0\u009f\u0093\u0090 83M\u00c2\u00b2 de puro dise\u00c3\u00b1o.\n\n\u00f0\u009f\u009b\u008c 2 Habitaciones / 2 Ba\u00c3\u00b1os.\n\n\u00f0\u009f\u0092\u00a7 Pozo de agua.\n\n\u00c2\u00a1No dejes que se te adelanten! \nEscr\u00c3\u00adbenos al enlace del perfil para agendar tu visita. \u00f0\u009f\u0093\u00b2\n\n#LosPalosGrandes #RealEstateCaracas #AsesoresRM #ApartamentoEnVenta #LujoCaracas #InversionInmobiliaria #VivirEnCaracas.",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "\u00e7\u009f\u00a5\u00e8\u00b6\u00b3\u00e5\u00b8\u00b8\u00e4\u00b9\u0090",
+  "is_still_participant": true,
+  "thread_path": "inbox/zhizuchangle_18041226899780331",
+  "magic_words": [
+    
+  ]
+}

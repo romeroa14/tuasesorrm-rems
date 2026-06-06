@@ -1,0 +1,71 @@
+{
+  "participants": [
+    {
+      "name": "S,Dei"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776826191601,
+      "content": "Si desea, podemos mostrarle el apartamento ma\u00c3\u00b1ana mismo",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776826178748,
+      "content": "Su precio es negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776826159313,
+      "content": "https://www.rexup.net/AAAAAAA/ver_inmueble_c.php?cod_inmueble=2203325120",
+      "share": {
+        "link": "https://www.rexup.net/AAAAAAA/ver_inmueble_c.php?cod_inmueble=2203325120",
+        "share_text": "https://www.rexup.net/AAAAAAA/ver_inmueble_c.php?cod_inmueble=2203325120"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "S,Dei",
+      "timestamp_ms": 1776826150196,
+      "content": "Necesito m\u00c3\u00a1s informaci\u00c3\u00b3n sobre la propiedad.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776826112613,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776826018236,
+      "content": "S,Dei replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "S,Dei",
+      "timestamp_ms": 1776826017599,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "S,Dei",
+  "is_still_participant": true,
+  "thread_path": "inbox/sdei_1788470359203017",
+  "magic_words": [
+    
+  ]
+}

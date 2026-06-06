@@ -1,0 +1,93 @@
+{
+  "participants": [
+    {
+      "name": "Ilias 011"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777202837849,
+      "content": "En breve le atender\u00c3\u00a9",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ilias 011",
+      "timestamp_ms": 1777202797986,
+      "content": "Ahmed Hammoud",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777202790953,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ilias 011",
+      "timestamp_ms": 1777202790360,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ilias 011",
+      "timestamp_ms": 1777202789684,
+      "content": "Hola feliz Domingo \n04243333555",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777202784057,
+      "content": "Soy Alejandro Flores del equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777202775199,
+      "content": "Si gusta perm\u00c3\u00adtame su n\u00c3\u00bamero para presentarlr esta propuesta de inversi\u00c3\u00b3n y conversamos sobre t\u00c3\u00a9rminos",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777202770328,
+      "content": "El Precio es de 1950000$ totalmente negociable \n\n\nSi gusta podr\u00c3\u00adamos agendar una visita a la propiedad y all\u00c3\u00ad conversamos t\u00c3\u00a9rminos de negociaci\u00c3\u00b3n \n\nFeliz domingo  (edited)",
+      "is_geoblocked_for_viewer": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777202762680,
+      "content": "El Precio es de 1950000$ totalmente negociable \n\n\nSi gusta podr\u00c3\u00adamos agendar una visita a la propiedad y all\u00c3\u00ad conversamos t\u00c3\u00a9rminos de negociaci\u00c3\u00b3n \n\nFeliz sabado",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777202742303,
+      "content": "Ilias 011 replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ilias 011",
+      "timestamp_ms": 1777202741170,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Ilias 011",
+  "is_still_participant": true,
+  "thread_path": "inbox/ilias011_18042194726780331",
+  "magic_words": [
+    
+  ]
+}

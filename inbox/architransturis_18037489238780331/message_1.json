@@ -1,0 +1,74 @@
+{
+  "participants": [
+    {
+      "name": "Architransturis"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776483486323,
+      "content": "Est\u00c3\u00a1 disponible en 249.000$\n83m2\n\n2 habitaciones \n2 ba\u00c3\u00b1os \n1 Puesto de estacionamiento \nAmoblado\nCocina Ferrara\nAires acondicionados\nPiso medio\nEdificio de baja densidad",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776483299378,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776462285376,
+      "content": "Architransturis replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Architransturis",
+      "timestamp_ms": 1776462284566,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1les son los detalles de la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774141391616,
+      "content": "El precio es de De 450.000$ con 3 habitaciones y 4 puestos de estacionamiento son 200 metros est\u00c3\u00a1 justo frente al Donwtonw beach y pr\u00c3\u00b3ximamente se instalar\u00c3\u00a1 la planta al edificio , el mismo tiene cancha piscina y \u00c3\u00a1reas comunes de primera",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Architransturis",
+      "timestamp_ms": 1774140374447,
+      "content": "Por favor",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Architransturis",
+      "timestamp_ms": 1774140370045,
+      "content": "Apto publicado cerca al Down Town isla de margarita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Architransturis",
+      "timestamp_ms": 1774140314311,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Architransturis",
+  "is_still_participant": true,
+  "thread_path": "inbox/architransturis_18037489238780331",
+  "magic_words": [
+    
+  ]
+}

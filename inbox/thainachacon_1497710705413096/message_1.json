@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Thaina Chacon"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779488176021,
+      "content": "Residencia la Monta\u00c3\u00b1a\n3 habitaciones cada una con su ba\u00c3\u00b1o\n6 ba\u00c3\u00b1os totales \nEl apartamento est\u00c3\u00a1 totalmente domotizado.\nAscensor privado \nPozo de agua \nTerraza con vista al \u00c3\u0081vila \nSe entrega amoblado",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779488133654,
+      "content": "$1,270,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779487743670,
+      "content": "Soy Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779487730070,
+      "content": "Hola buenas tardes, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779485267565,
+      "content": "Thaina Chacon replied to an ad. View ad(https://www.instagram.com/p/DXVf8NngBUq/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Thaina Chacon",
+      "timestamp_ms": 1779485266605,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Thaina Chacon",
+  "is_still_participant": true,
+  "thread_path": "inbox/thainachacon_1497710705413096",
+  "magic_words": [
+    
+  ]
+}

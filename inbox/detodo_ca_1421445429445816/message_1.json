@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "detodo_c.a"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773358217031,
+      "content": "Feliz noche la propiedad tiene un valor de $1,700,000 \n\nMi nombre es Alejandro Flores del equipo de asesores RM inmobiliaria \u00f0\u009f\u0098\u0083",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773351142394,
+      "content": "detodo_c.a replied to an ad. View ad(https://www.instagram.com/p/DVwwaOuANaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "detodo_c.a",
+      "timestamp_ms": 1773351141740,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "detodo_c.a",
+  "is_still_participant": true,
+  "thread_path": "inbox/detodo_ca_1421445429445816",
+  "magic_words": [
+    
+  ]
+}

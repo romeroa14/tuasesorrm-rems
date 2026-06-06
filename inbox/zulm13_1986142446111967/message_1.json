@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Zulm13"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778196092915,
+      "content": "Precio 1950000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778196070892,
+      "content": "Buen D\u00c3\u00ada Odra Cede\u00c3\u00b1o un Gusto saludarle del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Zulm13",
+  "is_still_participant": true,
+  "thread_path": "inbox/zulm13_1986142446111967",
+  "magic_words": [
+    
+  ]
+}

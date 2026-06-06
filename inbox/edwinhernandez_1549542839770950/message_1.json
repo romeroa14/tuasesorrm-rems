@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "EDWIN HERNANDEZ"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491462700,
+      "content": "This account can't receive your message because they don't allow new message requests from everyone.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491460907,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "EDWIN HERNANDEZ",
+  "is_still_participant": true,
+  "thread_path": "inbox/edwinhernandez_1549542839770950",
+  "magic_words": [
+    
+  ]
+}

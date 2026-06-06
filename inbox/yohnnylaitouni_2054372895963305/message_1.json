@@ -1,0 +1,81 @@
+{
+  "participants": [
+    {
+      "name": "Yohnny Laitouni"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Yohnny Laitouni",
+      "timestamp_ms": 1778764620036,
+      "content": "Le estoy avisando cualquier cosa \nGracias por tu atenci\u00c3\u00b3n!!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778764588366,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada evaluar otras opciones?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yohnny Laitouni",
+      "timestamp_ms": 1778764577066,
+      "content": "Muchas gracias por la informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yohnny Laitouni",
+      "timestamp_ms": 1778764569314,
+      "content": "Buen d\u00c3\u00ada",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778764548650,
+      "content": "Su precio es de 450.000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778764534684,
+      "content": "Es un Pent House, ubicado en Playa Moreno, con hermosa vista al mar \n\n3 habitaciones, la principal con vestier y ba\u00c3\u00b1o\nTiene 3 ba\u00c3\u00b1os \nCocina Ferrara \n\u00c3\u0081rea de lavandero \nTerraza \n2 puestos de estacionamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778764518211,
+      "content": "Hola buen d\u00c3\u00ada, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778762085573,
+      "content": "Yohnny Laitouni replied to an ad. View ad(https://www.instagram.com/p/DYTU1FzgDSx/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yohnny Laitouni",
+      "timestamp_ms": 1778762084907,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Yohnny Laitouni",
+  "is_still_participant": true,
+  "thread_path": "inbox/yohnnylaitouni_2054372895963305",
+  "magic_words": [
+    
+  ]
+}

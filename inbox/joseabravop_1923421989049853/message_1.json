@@ -1,0 +1,74 @@
+{
+  "participants": [
+    {
+      "name": "Jose A. Bravo P."
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774279336697,
+      "content": "Con financiamiento, 30% de inicial, de 18 a 24 meses de financiamiento, todo totalmente negociable\n\nYa nos quedan muy pocas unidades y podemos congelar el precio con un 10%",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774279322760,
+      "content": "En Promenade tenemos apartamentos y oficinas disponibles, a partir de los 37m2 desde 222.000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774279295182,
+      "content": "Hola buenos d\u00c3\u00adas, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774256107687,
+      "content": "Jose A. Bravo P. replied to an ad. View ad(https://www.instagram.com/p/DWKSHM2gIUW/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jose A. Bravo P.",
+      "timestamp_ms": 1774256107012,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773842933015,
+      "content": "Hola buenos d\u00c3\u00adas, un gusto B\u00c3\u00a1rbara Migliore \n\nLa casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada\u00e2\u0080\u00a6 Su valor es de 1.700.000$ negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House, la entrada es totalmente gratuita \n\n\u00c2\u00bfle gustar\u00c3\u00ada asistir?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773835272264,
+      "content": "Jose A. Bravo P. replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jose A. Bravo P.",
+      "timestamp_ms": 1773835271673,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jose A. Bravo P.",
+  "is_still_participant": true,
+  "thread_path": "inbox/joseabravop_1923421989049853",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "participants": [
+    {
+      "name": "Gonzalez Evelin"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773077023675,
+      "content": "\u00c2\u00bfUsted est\u00c3\u00a1 buscando edificio, oficina o local? Para enviarle la informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773076874153,
+      "content": "Hola buenas tardes, un gusto Barbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Gonzalez Evelin",
+      "timestamp_ms": 1772934575146,
+      "content": "\u00c2\u00a1Hola! Quiero m\u00c3\u00a1s informaci\u00c3\u00b3n.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Gonzalez Evelin",
+      "timestamp_ms": 1772934574512,
+      "content": "Gonzalez envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DVhyrtlALMy/?id=3846578462953354034_53287868330",
+        "share_text": "\u00f0\u009f\u008f\u00a2 \u00c2\u00a1UBICACI\u00c3\u0093N ESTRAT\u00c3\u0089GICA EN EL CORAZ\u00c3\u0093N DE LAS MERCEDES!\nAsesores RM ofrece en venta una propiedad comercial de alto impacto, situada en la intersecci\u00c3\u00b3n de la Av. Trinidad con Calle Londres, Municipio Baruta. El punto perfecto para negocios que requieren m\u00c3\u00a1xima exposici\u00c3\u00b3n y prestigio\n\n\u00f0\u009f\u0093\u008d ENTORNO Y CONECTIVIDAD:\n\nUbicaci\u00c3\u00b3n: A pie de calle en Avenida Principal\n\nAdyacencias: Rodeado de los mejores Restaurantes, Centros Comerciales, Colegios y Automercados de la zona\n\n\u00f0\u009f\u0093\u008f DIMENSIONES:\n\nConstrucci\u00c3\u00b3n: 756 m\u00c2\u00b2\nDistribuci\u00c3\u00b3n: Edificio funcional dise\u00c3\u00b1ado para uso mixto\n\n\u00f0\u009f\u008f\u009b\u00ef\u00b8\u008f AMBIENTES DISPONIBLES:\n\nAmplia Recepci\u00c3\u00b3n y Local comercial\nOficinas privadas para gesti\u00c3\u00b3n corporativa\n\u00c3\u0081reas sociales: Sala, Bar y Cocina\n\u00c3\u0081reas de servicio: Lavadero y Ba\u00c3\u00b1o de servicio\n\n\u00e2\u009a\u0099\u00ef\u00b8\u008f COMODIDADES Y EQUIPAMIENTO:\n\nMovilidad: Sistema de Ascensores\nInfraestructura: Internet de alta velocidad, L\u00c3\u00adnea telef\u00c3\u00b3nica y Gas directo\nEnerg\u00c3\u00ada: Suministro 110/220V, Iluminaci\u00c3\u00b3n LED y Luces de emergencia\nClimatizaci\u00c3\u00b3n y Seguridad: Acondicionadores de aire, Extractores de aire, Sistema anti-incendio, Cableado interno y Acometidas listas\nReserva: Tanque de agua de gran capacidad\n\n\u00f0\u009f\u008c\u00b3 EXTERIORES:\n\nEstacionamiento para visitantes\nCaminer\u00c3\u00adas\n \n\u00f0\u009f\u0094\u0091 Posiciona tu marca en la esquina m\u00c3\u00a1s vibrante de Caracas. Reserva tu visita y conoce el potencial de esta propiedad con el equipo de Asesores RM",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Gonzalez Evelin",
+  "is_still_participant": true,
+  "thread_path": "inbox/gonzalezevelin_2007147884014564",
+  "magic_words": [
+    
+  ]
+}

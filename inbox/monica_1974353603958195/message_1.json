@@ -1,0 +1,51 @@
+{
+  "participants": [
+    {
+      "name": "Monica \u00f0\u009f\u00a7\u00bf"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777114128246,
+      "content": "El Precio es de 1950000$ totalmente negociable \n\n\nSi gusta podr\u00c3\u00adamos agendar una visita a la propiedad y all\u00c3\u00ad conversamos t\u00c3\u00a9rminos de negociaci\u00c3\u00b3n \n\nFeliz sabado",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777114099637,
+      "content": "Placer servirle, Alejandro Flores de Asesores RM inmobiliaria \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Monica \u00f0\u009f\u00a7\u00bf",
+      "timestamp_ms": 1777113293611,
+      "content": "\u00c2\u00bfPuedo remodelar o reconstruir?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Monica \u00f0\u009f\u00a7\u00bf",
+      "timestamp_ms": 1777113293199,
+      "content": "Monica envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DW6mBeugIaw/?id=3871574057157691056_53287868330",
+        "share_text": "\u00f0\u009f\u0093\u008d \u00c2\u00a1EL PUNTO ESTRAT\u00c3\u0089GICO QUE TU NEGOCIO NECESITA!\n\nSi buscas presencia y rentabilidad en la zona m\u00c3\u00a1s exclusiva de Caracas, esta oportunidad en la Calle Londres de Las Mercedes es para ti. \u00f0\u009f\u009a\u0080\n\nTienes dos caminos para ganar:\n\u00e2\u009c\u0085 Aprovechar la estructura actual de 520 m\u00c2\u00b2 aprox. para una remodelaci\u00c3\u00b3n r\u00c3\u00a1pida.\n\u00e2\u009c\u0085 Desarrollar un proyecto desde cero sobre este terreno de 788 m\u00c2\u00b2 aprox.\n\nVersatilidad, ubicaci\u00c3\u00b3n y metros. \u00c2\u00a1Todo en un solo lugar! \u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f\n\n\u00f0\u009f\u0093\u00b2 \u00c2\u00bfQuieres conocerlo? Cont\u00c3\u00a1ctame al DM para agendar una visita.\n\n#LasMercedes #Caracas #BienesRaicesVenezuela #LocalComercial #InversionCaracas #CalleLondres #RealEstateCaracas #OportunidadDeInversion #LocalesEnVenta",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Monica \u00f0\u009f\u00a7\u00bf",
+  "is_still_participant": true,
+  "thread_path": "inbox/monica_1974353603958195",
+  "magic_words": [
+    
+  ]
+}

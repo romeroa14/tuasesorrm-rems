@@ -1,0 +1,81 @@
+{
+  "participants": [
+    {
+      "name": "Smitch015"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776359891331,
+      "content": "Quedo atenta si desea agendar la visita \u00e2\u0098\u00ba\u00ef\u00b8\u008f",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776359864830,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Smitch015",
+      "timestamp_ms": 1776359840463,
+      "content": "Buen d\u00c3\u00ada",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776264487842,
+      "content": "Hola buen d\u00c3\u00ada, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776182011152,
+      "content": "Me comparte su WhatsApp para coordinar la visita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776182001177,
+      "content": "Perfecto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Smitch015",
+      "timestamp_ms": 1776179726238,
+      "content": "Buen d\u00c3\u00ada. Para una cita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776105835361,
+      "content": "Le comento el terreno est\u00c3\u00a1 ubicado en Altamira son 785m\u00c2\u00b2 su precio es de $650,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776105816719,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1? Feliz lunes!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Smitch015",
+  "is_still_participant": true,
+  "thread_path": "inbox/smitch015_18040475057780331",
+  "magic_words": [
+    
+  ]
+}

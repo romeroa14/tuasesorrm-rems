@@ -1,0 +1,85 @@
+{
+  "participants": [
+    {
+      "name": "Ana Maria Sosa"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776955729902,
+      "content": "Se encuentra buscando algo con ciertas caracter\u00c3\u00adsticas ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776955717917,
+      "content": "Buenos d\u00c3\u00adas! Que tal est\u00c3\u00a1 ? Por ac\u00c3\u00a1 le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nQue tal le pareci\u00c3\u00b3 la informaci\u00c3\u00b3n enviada ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776522842659,
+      "content": "Su precio es de:\n\n2 hab, 2 ba\u00c3\u00b1os, 1 puesto de estacionamiento \nSu precio es de $249,000\n83m\u00c2\u00b2 | El edificio tiene pozo",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776522610800,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776522603505,
+      "content": "Apartamento-Residencial en Venta \r\n*Precio:* 249.000 \r\n*Distribuci\u00c3\u00b3n:* 2H-2B-1PE \r\n*Ubicaci\u00c3\u00b3n:* Caracas - Chacao, Los Palos Grandes\r\nhttps://www.rexup.net/AAAAAAA/ver_inmueble_c.php?cod_inmueble=2203325120",
+      "share": {
+        "link": "https://www.rexup.net/AAAAAAA/ver_inmueble_c.php?cod_inmueble=2203325120",
+        "share_text": "Apartamento-Residencial en Venta \r\n*Precio:* 249.000 \r\n*Distribuci\u00c3\u00b3n:* 2H-2B-1PE \r\n*Ubicaci\u00c3\u00b3n:* Caracas - Chacao, Los Palos Grandes\r\nhttps://www.rexup.net/AAAAAAA/ver_inmueble_c.php?cod_inmueble=2203325120"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776522596747,
+      "content": "Aqu\u00c3\u00ad le comparto informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776522577301,
+      "content": "Hola se\u00c3\u00b1ora Ana, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776522466860,
+      "content": "Ana Maria Sosa replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ana Maria Sosa",
+      "timestamp_ms": 1776522465693,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1les son los detalles de la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Ana Maria Sosa",
+  "is_still_participant": true,
+  "thread_path": "inbox/anamariasosa_2000649524661976",
+  "magic_words": [
+    
+  ]
+}

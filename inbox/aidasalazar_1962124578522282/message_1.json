@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Aida Salazar"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772807897236,
+      "content": "Aqu\u00c3\u00ad le comparto la disponibilidad:\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9329346\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670381\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670314",
+      "share": {
+        "link": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346",
+        "share_text": "Aqu\u00c3\u00ad le comparto la disponibilidad:\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9329346\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670381\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670314"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772807858690,
+      "content": "Valery Mendoza por aqui",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772807754274,
+      "content": "Hola buen d\u00c3\u00ada, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Aida Salazar",
+      "timestamp_ms": 1772807340402,
+      "content": "\u00c2\u00a1Hola! Quiero m\u00c3\u00a1s informaci\u00c3\u00b3n.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Aida Salazar",
+      "timestamp_ms": 1772807339632,
+      "share": {
+        "link": "https://www.instagram.com/p/DVhvF-ZgOb2/",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Aida Salazar",
+  "is_still_participant": true,
+  "thread_path": "inbox/aidasalazar_1962124578522282",
+  "magic_words": [
+    
+  ]
+}

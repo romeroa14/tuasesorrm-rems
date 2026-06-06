@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Juven Heras"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774209490430,
+      "content": "Con financiamiento, 30% de inicial, de 18 a 24 meses, sin intereses",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774209473207,
+      "content": "En Promenade tenemos apartamentos y oficinas disponibles, desde los 37m2 a partir de 222.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774209428136,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774208167885,
+      "content": "Juven Heras replied to an ad. View ad(https://www.instagram.com/p/DWKSHM2gIUW/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Juven Heras",
+      "timestamp_ms": 1774208167163,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Juven Heras",
+  "is_still_participant": true,
+  "thread_path": "inbox/juvenheras_1975513063840976",
+  "magic_words": [
+    
+  ]
+}

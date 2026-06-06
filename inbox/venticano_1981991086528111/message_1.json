@@ -1,0 +1,58 @@
+{
+  "participants": [
+    {
+      "name": "venticano"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774285412783,
+      "content": "Con financiamiento, 30% de inicial, de 18 a 24 meses de financiamiento, todo totalmente negociable\n\nYa nos quedan muy pocas unidades y podemos congelar el precio con un 10%",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774285404682,
+      "content": "En Promenade tenemos apartamentos y oficinas disponibles, a partir de los 37m2 desde 222.000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774285379540,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "venticano",
+      "timestamp_ms": 1774231886498,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "venticano",
+      "timestamp_ms": 1774231886190,
+      "content": "venticano envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DWKSHM2gIUW/?id=3857975690469082390_53287868330",
+        "share_text": "\u00c2\u00a1Tu pr\u00c3\u00b3ximo espacio en Las Mercedes te espera, y con facilidades de pago! \u00f0\u009f\u008f\u0099\u00e2\u009c\u00a8\n\nOBT\u00c3\u0089N TU PROPIEDAD RESIDENCIAL O COMERCIAL CON FINANCIAMIENTO:\n\u00e2\u009c\u0085 Solo 30% de inicial.\n\u00e2\u009c\u0085 24 meses sin intereses.\n\nAcomp\u00c3\u00a1\u00c3\u00b1anos junto a Asesores RM a un recorrido exclusivo de Promenade. Vive el proyecto a trav\u00c3\u00a9s de nuestra experiencia de Realidad Virtual (VR) \u00f0\u009f\u0095\u00b6\u00ef\u00b8\u008f y s\u00c3\u00a9 el primero en conocer todo lo nuevo que trae esta imponente obra.\n\n\u00f0\u009f\u0093\u008d Las Mercedes\n\u00f0\u009f\u0093\u0085 Jueves, 19 de marzo | \u00f0\u009f\u0095\u009c 10:00 a.m.\n\n\u00f0\u009f\u0093\u00a9 \u00c2\u00a1Asegura tu lugar hoy mismo! Escr\u00c3\u00adbenos al DM (Cupos limitados).\n\n#LasMercedes #Promenade #AsesoresRM #RealidadVirtual #GrupoBinian",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "venticano",
+  "is_still_participant": true,
+  "thread_path": "inbox/venticano_1981991086528111",
+  "magic_words": [
+    
+  ]
+}

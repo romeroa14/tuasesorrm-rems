@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Mery Pineros"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644486959,
+      "content": "Soy Valery quedo atenta!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644482406,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada asistir a nuestro OPEN HOUSE?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644480821,
+      "content": "El apartamento ubicado en los Naranjos del cafetal tiene un precio de $245,000\nSon 135 m\u00c2\u00b2 , cuenta con  3 Habitaciones | 2 Ba\u00c3\u00b1os",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644479160,
+      "content": "Hola se\u00c3\u00b1ora Mery, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773243121611,
+      "content": "En Asesores RM Inmobiliaria no solo buscamos espacios, encontramos el escenario donde tus sue\u00c3\u00b1os toman forma. Perm\u00c3\u00adteme guiarte hacia esa oficina o residencia que parece dise\u00c3\u00b1ada solo para ti. \u00c2\u00bfQu\u00c3\u00a9 propiedad tienes en mente hoy? Estoy listo para hacerla realidad.\nAlejandro Flores | Asesores RM Inmobiliaria",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Mery Pineros",
+  "is_still_participant": true,
+  "thread_path": "inbox/merypineros_1347834156601966",
+  "magic_words": [
+    
+  ]
+}

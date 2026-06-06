@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Caracas Monsalve"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773672621097,
+      "content": "1700000$ negociable, estamos trabajando bajo la modalidad de financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773672603164,
+      "content": "Placer saludarle, soy Alejandro Flores del equipo de Asesores RM inmobiliaria \u00f0\u009f\u0098\u0083",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Caracas Monsalve",
+      "timestamp_ms": 1773672549865,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio de las viviendas en Los Naranjos del Cafetal?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773672545392,
+      "content": "Caracas Monsalve replied to an ad. View ad(https://www.instagram.com/p/DVzkVHWgJM4/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Caracas Monsalve",
+      "timestamp_ms": 1773672544618,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 propiedades est\u00c3\u00a1n disponibles?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Caracas Monsalve",
+  "is_still_participant": true,
+  "thread_path": "inbox/caracasmonsalve_1980327726701808",
+  "magic_words": [
+    
+  ]
+}

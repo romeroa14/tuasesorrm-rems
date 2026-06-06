@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Manuel De Freitas"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778767380032,
+      "content": "El precio es de 1.950.000$ negociable hasta 1.750.000 sirve para auso comercial y residencial",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778767352870,
+      "content": "Buenos d\u00c3\u00adas un gusto saludarle le escribe Alejandra Velasco de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778767315094,
+      "content": "Manuel De Freitas replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Manuel De Freitas",
+      "timestamp_ms": 1778767314495,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Manuel De Freitas",
+  "is_still_participant": true,
+  "thread_path": "inbox/manueldefreitas_2013093720085700",
+  "magic_words": [
+    
+  ]
+}

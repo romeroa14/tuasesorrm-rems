@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Fumigaciones Ranbric 1908 | Control de Plagas"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778067007033,
+      "content": "Fumigaciones Ranbric 1908, Pest Control, F.P. replied to an ad. View ad(https://www.instagram.com/p/DXfXl92AJjV/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fumigaciones Ranbric 1908 | Control de Plagas",
+      "timestamp_ms": 1778067006444,
+      "content": "\u00c2\u00a1Hola! Gracias por ponerte en contacto con nosotros. Recibimos tu mensaje y agradecemos tu inter\u00c3\u00a9s.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Fumigaciones Ranbric 1908 | Control de Plagas",
+  "is_still_participant": true,
+  "thread_path": "inbox/fumigacionesranbric1908controldeplagas_18043596356780331",
+  "magic_words": [
+    
+  ]
+}

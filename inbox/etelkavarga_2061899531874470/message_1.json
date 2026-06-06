@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Etelka Varga"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776530133460,
+      "content": "El precio es de 240k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776530125243,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Etelka Varga",
+      "timestamp_ms": 1776529492992,
+      "content": "Precio de Los Palos Grandes  83m2?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776529467120,
+      "content": "Etelka Varga replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Etelka Varga",
+      "timestamp_ms": 1776529466313,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Etelka Varga",
+  "is_still_participant": true,
+  "thread_path": "inbox/etelkavarga_2061899531874470",
+  "magic_words": [
+    
+  ]
+}

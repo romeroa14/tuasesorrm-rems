@@ -1,0 +1,132 @@
+{
+  "participants": [
+    {
+      "name": "\u00f0\u009f\u00a7\u00bf Daphne Armenante"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "\u00f0\u009f\u00a7\u00bf Daphne Armenante",
+      "timestamp_ms": 1775787197027,
+      "content": "Liked a message",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775785857357,
+      "content": "En breve me comunicare",
+      "reactions": [
+        {
+          "reaction": "\u00e2\u009d\u00a4",
+          "actor": "\u00f0\u009f\u00a7\u00bf Daphne Armenante"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "\u00f0\u009f\u00a7\u00bf Daphne Armenante",
+      "timestamp_ms": 1775785533563,
+      "content": "Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "\u00f0\u009f\u00a7\u00bf Daphne Armenante",
+      "timestamp_ms": 1775785528729,
+      "content": "https://wa.me/message/SJTS466WXDQRO1",
+      "share": {
+        "link": "https://wa.me/message/SJTS466WXDQRO1",
+        "share_text": "https://wa.me/message/SJTS466WXDQRO1"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775785497074,
+      "content": "Si gusta comparteme tu WhatsApp para enviarte informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "\u00f0\u009f\u00a7\u00bf Daphne Armenante",
+      "timestamp_ms": 1775785429395,
+      "content": "Liked a message",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "\u00f0\u009f\u00a7\u00bf Daphne Armenante",
+      "timestamp_ms": 1775785413064,
+      "content": "Saludos!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "\u00f0\u009f\u00a7\u00bf Daphne Armenante",
+      "timestamp_ms": 1775785407709,
+      "content": "Link",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775785407370,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s detalles?",
+      "reactions": [
+        {
+          "reaction": "\u00e2\u009d\u00a4",
+          "actor": "\u00f0\u009f\u00a7\u00bf Daphne Armenante"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775785399216,
+      "content": "Este local a pie de Calle en la Calle Londres en las Mercedes tiene un precio $1,950,000 podemos aceptar un financiamiento a meses y su precio es negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775785386239,
+      "content": "\u00f0\u009f\u009f\u00a2 Valery Mendoza en l\u00c3\u00adnea",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775785375412,
+      "content": "Hola buenas noches, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775785255121,
+      "content": "\u00f0\u009f\u00a7\u00bf Daphne Armenante replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "\u00f0\u009f\u00a7\u00bf Daphne Armenante",
+      "timestamp_ms": 1775785254554,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "\u00f0\u009f\u00a7\u00bf Daphne Armenante",
+  "is_still_participant": true,
+  "thread_path": "inbox/daphnearmenante_2059269472139347",
+  "magic_words": [
+    
+  ]
+}

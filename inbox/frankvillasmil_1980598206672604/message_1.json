@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "frankvillasmil"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773701804831,
+      "content": "frankvillasmil replied to an ad. View ad(https://www.instagram.com/p/DVzkVHWgJM4/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "frankvillasmil",
+      "timestamp_ms": 1773701804035,
+      "content": "Buenas noches. Precio del inmueble de Los Naranjos, del Cafetal",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "frankvillasmil",
+  "is_still_participant": true,
+  "thread_path": "inbox/frankvillasmil_1980598206672604",
+  "magic_words": [
+    
+  ]
+}

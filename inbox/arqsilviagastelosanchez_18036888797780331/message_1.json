@@ -1,0 +1,37 @@
+{
+  "participants": [
+    {
+      "name": "Arq. Silvia Gastelo S\u00c3\u00a1nchez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Arq. Silvia Gastelo S\u00c3\u00a1nchez",
+      "timestamp_ms": 1773882220928,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1nto cuesta?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Arq. Silvia Gastelo S\u00c3\u00a1nchez",
+      "timestamp_ms": 1773882220246,
+      "content": "Arq. envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DVwwZIcgE67/?carousel_share_child_media_id=3850790477695590730_53287868330",
+        "share_text": "\u00f0\u009f\u008d\u00b7 RESERVA PRIVADA: Donde la exclusividad encuentra su hogar. \u00e2\u009c\u00a8\n\nTe invitamos a vivir una experiencia sensorial de alto nivel mientras descubres espacios dise\u00c3\u00b1ados para quienes aprecian el verdadero lujo en cada detalle. Ven, disfruta de un momento diferente, conecta con el buen gusto y visualiza tu pr\u00c3\u00b3xima gran inversi\u00c3\u00b3n en Los Naranjos del Cafetal.\n\n\u00f0\u009f\u0097\u0093\u00ef\u00b8\u008f Jueves 19 de marzo\n\u00e2\u008f\u00b0 10:30 AM\n\u00f0\u009f\u0093\u008d Asesores RM\n\n\u00c2\u00a1Te esperamos! Confirma tu asistencia envi\u00c3\u00a1ndonos un DM. \u00f0\u009f\u0093\u00a9\n\n#asesoresrm #inversi\u00c3\u00b3ninteligente #bienesra\u00c3\u00adcescaracas #exclusivaspropiedades #realestatevenezuela #losnaranjos #inmueblescaracas #luxurylifestyle",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Arq. Silvia Gastelo S\u00c3\u00a1nchez",
+  "is_still_participant": true,
+  "thread_path": "inbox/arqsilviagastelosanchez_18036888797780331",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Carolina Urdaneta"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Carolina Urdaneta",
+      "timestamp_ms": 1776534838047,
+      "content": "Hola, mucho gusto! No, me gusta mucho Campo alegre por ej",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776526544040,
+      "content": "\u00c2\u00bfSolo busca en la zona de Los Palos Grandes?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776526528953,
+      "content": "Si, tenemos apartamentos en alquiler disponibles",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776526519430,
+      "content": "Hola buenos d\u00c3\u00adas, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776524391300,
+      "content": "Carolina Urdaneta replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carolina Urdaneta",
+      "timestamp_ms": 1776524390586,
+      "content": "Tienes algo similar para rentar?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Carolina Urdaneta",
+  "is_still_participant": true,
+  "thread_path": "inbox/carolinaurdaneta_2034115534654476",
+  "magic_words": [
+    
+  ]
+}

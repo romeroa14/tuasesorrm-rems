@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "edmundo casanova"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774285470404,
+      "content": "El precio de esta hermosa casa es de 690k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774285457649,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774283826274,
+      "content": "edmundo casanova replied to an ad. View ad(https://www.instagram.com/p/DVhvV7mgNtC/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "edmundo casanova",
+      "timestamp_ms": 1774283825778,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "edmundo casanova",
+  "is_still_participant": true,
+  "thread_path": "inbox/edmundocasanova_18037741334780331",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "heladosmays7"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773784067167,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore \n\nLa casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada\u00e2\u0080\u00a6 Su valor es de 1.700.000$ negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House, la entrada es totalmente gratuita \n\n\u00c2\u00bfle gustar\u00c3\u00ada asistir?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "heladosmays7",
+      "timestamp_ms": 1773779771626,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 incluye la experiencia sensorial?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773779760319,
+      "content": "heladosmays7 replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "heladosmays7",
+      "timestamp_ms": 1773779759375,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "heladosmays7",
+  "is_still_participant": true,
+  "thread_path": "inbox/heladosmays7_18036720965780331",
+  "magic_words": [
+    
+  ]
+}

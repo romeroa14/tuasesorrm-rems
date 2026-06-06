@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Edwuar s Vergel T"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774233607723,
+      "content": "Si precio es de 650.000 desea visitar",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774231293595,
+      "content": "Edwuar s Vergel T replied to an ad. View ad(https://www.instagram.com/p/DVhvV7mgNtC/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Edwuar s Vergel T",
+      "timestamp_ms": 1774231292894,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Edwuar s Vergel T",
+  "is_still_participant": true,
+  "thread_path": "inbox/edwuarsvergelt_18037650542780331",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Gabriela Rojas"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Gabriela Rojas",
+      "timestamp_ms": 1775499811819,
+      "content": "Hola feliz d\u00c3\u00ada. A\u00c3\u00ban no hemos comprado, estamos asesorandonos primero y buscando opciones de financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491461271,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Gabriela Rojas",
+  "is_still_participant": true,
+  "thread_path": "inbox/gabrielarojas_17977408589780331",
+  "magic_words": [
+    
+  ]
+}

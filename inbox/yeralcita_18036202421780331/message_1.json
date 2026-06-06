@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Yeralcita."
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773500271322,
+      "content": "S\u00c3\u00ad desea mayor informaci\u00c3\u00b3n por favor ind\u00c3\u00adqueme su n\u00c3\u00bamero de tel\u00c3\u00a9fono y le estar\u00c3\u00a9 contactando",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773500264634,
+      "content": "La propiedad de los Naranjos tiene un valor de $1,700,000 y estamos trabajando bajo la modalidad de financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773500255155,
+      "content": "Buenos d\u00c3\u00adas Yeral qu\u00c3\u00a9 tal Soy Alejandro Flores del equipo de asesores RM inmobiliaria",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773468638279,
+      "content": "Yeralcita. replied to an ad. View ad(https://www.instagram.com/p/DVzkVHWgJM4/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yeralcita.",
+      "timestamp_ms": 1773468637334,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio de las viviendas en Los Naranjos del Cafetal?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Yeralcita.",
+  "is_still_participant": true,
+  "thread_path": "inbox/yeralcita_18036202421780331",
+  "magic_words": [
+    
+  ]
+}

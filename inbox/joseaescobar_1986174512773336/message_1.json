@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Jose A. Escobar"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776955633823,
+      "content": "Buenos d\u00c3\u00adas! Que tal est\u00c3\u00a1 ? Por ac\u00c3\u00a1 le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nQue tal le pareci\u00c3\u00b3 la informaci\u00c3\u00b3n enviada ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776553746955,
+      "content": "$249,000 negociable \n\n\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776553722171,
+      "content": "Hola se\u00c3\u00b1or Jos\u00c3\u00a9! \nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776546080675,
+      "content": "Jose A. Escobar replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jose A. Escobar",
+      "timestamp_ms": 1776546080054,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jose A. Escobar",
+  "is_still_participant": true,
+  "thread_path": "inbox/joseaescobar_1986174512773336",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Abul Mendez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776554060832,
+      "content": "Su precio es de 250.000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776544505386,
+      "content": "Abul Mendez replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Abul Mendez",
+      "timestamp_ms": 1776544504612,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Abul Mendez",
+  "is_still_participant": true,
+  "thread_path": "inbox/abulmendez_2002132721187612",
+  "magic_words": [
+    
+  ]
+}

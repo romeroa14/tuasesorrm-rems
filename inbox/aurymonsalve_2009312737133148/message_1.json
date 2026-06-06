@@ -1,0 +1,98 @@
+{
+  "participants": [
+    {
+      "name": "Aury Monsalve"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774833841138,
+      "content": "Soy Alejandro Flores de asesores RM inmobiliaria",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774833832193,
+      "content": "Premium la Escondida, gran residencia donde contamos con dos apartamentos disponibles.\n\n Planta baja con una superficie de 186 m2 con un precio de 170,000 \n\nQuinto piso, apartamento con 153 m2  con un precio de 220, 000k",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774832515112,
+      "content": "Aury Monsalve replied to an ad. View ad(https://www.instagram.com/p/DWbpoKBgEnK/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Aury Monsalve",
+      "timestamp_ms": 1774832514130,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "reactions": [
+        {
+          "reaction": "\u00e2\u009d\u00a4",
+          "actor": "Aury Monsalve"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774150541047,
+      "content": "https://info.wasi.co/apartamento-venta-caracas-baruta/9837600",
+      "share": {
+        "link": "https://info.wasi.co/apartamento-venta-caracas-baruta/9837600",
+        "share_text": "https://info.wasi.co/apartamento-venta-caracas-baruta/9837600"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774150526299,
+      "content": "Aqu\u00c3\u00ad le comparto el wassi \u00f0\u009f\u0091\u0087",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774150518859,
+      "content": "$1,300,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774150432780,
+      "content": "Hola se\u00c3\u00b1ora Aury, c\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774150346020,
+      "content": "Aury Monsalve replied to an ad. View ad(https://www.instagram.com/p/DWKSHk5AMl2/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Aury Monsalve",
+      "timestamp_ms": 1774150345345,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Aury Monsalve",
+  "is_still_participant": true,
+  "thread_path": "inbox/aurymonsalve_2009312737133148",
+  "magic_words": [
+    
+  ]
+}

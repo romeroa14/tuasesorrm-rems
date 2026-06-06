@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Barr.to"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Barr.to",
+      "timestamp_ms": 1773848566672,
+      "content": "Disculpe ! Gracias!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773843057729,
+      "content": "Hola buen d\u00c3\u00ada, no estamos vendiendo las sillas, disculpe",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Barr.to",
+      "timestamp_ms": 1773842257186,
+      "content": "Me interesan las sillas ? Precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Barr.to",
+      "timestamp_ms": 1773478373558,
+      "content": "Hola buen d\u00c3\u00ada! Quiero consultarle por las sillas que muestra en la barra .. las venden ? Precio? Ubicaci\u00c3\u00b3n de la tienda? Gracias !",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Barr.to",
+  "is_still_participant": true,
+  "thread_path": "inbox/barrto_1954199359314230",
+  "magic_words": [
+    
+  ]
+}

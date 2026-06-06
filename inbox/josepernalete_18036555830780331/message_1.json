@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Jos\u00c3\u00a9 pernalete"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773682376920,
+      "content": "Jos\u00c3\u00a9 pernalete replied to an ad. View ad(https://www.instagram.com/p/DVzkVHWgJM4/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jos\u00c3\u00a9 pernalete",
+      "timestamp_ms": 1773682376111,
+      "content": "Quiero vender mi casa pero cuando la estaba pagando nadie me ayud\u00c3\u00b3 y cuando la termine de pagar tampoco nadie me ayud\u00c3\u00b3, en las reparaciones nadie me ayud\u00c3\u00b3 y en los impuestos tampoco, entonces si alguien quiere ganar de lo m\u00c3\u00ado que nunca me ayud\u00c3\u00b3 ni le importo, entonces si eres mujer que ofreces para que ganes de lo m\u00c3\u00ado que nunca me ayudaste",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jos\u00c3\u00a9 pernalete",
+  "is_still_participant": true,
+  "thread_path": "inbox/josepernalete_18036555830780331",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "weszj_leyfernandez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779730729248,
+      "content": "Buen d\u00c3\u00ada un gusto saludarle Odra Cede\u00c3\u00b1o del Equipo de Asesores RM quer\u00c3\u00ada saber si hab\u00c3\u00ada revisado la informaci\u00c3\u00b3n enviada tambi\u00c3\u00a9n dispongo de otras opciones que pudieran ayudarle me gustar\u00c3\u00ada conocer un poco que b\u00c3\u00basqueda requiere para ayudarle \n\nQuedo atenta Mil Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779246750727,
+      "content": "En Quarzo Mohedano tenemos unidades disponibles desde 458600$ de 107,96mts  un proyecto con Ubicaci\u00c3\u00b3n Estrat\u00c3\u00a9gica en Zona Exclusiva inicial del 30% y con financiamiento de 18 meses sin intereses \n\nLe gustar\u00c3\u00ada agendar una visita para conocer el proyecto \n\nOdra Cede\u00c3\u00b1o del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "weszj_leyfernandez",
+  "is_still_participant": true,
+  "thread_path": "inbox/weszj_leyfernandez_1687024015914304",
+  "magic_words": [
+    
+  ]
+}

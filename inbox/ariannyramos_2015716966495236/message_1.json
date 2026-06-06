@@ -1,0 +1,87 @@
+{
+  "participants": [
+    {
+      "name": "Arianny Ramos"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Arianny Ramos",
+      "timestamp_ms": 1774821716470,
+      "content": "Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774821601817,
+      "content": "Perfecto ya se las estar\u00c3\u00a9 enviando a trav\u00c3\u00a9s de WhatsApp \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774821559562,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Arianny Ramos",
+      "timestamp_ms": 1774821558609,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Arianny Ramos",
+      "timestamp_ms": 1774821558178,
+      "content": "04120981954",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Arianny Ramos",
+      "timestamp_ms": 1774821541417,
+      "content": "Precio? Y si tiene fotos porfa",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774821523232,
+      "content": "Tendr\u00c3\u00a1 alg\u00c3\u00ban n\u00c3\u00bamero telef\u00c3\u00b3nico para comunicarme y poder coordinar la visita ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774821509935,
+      "content": "Muy buenas tardes! Que tal est\u00c3\u00a1 ? Le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nClaro que si se encuentra disponible para visitar",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774821461253,
+      "content": "Arianny Ramos replied to an ad. View ad(https://www.instagram.com/p/DWbpoKBgEnK/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Arianny Ramos",
+      "timestamp_ms": 1774821460652,
+      "content": "\u00c2\u00bfEst\u00c3\u00a1 disponible para visitar?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Arianny Ramos",
+  "is_still_participant": true,
+  "thread_path": "inbox/ariannyramos_2015716966495236",
+  "magic_words": [
+    
+  ]
+}

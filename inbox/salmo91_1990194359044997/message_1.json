@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Salmo91"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774273287324,
+      "content": "Estos son los gastos:\n\nCondominio 70/80 $\nFospuca.     100$\nCorpoelec.  40/60 $\n4 l\u00c3\u00adneas de CANTV \nM\u00c3\u00a1s o menos 10/12 -$ cada una menos la que tiene el ABA 20/25$__\n\nLa oficina tiene un precio de $120,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774273223407,
+      "content": "Hola buen d\u00c3\u00ada!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Salmo91",
+  "is_still_participant": true,
+  "thread_path": "inbox/salmo91_1990194359044997",
+  "magic_words": [
+    
+  ]
+}

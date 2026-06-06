@@ -1,0 +1,44 @@
+{
+  "participants": [
+    {
+      "name": "Yamilet Bianco"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776390693049,
+      "content": "Hola buen d\u00c3\u00ada su precio es de 3200.000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yamilet Bianco",
+      "timestamp_ms": 1776368387659,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el estado actual de la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yamilet Bianco",
+      "timestamp_ms": 1776368386975,
+      "content": "Yamilet envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DXMgwoKgBi3/?id=3876617458408233143_53287868330",
+        "share_text": "La seguridad de su patrimonio se consolida en activos tangibles de alta demanda \u00f0\u009f\u008f\u00a2\n\nEste complejo residencial en Las Mercedes ofrece 4 apartamentos y un Penthouse de 330 m\u00c2\u00b2. Una pieza estructural perfecta para una estrategia de 'Buy and Hold' en la zona de mayor movimiento financiero de la ciudad\n\n\u00f0\u009f\u0093\u0088 Inversi\u00c3\u00b3n: $3.000.000\n\nSolicite una reuni\u00c3\u00b3n confidencial para discutir proyecciones y tasas de capitalizaci\u00c3\u00b3n\n\n#RealtorsRM #LasMercedes #InversionMultifamiliar #WealthManagement #CaracasRealEstate #ActivoRefugio",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Yamilet Bianco",
+  "is_still_participant": true,
+  "thread_path": "inbox/yamiletbianco_2033153818081393",
+  "magic_words": [
+    
+  ]
+}

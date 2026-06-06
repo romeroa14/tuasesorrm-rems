@@ -1,0 +1,85 @@
+{
+  "participants": [
+    {
+      "name": "Juan Uzcategui"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779730566527,
+      "content": "Buen d\u00c3\u00ada un gusto saludarle Odra Cede\u00c3\u00b1o del Equipo de Asesores RM quer\u00c3\u00ada saber si hab\u00c3\u00ada revisado la informaci\u00c3\u00b3n enviada tambi\u00c3\u00a9n dispongo de otras opciones que pudieran ayudarle me gustar\u00c3\u00ada conocer un poco que b\u00c3\u00basqueda requiere para ayudarle \n\nQuedo atenta Mil Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779156796887,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada evaluar otras opciones?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779156448125,
+      "content": "Son 1,600 m\u00c2\u00b2 y 750 m\u00c2\u00b2 de terreno \n15 puestos de estacionamiento \nPlanta el\u00c3\u00a9ctrica y Pozo de agua",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779156446261,
+      "content": "https://info.wasi.co/edificio-venta-lasmercedes/9942749",
+      "share": {
+        "link": "https://info.wasi.co/edificio-venta-lasmercedes/9942749",
+        "share_text": "https://info.wasi.co/edificio-venta-lasmercedes/9942749"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779156439803,
+      "content": "Aqu\u00c3\u00ad le comparto esta oportunidad de inversi\u00c3\u00b3n en las Mercedes av la trinidad",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779156420990,
+      "content": "Soy Valery Mendoza del Equipo RM!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779156412165,
+      "content": "Hola se\u00c3\u00b1or Uzc\u00c3\u00a1tegui!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779156039695,
+      "content": "Juan Uzcategui replied to an ad. View ad(https://www.instagram.com/p/DYgBEJcABnZ/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Juan Uzcategui",
+      "timestamp_ms": 1779156038344,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Juan Uzcategui",
+  "is_still_participant": true,
+  "thread_path": "inbox/juanuzcategui_1373176607953852",
+  "magic_words": [
+    
+  ]
+}

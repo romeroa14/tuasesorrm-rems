@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "D\u00e2\u0080\u0099gustar ~ Sabor como en casa"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776483515000,
+      "content": "Est\u00c3\u00a1 disponible en 249.000$\n83m2\n\n2 habitaciones \n2 ba\u00c3\u00b1os \n1 Puesto de estacionamiento \nAmoblado\nCocina Ferrara\nAires acondicionados\nPiso medio\nEdificio de baja densidad",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776483503903,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776462188599,
+      "content": "D\u00e2\u0080\u0099gustar ~ Sabor como en casa replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "D\u00e2\u0080\u0099gustar ~ Sabor como en casa",
+      "timestamp_ms": 1776462187852,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "D\u00e2\u0080\u0099gustar ~ Sabor como en casa",
+  "is_still_participant": true,
+  "thread_path": "inbox/dgustarsaborcomoencasa_18041002397780331",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "participants": [
+    {
+      "name": "Bruno Torres-Lara"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779750469957,
+      "content": "Con gusto lo ayudamos! \u00e2\u0098\u00ba\u00ef\u00b8\u008f",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779750458197,
+      "content": "\u00c2\u00bfCual ser\u00c3\u00ada su presupuesto? \n\nTenemos un portafolio de propiedades",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Bruno Torres-Lara",
+      "timestamp_ms": 1779750436737,
+      "content": "Gracias pero esta fuera de mi presupuesto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779750394710,
+      "content": "Soy Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d un gusto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779750385339,
+      "content": "Si gusta nos comparte su WhatsApp y con gusto le mandamos m\u00c3\u00a1s informaci\u00c3\u00b3n y podemos agendar una visita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779750366281,
+      "content": "Esta totalmente remodelado",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779750358075,
+      "content": "El apartamento ubicado en los Naranjos del cafetal tiene un precio de $245,000\nSon 135 m\u00c2\u00b2 , cuenta con  3 Habitaciones | 2 Ba\u00c3\u00b1os",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779750324047,
+      "content": "Hola se\u00c3\u00b1or Bruno, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Bruno Torres-Lara",
+      "timestamp_ms": 1779745646482,
+      "content": "Precio por favor, departamento Los Naranjos del Cafetal",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Bruno Torres-Lara",
+  "is_still_participant": true,
+  "thread_path": "inbox/brunotorreslara_27556234470635474",
+  "magic_words": [
+    
+  ]
+}

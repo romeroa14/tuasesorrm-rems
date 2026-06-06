@@ -1,0 +1,92 @@
+{
+  "participants": [
+    {
+      "name": "Romina Birbe"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Romina Birbe",
+      "timestamp_ms": 1774823319758,
+      "content": "Ok gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774820333077,
+      "content": "En breve me comunicare",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Romina Birbe",
+      "timestamp_ms": 1774811496399,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Romina Birbe",
+      "timestamp_ms": 1774811496087,
+      "content": "04141905490",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774803769909,
+      "content": "Pero tambi\u00c3\u00a9n tenemos otras opciones disponible si desea me puede dejar su n\u00c3\u00bamero de contacto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774803747232,
+      "content": "El precio de esta casa es de 1.200.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774803734607,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Romina Birbe",
+      "timestamp_ms": 1774797148104,
+      "content": "Hola que valor esta propiedad? Estoy buscando algo de m\u00c3\u00adnimo 4 o 5 habitaciones, zona los samanes, o cerca, alguna casa o apartamento, con todo listo \u00e2\u009c\u0094\u00ef\u00b8\u008f",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774797084189,
+      "content": "Romina Birbe replied to an ad. View ad(https://www.instagram.com/p/DWbrPG-gMYO/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Romina Birbe",
+      "timestamp_ms": 1774797083103,
+      "content": "Romina envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DWbrPG-gMYO/?id=3862871259683538446_53287868330",
+        "share_text": "\u00f0\u009f\u009a\u0080 Lujo y visi\u00c3\u00b3n de futuro en el este de Caracas. Si buscas un estilo de vida superior, esta residencia de 3 niveles con ascensor privado lo tiene absolutamente todo:\n\n\u00e2\u009c\u0085 6 Habitaciones en total + Oficina privada.\n\u00e2\u009c\u0085 Piscina y parrillera para disfrutar al m\u00c3\u00a1ximo.\n\u00e2\u009c\u0085 8 puestos de estacionamiento.\n\u00e2\u009c\u0085 Cero preocupaciones: Planta el\u00c3\u00a9ctrica y tanques de agua de gran capacidad.\n\nUn hogar donde cada detalle suma valor.\n\n#asesoresrm #inmueblescaracas #bienesraicescaracas #casasdelujocaracas #estedecaracas #inversioninmobiliaria #mercadoinmobiliariovenezuela #PropiedadesExclusivas #ArquitecturaVenezolana #CaracasRealEstate #TuNuevoHogar #InversionesCaracas",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Romina Birbe",
+  "is_still_participant": true,
+  "thread_path": "inbox/rominabirbe_1912949410095883",
+  "magic_words": [
+    
+  ]
+}

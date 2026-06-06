@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Zoraida Altuve De Trejo"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774865108200,
+      "content": "Premium la Escondida, gran residencia donde contamos con dos apartamentos disponibles.\n\n Planta baja con una superficie de 186 m2 con un precio de 170,000 \n\nQuinto piso, apartamento con 153 m2  con un precio de 220, 000k",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774865086911,
+      "content": "Feliz lunes Zoraida soy Alejandro Flores de Asesores RM inmobiliaria",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774857142865,
+      "content": "Zoraida Altuve De Trejo replied to an ad. View ad(https://www.instagram.com/p/DWbpoKBgEnK/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Zoraida Altuve De Trejo",
+      "timestamp_ms": 1774857141676,
+      "content": "\u00c2\u00bfEst\u00c3\u00a1 disponible para visitar?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Zoraida Altuve De Trejo",
+  "is_still_participant": true,
+  "thread_path": "inbox/zoraidaaltuvedetrejo_2041724827221908",
+  "magic_words": [
+    
+  ]
+}

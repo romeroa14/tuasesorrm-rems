@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Vizaida Gonzalez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Vizaida Gonzalez",
+      "timestamp_ms": 1775730378284,
+      "content": "Gracias un placer",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775661195684,
+      "content": "Hola un gusto saludarle  le escribe Alejandra Velasco por a hora no tenemos nada disponible en ese presupuesto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Vizaida Gonzalez",
+      "timestamp_ms": 1774280841525,
+      "content": "Hola colega buen d\u00c3\u00ada mi nombre es Vizaida Gonzalez de century un placer tendr\u00c3\u00a1s apto en chulavista Santa Fe o la alameda presup Max $240.000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Vizaida Gonzalez",
+  "is_still_participant": true,
+  "thread_path": "inbox/vizaidagonzalez_1992773035452589",
+  "magic_words": [
+    
+  ]
+}

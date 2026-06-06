@@ -1,0 +1,58 @@
+{
+  "participants": [
+    {
+      "name": "Gleisy Gomez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773884668270,
+      "content": "M\u00c3\u00a1s que una visita, hemos dise\u00c3\u00b1ado un encuentro \u00c3\u00adntimo para que pueda apreciar el valor de una residencia completamente equipada y curada hasta el \u00c3\u00baltimo detalle bajo el exclusivo concepto \"Ready-to-Live\".",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773884660147,
+      "content": "Ma\u00c3\u00b1ana es el gran d\u00c3\u00ada! \u00f0\u009f\u008d\u00b7donde estaremos recorriendo cada lugar de esta casa \u00f0\u009f\u008f\u00a1 \u00f0\u009f\u008d\u00b7",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773884257340,
+      "content": "Hola, buenas noches!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Gleisy Gomez",
+      "timestamp_ms": 1773884232485,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Gleisy Gomez",
+      "timestamp_ms": 1773884231882,
+      "content": "Gleisy envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DV9ZXCkgEky/?id=3854348390569625906_53287868330",
+        "share_text": "Donde la exclusividad encuentra su hogar. \u00e2\u009c\u00a8 Te invitamos a una experiencia sensorial de alto nivel. Ven e invierte en Los Naranjos del Cafetal , con espacios dise\u00c3\u00b1ados para quienes aprecian el verdadero lujo.\n\n\u00f0\u009f\u0097\u0093\u00ef\u00b8\u008f Jueves 19 de marzo | \u00e2\u008f\u00b0 10:30 AM\n\u00f0\u009f\u0093\u008d Asesores RM\n\n#asesoresrm #inversi\u00c3\u00b3ninteligente #bienesra\u00c3\u00adcescaracas #exclusivaspropiedades #realestatevenezuela",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Gleisy Gomez",
+  "is_still_participant": true,
+  "thread_path": "inbox/gleisygomez_1972823004110978",
+  "magic_words": [
+    
+  ]
+}

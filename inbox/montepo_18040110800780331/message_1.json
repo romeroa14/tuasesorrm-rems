@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Monte Po"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775852902969,
+      "content": "El terreno se encuentra en la Av transversal 6 de la avenida 12 de Altamira\n\nEs correcto es R3 solo se puede construir un edificio de 3 pisos \n\n\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775852775162,
+      "content": "Hola buenas tardes, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775852769991,
+      "content": "\u00f0\u009f\u009f\u00a2 Valery Mendoza en l\u00c3\u00adnea",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Monte Po",
+  "is_still_participant": true,
+  "thread_path": "inbox/montepo_18040110800780331",
+  "magic_words": [
+    
+  ]
+}

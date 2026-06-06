@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "francy"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773866558098,
+      "content": "Hola buenas tardes, mi nombre es Yehosua Guarata, un placer, con justo le indico, esta es una propiedad valorada en $1.700.000. Es una casa que donde el lujo se experimenta. Por ello, Asesores RM le invita a un encuentro \u00c3\u00adntimo para descubrir la propiedad m\u00c3\u00a1s distinguida de nuestra colecci\u00c3\u00b3n en Los Naranjos del Cafetal.\n\n\u00c2\u00a0\n\nConozca el verdadero\nconcepto \"Ready-to-Live\" en esta residencia completamente equipada, \n\n\u00c2\u00a0\n\nDetalles del acceso:\n\n\u00f0\u009f\u0093\u0085\nFecha: Jueves 19/03/2026 | Desde las 10:30 am\n\n\u00f0\u009f\u0093\u008d\nUbicaci\u00c3\u00b3n: Los Naranjos del Cafetal\n\n\u00e2\u009c\u00a8\nExperiencia: Recorrido privado, atenci\u00c3\u00b3n personalizada y brindis de cortes\u00c3\u00ada.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773865815121,
+      "content": "francy replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "francy",
+      "timestamp_ms": 1773865814486,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "francy",
+  "is_still_participant": true,
+  "thread_path": "inbox/francy_1902801781112991",
+  "magic_words": [
+    
+  ]
+}

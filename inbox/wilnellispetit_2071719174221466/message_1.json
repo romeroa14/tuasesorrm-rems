@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Wilnellis Petit"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779299044423,
+      "content": "Apartamento en VENTA ubicado en \nUrbanizaci\u00c3\u00b3n Mirador de los Campitos\nResidencia la Monta\u00c3\u00b1a\n3 habitaciones cada una con su ba\u00c3\u00b1o\n6 ba\u00c3\u00b1os totales \nEl apartamento est\u00c3\u00a1 totalmente domotizado.\nAscensor privado \nPozo de agua \nTerraza con vista al \u00c3\u0081vila \nSe entrega amoblado \n\n\nSu precio es de $1,270,000 negociable \n\n\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779299011952,
+      "content": "Mi nombre es Valery Mendoza del Equipo RM!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779299005681,
+      "content": "Saludos Wilnellis! espero se encuentre bien!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Wilnellis Petit",
+  "is_still_participant": true,
+  "thread_path": "inbox/wilnellispetit_2071719174221466",
+  "magic_words": [
+    
+  ]
+}

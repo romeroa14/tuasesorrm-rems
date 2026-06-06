@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Chiquitin"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778548561316,
+      "content": "Terreno en 650000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778471020732,
+      "content": "Buen D\u00c3\u00ada Odra Cede\u00c3\u00b1o un Gusto saludarle del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Chiquitin",
+  "is_still_participant": true,
+  "thread_path": "inbox/chiquitin_1898289368226561",
+  "magic_words": [
+    
+  ]
+}

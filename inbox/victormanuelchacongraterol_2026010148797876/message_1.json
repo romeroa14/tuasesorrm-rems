@@ -1,0 +1,73 @@
+{
+  "participants": [
+    {
+      "name": "Victor Manuel Chacon Graterol"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774183000166,
+      "content": "Perfecto le estar\u00c3\u00a9 contactando muchas gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774182834755,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774182833996,
+      "content": "Victor Manuel Chacon Graterol replied to an ad. View ad(https://www.instagram.com/p/DWKSHk5AMl2/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Victor Manuel Chacon Graterol",
+      "timestamp_ms": 1774182833508,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Victor Manuel Chacon Graterol",
+      "timestamp_ms": 1774182833187,
+      "content": "04122060250",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774182731166,
+      "content": "Si desea mayor informaci\u00c3\u00b3n, en cuanto al plan de ventas y el brochure de la propiedad, por favor ind\u00c3\u00adqueme su n\u00c3\u00bamero de tel\u00c3\u00a9fono y le estar\u00c3\u00a9 contactando \n\nFeliz fin de semana",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774182729249,
+      "content": "Placer saludarle, soy Alejandro Flores del equipo de Asesores RM inmobiliaria \u00f0\u009f\u0098\u0083",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Victor Manuel Chacon Graterol",
+      "timestamp_ms": 1774181732606,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Victor Manuel Chacon Graterol",
+  "is_still_participant": true,
+  "thread_path": "inbox/victormanuelchacongraterol_2026010148797876",
+  "magic_words": [
+    
+  ]
+}

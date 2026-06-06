@@ -1,0 +1,88 @@
+{
+  "participants": [
+    {
+      "name": "Mati Fernandez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Mati Fernandez",
+      "timestamp_ms": 1776553729893,
+      "content": "Si vamos a evaluar otras opciones de igual manera no invitamos est\u00c3\u00a1.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776553699360,
+      "content": "O se encuentra evaluando otras opciones",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mati Fernandez",
+      "timestamp_ms": 1776553691799,
+      "content": "No, gracias.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776553686471,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mati Fernandez",
+      "timestamp_ms": 1776553685512,
+      "content": "Gracias por tu amabilidad,en responder",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776553652011,
+      "content": "$249,000 \nTiene 2 hab | 2 ba\u00c3\u00b1os | un puesto de estacionamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mati Fernandez",
+      "timestamp_ms": 1776553630110,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776553612353,
+      "content": "Hola feliz tarde!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776541592919,
+      "content": "Mati Fernandez replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mati Fernandez",
+      "timestamp_ms": 1776541592327,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio del apartamento?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Mati Fernandez",
+  "is_still_participant": true,
+  "thread_path": "inbox/matifernandez_1976630217060808",
+  "magic_words": [
+    
+  ]
+}

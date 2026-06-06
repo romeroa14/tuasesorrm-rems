@@ -1,0 +1,120 @@
+{
+  "participants": [
+    {
+      "name": "Jose A Fernandez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491955901,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772942048667,
+      "content": "Todos son negociables",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772942047333,
+      "content": "Podemos agendar una visita para el d\u00c3\u00ada que usted desee",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772942046321,
+      "content": "https://info.wasi.co/edificio-venta-lasmercedes/9814659",
+      "share": {
+        "link": "https://info.wasi.co/edificio-venta-lasmercedes/9814659"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772942043668,
+      "content": "https://info.wasi.co/edificio-venta-lasmercedes/9806143",
+      "share": {
+        "link": "https://info.wasi.co/edificio-venta-lasmercedes/9806143"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772942040231,
+      "content": "https://info.wasi.co/edificio-venta-lasmercedes/9718963",
+      "share": {
+        "link": "https://info.wasi.co/edificio-venta-lasmercedes/9718963"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772942037593,
+      "content": "https://info.wasi.co/hotel-venta-lasmercedes/9726842",
+      "share": {
+        "link": "https://info.wasi.co/hotel-venta-lasmercedes/9726842"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772941781311,
+      "content": "https://info.wasi.co/edificio-venta-lasmercedes/9731666",
+      "share": {
+        "link": "https://info.wasi.co/edificio-venta-lasmercedes/9731666"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772941780019,
+      "content": "Por ac\u00c3\u00a1 le dejo la disponibilidad",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772941779239,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772941617779,
+      "content": "Hola tengo varios edificios a la venta mi nombre es rossana migliore un placer si desea me env\u00c3\u00ada su n\u00c3\u00bamero de contacto o me escribe al 04241996758",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jose A Fernandez",
+      "timestamp_ms": 1772924942455,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1les edificios  tienes en venta...?",
+      "share": {
+        "link": "https://www.instagram.com/p/DVhyrtlALMy/"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jose A Fernandez",
+  "is_still_participant": true,
+  "thread_path": "inbox/joseafernandez_2013219163408509",
+  "magic_words": [
+    
+  ]
+}

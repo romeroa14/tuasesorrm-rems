@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Maigualida C Mogna"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774203614114,
+      "content": "Disc\u00c3\u00balpe, me podr\u00c3\u00ada indicar en qu\u00c3\u00a9 se encuentra interesada? por favor",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774203613769,
+      "content": "Hola, buenas tardes B\u00c3\u00a1rbara, Migliore, un gusto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774189938197,
+      "content": "Maigualida C Mogna replied to an ad. View ad(https://www.instagram.com/p/DWKSHk5AMl2/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Maigualida C Mogna",
+      "timestamp_ms": 1774189937606,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Maigualida C Mogna",
+  "is_still_participant": true,
+  "thread_path": "inbox/maigualidacmogna_2026554955406052",
+  "magic_words": [
+    
+  ]
+}

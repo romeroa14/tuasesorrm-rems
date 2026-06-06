@@ -1,0 +1,67 @@
+{
+  "participants": [
+    {
+      "name": "Jhonny sen"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777387929381,
+      "content": "Buenos d\u00c3\u00adas Alejandra velasco d\u00c3\u00a9 Asesores RM pudo verificar la enviada? O desea vender una propiedad estamos para ayudarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777387883406,
+      "content": "Buenos d\u00c3\u00adas Alejandra velasco d\u00c3\u00a9 Asesores RM pudo verificar la enviada? O desea vender una propiedad estamos para ayudarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775947912988,
+      "content": "Le gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775947907770,
+      "content": "Este terreno de 786 m\u00c2\u00b2 ubicado en Altamira tiene un precio de $650,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775947878673,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1?\n\u00f0\u009f\u009f\u00a2 Valery Mendoza en l\u00c3\u00adnea",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775857486960,
+      "content": "Jhonny Cen replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jhonny sen",
+      "timestamp_ms": 1775857485697,
+      "content": "hola como est\u00c3\u00a1",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jhonny sen",
+  "is_still_participant": true,
+  "thread_path": "inbox/jhonnysen_1808585250527243",
+  "magic_words": [
+    
+  ]
+}

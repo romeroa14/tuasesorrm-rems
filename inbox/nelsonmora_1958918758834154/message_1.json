@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Nelson Mora"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773784563555,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore \n\nEl Pent House en venta, ubicado en Margarita Playa Moreno, est\u00c3\u00a1 disponible en 450.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773784563193,
+      "content": "Enviaste una respuesta privada a un comentario de tu publicaci\u00c3\u00b3n de Instagram.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Nelson Mora",
+  "is_still_participant": true,
+  "thread_path": "inbox/nelsonmora_1958918758834154",
+  "magic_words": [
+    
+  ]
+}

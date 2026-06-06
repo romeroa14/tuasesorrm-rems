@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Maria Carolina Tovar"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644594953,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada asistir a nuestro OPEN HOUSE?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644593624,
+      "content": "El apartamento ubicado en los Naranjos del cafetal tiene un precio de $245,000\nSon 135 m\u00c2\u00b2 , cuenta con  3 Habitaciones | 2 Ba\u00c3\u00b1os",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644593117,
+      "content": "Saludos Mar\u00c3\u00ada! Feliz domingo",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Maria Carolina Tovar",
+  "is_still_participant": true,
+  "thread_path": "inbox/mariacarolinatovar_1704547410885409",
+  "magic_words": [
+    
+  ]
+}

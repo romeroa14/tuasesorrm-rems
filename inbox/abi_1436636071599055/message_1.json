@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Abi"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779299133810,
+      "content": "Su precio es de $1,270,000 negociable \n\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779299132452,
+      "content": "Apartamento en VENTA ubicado en \nUrbanizaci\u00c3\u00b3n Mirador de los Campitos\nResidencia la Monta\u00c3\u00b1a\n3 habitaciones | 6 ba\u00c3\u00b1os totales \nEl apartamento est\u00c3\u00a1 totalmente domotizado.\nAscensor privado \nPozo de agua  | Terraza con vista al \u00c3\u0081vila \nSe entrega amoblado",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779299083775,
+      "content": "Mi nombre es Valery del Equipo RM!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779299069473,
+      "content": "Hola, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Abi",
+  "is_still_participant": true,
+  "thread_path": "inbox/abi_1436636071599055",
+  "magic_words": [
+    
+  ]
+}

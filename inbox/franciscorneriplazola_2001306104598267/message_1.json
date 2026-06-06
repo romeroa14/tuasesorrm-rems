@@ -1,0 +1,38 @@
+{
+  "participants": [
+    {
+      "name": "Francisco R. Neri Plazola"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Francisco R. Neri Plazola",
+      "timestamp_ms": 1775605964746,
+      "content": "Fue solicitando informacion para un cliente. Gracias",
+      "reactions": [
+        {
+          "reaction": "\u00e2\u009d\u00a4",
+          "actor": "Realtors RM"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491708066,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Francisco R. Neri Plazola",
+  "is_still_participant": true,
+  "thread_path": "inbox/franciscorneriplazola_2001306104598267",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Cbc Belleza Center"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779153422560,
+      "content": "Cbc Belleza Center replied to an ad. View ad(https://www.instagram.com/p/DYgBEJcABnZ/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Cbc Belleza Center",
+      "timestamp_ms": 1779153421329,
+      "content": "\u00c2\u00a1Hola! Gracias por ponerte en contacto con nosotros. Hemos recibido tu mensaje y agradecemos tu inter\u00c3\u00a9s.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Cbc Belleza Center",
+  "is_still_participant": true,
+  "thread_path": "inbox/cbcbellezacenter_1005034665292966",
+  "magic_words": [
+    
+  ]
+}

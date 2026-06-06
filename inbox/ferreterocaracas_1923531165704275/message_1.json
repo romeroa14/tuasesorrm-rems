@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Ferretero Caracas."
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774288868811,
+      "content": "La casa por la cual consulto est\u00c3\u00a1 en 690k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774288857179,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco asistente de Rossana Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Ferretero Caracas.",
+  "is_still_participant": true,
+  "thread_path": "inbox/ferreterocaracas_1923531165704275",
+  "magic_words": [
+    
+  ]
+}

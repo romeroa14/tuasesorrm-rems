@@ -1,0 +1,73 @@
+{
+  "participants": [
+    {
+      "name": "Wilhelm Asensi"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774740129312,
+      "content": "Perfecto! Le gustar\u00c3\u00ada y agendamos visita al terreno?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Wilhelm Asensi",
+      "timestamp_ms": 1774738550393,
+      "content": "Ch\u00c3\u00a9vere y usted? Por favor, la informaci\u00c3\u00b3n que tengan disponible!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774736703912,
+      "content": "Le gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n? (edited)",
+      "is_geoblocked_for_viewer": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774736636256,
+      "content": "Me gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774736391488,
+      "content": "Su permisolog\u00c3\u00ada permite edificio de hasta 4 pisos \n\nYa que es una zona residencial en Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774736369842,
+      "content": "Saludos, c\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774735907273,
+      "content": "Wilhelm Asensi replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Wilhelm Asensi",
+      "timestamp_ms": 1774735906624,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 usos se permiten en la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Wilhelm Asensi",
+  "is_still_participant": true,
+  "thread_path": "inbox/wilhelmasensi_1992004808861189",
+  "magic_words": [
+    
+  ]
+}

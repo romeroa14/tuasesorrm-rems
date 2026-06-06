@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "CS"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777294345573,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777294336806,
+      "content": "El terreno est\u00c3\u00a1 ubicado en la Calle Londres en las Mercedes. Su precio es de $1,950,000 negociable y con opci\u00c3\u00b3n de financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777294335814,
+      "content": "Hola buenos d\u00c3\u00adas, c\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "CS",
+  "is_still_participant": true,
+  "thread_path": "inbox/cs_1982444636486104",
+  "magic_words": [
+    
+  ]
+}

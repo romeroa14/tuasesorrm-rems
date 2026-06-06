@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "CASAS | APARTAMENTOS | OFICINAS | LOCALES | VENTA Y ALQUILER."
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776439872739,
+      "content": "Precio 1950000$ para remodelar 780 metros atenta",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776439743271,
+      "content": "Feliz d\u00c3\u00ada ! Gusto saludarle Odra Cede\u00c3\u00b1o para atenderle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776439742830,
+      "content": "Enviaste una respuesta privada a un comentario de tu publicaci\u00c3\u00b3n de Instagram.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "CASAS | APARTAMENTOS | OFICINAS | LOCALES | VENTA Y ALQUILER.",
+  "is_still_participant": true,
+  "thread_path": "inbox/casasapartamentosoficinaslocalesventayalquiler_18040966607780331",
+  "magic_words": [
+    
+  ]
+}

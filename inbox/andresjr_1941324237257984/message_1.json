@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Andres. Jr"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778194588500,
+      "content": "Andres. Jr replied to an ad. View ad(https://www.instagram.com/p/DXMgwr4AHNn/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Andres. Jr",
+      "timestamp_ms": 1778194587939,
+      "content": "Listo gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Andres. Jr",
+  "is_still_participant": true,
+  "thread_path": "inbox/andresjr_1941324237257984",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "participants": [
+    {
+      "name": "La Rusa Caraque\u00c3\u00b1a"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773803010681,
+      "content": "En breve me comunico",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773802997299,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "La Rusa Caraque\u00c3\u00b1a",
+      "timestamp_ms": 1773802996593,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "La Rusa Caraque\u00c3\u00b1a",
+      "timestamp_ms": 1773802995917,
+      "content": "+584120136638",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773798330853,
+      "content": "Perfecto nos comparte su n\u00c3\u00bamero de tel\u00c3\u00a9fono para enviarle la invitaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "La Rusa Caraque\u00c3\u00b1a",
+      "timestamp_ms": 1773797293641,
+      "content": "S\u00c3\u00ad, me gustar\u00c3\u00ada asistir.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773774987291,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore \n\nLa casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada\u00e2\u0080\u00a6 Su valor es de 1.700.000$ negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House, la entrada es totalmente gratuita \n\n\u00c2\u00bfle gustar\u00c3\u00ada asistir?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773771904313,
+      "content": "Natalia Giumiushliu replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "La Rusa Caraque\u00c3\u00b1a",
+      "timestamp_ms": 1773771903655,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 incluye la experiencia sensorial?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "La Rusa Caraque\u00c3\u00b1a",
+  "is_still_participant": true,
+  "thread_path": "inbox/larusacaraquena_1978037466924202",
+  "magic_words": [
+    
+  ]
+}

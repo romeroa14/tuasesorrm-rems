@@ -1,0 +1,58 @@
+{
+  "participants": [
+    {
+      "name": "Pedro Songaila"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776439617593,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM\n\nTiene alguna busqueda inmobiliaria? o alguna propiedad que desee vender o alquilar? podr\u00c3\u00ada impulsar la venta de su inmueble",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774312501951,
+      "content": "Gustar\u00c3\u00ada agendar una visita ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774312497209,
+      "content": "Muy buenas noches! Que tal est\u00c3\u00a1 ? Le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nEsta propiedad se encuentra en 450.000$ totalmente negociable \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\u00e2\u009c\u0085",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Pedro Songaila",
+      "timestamp_ms": 1774311991058,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Pedro Songaila",
+      "timestamp_ms": 1774311990507,
+      "content": "Pedro envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DWKSHqEgA0L/?id=3857975721842445579_53287868330",
+        "share_text": "\u00c2\u00bfTe imaginas vivir en lo m\u00c3\u00a1s alto y con la mejor vista de Playa Moreno? \u00f0\u009f\u008c\u008a Asesores RM lo hace posible\n\nTenemos en venta este exclusivo Pent House ubicado en Punta Pac\u00c3\u00adfico. \u00c2\u00a1Un verdadero para\u00c3\u00adso!\n\nEl confort est\u00c3\u00a1 garantizado: cuenta con 3 amplias habitaciones y 2 ba\u00c3\u00b1os dise\u00c3\u00b1ados para el descanso y la privacidad de toda tu familia\n\n\u00c2\u00bfEl toque final? Una incre\u00c3\u00adble terraza privada para relajarte o compartir, adem\u00c3\u00a1s de 2 puestos de estacionamiento totalmente asegurados\n\nEsta es tu oportunidad de invertir en la Perla de Caribe. Cont\u00c3\u00a1ctanos para m\u00c3\u00a1s informaci\u00c3\u00b3n sobre este inmueble \u00f0\u009f\u008f\u00a0\u00f0\u009f\u0093\u00a9",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Pedro Songaila",
+  "is_still_participant": true,
+  "thread_path": "inbox/pedrosongaila_2018946712833701",
+  "magic_words": [
+    
+  ]
+}

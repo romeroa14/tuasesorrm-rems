@@ -1,0 +1,138 @@
+{
+  "participants": [
+    {
+      "name": "Boris"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778803800779,
+      "content": "Quedo atenta a su comentario",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778803794000,
+      "content": "Su precio es de $1,950,000 negociable\nPodemos negociarlo a $1,750,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778803773026,
+      "content": "Su zonificaci\u00c3\u00b3n es V6-CT\nTiene 20 metros lineales",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778803747560,
+      "content": "Consult\u00c3\u00b3 a trav\u00c3\u00a9s de nuestro Reel sobre el terreno en la Calle Londres de las Mercedes !",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778803598725,
+      "content": "Por aqu\u00c3\u00ad Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778803589561,
+      "content": "Hola buenas noches! un placer",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776715558974,
+      "content": "https://info.wasi.co/local-alquiler-lasmercedes/9806134",
+      "share": {
+        "link": "https://info.wasi.co/local-alquiler-lasmercedes/9806134",
+        "share_text": "https://info.wasi.co/local-alquiler-lasmercedes/9806134"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776715554333,
+      "content": "https://info.wasi.co/local-alquiler-lasmercedes/9806117",
+      "share": {
+        "link": "https://info.wasi.co/local-alquiler-lasmercedes/9806117",
+        "share_text": "https://info.wasi.co/local-alquiler-lasmercedes/9806117"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776715550532,
+      "content": "https://info.wasi.co/local-alquiler-lasmercedes/9618125",
+      "share": {
+        "link": "https://info.wasi.co/local-alquiler-lasmercedes/9618125",
+        "share_text": "https://info.wasi.co/local-alquiler-lasmercedes/9618125"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776715545942,
+      "content": "Aqu\u00c3\u00ad le comparto informaci\u00c3\u00b3n de locales en alquiler",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776715535126,
+      "content": "Hola buenas tardes, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776648827205,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776648794085,
+      "content": "$1,950,000 el precio de venta.Est\u00c3\u00a1 ubicado en las Mercedes calle Londres",
+      "share": {
+        "share_text": "$1,950,000 el precio de venta.Est\u00c3\u00a1 ubicado en las Mercedes calle Londres"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776648769681,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776648763092,
+      "content": "Buenas noches se\u00c3\u00b1or Boris!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Boris",
+  "is_still_participant": true,
+  "thread_path": "inbox/boris_1933872644671428",
+  "magic_words": [
+    
+  ]
+}

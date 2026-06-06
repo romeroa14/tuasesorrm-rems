@@ -1,0 +1,104 @@
+{
+  "participants": [
+    {
+      "name": "Fernando Ferro"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Fernando Ferro",
+      "timestamp_ms": 1774733920538,
+      "content": "Okok",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733909396,
+      "content": "Vale Sr. Fernando muchas gracias, el d\u00c3\u00ada lunes nos estaremos comunicando con usted igualmente para reconfirmar\u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733857808,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fernando Ferro",
+      "timestamp_ms": 1774733857024,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fernando Ferro",
+      "timestamp_ms": 1774733856548,
+      "content": "Perfecto 04123200918 fernando",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733816292,
+      "content": "\u00c2\u00bfA las 10 AM le parece bien?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fernando Ferro",
+      "timestamp_ms": 1774733743795,
+      "content": "En la ma\u00c3\u00b1ana a la hora .que puedan antes de las 12 pm",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733693186,
+      "content": "\u00c2\u00bfA qu\u00c3\u00a9 hora el d\u00c3\u00ada martes?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733686507,
+      "content": "Si, por supuesto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733681864,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774733561296,
+      "content": "Fernando Ferro replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fernando Ferro",
+      "timestamp_ms": 1774733560749,
+      "content": "Hola.puedo verlo ??? El martes o miecoles",
+      "share": {
+        "share_text": "Hola.puedo verlo ??? El martes o miecoles"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Fernando Ferro",
+  "is_still_participant": true,
+  "thread_path": "inbox/fernandoferro_1911815863543842",
+  "magic_words": [
+    
+  ]
+}

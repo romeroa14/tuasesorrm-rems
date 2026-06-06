@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Florangel Rumbos"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777138524357,
+      "content": "Florangel Rumbos replied to an ad. View ad(https://www.instagram.com/p/DXjnPoXgIOP/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Florangel Rumbos",
+      "timestamp_ms": 1777138523811,
+      "content": "Hola buenas tardes, soy asesora inmobiliaria y tengo un posible comprador para este apartamento, me podr\u00c3\u00adas enviar el link, gracias de antemano",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Florangel Rumbos",
+  "is_still_participant": true,
+  "thread_path": "inbox/florangelrumbos_2044939910235619",
+  "magic_words": [
+    
+  ]
+}

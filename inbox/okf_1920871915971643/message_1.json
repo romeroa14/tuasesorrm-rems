@@ -1,0 +1,67 @@
+{
+  "participants": [
+    {
+      "name": "Okf"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775856084548,
+      "content": "Uso recidencial",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775855299935,
+      "content": "Okf replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Okf",
+      "timestamp_ms": 1775855299316,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 usos se permiten en la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775658090539,
+      "content": "Son 750 m\u00c2\u00b2 de oportunidad, si gusta puedo enviarle m\u00c3\u00a1s informaci\u00c3\u00b3n a trav\u00c3\u00a9s de WhatsApp",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775658057966,
+      "content": "El local ubicado en la Calle Londres en las Mercedes tiene un precio de $1,950,000 negociable y podemos aceptar un financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775658027088,
+      "content": "Hola, c\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775609242211,
+      "content": "Holaa buen d\u00c3\u00ada un gusto est\u00c3\u00a1 en 1950.000$ pero est\u00c3\u00a1n dispuestos a negociar de por si nuestra broker logr\u00c3\u00b3 un precio menor en una propuesta anterior , en las mercedes por ahora es el m\u00c3\u00a1s econ\u00c3\u00b3mico de este metraje",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Okf",
+  "is_still_participant": true,
+  "thread_path": "inbox/okf_1920871915971643",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Nico"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779731224563,
+      "content": "Buen d\u00c3\u00ada un gusto saludarle Odra Cede\u00c3\u00b1o del Equipo de Asesores RM quer\u00c3\u00ada saber si hab\u00c3\u00ada revisado la informaci\u00c3\u00b3n enviada tambi\u00c3\u00a9n dispongo de otras opciones que pudieran ayudarle me gustar\u00c3\u00ada conocer un poco que b\u00c3\u00basqueda requiere para ayudarle \n\nQuedo atenta Mil Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644457249,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada asistir a nuestro OPEN HOUSE?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644455499,
+      "content": "El apartamento ubicado en los Naranjos del cafetal tiene un precio de $245,000\nSon 135 m\u00c2\u00b2 , cuenta con  3 Habitaciones | 2 Ba\u00c3\u00b1os",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644454661,
+      "content": "Se\u00c3\u00b1or Nico, c\u00c3\u00b3mo est\u00c3\u00a1?\nSoy Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Nico",
+  "is_still_participant": true,
+  "thread_path": "inbox/nico_1170013611917597",
+  "magic_words": [
+    
+  ]
+}

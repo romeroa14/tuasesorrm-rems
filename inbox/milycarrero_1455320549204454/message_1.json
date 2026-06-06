@@ -1,0 +1,25 @@
+{
+  "participants": [
+    {
+      "name": "Mily Carrero\u00f0\u009f\u0087\u00bb\u00f0\u009f\u0087\u00aa\u00e2\u009d\u00a4"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491662801,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Mily Carrero\u00f0\u009f\u0087\u00bb\u00f0\u009f\u0087\u00aa\u00e2\u009d\u00a4",
+  "is_still_participant": true,
+  "thread_path": "inbox/milycarrero_1455320549204454",
+  "magic_words": [
+    
+  ]
+}

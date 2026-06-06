@@ -1,0 +1,89 @@
+{
+  "participants": [
+    {
+      "name": "Andres M"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773592448126,
+      "content": "El jueves 19 de marzo vamos a realizar un Open House \n\u00c2\u00bfle gustar\u00c3\u00ada asistir?\u00f0\u009f\u008d\u00b7",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773592441583,
+      "photos": [
+        {
+          "uri": "your_instagram_activity/messages/inbox/andresm_1502547821228744/photos/1471767104342096.jpg",
+          "creation_timestamp": 1773592440
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773592437204,
+      "content": "Su valor es de $1.700.000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773592411932,
+      "photos": [
+        {
+          "uri": "your_instagram_activity/messages/inbox/andresm_1502547821228744/photos/1634960247645032.jpg",
+          "creation_timestamp": 1773592410
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773592407521,
+      "content": "La casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773592392894,
+      "content": "Hola Andr\u00c3\u00a9s! C\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Andres M",
+      "timestamp_ms": 1773576691668,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 propiedades est\u00c3\u00a1n disponibles?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Andres M",
+      "timestamp_ms": 1773576691123,
+      "content": "Andres envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DVzkVHWgJM4/?id=3851581887009035064_53287868330",
+        "share_text": "\u00f0\u009f\u008d\u00b7 RESERVA PRIVADA \u00e2\u009c\u00a8\nDescubre el verdadero lujo en Los Naranjos del Cafetal. Te invitamos a una experiencia sensorial \u00c3\u00banica para que visualices tu pr\u00c3\u00b3ximo hogar o inversi\u00c3\u00b3n inmobiliaria.\n\n\u00f0\u009f\u0097\u0093\u00ef\u00b8\u008f Jueves 19 de Marzo\n\u00e2\u008f\u00b0 10:30 AM\n\u00f0\u009f\u0093\u008d Asesores RM\n\n\u00f0\u009f\u0091\u0089 Confirma tu asistencia por DM. \u00c2\u00a1Te esperamos!\n\n#asesoresrm #inversi\u00c3\u00b3ninteligente #bienesra\u00c3\u00adcescaracas #exclusivaspropiedades #realestatevenezuela #losnaranjos #inmueblescaracas #luxurylifestyle",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Andres M",
+  "is_still_participant": true,
+  "thread_path": "inbox/andresm_1502547821228744",
+  "magic_words": [
+    
+  ]
+}

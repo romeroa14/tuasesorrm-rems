@@ -1,0 +1,50 @@
+{
+  "participants": [
+    {
+      "name": "Roxana Tejada"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777243027915,
+      "content": "Apartamento-Residencial en Venta \r\n*Precio:* 249.000 \r\n*Distribuci\u00c3\u00b3n:* 2H-2B-1PE \r\n*Ubicaci\u00c3\u00b3n:* Caracas - Chacao, Los Palos Grandes\r\nhttps://www.rexup.net/AAAAAAA/ver_inmueble_c.php?cod_inmueble=2203325120",
+      "share": {
+        "link": "https://www.rexup.net/AAAAAAA/ver_inmueble_c.php?cod_inmueble=2203325120",
+        "share_text": "Apartamento-Residencial en Venta \r\n*Precio:* 249.000 \r\n*Distribuci\u00c3\u00b3n:* 2H-2B-1PE \r\n*Ubicaci\u00c3\u00b3n:* Caracas - Chacao, Los Palos Grandes\r\nhttps://www.rexup.net/AAAAAAA/ver_inmueble_c.php?cod_inmueble=2203325120"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777243022998,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777235046125,
+      "content": "Roxana Tejada replied to an ad. View ad(https://www.instagram.com/p/DXjnPoXgIOP/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Roxana Tejada",
+      "timestamp_ms": 1777235044773,
+      "content": "\u00c2\u00bfCosto de los servicios?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Roxana Tejada",
+  "is_still_participant": true,
+  "thread_path": "inbox/roxanatejada_1822502069135505",
+  "magic_words": [
+    
+  ]
+}

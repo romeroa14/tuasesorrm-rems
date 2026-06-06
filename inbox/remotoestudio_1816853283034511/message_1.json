@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "RemotoEstudio"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776690123703,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776690122054,
+      "content": "Su precio es de $1,270,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776690119899,
+      "content": "Apartamento en VENTA ubicado en \nUrbanizaci\u00c3\u00b3n Mirador de los Campitos, Altos de Valle Arriba\n\nResidencia la Monta\u00c3\u00b1a\n3 habitaciones cada una con su ba\u00c3\u00b1o\n6 ba\u00c3\u00b1os totales \nEl apartamento est\u00c3\u00a1 totalmente domotizado.\nAscensor privado \nPozo de agua \nTerraza con vista al \u00c3\u0081vila \nSe entrega amoblado",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776690103034,
+      "content": "Hola buen d\u00c3\u00ada, c\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "RemotoEstudio",
+  "is_still_participant": true,
+  "thread_path": "inbox/remotoestudio_1816853283034511",
+  "magic_words": [
+    
+  ]
+}

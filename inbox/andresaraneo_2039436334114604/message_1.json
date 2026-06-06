@@ -1,0 +1,58 @@
+{
+  "participants": [
+    {
+      "name": "Andres Araneo"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778787860662,
+      "content": "Gustar\u00c3\u00ada que pudi\u00c3\u00a9ramos agendar una visita al local para que pueda conocer el espacio ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778787845482,
+      "content": "Este local comercial ubicado en la calle Londres de las Mercedes se encuentra totalmente disponible para la venta por 1.950.000$ totalmente NEGOCIABLES! \n\nEste local se encuentra para remodelaci\u00c3\u00b3n y tambi\u00c3\u00a9n cuenta con permiso para la construir un edificio de tanto residencial como comercial \n\nCaracter\u00c3\u00adsticas: \n\n\u00c3\u0081rea total de terreno: 788m2 \n\n\u00c3\u0081rea total de construcci\u00c3\u00b3n: 750m2 \n\nPlanta baja: 500m2 \n\nPlanta alta: 250m2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778787644566,
+      "content": "Muy buenas tardes! Que tal est\u00c3\u00a1 ? Por ac\u00c3\u00a1 le habla le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Andres Araneo",
+      "timestamp_ms": 1778787628305,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Andres Araneo",
+      "timestamp_ms": 1778787627861,
+      "content": "Andres envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DW6mBeugIaw/?id=3871574057157691056_53287868330",
+        "share_text": "\u00f0\u009f\u0093\u008d \u00c2\u00a1EL PUNTO ESTRAT\u00c3\u0089GICO QUE TU NEGOCIO NECESITA!\n\nSi buscas presencia y rentabilidad en la zona m\u00c3\u00a1s exclusiva de Caracas, esta oportunidad en la Calle Londres de Las Mercedes es para ti. \u00f0\u009f\u009a\u0080\n\nTienes dos caminos para ganar:\n\u00e2\u009c\u0085 Aprovechar la estructura actual de 520 m\u00c2\u00b2 aprox. para una remodelaci\u00c3\u00b3n r\u00c3\u00a1pida.\n\u00e2\u009c\u0085 Desarrollar un proyecto desde cero sobre este terreno de 788 m\u00c2\u00b2 aprox.\n\nVersatilidad, ubicaci\u00c3\u00b3n y metros. \u00c2\u00a1Todo en un solo lugar! \u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f\n\n\u00f0\u009f\u0093\u00b2 \u00c2\u00bfQuieres conocerlo? Cont\u00c3\u00a1ctame al DM para agendar una visita.\n\n#LasMercedes #Caracas #BienesRaicesVenezuela #LocalComercial #InversionCaracas #CalleLondres #RealEstateCaracas #OportunidadDeInversion #LocalesEnVenta",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Andres Araneo",
+  "is_still_participant": true,
+  "thread_path": "inbox/andresaraneo_2039436334114604",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Yulesy Perez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776086800158,
+      "content": "Si me comparte su n\u00c3\u00bamero telef\u00c3\u00b3nico con gusto puedo coordinar la visita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776086784265,
+      "content": "$650,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776086775491,
+      "content": "Hola buen d\u00c3\u00ada, c\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yulesy Perez",
+      "timestamp_ms": 1776058408880,
+      "content": "\u00c2\u00bfC\u00c3\u00b3mo puedo programar una visita?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776058402699,
+      "content": "Yulesy Perez replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yulesy Perez",
+      "timestamp_ms": 1776058402072,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Yulesy Perez",
+  "is_still_participant": true,
+  "thread_path": "inbox/yulesyperez_1982993619758524",
+  "magic_words": [
+    
+  ]
+}

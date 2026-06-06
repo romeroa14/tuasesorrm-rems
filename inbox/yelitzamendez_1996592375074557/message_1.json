@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Yelitza Mendez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776881355635,
+      "content": "Apartamento en VENTA ubicado en \nUrbanizaci\u00c3\u00b3n Mirador de los Campitos\n\nResidencia la Monta\u00c3\u00b1a\n3 habitaciones cada una con su ba\u00c3\u00b1o\n6 ba\u00c3\u00b1os totales \nEl apartamento est\u00c3\u00a1 totalmente domotizado.\nAscensor privado \nPozo de agua \nTerraza con vista al \u00c3\u0081vila \nSe entrega amoblado\nPrecio 1270000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776881344599,
+      "content": "Feliz Tarde Odra Cede\u00c3\u00b1o un gusto saludarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776880356494,
+      "content": "Yelitza Mendez replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yelitza Mendez",
+      "timestamp_ms": 1776880355929,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Yelitza Mendez",
+  "is_still_participant": true,
+  "thread_path": "inbox/yelitzamendez_1996592375074557",
+  "magic_words": [
+    
+  ]
+}

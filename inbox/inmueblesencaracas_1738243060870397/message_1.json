@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Inmuebles en Caracas \u00f0\u009f\u0087\u00bb\u00f0\u009f\u0087\u00aa"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644546671,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada asistir a nuestro OPEN HOUSE?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644544486,
+      "content": "El apartamento ubicado en los Naranjos del cafetal tiene un precio de $245,000\nSon 135 m\u00c2\u00b2 , cuenta con  3 Habitaciones | 2 Ba\u00c3\u00b1os",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779644543566,
+      "content": "Hola buenas tardes, soy Valery!\nFeliz domingo",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Inmuebles en Caracas \u00f0\u009f\u0087\u00bb\u00f0\u009f\u0087\u00aa",
+  "is_still_participant": true,
+  "thread_path": "inbox/inmueblesencaracas_1738243060870397",
+  "magic_words": [
+    
+  ]
+}

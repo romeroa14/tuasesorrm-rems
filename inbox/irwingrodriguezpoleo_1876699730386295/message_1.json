@@ -1,0 +1,58 @@
+{
+  "participants": [
+    {
+      "name": "Irwing Rodriguez Poleo"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Irwing Rodriguez Poleo",
+      "timestamp_ms": 1774206523996,
+      "content": "Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774202506743,
+      "content": "El Penthouse est\u00c3\u00a1 disponible en $450,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774202497154,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Irwing Rodriguez Poleo",
+      "timestamp_ms": 1774190677800,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Irwing Rodriguez Poleo",
+      "timestamp_ms": 1774190677379,
+      "content": "Irwing envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DWKSHqEgA0L/?id=3857975721842445579_53287868330",
+        "share_text": "\u00c2\u00bfTe imaginas vivir en lo m\u00c3\u00a1s alto y con la mejor vista de Playa Moreno? \u00f0\u009f\u008c\u008a Asesores RM lo hace posible\n\nTenemos en venta este exclusivo Pent House ubicado en Punta Pac\u00c3\u00adfico. \u00c2\u00a1Un verdadero para\u00c3\u00adso!\n\nEl confort est\u00c3\u00a1 garantizado: cuenta con 3 amplias habitaciones y 2 ba\u00c3\u00b1os dise\u00c3\u00b1ados para el descanso y la privacidad de toda tu familia\n\n\u00c2\u00bfEl toque final? Una incre\u00c3\u00adble terraza privada para relajarte o compartir, adem\u00c3\u00a1s de 2 puestos de estacionamiento totalmente asegurados\n\nEsta es tu oportunidad de invertir en la Perla de Caribe. Cont\u00c3\u00a1ctanos para m\u00c3\u00a1s informaci\u00c3\u00b3n sobre este inmueble \u00f0\u009f\u008f\u00a0\u00f0\u009f\u0093\u00a9",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Irwing Rodriguez Poleo",
+  "is_still_participant": true,
+  "thread_path": "inbox/irwingrodriguezpoleo_1876699730386295",
+  "magic_words": [
+    
+  ]
+}

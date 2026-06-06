@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Al\u00c3\u00ad L\u00c3\u00b3pez Maiolino \u00f0\u009f\u0087\u00bb\u00f0\u009f\u0087\u00aa"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774273313467,
+      "content": "Cumbres de Curumo su precio es de $690,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774273299535,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774272726999,
+      "content": "Al\u00c3\u00ad L\u00c3\u00b3pez Maiolino \u00f0\u009f\u0087\u00bb\u00f0\u009f\u0087\u00aa replied to an ad. View ad(https://www.instagram.com/p/DVhvV7mgNtC/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Al\u00c3\u00ad L\u00c3\u00b3pez Maiolino \u00f0\u009f\u0087\u00bb\u00f0\u009f\u0087\u00aa",
+      "timestamp_ms": 1774272726389,
+      "content": "Ubicaci\u00c3\u00b3n y precio por favor",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Al\u00c3\u00ad L\u00c3\u00b3pez Maiolino \u00f0\u009f\u0087\u00bb\u00f0\u009f\u0087\u00aa",
+  "is_still_participant": true,
+  "thread_path": "inbox/alilopezmaiolino_1801042024633765",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Yesenia Pilo-Pais Sussoni"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779663794422,
+      "content": "El apartamento ubicado en los Naranjos del cafetal tiene un precio de $245,000\nSon 135 m\u00c2\u00b2 , cuenta con  3 Habitaciones | 2 Ba\u00c3\u00b1os",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779663794000,
+      "content": "Buenas tardes, c\u00c3\u00b3mo est\u00c3\u00a1?\nSoy Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Yesenia Pilo-Pais Sussoni",
+  "is_still_participant": true,
+  "thread_path": "inbox/yeseniapilopaissussoni_2263620590844853",
+  "magic_words": [
+    
+  ]
+}

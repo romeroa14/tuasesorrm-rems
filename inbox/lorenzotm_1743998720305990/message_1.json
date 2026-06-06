@@ -1,0 +1,51 @@
+{
+  "participants": [
+    {
+      "name": "Lorenzo T M"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779483221269,
+      "content": "El precio es de 1.950.000 $ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779483209816,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Lorenzo T M",
+      "timestamp_ms": 1779480724791,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Lorenzo T M",
+      "timestamp_ms": 1779480724230,
+      "content": "Lorenzo envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DW6mBeugIaw/?id=3871574057157691056_53287868330",
+        "share_text": "\u00f0\u009f\u0093\u008d \u00c2\u00a1EL PUNTO ESTRAT\u00c3\u0089GICO QUE TU NEGOCIO NECESITA!\n\nSi buscas presencia y rentabilidad en la zona m\u00c3\u00a1s exclusiva de Caracas, esta oportunidad en la Calle Londres de Las Mercedes es para ti. \u00f0\u009f\u009a\u0080\n\nTienes dos caminos para ganar:\n\u00e2\u009c\u0085 Aprovechar la estructura actual de 520 m\u00c2\u00b2 aprox. para una remodelaci\u00c3\u00b3n r\u00c3\u00a1pida.\n\u00e2\u009c\u0085 Desarrollar un proyecto desde cero sobre este terreno de 788 m\u00c2\u00b2 aprox.\n\nVersatilidad, ubicaci\u00c3\u00b3n y metros. \u00c2\u00a1Todo en un solo lugar! \u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f\n\n\u00f0\u009f\u0093\u00b2 \u00c2\u00bfQuieres conocerlo? Cont\u00c3\u00a1ctame al DM para agendar una visita.\n\n#LasMercedes #Caracas #BienesRaicesVenezuela #LocalComercial #InversionCaracas #CalleLondres #RealEstateCaracas #OportunidadDeInversion #LocalesEnVenta",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Lorenzo T M",
+  "is_still_participant": true,
+  "thread_path": "inbox/lorenzotm_1743998720305990",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "participants": [
+    {
+      "name": "Dino Dragone"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777387957331,
+      "content": "Buenos d\u00c3\u00adas Alejandra velasco d\u00c3\u00a9 Asesores RM pudo verificar la enviada? O desea vender una propiedad estamos para ayudarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777387883889,
+      "content": "Buenos d\u00c3\u00adas Alejandra velasco d\u00c3\u00a9 Asesores RM pudo verificar la enviada? O desea vender una propiedad estamos para ayudarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775948127386,
+      "content": "Le gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775948123069,
+      "content": "Av transversal 6 de la avenida 12 de Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775948094191,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1 usted?\n\u00f0\u009f\u009f\u00a2 Valery Mendoza en l\u00c3\u00adnea",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775911774356,
+      "content": "Dino Dragone replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Dino Dragone",
+      "timestamp_ms": 1775911773677,
+      "content": "Hola, donde esta ubivada",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Dino Dragone",
+  "is_still_participant": true,
+  "thread_path": "inbox/dinodragone_1956671739057025",
+  "magic_words": [
+    
+  ]
+}

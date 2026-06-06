@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Jorge Sukkar"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491933567,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772897858657,
+      "content": "\u00c2\u00bfUsted est\u00c3\u00a1 en busca de cu\u00c3\u00a1l? Para enviarle la informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772897812381,
+      "content": "En Las Mercedes tenemos disponible oficinas, edificios y locales",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772897780339,
+      "content": "Hola buen d\u00c3\u00ada, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772897779682,
+      "content": "Enviaste una respuesta privada a un comentario de tu publicaci\u00c3\u00b3n de Instagram.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jorge Sukkar",
+  "is_still_participant": true,
+  "thread_path": "inbox/jorgesukkar_2016940893037407",
+  "magic_words": [
+    
+  ]
+}

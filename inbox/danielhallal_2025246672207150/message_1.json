@@ -1,0 +1,70 @@
+{
+  "participants": [
+    {
+      "name": "Dani El Hallal"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777300847028,
+      "content": "Saludos, Alejandro Flores\u00f0\u009f\u009f\u00a2 Paso por aqu\u00c3\u00ad para saber si tiene alguna b\u00c3\u00basqueda inmobiliaria o desea vender alguna propiedad?\n Asesores RM para servirle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777034898542,
+      "content": "La descripci\u00c3\u00b3n del inmueble es \nUrbanizaci\u00c3\u00b3n Mirador de los Campitos\n\n\u00e2\u0080\u00a2 3 habitaciones cada una con su ba\u00c3\u00b1o\n\u00e2\u0080\u00a2 6 ba\u00c3\u00b1os totales \n\u00e2\u0080\u00a2 El apartamento est\u00c3\u00a1 totalmente domotizado.\n\u00e2\u0080\u00a2 Ascensor privado \n\u00e2\u0080\u00a2 Pozo de agua \n\u00e2\u0080\u00a2 Terraza con vista al \u00c3\u0081vila \n\u00e2\u0080\u00a2 Se entrega equipado y amoblado, con muebles italianos de alta gama.\n\n\u00e2\u0080\u00a2 Cuenta con ascensor privado, pozo de agua y piscina\n\nSu precio es de $1,270,000 negociable \n\u00c2\u00bfLe gustar\u00c3\u00ada agendar una visita?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777034882146,
+      "content": "El precio es de 1.270.000k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777034843859,
+      "content": "Le escribe Alejandra velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777034796886,
+      "content": "Buen d\u00c3\u00ada un gusto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Dani El Hallal",
+      "timestamp_ms": 1776879306417,
+      "content": "Mas informaci\u00c3\u00b3n y precio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Dani El Hallal",
+      "timestamp_ms": 1776879305925,
+      "share": {
+        "link": "https://www.instagram.com/p/DXVf8NngBUq/",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Dani El Hallal",
+  "is_still_participant": true,
+  "thread_path": "inbox/danielhallal_2025246672207150",
+  "magic_words": [
+    
+  ]
+}

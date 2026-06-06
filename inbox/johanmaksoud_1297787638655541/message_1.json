@@ -1,0 +1,113 @@
+{
+  "participants": [
+    {
+      "name": "Johan Maksoud"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779488118091,
+      "content": "Si gusta me comparte su contacto para enviarle informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Johan Maksoud",
+      "timestamp_ms": 1779488020766,
+      "content": "Gracias Valery",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779487579353,
+      "content": "Tenemos otras opciones disponibles en la Mercedes! \u00c2\u00bfPodr\u00c3\u00ada a comentarme un poco acerca de lo que busca? y con gusto le comparto opciones",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779487350904,
+      "content": "Mi nombre es Valery soy del Equipo RM!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779487338675,
+      "content": "https://info.wasi.co/edificio-venta-lasmercedes/9942749",
+      "share": {
+        "link": "https://info.wasi.co/edificio-venta-lasmercedes/9942749",
+        "share_text": "https://info.wasi.co/edificio-venta-lasmercedes/9942749"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779487335550,
+      "content": "Aqu\u00c3\u00ad le comparto el link del edificio:",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779487302225,
+      "content": "Son 1,600 m\u00c2\u00b2 y 750 m\u00c2\u00b2 de terreno \n15 puestos de estacionamiento \nPlanta el\u00c3\u00a9ctrica y Pozo de agua",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779487298763,
+      "content": "Bien excelente!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Johan Maksoud",
+      "timestamp_ms": 1779487281666,
+      "content": "Bien y usted",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Johan Maksoud",
+      "timestamp_ms": 1779487277656,
+      "content": "Saludos",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779487266996,
+      "content": "Hola se\u00c3\u00b1or Johan! \u00c2\u00bfC\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779480802999,
+      "content": "Johan Maksoud replied to an ad. View ad(https://www.instagram.com/p/DYgBEJcABnZ/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Johan Maksoud",
+      "timestamp_ms": 1779480802468,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Johan Maksoud",
+  "is_still_participant": true,
+  "thread_path": "inbox/johanmaksoud_1297787638655541",
+  "magic_words": [
+    
+  ]
+}

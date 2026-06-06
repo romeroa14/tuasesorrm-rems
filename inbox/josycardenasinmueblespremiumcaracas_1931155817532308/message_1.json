@@ -1,0 +1,71 @@
+{
+  "participants": [
+    {
+      "name": "Josy C\u00c3\u00a1rdenas | Inmuebles Premium Caracas"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779500768185,
+      "content": "https://info.wasi.co/local-alquiler-caracas-baruta/9992410",
+      "share": {
+        "link": "https://info.wasi.co/local-alquiler-caracas-baruta/9992410",
+        "share_text": "https://info.wasi.co/local-alquiler-caracas-baruta/9992410"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779500647235,
+      "content": "Aqu\u00c3\u00ad le comparto el link!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779500641870,
+      "content": "Perfecto este planta baja de 404 m\u00c2\u00b2 ubicado en Chuao a toda pie de Calle, su precio de alquiler es el siguiente:\n\n$16,000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779500598324,
+      "content": "Soy Valery Mendoza del Equipo RM!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779500591512,
+      "content": "Hola buenas noches! \u00c2\u00bfC\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779470462522,
+      "content": "Josy C\u00c3\u00a1rdenas | Inmuebles Premium Caracas replied to an ad. View ad(https://www.instagram.com/p/DYpgR4KgK0O/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Josy C\u00c3\u00a1rdenas | Inmuebles Premium Caracas",
+      "timestamp_ms": 1779470461867,
+      "content": "Hola necesito informaci\u00c3\u00b3n sobre el local en Chuao tengo un cliente, soy asesora inmobiliaria",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Josy C\u00c3\u00a1rdenas | Inmuebles Premium Caracas",
+  "is_still_participant": true,
+  "thread_path": "inbox/josycardenasinmueblespremiumcaracas_1931155817532308",
+  "magic_words": [
+    
+  ]
+}

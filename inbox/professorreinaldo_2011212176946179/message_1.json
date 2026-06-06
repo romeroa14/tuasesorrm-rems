@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Professor Reinaldo"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Professor Reinaldo",
+      "timestamp_ms": 1774943599414,
+      "content": "Porque me gust\u00c3\u00b3 un v\u00c3\u00addeo que publicaron de una propiedad en la guaira pero creo que era solo alquiler y no venta.... Me llam\u00c3\u00b3 mucho la atenci\u00c3\u00b3n... Quer\u00c3\u00ada negociar hasta que vi la palabra \"alquiler'",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774943508806,
+      "content": "Professor Reinaldo replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Professor Reinaldo",
+      "timestamp_ms": 1774943508119,
+      "content": "Espero que tengan un buen d\u00c3\u00ada, ehm bueno... Creo que les escrib\u00c3\u00ad para salir de una duda, si ustedes son una empresa inmobiliaria de ventas o una empresa de alquiler",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Professor Reinaldo",
+  "is_still_participant": true,
+  "thread_path": "inbox/professorreinaldo_2011212176946179",
+  "magic_words": [
+    
+  ]
+}

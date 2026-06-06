@@ -1,0 +1,77 @@
+{
+  "participants": [
+    {
+      "name": "MaigualidaSugar"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773873612972,
+      "content": "Ma\u00c3\u00b1ana vamos a realizar un Open House gratuito \n\u00c2\u00bfle gustar\u00c3\u00ada asistir?\u00f0\u009f\u008d\u00b7",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773873594759,
+      "content": "La casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada!\n\nSu valor es de $1.700.000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773873585219,
+      "content": "Hola c\u00c3\u00b3mo est\u00c3\u00a1?\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MaigualidaSugar",
+      "timestamp_ms": 1773873552354,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MaigualidaSugar",
+      "timestamp_ms": 1773873552096,
+      "content": "MaigualidaSugar envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DV9ZK6KANBw/?id=3854347556901408880_53287868330",
+        "share_text": "Donde la exclusividad encuentra su hogar. \u00e2\u009c\u00a8 Te invitamos a una experiencia sensorial de alto nivel. Ven e invierte en Los Naranjos del Cafetal , con espacios dise\u00c3\u00b1ados para quienes aprecian el verdadero lujo.\n\n\u00f0\u009f\u0097\u0093\u00ef\u00b8\u008f Jueves 19 de marzo | \u00e2\u008f\u00b0 10:30 AM\n\u00f0\u009f\u0093\u008d Asesores RM\n\n#asesoresrm #inversi\u00c3\u00b3ninteligente #bienesra\u00c3\u00adcescaracas #exclusivaspropiedades #realestatevenezuela",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MaigualidaSugar",
+      "timestamp_ms": 1773873551846,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "MaigualidaSugar",
+      "timestamp_ms": 1773873551612,
+      "content": "MaigualidaSugar envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DV9ZK6KANBw/?id=3854347556901408880_53287868330",
+        "share_text": "Donde la exclusividad encuentra su hogar. \u00e2\u009c\u00a8 Te invitamos a una experiencia sensorial de alto nivel. Ven e invierte en Los Naranjos del Cafetal , con espacios dise\u00c3\u00b1ados para quienes aprecian el verdadero lujo.\n\n\u00f0\u009f\u0097\u0093\u00ef\u00b8\u008f Jueves 19 de marzo | \u00e2\u008f\u00b0 10:30 AM\n\u00f0\u009f\u0093\u008d Asesores RM\n\n#asesoresrm #inversi\u00c3\u00b3ninteligente #bienesra\u00c3\u00adcescaracas #exclusivaspropiedades #realestatevenezuela",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "MaigualidaSugar",
+  "is_still_participant": true,
+  "thread_path": "inbox/maigualidasugar_1983778299689097",
+  "magic_words": [
+    
+  ]
+}

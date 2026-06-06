@@ -1,0 +1,67 @@
+{
+  "participants": [
+    {
+      "name": "Pedro Casanova"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773408703142,
+      "content": "Si desea mayor informaci\u00c3\u00b3n por favor ind\u00c3\u00adqueme su n\u00c3\u00bamero de tel\u00c3\u00a9fono y le estar\u00c3\u00a9 contactando",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773408689020,
+      "content": "Pedro la propiedad est\u00c3\u00a1 para 1700000$\n\nEstamos trabajando bajo la modalidad de financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773408674094,
+      "content": "Placer saludarle, soy Alejandro Flores del equipo de Asesores RM inmobiliaria \u00f0\u009f\u0098\u0083",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Pedro Casanova",
+      "timestamp_ms": 1773405596989,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio de las viviendas en Los Naranjos del Cafetal?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Pedro Casanova",
+      "timestamp_ms": 1773405587674,
+      "content": "Estoy interesado. Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773405568456,
+      "content": "Pedro Casanova replied to an ad. View ad(https://www.instagram.com/p/DVzkVHWgJM4/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Pedro Casanova",
+      "timestamp_ms": 1773405566808,
+      "content": "Hola cuentame",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Pedro Casanova",
+  "is_still_participant": true,
+  "thread_path": "inbox/pedrocasanova_1957560378977468",
+  "magic_words": [
+    
+  ]
+}

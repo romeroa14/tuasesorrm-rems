@@ -1,0 +1,107 @@
+{
+  "participants": [
+    {
+      "name": "Ruth Maibe"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774750591907,
+      "content": "Si gusta comp\u00c3\u00a1rteme tu WhatsApp y conversamos acerca de esos detalles",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ruth Maibe",
+      "timestamp_ms": 1774749795432,
+      "content": "Necesito m\u00c3\u00a1s informaci\u00c3\u00b3n sobre financiamiento.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774748268497,
+      "photos": [
+        {
+          "uri": "your_instagram_activity/messages/inbox/ruthmaibe_1853181152736818/photos/1668337234333475.jpg",
+          "creation_timestamp": 1774748266
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774748229775,
+      "content": "El planta baja tiene para una sola habitaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ruth Maibe",
+      "timestamp_ms": 1774738249058,
+      "content": "O se transforma ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ruth Maibe",
+      "timestamp_ms": 1774738240217,
+      "content": "Pero por que tienen 1 habitacion?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774737921950,
+      "content": "En Premium La Escondida tenemos 2 apartamentos disponibles:\n\n\u00e2\u0080\u00a2Un Planta Baja, 186m2 en 170.000$ \n\u00e2\u0080\u00a2Uno en piso 5, 153m2 en 220.000$ \n\nNegociables, podemos aceptar un financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ruth Maibe",
+      "timestamp_ms": 1774737466239,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774737332179,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774737328847,
+      "content": "Saludos Ruth, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774737311928,
+      "content": "Ruth Maibe replied to an ad. View ad(https://www.instagram.com/p/DWbpoKBgEnK/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ruth Maibe",
+      "timestamp_ms": 1774737311261,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Ruth Maibe",
+  "is_still_participant": true,
+  "thread_path": "inbox/ruthmaibe_1853181152736818",
+  "magic_words": [
+    
+  ]
+}

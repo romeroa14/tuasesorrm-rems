@@ -1,0 +1,74 @@
+{
+  "participants": [
+    {
+      "name": "Jay more"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777388035100,
+      "content": "Buenos d\u00c3\u00adas Alejandra velasco d\u00c3\u00a9 Asesores RM pudo verificar la enviada? O desea vender una propiedad estamos para ayudarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491977623,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772984439406,
+      "content": "La del cafetal est\u00c3\u00a1 en 1700.000$ negociable y la de Cumbre\u00e2\u0080\u0099s de Curumo es 620.000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jay more",
+      "timestamp_ms": 1772980024805,
+      "content": "Y el costo, cu\u00c3\u00a1l ser\u00c3\u00ada?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772842063094,
+      "content": "Habitaciones:6 amplias y luminosas.\n- Ba\u00c3\u00b1os: 7 modernos y funcionales.\n- Estacionamiento: 5 puestos privados.\n- Construcci\u00c3\u00b3n:900 m\u00c2\u00b2 de puro dise\u00c3\u00b1o.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772842061517,
+      "content": "Aqu\u00c3\u00ad le comparto detalles de la casa",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772842054613,
+      "content": "Le escribe Valery Mendoza",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772842022606,
+      "content": "Saludos Jay!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jay more",
+  "is_still_participant": true,
+  "thread_path": "inbox/jaymore_1789841415735445",
+  "magic_words": [
+    
+  ]
+}

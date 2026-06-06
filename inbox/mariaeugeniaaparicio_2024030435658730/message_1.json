@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Maria Eugenia Aparicio"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773412284625,
+      "content": "Me permite su n\u00c3\u00bamero telef\u00c3\u00b3nico para enviarle opciones y un asesor pueda comunicarse con usted",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773412135318,
+      "content": "Se\u00c3\u00b1ora Mar\u00c3\u00ada! \nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773410658338,
+      "content": "Maria Eugenia Aparicio replied to an ad. View ad(https://www.instagram.com/p/DVzkVHWgJM4/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Maria Eugenia Aparicio",
+      "timestamp_ms": 1773410657226,
+      "content": "Busco apartamento para la compra entre 80 y 100 en la zona de Los Palos Grandes, Santa Eduvigis de 2 habitaciones",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Maria Eugenia Aparicio",
+  "is_still_participant": true,
+  "thread_path": "inbox/mariaeugeniaaparicio_2024030435658730",
+  "magic_words": [
+    
+  ]
+}

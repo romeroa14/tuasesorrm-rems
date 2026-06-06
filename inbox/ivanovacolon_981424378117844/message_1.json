@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Ivanova Colon"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779297853899,
+      "content": "Le comento este Terreno est\u00c3\u00a1 ubicado en Altamira son 786 m\u00c2\u00b2 a un precio de $650,000 su zonificaci\u00c3\u00b3n es R3 !\n\nQuedo atenta si desea m\u00c3\u00a1s informaci\u00c3\u00b3n!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779297699008,
+      "content": "Hola se\u00c3\u00b1ora Ivanova, c\u00c3\u00b3mo est\u00c3\u00a1?\nMi nombre es Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Ivanova Colon",
+  "is_still_participant": true,
+  "thread_path": "inbox/ivanovacolon_981424378117844",
+  "magic_words": [
+    
+  ]
+}

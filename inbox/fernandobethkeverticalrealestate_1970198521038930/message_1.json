@@ -1,0 +1,94 @@
+{
+  "participants": [
+    {
+      "name": "Fernando Bethke Vertical Real Estate"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Fernando Bethke Vertical Real Estate",
+      "timestamp_ms": 1778182334735,
+      "content": "Osea no comparten ?!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fernando Bethke Vertical Real Estate",
+      "timestamp_ms": 1778182308369,
+      "content": "Ok",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778182297704,
+      "content": "Se trabaja con cliente directo amigo",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fernando Bethke Vertical Real Estate",
+      "timestamp_ms": 1778182291073,
+      "content": "Fernando Bethke",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778182289687,
+      "content": "Placer servirle, Alejandro Flores de Asesores RM inmobiliaria \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778182288828,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fernando Bethke Vertical Real Estate",
+      "timestamp_ms": 1778182288298,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fernando Bethke Vertical Real Estate",
+      "timestamp_ms": 1778182287632,
+      "content": "04242745410",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fernando Bethke Vertical Real Estate",
+      "timestamp_ms": 1778182281959,
+      "content": "Necesito info. Tengo cliente para esto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778182271934,
+      "content": "Fernando Bethke Vertical Real Estate replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Fernando Bethke Vertical Real Estate",
+      "timestamp_ms": 1778182271464,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Fernando Bethke Vertical Real Estate",
+  "is_still_participant": true,
+  "thread_path": "inbox/fernandobethkeverticalrealestate_1970198521038930",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "participants": [
+    {
+      "name": "Laila Stopler"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777387957117,
+      "content": "Buenos d\u00c3\u00adas Alejandra velasco d\u00c3\u00a9 Asesores RM pudo verificar la enviada? O desea vender una propiedad estamos para ayudarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777387883567,
+      "content": "Buenos d\u00c3\u00adas Alejandra velasco d\u00c3\u00a9 Asesores RM pudo verificar la enviada? O desea vender una propiedad estamos para ayudarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775952799346,
+      "content": "O se encuentra evaluando otras opciones",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775952794055,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Laila Stopler",
+      "timestamp_ms": 1775952780773,
+      "content": "Graciasss!!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775952764681,
+      "content": "El precio de este local es de $1,900,000 negociable y con opci\u00c3\u00b3n de financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775952721705,
+      "content": "Valery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775952710109,
+      "content": "Hola se\u00c3\u00b1ora Laila!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775952685989,
+      "content": "Laila Stopler replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Laila Stopler",
+      "timestamp_ms": 1775952685368,
+      "content": "Hola feliz noche!! Informaci\u00c3\u00b3n porfa",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Laila Stopler",
+  "is_still_participant": true,
+  "thread_path": "inbox/lailastopler_1970211297708987",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "participants": [
+    {
+      "name": "Amin"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775491977284,
+      "content": "Gusto en saludarle soy Alejandro Flores de Asesores RM inmobiliaria \n\nEn alg\u00c3\u00ban momento solicit\u00c3\u00b3 informaci\u00c3\u00b3n sobre nuestras propiedades en venta!\n\nYa compr\u00c3\u00b3? O sigue en la b\u00c3\u00basqueda?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772983265801,
+      "content": "Buen d\u00c3\u00ada! $1,700,000 Casa nueva a estrenar",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Amin",
+      "timestamp_ms": 1772982406500,
+      "content": "Hola Valery cual seria el precio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772940046361,
+      "content": "\u00e2\u0080\u00a2 SALA, COMEDOR. COCINA. AMBIENTE ABIERTO CON VISTA PANORAMICA DESDE LOS 3 NIVELES.\n\n\u00e2\u0080\u00a2 6 HABITACIONES\n\u00e2\u0080\u00a2 SAL\u00c3\u0093N DE BAR CON SU BA\u00c3\u0091O.\n\u00e2\u0080\u00a2 TODAS LAS HABITACIONES CON CLOSET, VESTIER, CAMAS Y TV.\n\u00e2\u0080\u00a2 AREA DE PARRILLERA EN ACERO INOXIDABLE.\n\u00e2\u0080\u00a2 FOGATA AL AIRE LIBRE.\n\u00e2\u0080\u00a2 PISCINA CLIMATIZADA.\n\u00e2\u0080\u00a2 TERRAZA AL AIRE LIBRE. VISTA A LA MONTA\u00c3\u0091A DESDE LOS 3\nNIVELES DE LA CASA.\n\u00e2\u0080\u00a2 5 PUESTOS DE ESTACIONAMIENTOS",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772940006624,
+      "content": "Por aqu\u00c3\u00ad Valery Mendoza",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772939997204,
+      "content": "Buenas noches! C\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772939988773,
+      "content": "Se\u00c3\u00b1or Amin",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Amin",
+      "timestamp_ms": 1772917961276,
+      "content": "\u00c2\u00a1Hola! Quiero m\u00c3\u00a1s informaci\u00c3\u00b3n.",
+      "share": {
+        "link": "https://www.instagram.com/p/DVh1SGVgMPU/"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Amin",
+  "is_still_participant": true,
+  "thread_path": "inbox/amin_1824581832263197",
+  "magic_words": [
+    
+  ]
+}

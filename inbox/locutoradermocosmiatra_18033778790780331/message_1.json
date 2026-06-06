@@ -1,0 +1,87 @@
+{
+  "participants": [
+    {
+      "name": "Locutora | Dermocosmiatra"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776874078155,
+      "content": "Podr\u00c3\u00adamos agendar una visita por si le interesa mirar la propiedad",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776874060674,
+      "content": "Urbanizaci\u00c3\u00b3n mirador de los campitos residencias monta\u00c3\u00b1a",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Locutora | Dermocosmiatra",
+      "timestamp_ms": 1776873953659,
+      "content": "Me das una referencia eso es por colinas de las mercedes arriba ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776873897730,
+      "content": "Si gusta env\u00c3\u00ademe su n\u00c3\u00bamero de tel\u00c3\u00a9fono",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776873871136,
+      "content": "Soy Alejandro",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Locutora | Dermocosmiatra",
+      "timestamp_ms": 1776873870902,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776873866851,
+      "content": "Gusto Saludarle! Apartamento Exclusivo con una vista majestuosa totalmente Remodelado,amoblado y  domotizado  en una Zona Exclusiva en Mirador  de Los Campitos precio 1270000$ si gusta nos deja su contacto para agendar su visita",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Locutora | Dermocosmiatra",
+      "timestamp_ms": 1776873830445,
+      "content": "y d\u00c3\u00b3nde est\u00c3\u00a1 ubicado",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776873819161,
+      "content": "Locutora | Dermocosmiatra replied to an ad. View ad(https://www.instagram.com/p/DXVf8NngBUq/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Locutora | Dermocosmiatra",
+      "timestamp_ms": 1776873818219,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Locutora | Dermocosmiatra",
+  "is_still_participant": true,
+  "thread_path": "inbox/locutoradermocosmiatra_18033778790780331",
+  "magic_words": [
+    
+  ]
+}

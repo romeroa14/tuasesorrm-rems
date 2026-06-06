@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "Daniel Antonio Saez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774287294958,
+      "content": "El Pent House en venta, ubicado en Margarita est\u00c3\u00a1 disponible en 450.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774287270499,
+      "content": "Hola buenas tardes. Un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Daniel Antonio Saez",
+  "is_still_participant": true,
+  "thread_path": "inbox/danielantoniosaez_18037748510780331",
+  "magic_words": [
+    
+  ]
+}

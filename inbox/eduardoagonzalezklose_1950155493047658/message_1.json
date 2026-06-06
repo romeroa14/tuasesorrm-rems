@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Eduardo A. Gonzalez Klose"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774746643636,
+      "content": "Terreno en Altamira \n$600,000 precio de oportunidad se encuentra en una av donde hay nuevas edificaciones en Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774746632596,
+      "content": "Buenas noches un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Eduardo A. Gonzalez Klose",
+      "timestamp_ms": 1774745370820,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 usos se permiten en la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Eduardo A. Gonzalez Klose",
+      "timestamp_ms": 1774745370270,
+      "content": "Eduardo envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Eduardo A. Gonzalez Klose",
+  "is_still_participant": true,
+  "thread_path": "inbox/eduardoagonzalezklose_1950155493047658",
+  "magic_words": [
+    
+  ]
+}

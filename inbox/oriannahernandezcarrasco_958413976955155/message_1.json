@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Orianna Hern\u00c3\u00a1ndez Carrasco"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779730704819,
+      "content": "Buen d\u00c3\u00ada un gusto saludarle Odra Cede\u00c3\u00b1o del Equipo de Asesores RM quer\u00c3\u00ada saber si hab\u00c3\u00ada revisado la informaci\u00c3\u00b3n enviada tambi\u00c3\u00a9n dispongo de otras opciones que pudieran ayudarle me gustar\u00c3\u00ada conocer un poco que b\u00c3\u00basqueda requiere para ayudarle \n\nQuedo atenta Mil Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779221029386,
+      "content": "120$ la noche",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779221002321,
+      "content": "Buenas tardes un gusto saludarle le escribe Odra Cede\u00c3\u00b1o del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Orianna Hern\u00c3\u00a1ndez Carrasco",
+  "is_still_participant": true,
+  "thread_path": "inbox/oriannahernandezcarrasco_958413976955155",
+  "magic_words": [
+    
+  ]
+}

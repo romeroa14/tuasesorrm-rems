@@ -1,0 +1,73 @@
+{
+  "participants": [
+    {
+      "name": "G\u00c3\u00a9nesis Telleria"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777387929136,
+      "content": "Buenos d\u00c3\u00adas Alejandra velasco d\u00c3\u00a9 Asesores RM pudo verificar la enviada? O desea vender una propiedad estamos para ayudarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "G\u00c3\u00a9nesis Telleria",
+      "timestamp_ms": 1777328690802,
+      "content": "Liked a message",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777259305313,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777259304337,
+      "content": "Se trata de una parcela excepcional ubicada en el coraz\u00c3\u00b3n de Las Mercedes, ideal para inversionistas que buscan alta rentabilidad y desarrollo en el sector de mayor dinamismo de la ciudad. \u00f0\u009f\u008f\u0099\u00ef\u00b8\u008f\n\nCon un valor de $1950000\nUbicaci\u00c3\u00b3n Premium \n\n\u00f0\u009f\u0093\u008d Ubicaci\u00c3\u00b3n y Superficie\n\u00c3\u0081rea Total: 778 m\u00c2\u00b2 \nFrente: 20 metros lineales \n\n\u00f0\u009f\u0093\u0088Zonificaci\u00c3\u00b3n: V6-CT \n(Para construir un edificio, con locales, oficinas y viviendas de lujo) \n\n\u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f Potencial de Desarrollo \nUbicaci\u00c3\u00b3n M\u00c3\u00a1xima: 60% \nAltura Permitida: Hasta 24 metros (6 pisos) \n\n\u00f0\u009f\u008f\u00a0 Local Comercial existente de dos plantas:\n\u00c3\u0081rea Total Construida: 750 m\u00c2\u00b2 \u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f\nPlanta Baja: 500 m\u00c2\u00b2 aprox.\nPlanta Alta: 250 m\u00c2\u00b2 aprox.",
+      "reactions": [
+        {
+          "reaction": "\u00e2\u009d\u00a4",
+          "actor": "G\u00c3\u00a9nesis Telleria"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777259257629,
+      "content": "Buenas noches un gusto saludarle le escribe Alejandra Velasco de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777259230726,
+      "content": "G\u00c3\u00a9nesis Telleria replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "G\u00c3\u00a9nesis Telleria",
+      "timestamp_ms": 1777259230133,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "G\u00c3\u00a9nesis Telleria",
+  "is_still_participant": true,
+  "thread_path": "inbox/genesistelleria_18042300380780331",
+  "magic_words": [
+    
+  ]
+}

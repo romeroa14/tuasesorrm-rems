@@ -1,0 +1,75 @@
+{
+  "participants": [
+    {
+      "name": "Bernat-Lautaro | Periodismo Internacional"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773603058665,
+      "content": "La casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada!\n\nSu valor es de $1.700.000 negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House \n\u00c2\u00bfle gustar\u00c3\u00ada asistir?\u00f0\u009f\u008d\u00b7",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773603056894,
+      "photos": [
+        {
+          "uri": "your_instagram_activity/messages/inbox/bernatlautaroperiodismointernacional_18036419558780331/photos/869953699396118.jpg",
+          "creation_timestamp": 1773603056
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773603055407,
+      "photos": [
+        {
+          "uri": "your_instagram_activity/messages/inbox/bernatlautaroperiodismointernacional_18036419558780331/photos/1442318077673280.jpg",
+          "creation_timestamp": 1773603054
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773603036286,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara w",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Bernat-Lautaro | Periodismo Internacional",
+      "timestamp_ms": 1773595200608,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio de las viviendas en Los Naranjos del Cafetal?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Bernat-Lautaro | Periodismo Internacional",
+      "timestamp_ms": 1773595200096,
+      "content": "Bernat-Lautaro envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DVzkVHWgJM4/?id=3851581887009035064_53287868330",
+        "share_text": "\u00f0\u009f\u008d\u00b7 RESERVA PRIVADA \u00e2\u009c\u00a8\nDescubre el verdadero lujo en Los Naranjos del Cafetal. Te invitamos a una experiencia sensorial \u00c3\u00banica para que visualices tu pr\u00c3\u00b3ximo hogar o inversi\u00c3\u00b3n inmobiliaria.\n\n\u00f0\u009f\u0097\u0093\u00ef\u00b8\u008f Jueves 19 de Marzo\n\u00e2\u008f\u00b0 10:30 AM\n\u00f0\u009f\u0093\u008d Asesores RM\n\n\u00f0\u009f\u0091\u0089 Confirma tu asistencia por DM. \u00c2\u00a1Te esperamos!\n\n#asesoresrm #inversi\u00c3\u00b3ninteligente #bienesra\u00c3\u00adcescaracas #exclusivaspropiedades #realestatevenezuela #losnaranjos #inmueblescaracas #luxurylifestyle",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Bernat-Lautaro | Periodismo Internacional",
+  "is_still_participant": true,
+  "thread_path": "inbox/bernatlautaroperiodismointernacional_18036419558780331",
+  "magic_words": [
+    
+  ]
+}

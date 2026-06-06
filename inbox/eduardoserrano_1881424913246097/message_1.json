@@ -1,0 +1,65 @@
+{
+  "participants": [
+    {
+      "name": "Eduardo Serrano"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775851223081,
+      "content": "Es para la venta",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Eduardo Serrano",
+      "timestamp_ms": 1775851216317,
+      "content": "Quisiera saber si la venden o alquilan y el costo amigo",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775851215943,
+      "content": "El precio es de 1.900.000k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775851200722,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Eduardo Serrano",
+      "timestamp_ms": 1775851191308,
+      "content": "Eduardo envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/reel/DW6kW8wjtg2/?id=3871566736420427830_53287868330",
+        "share_text": "\u00f0\u009f\u0093\u008d \u00c2\u00a1EL PUNTO ESTRAT\u00c3\u0089GICO QUE TU NEGOCIO NECESITA!\n\nSi buscas presencia y rentabilidad en la zona m\u00c3\u00a1s exclusiva de Caracas, esta oportunidad en la Calle Londres de Las Mercedes es para ti. \u00f0\u009f\u009a\u0080\n\nTienes dos caminos para ganar:\n\u00e2\u009c\u0085 Aprovechar la estructura actual de 520 m\u00c2\u00b2 aprox. para una remodelaci\u00c3\u00b3n r\u00c3\u00a1pida.\n\u00e2\u009c\u0085 Desarrollar un proyecto desde cero sobre este terreno de 788 m\u00c2\u00b2 aprox.\n\nVersatilidad, ubicaci\u00c3\u00b3n y metros. \u00c2\u00a1Todo en un solo lugar! \u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f\n\n\u00f0\u009f\u0093\u00b2 \u00c2\u00bfQuieres conocerlo? Cont\u00c3\u00a1ctame al DM para agendar una visita.\n\n#LasMercedes #Caracas #BienesRaicesVenezuela #LocalComercial #InversionCaracas #CalleLondres #RealEstateCaracas #OportunidadDeInversion #LocalesEnVenta",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Eduardo Serrano",
+      "timestamp_ms": 1775851180785,
+      "content": "Buenas",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Eduardo Serrano",
+  "is_still_participant": true,
+  "thread_path": "inbox/eduardoserrano_1881424913246097",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "Dibo Salmo Wassouf"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Dibo Salmo Wassouf",
+      "timestamp_ms": 1778293349051,
+      "content": "Ok muchas gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778293325896,
+      "content": "La verdad m\u00c3\u00a1ximo 60 d\u00c3\u00adas que podr\u00c3\u00adan extenderse un mes m\u00c3\u00a1s",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Dibo Salmo Wassouf",
+      "timestamp_ms": 1778293287689,
+      "content": "Gracias hay alguna posibilidad de cr\u00c3\u00a9dito",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778293270292,
+      "content": "Hola su precio es de 1900.000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778293240201,
+      "content": "Dibo Salmo Wassouf replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Dibo Salmo Wassouf",
+      "timestamp_ms": 1778293239713,
+      "content": "Buenas noches amigos cu\u00c3\u00a1l es el precio",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Dibo Salmo Wassouf",
+  "is_still_participant": true,
+  "thread_path": "inbox/dibosalmowassouf_1977218387000999",
+  "magic_words": [
+    
+  ]
+}

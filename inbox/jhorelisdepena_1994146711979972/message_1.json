@@ -1,0 +1,114 @@
+{
+  "participants": [
+    {
+      "name": "Jhorelis De Pe\u00c3\u00b1a"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777300384793,
+      "content": "Saludos, Alejandro Flores\u00f0\u009f\u009f\u00a2 Paso por aqu\u00c3\u00ad para saber si tiene alguna b\u00c3\u00basqueda inmobiliaria o desea vender alguna propiedad?\n Asesores RM para servirle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776894927120,
+      "content": "En breve me comunicare",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776894914056,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jhorelis De Pe\u00c3\u00b1a",
+      "timestamp_ms": 1776894912741,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jhorelis De Pe\u00c3\u00b1a",
+      "timestamp_ms": 1776894912542,
+      "content": "0424-6007520",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776894904943,
+      "content": "Para enviarle informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776894901018,
+      "content": "Si gusta me comparte su WhatsApp",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jhorelis De Pe\u00c3\u00b1a",
+      "timestamp_ms": 1776894887876,
+      "content": "Reacted \u00f0\u009f\u0091\u008d to your message ",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776889245092,
+      "content": "En breve le confirmo disponibilidad",
+      "reactions": [
+        {
+          "reaction": "\u00f0\u009f\u0091\u008d",
+          "actor": "Jhorelis De Pe\u00c3\u00b1a"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Jhorelis De Pe\u00c3\u00b1a",
+      "timestamp_ms": 1776888863894,
+      "content": "Tienen disponibilidad para el 25 y 26 de este mes ?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776864837124,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776864832805,
+      "content": "Son $120 por noche la posada ubicada en la Guaira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776864748334,
+      "content": "Hola buen d\u00c3\u00ada se\u00c3\u00b1ora Jhorelis! \nSoy Valery Mendoza del Equipo de Asesores RM \u00f0\u009f\u00a4\u009d",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Jhorelis De Pe\u00c3\u00b1a",
+  "is_still_participant": true,
+  "thread_path": "inbox/jhorelisdepena_1994146711979972",
+  "magic_words": [
+    
+  ]
+}

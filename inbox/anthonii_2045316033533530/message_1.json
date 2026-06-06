@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Anthonii"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775999216792,
+      "content": "El precio es de 600k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775999208753,
+      "content": "Buenos d\u00c3\u00adas un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775998079021,
+      "content": "Anthonii replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Anthonii",
+      "timestamp_ms": 1775998078220,
+      "content": "Precio de terreno en altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Anthonii",
+  "is_still_participant": true,
+  "thread_path": "inbox/anthonii_2045316033533530",
+  "magic_words": [
+    
+  ]
+}

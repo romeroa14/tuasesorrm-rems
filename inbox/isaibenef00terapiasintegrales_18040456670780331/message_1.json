@@ -1,0 +1,64 @@
+{
+  "participants": [
+    {
+      "name": "Isai Benef 00 | TERAPIAS INTEGRALES"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776182912471,
+      "content": "Terreno en Altamira \n$600,000 precio de oportunidad se encuentra en una av donde hay nuevas edificaciones en Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776182905767,
+      "content": "https://info.wasi.co/terreno-venta-altamira/9704566",
+      "share": {
+        "link": "https://info.wasi.co/terreno-venta-altamira/9704566",
+        "share_text": "https://info.wasi.co/terreno-venta-altamira/9704566"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776182887422,
+      "content": "Est\u00c3\u00a1 disponible en 600.000$ negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776182877046,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776182767598,
+      "content": "Isai Benef 00 | TERAPIAS INTEGRALES replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Isai Benef 00 | TERAPIAS INTEGRALES",
+      "timestamp_ms": 1776182766915,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio del terreno?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Isai Benef 00 | TERAPIAS INTEGRALES",
+  "is_still_participant": true,
+  "thread_path": "inbox/isaibenef00terapiasintegrales_18040456670780331",
+  "magic_words": [
+    
+  ]
+}

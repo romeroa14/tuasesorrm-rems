@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "miguelmz14"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774293072338,
+      "content": "1600000",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "miguelmz14",
+      "timestamp_ms": 1774293052319,
+      "content": "\u00e2\u0098\u009d\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774293012443,
+      "content": "Si desea mayor informaci\u00c3\u00b3n, en cuanto al plan de ventas y el brochure de la propiedad, por favor ind\u00c3\u00adqueme su n\u00c3\u00bamero de tel\u00c3\u00a9fono y le estar\u00c3\u00a9 contactando \n\nFeliz fin de semana",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774293010793,
+      "content": "Placer saludarle, soy Alejandro Flores del equipo de Asesores RM inmobiliaria \u00f0\u009f\u0098\u0083",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774292521127,
+      "content": "miguelmz14 replied to an ad. View ad(https://www.instagram.com/p/DVhvV7mgNtC/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "miguelmz14",
+      "timestamp_ms": 1774292520677,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "miguelmz14",
+  "is_still_participant": true,
+  "thread_path": "inbox/miguelmz14_1988555885875283",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "participants": [
+    {
+      "name": "Isabel Luis"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779732408088,
+      "content": "Perfecto por ac\u00c3\u00a1 a la orden para ayudarle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Isabel Luis",
+      "timestamp_ms": 1779732371578,
+      "content": "Pero no estoy visitando a\u00c3\u00ban, el d\u00c3\u00ada que tenga dinero en mano decido",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Isabel Luis",
+      "timestamp_ms": 1779732346434,
+      "content": "A\u00c3\u00ban no lo se, estoy vendiendo mi propiedad y solo ando mirando precio y piso en realidad",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779731603265,
+      "content": "Cu\u00c3\u00a1l ser\u00c3\u00ada su presupuesto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Isabel Luis",
+      "timestamp_ms": 1779731592813,
+      "content": "Correcto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779731581521,
+      "content": "185.000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Isabel Luis",
+      "timestamp_ms": 1779731557658,
+      "content": "Ah s\u00c3\u00ad creo que era un edificio bajo, pero no recuerdo el precio creo que pasaba de 100 y algo, no ser\u00c3\u00ada mi presupuesto",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779731256815,
+      "content": "Pregunto por un ph en Los Samanes",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Isabel Luis",
+      "timestamp_ms": 1779730925085,
+      "content": "Disculpe he visto tantas cosas que no recuerdo y tengo el chat de la informaci\u00c3\u00b3n pedida",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779730500544,
+      "content": "Buen d\u00c3\u00ada un gusto saludarle Odra Cede\u00c3\u00b1o del Equipo de Asesores RM quer\u00c3\u00ada saber si hab\u00c3\u00ada revisado la informaci\u00c3\u00b3n enviada tambi\u00c3\u00a9n dispongo de otras opciones que pudieran ayudarle me gustar\u00c3\u00ada conocer un poco que b\u00c3\u00basqueda requiere para ayudarle \n\nQuedo atenta Mil Gracias",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779156227302,
+      "content": "Aqu\u00c3\u00ad te comparto las caracter\u00c3\u00adsticas de este penthouse de 172 m\u00c2\u00b2 ubicado en los Samanes! \n\n4 habitaciones | 3 ba\u00c3\u00b1os | Sala, cocina, lavandero, Vestier, habitaci\u00c3\u00b3n de servicio, ba\u00c3\u00b1o de visitas, Balc\u00c3\u00b3n y Bar\n\nSu precio es de $185,000 negociable \n\n\u00c2\u00bfTe gustar\u00c3\u00ada conocerlo?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779156206336,
+      "content": "Valery Mendoza en l\u00c3\u00adnea!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779156202485,
+      "content": "Hola se\u00c3\u00b1ora Isabel! Feliz noche!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Isabel Luis",
+  "is_still_participant": true,
+  "thread_path": "inbox/isabelluis_1627637898453116",
+  "magic_words": [
+    
+  ]
+}

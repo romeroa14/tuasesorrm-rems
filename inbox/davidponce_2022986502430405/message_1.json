@@ -1,0 +1,74 @@
+{
+  "participants": [
+    {
+      "name": "David Ponce"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777300913016,
+      "content": "Saludos, Alejandro Flores\u00f0\u009f\u009f\u00a2 Paso por aqu\u00c3\u00ad para saber si tiene alguna b\u00c3\u00basqueda inmobiliaria o desea vender alguna propiedad?\n Asesores RM para servirle",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777063487003,
+      "content": "Placer saludarle, soy Alejandro Flores asistente de Rossana Migliore del equipo de Asesores RM inmobiliaria \u00f0\u009f\u0098\u0083\n\nEl Precio es de 1950000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1777063124603,
+      "content": "David Ponce replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "David Ponce",
+      "timestamp_ms": 1777063123943,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774819328452,
+      "content": "Me pasas tu contacto para agendarte y conozca este terreno en Altamira!\nSu precio es de $600,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774819301396,
+      "content": "Hola David! \nPor aqu\u00c3\u00ad Valery Mendoza del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774807079528,
+      "content": "David Ponce replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "David Ponce",
+      "timestamp_ms": 1774807078964,
+      "content": "\u00c2\u00bfC\u00c3\u00b3mo puedo programar una visita?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "David Ponce",
+  "is_still_participant": true,
+  "thread_path": "inbox/davidponce_2022986502430405",
+  "magic_words": [
+    
+  ]
+}

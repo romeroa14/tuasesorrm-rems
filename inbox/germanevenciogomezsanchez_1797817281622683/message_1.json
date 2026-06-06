@@ -1,0 +1,32 @@
+{
+  "participants": [
+    {
+      "name": "German Evencio Gomez Sanchez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773276794787,
+      "content": "Tengo locales comerciales, edificios y terrenos en venta en las Mercedes y Chacao\n\n\u00c2\u00bfTe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773276732272,
+      "content": "Hola buenas noches! \nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "German Evencio Gomez Sanchez",
+  "is_still_participant": true,
+  "thread_path": "inbox/germanevenciogomezsanchez_1797817281622683",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "participants": [
+    {
+      "name": "Carolina Alvarez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773892484513,
+      "content": "Perfecto en breve me comunicare",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carolina Alvarez",
+      "timestamp_ms": 1773892467979,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carolina Alvarez",
+      "timestamp_ms": 1773892467411,
+      "content": "0424.260.66.63",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773892335837,
+      "content": "Perfecto nos comparte su n\u00c3\u00bamero telef\u00c3\u00b3nico para hacerle llegar su invitaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carolina Alvarez",
+      "timestamp_ms": 1773891832574,
+      "content": "S\u00c3\u00ad, me gustar\u00c3\u00ada asistir.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773842891124,
+      "content": "Hola buenos d\u00c3\u00adas, un gusto B\u00c3\u00a1rbara Migliore \n\nLa casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada\u00e2\u0080\u00a6 Su valor es de 1.700.000$ negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House, la entrada es totalmente gratuita \n\n\u00c2\u00bfle gustar\u00c3\u00ada asistir?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773808841479,
+      "content": "Carolina Alvarez replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Carolina Alvarez",
+      "timestamp_ms": 1773808840163,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 incluye la experiencia sensorial?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Carolina Alvarez",
+  "is_still_participant": true,
+  "thread_path": "inbox/carolinaalvarez_18036762443780331",
+  "magic_words": [
+    
+  ]
+}

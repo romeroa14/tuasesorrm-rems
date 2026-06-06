@@ -1,0 +1,140 @@
+{
+  "participants": [
+    {
+      "name": "Mar\u00c3\u00ada Veronica Carvallo"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Mar\u00c3\u00ada Veronica Carvallo",
+      "timestamp_ms": 1774716324719,
+      "content": "Yo, Ver\u00c3\u00b3nica Carvallo, Agente Inmobiliario RIV Altos Mirandinos",
+      "reactions": [
+        {
+          "reaction": "\u00e2\u009d\u00a4",
+          "actor": "Realtors RM"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mar\u00c3\u00ada Veronica Carvallo",
+      "timestamp_ms": 1774716306992,
+      "content": "Liked a message",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774716289320,
+      "content": "En breve me comunico! \nPor aqu\u00c3\u00ad Valery Mendoza del Equipo RM",
+      "reactions": [
+        {
+          "reaction": "\u00e2\u009d\u00a4",
+          "actor": "Mar\u00c3\u00ada Veronica Carvallo"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774716132132,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mar\u00c3\u00ada Veronica Carvallo",
+      "timestamp_ms": 1774716131362,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mar\u00c3\u00ada Veronica Carvallo",
+      "timestamp_ms": 1774716131003,
+      "content": "04141065047",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mar\u00c3\u00ada Veronica Carvallo",
+      "timestamp_ms": 1774716120808,
+      "content": "Excelente",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774716111185,
+      "content": "Si gusta comp\u00c3\u00a1rteme tu WhatsApp para enviarte el wassi y informaci\u00c3\u00b3n adicional",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mar\u00c3\u00ada Veronica Carvallo",
+      "timestamp_ms": 1774716083332,
+      "content": "Tengo cliente buscando terrenos, ayer vimos dos pero quiere tener m\u00c3\u00a1s opciones",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mar\u00c3\u00ada Veronica Carvallo",
+      "timestamp_ms": 1774716035398,
+      "content": "Tiene las variables? Plano topogr\u00c3\u00a1fico?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mar\u00c3\u00ada Veronica Carvallo",
+      "timestamp_ms": 1774715991137,
+      "content": "Reacted \u00f0\u009f\u00a4\u009d to your message ",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mar\u00c3\u00ada Veronica Carvallo",
+      "timestamp_ms": 1774715964032,
+      "content": "Permite construcci\u00c3\u00b3n de edificio? Alta o baja densidad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774715315974,
+      "content": "Buen d\u00c3\u00ada un gusto el uso es residencial",
+      "reactions": [
+        {
+          "reaction": "\u00f0\u009f\u00a4\u009d",
+          "actor": "Mar\u00c3\u00ada Veronica Carvallo"
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774710161506,
+      "content": "Mar\u00c3\u00ada Veronica Carvallo replied to an ad. View ad(https://www.instagram.com/p/DWbpoJBgHaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mar\u00c3\u00ada Veronica Carvallo",
+      "timestamp_ms": 1774710160852,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 usos se permiten en la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Mar\u00c3\u00ada Veronica Carvallo",
+  "is_still_participant": true,
+  "thread_path": "inbox/mariaveronicacarvallo_1852961846091012",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "participants": [
+    {
+      "name": "Daniela Chiesa T."
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772908817042,
+      "content": "Quedo atenta!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Daniela Chiesa T.",
+      "timestamp_ms": 1772905483300,
+      "content": "Liked a message",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772855309693,
+      "content": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670381\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670314",
+      "share": {
+        "link": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346",
+        "share_text": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670381\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670314"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772854892323,
+      "content": "Esta es Res. Jade Loft. Tenemos 3 opciones disponibles en obra gris y obra blanca:",
+      "reactions": [
+        {
+          "reaction": "\u00e2\u009d\u00a4",
+          "actor": "Daniela Chiesa T."
+        }
+      ],
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772854851317,
+      "content": "Saludos!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Daniela Chiesa T.",
+      "timestamp_ms": 1772854833798,
+      "content": "\u00c2\u00a1Hola! Quiero m\u00c3\u00a1s informaci\u00c3\u00b3n.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Daniela Chiesa T.",
+      "timestamp_ms": 1772854833544,
+      "share": {
+        "link": "https://www.instagram.com/p/DVhvF-ZgOb2/",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Daniela Chiesa T.",
+  "is_still_participant": true,
+  "thread_path": "inbox/danielachiesat_1925841008811203",
+  "magic_words": [
+    
+  ]
+}

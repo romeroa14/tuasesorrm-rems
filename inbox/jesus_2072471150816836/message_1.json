@@ -1,0 +1,102 @@
+{
+  "participants": [
+    {
+      "name": "jesus"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776781513493,
+      "content": "\u00c2\u00a1Quedo atenta!",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776781506613,
+      "content": "La documentaci\u00c3\u00b3n est\u00c3\u00a1 al d\u00c3\u00ada y estamos agendando visitas para esta semana",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776781493033,
+      "content": "\u00c2\u00bfLe gustar\u00c3\u00ada recibir m\u00c3\u00a1s informaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776778390777,
+      "content": "Su zonificaci\u00c3\u00b3n es solo residencial y se puede construir un edificio de 3 pisos \n\nSon 786 m\u00c2\u00b2 de terreno",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776778344943,
+      "content": "Av transversal 6 de la avenida 12 de Altamira",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "jesus",
+      "timestamp_ms": 1776778302402,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el ubicaci\u00c3\u00b3n?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776778291789,
+      "content": "Valery Mendoza del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1776778286123,
+      "content": "Hola buen d\u00c3\u00ada, c\u00c3\u00b3mo est\u00c3\u00a1?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "jesus",
+      "timestamp_ms": 1776778279216,
+      "content": "La direcci\u00c3\u00b3n exacta cu\u00c3\u00a1l seria",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "jesus",
+      "timestamp_ms": 1776778278878,
+      "content": "jesus envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "jesus",
+      "timestamp_ms": 1776778269734,
+      "content": "Hola buen d\u00c3\u00ada",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "jesus",
+      "timestamp_ms": 1776778269121,
+      "content": "jesus envi\u00c3\u00b3 un archivo adjunto.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "jesus",
+  "is_still_participant": true,
+  "thread_path": "inbox/jesus_2072471150816836",
+  "magic_words": [
+    
+  ]
+}

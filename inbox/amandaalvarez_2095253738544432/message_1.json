@@ -1,0 +1,46 @@
+{
+  "participants": [
+    {
+      "name": "Amanda Alvarez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774757484613,
+      "content": "Quedo atenta si requiere de otra informaci\u00c3\u00b3n \u00f0\u009f\u0099\u008c",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774757470273,
+      "content": "En Premium La Escondida tenemos 2 apartamentos disponibles:\n\n\u00e2\u0080\u00a2Un Planta Baja, 186m2 en $170.000 \n\u00e2\u0080\u00a2Uno en piso 5, 153m2 en $220.000\n\nAmbos est\u00c3\u00a1n en obra gris, su precio es negociable y podemos aceptar un financiamiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774757434238,
+      "content": "Ubicado en la Tahona sector la escondida",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774757409704,
+      "content": "Hola se\u00c3\u00b1ora Amanda, buenas noches \nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Amanda Alvarez",
+  "is_still_participant": true,
+  "thread_path": "inbox/amandaalvarez_2095253738544432",
+  "magic_words": [
+    
+  ]
+}

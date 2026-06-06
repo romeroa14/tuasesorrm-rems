@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "angelimar1311"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773327447564,
+      "content": ".",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "angelimar1311",
+      "timestamp_ms": 1773325911758,
+      "content": "Buenos d\u00c3\u00adas precio de la propiedad por favor?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773322949759,
+      "content": "Angelimar la propiedad tiene un valor de 1700000$ su precio es negociable \n\nTambi\u00c3\u00a9n tengo otras propiedades disponibles",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773322919303,
+      "content": "Placer saludarle, soy Alejandro Flores del equipo de Asesores RM inmobiliaria \u00f0\u009f\u0098\u0083",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773322126588,
+      "content": "angelimar1311 replied to an ad. View ad(https://www.instagram.com/p/DVwwaOuANaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "angelimar1311",
+      "timestamp_ms": 1773322124693,
+      "content": "Buenos d\u00c3\u00adas por favor quisiera informaci\u00c3\u00b3n de precio por favor.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "angelimar1311",
+  "is_still_participant": true,
+  "thread_path": "inbox/angelimar1311_1961088221951137",
+  "magic_words": [
+    
+  ]
+}

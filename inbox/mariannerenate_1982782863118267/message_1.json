@@ -1,0 +1,60 @@
+{
+  "participants": [
+    {
+      "name": "marianne renate"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774309310992,
+      "content": "El d\u00c3\u00ada de ma\u00c3\u00b1ana estaremos mostrando la obra, que ya est\u00c3\u00a1 100% su estructura y ya est\u00c3\u00a1n en la parte del revestimiento",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774309266384,
+      "content": "Con financiamiento, 30% de inicial, de 18 a 24 meses de financiamiento, todo totalmente negociable\n\nYa nos quedan muy pocas unidades y podemos congelar el precio con un 10%",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774309257258,
+      "content": "En Promenade tenemos apartamentos y oficinas disponibles, a partir de los 37m2 desde 222.000$",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774309248178,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774307458470,
+      "content": "marianne renate replied to an ad. View ad(https://www.instagram.com/p/DWKSHM2gIUW/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "marianne renate",
+      "timestamp_ms": 1774307457947,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 incluye la experiencia de Realidad Virtual?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "marianne renate",
+  "is_still_participant": true,
+  "thread_path": "inbox/mariannerenate_1982782863118267",
+  "magic_words": [
+    
+  ]
+}

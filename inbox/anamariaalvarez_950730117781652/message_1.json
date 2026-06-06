@@ -1,0 +1,66 @@
+{
+  "participants": [
+    {
+      "name": "Ana Maria Alvarez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779227362877,
+      "content": "En breve ser\u00c3\u00a1 atendida",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779221145207,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ana Maria Alvarez",
+      "timestamp_ms": 1779221144556,
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ana Maria Alvarez",
+      "timestamp_ms": 1779221144066,
+      "content": "Hola Odra \nMi cel 04143264532\nAna Mar\u00c3\u00ada Alvarez",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Ana Maria Alvarez",
+      "timestamp_ms": 1779221111865,
+      "content": "Si",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779220952107,
+      "content": "Aqu\u00c3\u00ad te comparto las caracter\u00c3\u00adsticas de este penthouse de 172 m\u00c2\u00b2 ubicado en los Samanes! \n\n4 habitaciones | 3 ba\u00c3\u00b1os | Sala, cocina, lavandero, Vestier, habitaci\u00c3\u00b3n de servicio, ba\u00c3\u00b1o de visitas, Balc\u00c3\u00b3n y Bar\n\nSu precio es de $185,000 negociable \n\n\u00c2\u00bfTe gustar\u00c3\u00ada conocerlo?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1779220949221,
+      "content": "Hola Ana buenas tardes un gusto saludarle Odra Cede\u00c3\u00b1o del Equipo de Asesores RM",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Ana Maria Alvarez",
+  "is_still_participant": true,
+  "thread_path": "inbox/anamariaalvarez_950730117781652",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "participants": [
+    {
+      "name": "Yuri Aranguren"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773777360598,
+      "content": "https://info.wasi.co/casa-venta-elcafetal/9805625",
+      "share": {
+        "link": "https://info.wasi.co/casa-venta-elcafetal/9805625"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773777317564,
+      "content": "Si, por supuesto, por ac\u00c3\u00a1 le dejo el link donde podr\u00c3\u00a1 ver las fotos e informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yuri Aranguren",
+      "timestamp_ms": 1773768034806,
+      "content": "Tienes m\u00c3\u00a1s informaci\u00c3\u00b3n sobre la propiedad",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773766061893,
+      "content": "Hola buenos d\u00c3\u00adas, un gusto B\u00c3\u00a1rbara Migliore \n\nLa casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada\u00e2\u0080\u00a6 Su valor es de 1.700.000$ negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House, la entrada es totalmente gratuita \n\n\u00c2\u00bfle gustar\u00c3\u00ada asistir?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773761351521,
+      "content": "Yuri Aranguren replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Yuri Aranguren",
+      "timestamp_ms": 1773761350671,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Yuri Aranguren",
+  "is_still_participant": true,
+  "thread_path": "inbox/yuriaranguren_1981372766587628",
+  "magic_words": [
+    
+  ]
+}

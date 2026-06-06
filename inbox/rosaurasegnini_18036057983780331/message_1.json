@@ -1,0 +1,74 @@
+{
+  "participants": [
+    {
+      "name": "Rosaura segnini"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773885973130,
+      "content": "La casa queda totalmente amoblada y remodelada",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773885949926,
+      "content": "Vale perfecto, a la brevedad le enviaremos la informaci\u00c3\u00b3n",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773885932524,
+      "content": "Hola buenas noches, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773870123513,
+      "content": "Rosaura segnini replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Rosaura segnini",
+      "timestamp_ms": 1773870122914,
+      "content": "desear\u00c3\u00ada la descripci\u00c3\u00b3n .la forma de negociaci\u00c3\u00b3n precio condiciones.inmobilia21rgs@gmsil.com",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Rosaura segnini",
+      "timestamp_ms": 1773350210733,
+      "content": "por favor env\u00c3\u00adame toda la informaci\u00c3\u00b3n al siguiente correo inmobilia21rgs@gmail.com",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773350173592,
+      "content": "Rosaura segnini replied to an ad. View ad(https://www.instagram.com/p/DVwwaOuANaL/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Rosaura segnini",
+      "timestamp_ms": 1773350172953,
+      "content": "\u00c2\u00bfEst\u00c3\u00a1 amoblada la propiedad?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Rosaura segnini",
+  "is_still_participant": true,
+  "thread_path": "inbox/rosaurasegnini_18036057983780331",
+  "magic_words": [
+    
+  ]
+}

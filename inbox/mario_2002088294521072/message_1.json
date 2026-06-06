@@ -1,0 +1,91 @@
+{
+  "participants": [
+    {
+      "name": "Mario"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774319284940,
+      "content": "$450,000 negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774319276591,
+      "content": "Hola se\u00c3\u00b1or Mario buenas noches, Valery Mendoza por Aqu\u00c3\u00ad",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1774319099758,
+      "content": "Mario replied to an ad. View ad(https://www.instagram.com/p/DV9ZK6KANBw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mario",
+      "timestamp_ms": 1774319099456,
+      "content": "Mario vivenzio favor cuando vale",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mario",
+      "timestamp_ms": 1774319098944,
+      "content": "Mario envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DWKSHqEgA0L/?id=3857975721842445579_53287868330",
+        "share_text": "\u00c2\u00bfTe imaginas vivir en lo m\u00c3\u00a1s alto y con la mejor vista de Playa Moreno? \u00f0\u009f\u008c\u008a Asesores RM lo hace posible\n\nTenemos en venta este exclusivo Pent House ubicado en Punta Pac\u00c3\u00adfico. \u00c2\u00a1Un verdadero para\u00c3\u00adso!\n\nEl confort est\u00c3\u00a1 garantizado: cuenta con 3 amplias habitaciones y 2 ba\u00c3\u00b1os dise\u00c3\u00b1ados para el descanso y la privacidad de toda tu familia\n\n\u00c2\u00bfEl toque final? Una incre\u00c3\u00adble terraza privada para relajarte o compartir, adem\u00c3\u00a1s de 2 puestos de estacionamiento totalmente asegurados\n\nEsta es tu oportunidad de invertir en la Perla de Caribe. Cont\u00c3\u00a1ctanos para m\u00c3\u00a1s informaci\u00c3\u00b3n sobre este inmueble \u00f0\u009f\u008f\u00a0\u00f0\u009f\u0093\u00a9",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773805032430,
+      "content": "La casa es una de las joyas de la zona, est\u00c3\u00a1 lista para mudarse, ya que se entrega remodelada y equipada\u00e2\u0080\u00a6 Su valor es de $1.700.000 negociable \n\nEl jueves 19 de marzo vamos a realizar un Open House, la entrada es totalmente gratuita \n\n\u00c2\u00bfle gustar\u00c3\u00ada asistir?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1773804960270,
+      "content": "Se\u00c3\u00b1or Mario!\nValery Mendoza en l\u00c3\u00adnea \u00f0\u009f\u009f\u00a2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mario",
+      "timestamp_ms": 1773804180039,
+      "content": "\u00c2\u00bfQu\u00c3\u00a9 incluye la experiencia sensorial?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Mario",
+      "timestamp_ms": 1773804179377,
+      "content": "Mario envi\u00c3\u00b3 un archivo adjunto.",
+      "share": {
+        "link": "https://www.instagram.com/p/DV9ZK6KANBw/?id=3854347556901408880_53287868330",
+        "share_text": "Donde la exclusividad encuentra su hogar. \u00e2\u009c\u00a8 Te invitamos a una experiencia sensorial de alto nivel. Ven e invierte en Los Naranjos del Cafetal , con espacios dise\u00c3\u00b1ados para quienes aprecian el verdadero lujo.\n\n\u00f0\u009f\u0097\u0093\u00ef\u00b8\u008f Jueves 19 de marzo | \u00e2\u008f\u00b0 10:30 AM\n\u00f0\u009f\u0093\u008d Asesores RM\n\n#asesoresrm #inversi\u00c3\u00b3ninteligente #bienesra\u00c3\u00adcescaracas #exclusivaspropiedades #realestatevenezuela",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Mario",
+  "is_still_participant": true,
+  "thread_path": "inbox/mario_2002088294521072",
+  "magic_words": [
+    
+  ]
+}

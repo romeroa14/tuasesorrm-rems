@@ -1,0 +1,39 @@
+{
+  "participants": [
+    {
+      "name": "Giovanni Scutaro"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778727903499,
+      "content": "Gustar\u00c3\u00ada que pudi\u00c3\u00a9ramos agendar una visita al terreno ? Para que pueda conocer el espacio \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778727885502,
+      "content": "Esta imponente parcela de ubicada en la calle Londres de las Mercedes se encuentra disponible para la venta por 1.950.000$ totalmente negociables! \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nCaracter\u00c3\u00adsticas del terreno:\n\nArena total de terreno: 778m2 \n\u00c3\u0081rea total construida: 750m2 \nPlanta baja: 500m2 \nPlanta alta: 250m2",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778727457685,
+      "content": "Muy buenas noches! Que tal est\u00c3\u00a1 ? Por ac\u00c3\u00a1 le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb\n\nPude ver a trav\u00c3\u00a9s de los comentarios de nuestra publicaci\u00c3\u00b3n que solicit\u00c3\u00b3 m\u00c3\u00a1s informaci\u00c3\u00b3n sobre el terreno ubicado en la Mercedes \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Giovanni Scutaro",
+  "is_still_participant": true,
+  "thread_path": "inbox/giovanniscutaro_2177814070282459",
+  "magic_words": [
+    
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "participants": [
+    {
+      "name": "Luisa Villegas"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Luisa Villegas",
+      "timestamp_ms": 1775857662235,
+      "content": "Buenastardes . Gracias por la informaci\u00c3\u00b3n .",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775857617972,
+      "content": "El precio es de 1.900.000k negociable",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775857607416,
+      "content": "Buenas tardes un gusto saludarle le escribe Alejandra Velasco",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1775857285252,
+      "content": "Luisa Villegas replied to an ad. View ad(https://www.instagram.com/p/DW6mBeugIaw/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Luisa Villegas",
+      "timestamp_ms": 1775857284663,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1l es el precio?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Luisa Villegas",
+  "is_still_participant": true,
+  "thread_path": "inbox/luisavillegas_1989299369133999",
+  "magic_words": [
+    
+  ]
+}

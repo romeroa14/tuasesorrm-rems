@@ -1,0 +1,100 @@
+{
+  "participants": [
+    {
+      "name": "Michelle Hernandez"
+    },
+    {
+      "name": "Realtors RM"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Michelle Hernandez",
+      "timestamp_ms": 1778710872108,
+      "content": "Me puedes enviar el wasi colega",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778704012980,
+      "content": "",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778704012150,
+      "content": "Se trata de una parcela excepcional ubicada en el coraz\u00c3\u00b3n de Las Mercedes, ideal para inversionistas que buscan alta rentabilidad y desarrollo en el sector de mayor dinamismo de la ciudad. \u00f0\u009f\u008f\u0099\u00ef\u00b8\u008f\n\nCon un valor de $1,950,000\nUbicaci\u00c3\u00b3n Premium \n\n\u00f0\u009f\u0093\u008d Ubicaci\u00c3\u00b3n y Superficie\n\u00c3\u0081rea Total: 778 m\u00c2\u00b2 \nFrente: 20 metros lineales \n\n\u00f0\u009f\u0093\u0088Zonificaci\u00c3\u00b3n: V6-CT \n(Para construir un edificio, con locales, oficinas y viviendas de lujo) \n\n\u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f Potencial de Desarrollo \nUbicaci\u00c3\u00b3n M\u00c3\u00a1xima: 60% \nAltura Permitida: Hasta 24 metros (6 pisos) \n\n\u00f0\u009f\u008f\u00a0 Local Comercial existente de dos plantas:\n\u00c3\u0081rea Total Construida: 750 m\u00c2\u00b2 \u00f0\u009f\u008f\u0097\u00ef\u00b8\u008f\nPlanta Baja: 500 m\u00c2\u00b2 aprox.\nPlanta Alta: 250 m\u00c2\u00b2 aprox.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778703983137,
+      "content": "Muy buenas tardes! Que tal est\u00c3\u00a1 ? Por ac\u00c3\u00a1 le habla Luis Rojas de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb (edited)",
+      "is_geoblocked_for_viewer": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778703975085,
+      "content": "Muy buenas tardes! Que tal est\u00c3\u00a1 ? Por ac\u00c3\u00a1 le habla Luis Rojs de parte del equipo de asesores RM inmobiliaria \u00f0\u009f\u0099\u008c\u00f0\u009f\u008f\u00bb",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1778703926230,
+      "content": "Michelle Hernandez replied to an ad. View ad(https://www.instagram.com/p/DYQYOU2ABIT/)",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Michelle Hernandez",
+      "timestamp_ms": 1778703925006,
+      "content": "\u00c2\u00bfCu\u00c3\u00a1nto cuesta el terreno?",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772821706808,
+      "content": "Aqu\u00c3\u00ad le comparto la disponibilidad:\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9329346\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670381\n\nhttps://info.wasi.co/apartamento-venta-lasmercedes/9670314",
+      "share": {
+        "link": "https://info.wasi.co/apartamento-venta-lasmercedes/9329346"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Realtors RM",
+      "timestamp_ms": 1772821703558,
+      "content": "Hola buenas tardes, un gusto B\u00c3\u00a1rbara Migliore",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Michelle Hernandez",
+      "timestamp_ms": 1772812728142,
+      "content": "\u00c2\u00a1Hola! Quiero m\u00c3\u00a1s informaci\u00c3\u00b3n.",
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    },
+    {
+      "sender_name": "Michelle Hernandez",
+      "timestamp_ms": 1772812727842,
+      "share": {
+        "link": "https://www.instagram.com/p/DVhvF-ZgOb2/",
+        "original_content_owner": "realtors.rm"
+      },
+      "is_geoblocked_for_viewer": false,
+      "is_unsent_image_by_messenger_kid_parent": false
+    }
+  ],
+  "title": "Michelle Hernandez",
+  "is_still_participant": true,
+  "thread_path": "inbox/michellehernandez_1987715182626306",
+  "magic_words": [
+    
+  ]
+}
