@@ -7,7 +7,25 @@
 #
 # Nginx Proxy Manager: Forward rems-app:80. Ver README.md
 #
-# MySQL: servicio rems-mysql (no expone 3306 al host; solo red interna rems-internal).
+# Arquitectura Redis (red interna rems-internal):
+#   DB 0 → cola webhook:inbound / webhook:dead (RedisQueue)
+#   DB 1 → cache CI4 (CRM, reCAPTCHA, respuestas Graph)
+#   Workers → php spark queue:process (3 réplicas por defecto para campañas multi-cuenta)
+
+x-rems-worker: &rems-worker
+  image: rems-ci4:local
+  restart: unless-stopped
+  working_dir: /var/www/html
+  volumes:
+    - ../..:/var/www/html
+  networks:
+    - rems-internal
+  depends_on:
+    rems-mysql:
+      condition: service_healthy
+    rems-redis:
+      condition: service_healthy
+  entrypoint: ["php", "spark", "queue:process"]
 
 services:
   rems:
@@ -21,6 +39,8 @@ services:
       - "host.docker.internal:host-gateway"
     depends_on:
       rems-mysql:
+        condition: service_healthy
+      rems-redis:
         condition: service_healthy
     volumes:
       - ../..:/var/www/html
@@ -54,9 +74,52 @@ services:
     # ports:
     #   - "127.0.0.1:33306:3306"
 
+  rems-redis:
+    image: redis:7-alpine
+    container_name: rems-redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --requirepass ${REMS_REDIS_PASSWORD}
+      --maxmemory ${REMS_REDIS_MAXMEMORY:-512mb}
+      --maxmemory-policy allkeys-lru
+      --appendonly yes
+      --appendfsync everysec
+      --save 900 1
+      --save 300 10
+      --save 60 10000
+      --tcp-keepalive 60
+      --timeout 300
+    volumes:
+      - rems-redis-data:/data
+    networks:
+      - rems-internal
+    healthcheck:
+      test: ["CMD", "sh", "-c", "redis-cli -a \"$$REMS_REDIS_PASSWORD\" ping | grep -q PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    environment:
+      REMS_REDIS_PASSWORD: ${REMS_REDIS_PASSWORD}
+
+  rems-queue-worker-1:
+    <<: *rems-worker
+    container_name: rems-queue-worker-1
+
+  rems-queue-worker-2:
+    <<: *rems-worker
+    container_name: rems-queue-worker-2
+
+  rems-queue-worker-3:
+    <<: *rems-worker
+    container_name: rems-queue-worker-3
+
 volumes:
   rems-mysql-data:
     name: rems_mysql_data
+  rems-redis-data:
+    name: rems_redis_data
 
 networks:
   proxy-network:

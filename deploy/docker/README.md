@@ -102,7 +102,46 @@ Misma lógica para `REMS_MYSQL_ROOT_PASSWORD` vs lo que tú guardes para root; e
 
    (Email: `ctrejo@tuasesorrm.com.ve`; seeder idempotente: si el email ya existe, actualiza nombre y clave.)
 
-5. Comprueba contenedores: `docker ps` debería listar `rems-app` y `rems-mysql` en estado sano.
+5. Comprueba contenedores: `docker ps` debería listar `rems-app`, `rems-mysql`, `rems-redis` y los workers `rems-queue-worker-*` en estado sano.
+
+### Redis + workers (campañas multi-cuenta / CRM)
+
+El stack incluye **Redis 7** con persistencia (AOF), límite de memoria y **3 workers** que ejecutan `php spark queue:process`:
+
+| Redis DB | Uso |
+|----------|-----|
+| **0** | Cola `webhook:inbound` y `webhook:dead` (Instagram/Meta DMs) |
+| **1** | Cache CI4 (CRM, reCAPTCHA, consultas repetidas) |
+
+En el **`.env` de la raíz** (CodeIgniter), alinea Redis con `deploy/docker/.env`:
+
+```ini
+REDIS_HOST=rems-redis
+REDIS_PORT=6379
+REDIS_PASSWORD="RemsRedis20$"
+REDIS_DATABASE=0
+
+cache.handler = redis
+cache.redis.host = rems-redis
+cache.redis.port = 6379
+cache.redis.database = 1
+cache.redis.password = "RemsRedis20$"
+```
+
+**Operación:**
+
+```bash
+# Estado de la cola
+docker exec rems-app php spark queue:dead
+
+# Reintentar mensajes en dead letter
+docker exec rems-app php spark queue:process --dead
+
+# Logs de un worker
+docker logs rems-queue-worker-1 --tail 50 -f
+```
+
+Si el volumen de publicidad crece, añade más workers copiando el bloque `rems-queue-worker-N` en `docker-compose.yml` o escala con `docker compose up -d --scale rems-queue-worker=5` (quitando `container_name` fijos).
 
 **Importar un dump** existente: `docker exec -i rems-mysql mysql -u rems -p<password> rems < backup.sql` (o con `root` y redirección a la base que corresponda). Ajustad credenciales y opciones según vuestro dump.
 

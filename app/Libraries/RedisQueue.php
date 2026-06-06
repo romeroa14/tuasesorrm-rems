@@ -16,14 +16,16 @@ class RedisQueue
             $host     = getenv('REDIS_HOST') ?: 'rems-redis';
             $port     = getenv('REDIS_PORT') ?: '6379';
             $password = getenv('REDIS_PASSWORD') ?: null;
+            $database = getenv('REDIS_DATABASE') ?: '0';
 
             $params = [
-                'scheme' => 'tcp',
-                'host'   => $host,
-                'port'   => (int) $port,
-                'timeout' => 2.0,
+                'scheme'   => 'tcp',
+                'host'     => $host,
+                'port'     => (int) $port,
+                'timeout'  => 2.0,
+                'database' => (int) $database,
             ];
-            if ($password !== null && $password !== '') {
+            if (is_string($password) && $password !== '') {
                 $params['password'] = $password;
             }
 
