@@ -64,6 +64,29 @@ class Format extends BaseConfig
     ];
 
     /**
+     * --------------------------------------------------------------------------
+     * JSON Encode Depth
+     * --------------------------------------------------------------------------
+     *
+     * The maximum depth when encoding JSON.
+     *
+     * @var int<1, max>
+     */
+    public int $jsonEncodeDepth = 512;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Throws JSON Error on Invalid UTF-8
+     * --------------------------------------------------------------------------
+     *
+     * When set to true, the JSON API response will throw an exception if the
+     * response data contains invalid UTF-8 characters.
+     *
+     * @var bool
+     */
+    public bool $jsonEncodeThrowOnError = true;
+
+    /**
      * A Factory method to return the appropriate formatter for the given mime type.
      *
      * @return FormatterInterface

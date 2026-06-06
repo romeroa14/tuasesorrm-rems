@@ -159,3 +159,8 @@ backup*.zip
 # Properties images - muy grandes, pueden estar en otro lugar
 # properties/
 
+#-------------------------
+# Inbox — datos exportados de Instagram, muy pesados para el repo
+#-------------------------
+/inbox/
+
