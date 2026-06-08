@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FinanceExpense extends Model
+class FinanceMember extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'finance_expenses';
+    protected $table            = 'finance_members';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -16,54 +16,28 @@ class FinanceExpense extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'user_id',
-        'approved_by',
-        'currency_id',
-        'payment_type_id',
-        'expense_type_id',
-        'category_id',
-        'company_id',
-        'account_id',
-        'project_id',
-        'department_id',
-        'created_by',
-        'status',
-        'amount',
-        'amount_usd',
-        'description',
-        'title',
-        'invoice_number',
-        'expense_date',
-        'payment_date',
-        'priority',
-        'tax_amount_usd',
-        'total_amount_usd',
-        'original_amount',
-        'original_currency',
-        'exchange_rate',
-        'notes',
-        'recipient',
-        'provider',
-        'internal_notes',
-        'attachment_path',
-        'date',
+        'member_role',
+        'is_active',
+        'approval_limit',
+        'can_manage_members',
     ];
 
-    // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // Validation
     protected $validationRules      = [
-        'status' => 'permit_empty|in_list[pending,approved,rejected]',
+        'user_id'            => 'required|integer',
+        'member_role'        => 'required|in_list[owner,admin,assistant]',
+        'is_active'          => 'permit_empty|in_list[0,1]',
+        'can_manage_members' => 'permit_empty|in_list[0,1]',
     ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
-    // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
     protected $afterInsert    = [];
@@ -73,4 +47,11 @@ class FinanceExpense extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function findActiveByUserId(int $userId): ?array
+    {
+        return $this->where('user_id', $userId)
+            ->where('is_active', 1)
+            ->first();
+    }
 }

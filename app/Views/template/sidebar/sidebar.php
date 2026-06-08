@@ -1,4 +1,6 @@
 <!-- Sidebar -->
+<?php $financeAuthorization = new \App\Libraries\FinanceAuthorization(); ?>
+<?php $canAccessFinance = $financeAuthorization->canAccess(); ?>
 <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-text mx-3">
@@ -15,7 +17,7 @@
         </a>
     </li>
 
-    <?php if(session()->get('id_fk_rol') == 2): ?>
+    <?php if($canAccessFinance): ?>
     <!-- Administrativa -->
     <hr class="sidebar-divider">
     <div class="sidebar-heading">Administrativa</div>

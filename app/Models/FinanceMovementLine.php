@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FinanceExpense extends Model
+class FinanceMovementLine extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'finance_expenses';
+    protected $table            = 'finance_movement_lines';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,55 +17,36 @@ class FinanceExpense extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'user_id',
-        'approved_by',
+        'movement_id',
+        'line_number',
+        'account_id',
+        'side',
+        'amount',
         'currency_id',
-        'payment_type_id',
-        'expense_type_id',
+        'rate_to_base',
         'category_id',
         'company_id',
-        'account_id',
         'project_id',
         'department_id',
-        'created_by',
-        'status',
-        'amount',
-        'amount_usd',
         'description',
-        'title',
-        'invoice_number',
-        'expense_date',
-        'payment_date',
-        'priority',
-        'tax_amount_usd',
-        'total_amount_usd',
-        'original_amount',
-        'original_currency',
-        'exchange_rate',
-        'notes',
-        'recipient',
-        'provider',
-        'internal_notes',
-        'attachment_path',
-        'date',
     ];
 
-    // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // Validation
     protected $validationRules      = [
-        'status' => 'permit_empty|in_list[pending,approved,rejected]',
+        'movement_id' => 'required|integer',
+        'line_number' => 'required|integer',
+        'side'        => 'required|in_list[debit,credit]',
+        'amount'      => 'required|decimal',
     ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
-    // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
     protected $afterInsert    = [];

@@ -134,4 +134,34 @@ final class FinanceApiControllerTest extends CIUnitTestCase
             "\$entityMap['{$entity}'] must map to {$expectedModel}"
         );
     }
+
+    public function testCatalogEntityListKeepsEditableReferenceDataOnly(): void
+    {
+        $path = APPPATH . 'Controllers/FinanceApiController.php';
+        require_once $path;
+
+        $reflection = new \ReflectionClass(FinanceApiController::class);
+        $defaultProps = $reflection->getDefaultProperties();
+
+        $this->assertArrayHasKey('catalogEntities', $defaultProps);
+        $this->assertContains('accounts', $defaultProps['catalogEntities']);
+        $this->assertContains('exchange_rates', $defaultProps['catalogEntities']);
+        $this->assertNotContains('transactions', $defaultProps['catalogEntities']);
+        $this->assertNotContains('expenses', $defaultProps['catalogEntities']);
+    }
+
+    public function testLegacyEntitiesStayReadOnly(): void
+    {
+        $path = APPPATH . 'Controllers/FinanceApiController.php';
+        require_once $path;
+
+        $reflection = new \ReflectionClass(FinanceApiController::class);
+        $defaultProps = $reflection->getDefaultProperties();
+
+        $this->assertArrayHasKey('legacyReadOnlyEntities', $defaultProps);
+        $this->assertSame(
+            ['transactions', 'expenses'],
+            $defaultProps['legacyReadOnlyEntities']
+        );
+    }
 }

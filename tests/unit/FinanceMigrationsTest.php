@@ -7,7 +7,7 @@ namespace Tests\Unit;
 use CodeIgniter\Test\CIUnitTestCase;
 
 /**
- * Structural tests for all 6 finance module migrations.
+ * Structural tests for the finance module migrations.
  *
  * Each task ensures:
  *  - The migration file exists at the expected path
@@ -47,6 +47,26 @@ final class FinanceMigrationsTest extends CIUnitTestCase
             '1.6 SeedFinanceData' => [
                 '2026-05-15-000006_SeedFinanceData',
                 \App\Database\Migrations\SeedFinanceData::class,
+            ],
+            '1.7 FinanceNormalizePrivateBase' => [
+                '2026-06-07-130000_FinanceNormalizePrivateBase',
+                \App\Database\Migrations\FinanceNormalizePrivateBase::class,
+            ],
+            '1.8 CreateFinanceMembers' => [
+                '2026-06-07-130100_CreateFinanceMembers',
+                \App\Database\Migrations\CreateFinanceMembers::class,
+            ],
+            '1.9 CreateFinanceLedgerCore' => [
+                '2026-06-07-131200_CreateFinanceLedgerCore',
+                \App\Database\Migrations\CreateFinanceLedgerCore::class,
+            ],
+            '1.10 BackfillFinanceLedgerFromLegacy' => [
+                '2026-06-07-131300_BackfillFinanceLedgerFromLegacy',
+                \App\Database\Migrations\BackfillFinanceLedgerFromLegacy::class,
+            ],
+            '1.11 CreateFinanceApprovalEventsWorkflow' => [
+                '2026-06-07-140000_CreateFinanceApprovalEventsWorkflow',
+                \App\Database\Migrations\CreateFinanceApprovalEventsWorkflow::class,
             ],
         ];
     }

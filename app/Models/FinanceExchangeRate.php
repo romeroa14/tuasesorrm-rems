@@ -30,7 +30,9 @@ class FinanceExchangeRate extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules      = [
+        'source' => 'permit_empty|in_list[oficial,paralelo,promedio_usdt,efectivo]',
+    ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

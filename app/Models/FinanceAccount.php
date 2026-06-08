@@ -17,11 +17,13 @@ class FinanceAccount extends Model
     protected $allowedFields    = [
         'name',
         'type',
+        'account_kind',
         'currency_id',
         'balance',
         'account_number',
         'initial_balance',
         'current_balance',
+        'active',
     ];
 
     // Dates
@@ -32,7 +34,11 @@ class FinanceAccount extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules      = [
+        'type'         => 'permit_empty|in_list[bank,cash]',
+        'account_kind' => 'permit_empty|in_list[bank,petty_cash,custody,exchange,clearing]',
+        'active'       => 'permit_empty|in_list[0,1]',
+    ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

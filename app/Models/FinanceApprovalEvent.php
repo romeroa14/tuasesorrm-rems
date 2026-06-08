@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FinanceExpense extends Model
+class FinanceApprovalEvent extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'finance_expenses';
+    protected $table            = 'finance_approval_events';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,55 +17,31 @@ class FinanceExpense extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'user_id',
-        'approved_by',
-        'currency_id',
-        'payment_type_id',
-        'expense_type_id',
-        'category_id',
-        'company_id',
-        'account_id',
-        'project_id',
-        'department_id',
-        'created_by',
-        'status',
-        'amount',
-        'amount_usd',
-        'description',
-        'title',
-        'invoice_number',
-        'expense_date',
-        'payment_date',
-        'priority',
-        'tax_amount_usd',
-        'total_amount_usd',
-        'original_amount',
-        'original_currency',
-        'exchange_rate',
+        'movement_id',
+        'workflow_type',
+        'event_type',
+        'from_status',
+        'to_status',
+        'actor_user_id',
         'notes',
-        'recipient',
-        'provider',
-        'internal_notes',
-        'attachment_path',
-        'date',
+        'metadata_json',
     ];
 
-    // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // Validation
     protected $validationRules      = [
-        'status' => 'permit_empty|in_list[pending,approved,rejected]',
+        'workflow_type' => 'required|max_length[50]',
+        'event_type'    => 'required|in_list[drafted,submitted,auto_posted,approved,rejected]',
+        'to_status'     => 'required|in_list[draft,pending_approval,posted,rejected,void]',
     ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
-    // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
     protected $afterInsert    = [];

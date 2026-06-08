@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\FinanceAuthorization;
 use App\Models\FinanceAccount;
 use App\Models\FinanceBudget;
 use App\Models\FinanceCategory;
@@ -18,6 +19,8 @@ use App\Models\FinancePaymentType;
 use App\Models\FinanceProject;
 use App\Models\FinanceTransaction;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\HTTP\RequestInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Finance module — JSON API endpoints for DataTables and CRUD operations.
@@ -35,6 +38,8 @@ use CodeIgniter\HTTP\ResponseInterface;
  */
 class FinanceApiController extends BaseController
 {
+    protected FinanceAuthorization $financeAuthorization;
+
     /**
      * Maps URL entity name → fully qualified Model class name.
      *
@@ -74,6 +79,40 @@ class FinanceApiController extends BaseController
         'expense_types'  => 'Tipo de Gasto',
         'payment_types'  => 'Método de Pago',
     ];
+
+    /**
+     * Catalog entities remain editable for owner/admin members.
+     *
+     * @var list<string>
+     */
+    protected array $catalogEntities = [
+        'accounts',
+        'categories',
+        'budgets',
+        'exchange_rates',
+        'companies',
+        'departments',
+        'projects',
+        'currencies',
+        'expense_types',
+        'payment_types',
+    ];
+
+    /**
+     * Legacy records stay readable but are no longer writable.
+     *
+     * @var list<string>
+     */
+    protected array $legacyReadOnlyEntities = [
+        'transactions',
+        'expenses',
+    ];
+
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+    {
+        parent::initController($request, $response, $logger);
+        $this->financeAuthorization = new FinanceAuthorization();
+    }
 
     // ─────────────────────────────────────────────
     //  Helpers
@@ -127,13 +166,44 @@ class FinanceApiController extends BaseController
      */
     protected function requireAuth(): bool
     {
-        return session()->get('loggedIn') === true;
+        return session()->get('loggedIn') === true && $this->financeAuthorization->canAccess();
+    }
+
+    protected function canWriteEntity(string $entity): bool
+    {
+        if (in_array($entity, $this->legacyReadOnlyEntities, true)) {
+            return false;
+        }
+
+        if (in_array($entity, $this->catalogEntities, true)) {
+            return $this->financeAuthorization->canManageCatalogs();
+        }
+
+        return false;
+    }
+
+    protected function financeAccessError(): ResponseInterface
+    {
+        $statusCode = session()->get('loggedIn') === true ? 403 : 401;
+        $message = $statusCode === 401
+            ? 'Unauthorized'
+            : 'No tienes acceso al modulo privado de finanzas.';
+
+        return $this->jsonError($message, $statusCode);
+    }
+
+    protected function legacyWriteError(): ResponseInterface
+    {
+        return $this->jsonError(
+            'Las escrituras del libro legacy quedaron en modo solo lectura. Usa los flujos privados nuevos cuando se habiliten.',
+            403
+        );
     }
 
     /**
      * Convert empty strings to NULL for FK fields to avoid constraint errors.
      */
-    protected function sanitizeForModel($model, array $data): array
+    protected function sanitizeForModel(string $entity, $model, array $data): array
     {
         // Known FK fields across finance tables
         $fkFields = [
@@ -148,6 +218,30 @@ class FinanceApiController extends BaseController
         }
         // Remove 'id' and 'entity' from insert data
         unset($data['id'], $data['entity']);
+
+        if ($entity === 'accounts') {
+            $accountKind = $data['account_kind'] ?? null;
+            if (is_string($accountKind) && $accountKind !== '' && empty($data['type'])) {
+                $data['type'] = $accountKind === 'bank' ? 'bank' : 'cash';
+            }
+
+            if (! isset($data['account_kind']) && ! empty($data['type'])) {
+                $data['account_kind'] = $data['type'] === 'bank' ? 'bank' : 'petty_cash';
+            }
+        }
+
+        if ($entity === 'expenses') {
+            if (empty($data['date']) && ! empty($data['expense_date'])) {
+                $data['date'] = $data['expense_date'];
+            }
+
+            if (! isset($data['total_amount_usd']) && isset($data['amount_usd'])) {
+                $amountUsd = (float) $data['amount_usd'];
+                $taxUsd = isset($data['tax_amount_usd']) ? (float) $data['tax_amount_usd'] : 0.0;
+                $data['total_amount_usd'] = (string) ($amountUsd + $taxUsd);
+            }
+        }
+
         return $data;
     }
 
@@ -165,7 +259,7 @@ class FinanceApiController extends BaseController
     public function apiList(string $entity): ResponseInterface
     {
         if (! $this->requireAuth()) {
-            return $this->jsonError('Unauthorized', 401);
+            return $this->financeAccessError();
         }
 
         try {
@@ -199,7 +293,7 @@ class FinanceApiController extends BaseController
     public function apiGet(string $entity, string $id): ResponseInterface
     {
         if (! $this->requireAuth()) {
-            return $this->jsonError('Unauthorized', 401);
+            return $this->financeAccessError();
         }
 
         try {
@@ -228,7 +322,13 @@ class FinanceApiController extends BaseController
     public function apiCreate(string $entity): ResponseInterface
     {
         if (! $this->requireAuth()) {
-            return $this->jsonError('Unauthorized', 401);
+            return $this->financeAccessError();
+        }
+
+        if (! $this->canWriteEntity($entity)) {
+            return in_array($entity, $this->legacyReadOnlyEntities, true)
+                ? $this->legacyWriteError()
+                : $this->jsonError('No tienes permisos para editar catalogos financieros.', 403);
         }
 
         try {
@@ -245,7 +345,10 @@ class FinanceApiController extends BaseController
             }
 
             // Convert empty strings to NULL for FK fields
-            $data = $this->sanitizeForModel($model, $data);
+            $data = $this->sanitizeForModel($entity, $model, $data);
+            if ($entity === 'accounts' && ! isset($data['current_balance']) && isset($data['initial_balance'])) {
+                $data['current_balance'] = $data['initial_balance'];
+            }
 
             if (! $model->insert($data)) {
                 $errors = $model->errors();
@@ -277,7 +380,13 @@ class FinanceApiController extends BaseController
     public function apiUpdate(string $entity, string $id): ResponseInterface
     {
         if (! $this->requireAuth()) {
-            return $this->jsonError('Unauthorized', 401);
+            return $this->financeAccessError();
+        }
+
+        if (! $this->canWriteEntity($entity)) {
+            return in_array($entity, $this->legacyReadOnlyEntities, true)
+                ? $this->legacyWriteError()
+                : $this->jsonError('No tienes permisos para editar catalogos financieros.', 403);
         }
 
         try {
@@ -299,7 +408,7 @@ class FinanceApiController extends BaseController
                 return $this->jsonError('No data provided');
             }
 
-            $data = $this->sanitizeForModel($model, $data);
+            $data = $this->sanitizeForModel($entity, $model, $data);
 
             if (! $model->update($id, $data)) {
                 $errors = $model->errors();
@@ -331,7 +440,13 @@ class FinanceApiController extends BaseController
     public function apiDelete(string $entity, string $id): ResponseInterface
     {
         if (! $this->requireAuth()) {
-            return $this->jsonError('Unauthorized', 401);
+            return $this->financeAccessError();
+        }
+
+        if (! $this->canWriteEntity($entity)) {
+            return in_array($entity, $this->legacyReadOnlyEntities, true)
+                ? $this->legacyWriteError()
+                : $this->jsonError('No tienes permisos para editar catalogos financieros.', 403);
         }
 
         try {
@@ -372,7 +487,13 @@ class FinanceApiController extends BaseController
     public function handleForm(string $entity): ResponseInterface
     {
         if (! $this->requireAuth()) {
-            return $this->jsonError('Unauthorized', 401);
+            return $this->financeAccessError();
+        }
+
+        if (! $this->canWriteEntity($entity)) {
+            return in_array($entity, $this->legacyReadOnlyEntities, true)
+                ? $this->legacyWriteError()
+                : $this->jsonError('No tienes permisos para editar catalogos financieros.', 403);
         }
 
         try {
@@ -388,6 +509,7 @@ class FinanceApiController extends BaseController
                 return $this->jsonError('No data provided');
             }
 
+            $data = $this->sanitizeForModel($entity, $model, $data);
             $pk = $model->primaryKey;
 
             // If primary key is present and non-empty in $data, update; else create

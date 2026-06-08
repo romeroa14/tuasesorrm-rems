@@ -6,6 +6,9 @@
         <h1 class="h3 mb-0 text-gray-800">
             <i class="fas fa-exchange-alt text-primary"></i> Transacciones
         </h1>
+        <?php if (empty($can_write_legacy)): ?>
+        <span class="badge badge-warning text-wrap p-2">Modo solo lectura mientras el modulo privado migra fuera del CRUD legacy.</span>
+        <?php endif; ?>
     </div>
 
     <div class="card shadow mb-4">
@@ -13,9 +16,11 @@
             <h6 class="m-0 font-weight-bold text-primary">
                 <i class="fas fa-list"></i> Listado de Transacciones
             </h6>
+            <?php if (!empty($can_write_legacy)): ?>
             <button class="btn btn-primary btn-sm" onclick="showModal('create')">
                 <i class="fas fa-plus"></i> Agregar Nuevo
             </button>
+            <?php endif; ?>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -101,6 +106,7 @@
 var dt;
 var editMode = false;
 var apiBase = '<?= base_url('/app/finance/api/transactions') ?>';
+var canWriteLegacy = <?= !empty($can_write_legacy) ? 'true' : 'false' ?>;
 
 function loadTable() {
     $.ajax({
@@ -111,14 +117,17 @@ function loadTable() {
             var rows = [];
             if (response.status === 'success' && Array.isArray(response.data)) {
                 response.data.forEach(function(row) {
+                    var actions = canWriteLegacy
+                        ? '<button class="btn btn-info btn-sm mr-1" onclick="showModal(\'edit\',' + row.id + ')"><i class="fas fa-edit"></i></button>' +
+                          '<button class="btn btn-danger btn-sm" onclick="deleteRecord(' + row.id + ')"><i class="fas fa-trash"></i></button>'
+                        : '—';
                     rows.push([
                         row.id,
                         '<span class="badge badge-' + (row.type === 'income' ? 'success' : 'danger') + '">' + (row.type === 'income' ? 'Ingreso' : 'Gasto') + '</span>',
                         parseFloat(row.amount || 0).toLocaleString('es-VE', {minimumFractionDigits: 2}),
                         row.description || '—',
                         row.date || '—',
-                        '<button class="btn btn-info btn-sm mr-1" onclick="showModal(\'edit\',' + row.id + ')"><i class="fas fa-edit"></i></button>' +
-                        '<button class="btn btn-danger btn-sm" onclick="deleteRecord(' + row.id + ')"><i class="fas fa-trash"></i></button>'
+                        actions
                     ]);
                 });
             }
@@ -157,6 +166,10 @@ function loadDropdowns() {
 }
 
 function showModal(mode, id) {
+    if (!canWriteLegacy) {
+        return;
+    }
+
     editMode = mode === 'edit';
     $('#record_id').val('');
     $('#financeForm')[0].reset();
@@ -178,6 +191,10 @@ function showModal(mode, id) {
 
 $('#financeForm').submit(function(e) {
     e.preventDefault();
+    if (!canWriteLegacy) {
+        return;
+    }
+
     var data = $(this).serialize();
     var url = editMode && $('#record_id').val()
         ? apiBase + '/' + $('#record_id').val()
@@ -201,7 +218,7 @@ $('#financeForm').submit(function(e) {
 });
 
 function deleteRecord(id) {
-    if (!confirm('¿Eliminar esta transacción?')) return;
+    if (!canWriteLegacy || !confirm('¿Eliminar esta transacción?')) return;
     $.post(apiBase + '/' + id + '/delete', function(res) {
         if (res.status === 'success') loadTable();
         else alert('Error: ' + (res.message || 'No se pudo eliminar'));

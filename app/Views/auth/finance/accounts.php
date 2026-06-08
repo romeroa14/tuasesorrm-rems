@@ -1,7 +1,9 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-university text-primary"></i> Cuentas</h1>
+        <?php if (!empty($can_manage_catalogs)): ?>
         <button class="btn btn-primary btn-sm" onclick="showModal('create')"><i class="fas fa-plus"></i> Nueva Cuenta</button>
+        <?php endif; ?>
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-list"></i> Listado de Cuentas</h6></div>
@@ -26,7 +28,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6"><div class="form-group"><label><i class="fas fa-heading text-muted"></i> Nombre <span class="text-danger">*</span></label><input type="text" class="form-control" id="name" name="name" required placeholder="Ej: Banesco"></div></div>
-                            <div class="col-md-6"><div class="form-group"><label><i class="fas fa-tag text-muted"></i> Tipo <span class="text-danger">*</span></label><select class="form-control" id="type" name="type" required><option value="">Seleccionar...</option><option value="bank">Banco</option><option value="cash">Efectivo</option><option value="credit_card">Tarjeta Crédito</option><option value="digital_wallet">Billetera Digital</option></select></div></div>
+                            <div class="col-md-6"><div class="form-group"><label><i class="fas fa-tag text-muted"></i> Tipo <span class="text-danger">*</span></label><select class="form-control" id="account_kind" name="account_kind" required><option value="">Seleccionar...</option><option value="bank">Banco</option><option value="petty_cash">Caja chica</option><option value="custody">Resguardo</option><option value="exchange">Canje</option><option value="clearing">Compensación</option></select></div></div>
                         </div>
                         <div class="row">
                             <div class="col-md-6"><div class="form-group"><label><i class="fas fa-hashtag text-muted"></i> Nro. Cuenta</label><input type="text" class="form-control" id="account_number" name="account_number" placeholder="000-000000-0"></div></div>
@@ -40,10 +42,12 @@
 </div>
 <script>
 var dt, apiBase='<?= base_url('/app/finance/api/accounts') ?>';
-function loadTable(){$.post(apiBase,function(r){var rows=[];if(r.status==='success'&&Array.isArray(r.data))r.data.forEach(function(d){rows.push([d.id,d.name,'<span class="badge badge-info">'+d.type+'</span>',d.account_number||'—',parseFloat(d.initial_balance||0).toFixed(2),parseFloat(d.current_balance||0).toFixed(2),d.active?'<span class="badge badge-success">Activa</span>':'<span class="badge badge-secondary">Inactiva</span>','<button class="btn btn-info btn-sm mr-1" onclick="edit('+d.id+')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="remove('+d.id+')"><i class="fas fa-trash"></i></button>']);});if(dt)dt.clear().rows.add(rows).draw();else dt=$('#dataTable').DataTable({data:rows,pageLength:25,language:{url:'//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'}});});}
-function showModal(mode,id){$('#record_id').val('');$('#financeForm')[0].reset();$('#modalTitle').text(mode==='create'?'Nueva Cuenta':'Editar Cuenta');if(mode==='edit'&&id)$.get(apiBase+'/'+id,function(r){if(r.status==='success'){var d=r.data;Object.keys(d).forEach(function(k){var el=$('[name="'+k+'"]');if(el.length)el.val(d[k]);});$('#record_id').val(d.id);}});$('#financeModal').modal('show');}
+var canManageCatalogs = <?= !empty($can_manage_catalogs) ? 'true' : 'false' ?>;
+var accountKindLabels = {bank:'Banco', petty_cash:'Caja chica', custody:'Resguardo', exchange:'Canje', clearing:'Compensación'};
+function loadTable(){$.post(apiBase,function(r){var rows=[];if(r.status==='success'&&Array.isArray(r.data))r.data.forEach(function(d){var accountKind=d.account_kind||d.type||'—';var actions='';if(canManageCatalogs){actions='<button class="btn btn-info btn-sm mr-1" onclick="edit('+d.id+')"><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm" onclick="remove('+d.id+')"><i class="fas fa-trash"></i></button>';}rows.push([d.id,d.name,'<span class="badge badge-info">'+(accountKindLabels[accountKind]||accountKind)+'</span>',d.account_number||'—',parseFloat(d.initial_balance||0).toFixed(2),parseFloat(d.current_balance||0).toFixed(2),parseInt(d.active||1,10)?'<span class="badge badge-success">Activa</span>':'<span class="badge badge-secondary">Inactiva</span>',actions||'—']);});if(dt)dt.clear().rows.add(rows).draw();else dt=$('#dataTable').DataTable({data:rows,pageLength:25,language:{url:'//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'}});});}
+function showModal(mode,id){if(!canManageCatalogs)return;$('#record_id').val('');$('#financeForm')[0].reset();$('#modalTitle').text(mode==='create'?'Nueva Cuenta':'Editar Cuenta');if(mode==='edit'&&id)$.get(apiBase+'/'+id,function(r){if(r.status==='success'){var d=r.data;Object.keys(d).forEach(function(k){var el=$('[name="'+k+'"]');if(el.length)el.val(d[k]);});$('#record_id').val(d.id);$('#account_kind').val(d.account_kind||d.type||'');}});$('#financeModal').modal('show');}
 function edit(id){showModal('edit',id);}
-function remove(id){if(!confirm('¿Eliminar?'))return;$.post(apiBase+'/'+id+'/delete',function(r){if(r.status==='success')loadTable();});}
-$('#financeForm').submit(function(e){e.preventDefault();var id=$('#record_id').val();$.ajax({url:apiBase+(id?'/'+id:'/create'),method:'POST',data:$(this).serialize(),dataType:'json',success:function(r){if(r.status==='success'){$('#financeModal').modal('hide');loadTable();}}});});
+function remove(id){if(!canManageCatalogs||!confirm('¿Eliminar?'))return;$.post(apiBase+'/'+id+'/delete',function(r){if(r.status==='success')loadTable();});}
+$('#financeForm').submit(function(e){e.preventDefault();if(!canManageCatalogs)return;var id=$('#record_id').val();$.ajax({url:apiBase+(id?'/'+id:'/create'),method:'POST',data:$(this).serialize(),dataType:'json',success:function(r){if(r.status==='success'){$('#financeModal').modal('hide');loadTable();}}});});
 $(document).ready(function(){loadTable();});
 </script>

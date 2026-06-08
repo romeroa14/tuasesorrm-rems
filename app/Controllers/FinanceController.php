@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\FinanceAuthorization;
 use App\Models\FinanceTransaction;
 use App\Models\FinanceExpense;
 use App\Models\FinanceAccount;
-use App\Models\FinanceCategory;
-use App\Models\FinanceBudget;
 use App\Models\FinanceExchangeRate;
-use App\Models\FinanceCompany;
-use App\Models\FinanceDepartment;
-use App\Models\FinanceProject;
+use Config\Services;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Finance module — page controllers with DataTable views.
@@ -25,13 +25,47 @@ use App\Models\FinanceProject;
  */
 class FinanceController extends BaseController
 {
+    protected FinanceAuthorization $financeAuthorization;
+
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+    {
+        parent::initController($request, $response, $logger);
+        $this->financeAuthorization = new FinanceAuthorization();
+    }
+
+    protected function requireFinanceAccess()
+    {
+        if ($this->financeAuthorization->canAccess()) {
+            return null;
+        }
+
+        session()->setFlashdata([
+            'failed' => 'No tienes acceso al modulo privado de finanzas.',
+        ]);
+
+        return redirect()->to(base_url('/app/dashboard'));
+    }
+
+    protected function setFinanceContext(string $title, string $view, string $entity): void
+    {
+        $this->settings['title'] = $title;
+        $this->settings['url']   = $view;
+        $this->body['entity'] = $entity;
+        $this->body['can_manage_catalogs'] = $this->financeAuthorization->canManageCatalogs();
+        $this->body['can_write_legacy'] = $this->financeAuthorization->canWriteLegacy();
+        $this->body['finance_member_role'] = $this->financeAuthorization->currentRole();
+    }
+
     /**
      * Finance dashboard with summary stats.
      */
     public function index()
     {
-        $this->settings['title'] = 'Finanzas — Dashboard';
-        $this->settings['url']   = 'auth/finance/dashboard';
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
+
+        $this->setFinanceContext('Finanzas Dashboard', 'auth/finance/dashboard', 'dashboard');
 
         $transactionModel = new FinanceTransaction();
         $expenseModel     = new FinanceExpense();
@@ -52,11 +86,11 @@ class FinanceController extends BaseController
      */
     public function transactions()
     {
-        $this->settings['title'] = 'Transacciones';
-        $this->settings['url']   = 'auth/finance/transactions';
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
 
-        $this->body['entity'] = 'transactions';
-
+        $this->setFinanceContext('Finanzas Transacciones', 'auth/finance/transactions', 'transactions');
         $this->generate_template($this->settings['url']);
     }
 
@@ -65,11 +99,11 @@ class FinanceController extends BaseController
      */
     public function expenses()
     {
-        $this->settings['title'] = 'Gastos';
-        $this->settings['url']   = 'auth/finance/expenses';
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
 
-        $this->body['entity'] = 'expenses';
-
+        $this->setFinanceContext('Finanzas Gastos', 'auth/finance/expenses', 'expenses');
         $this->generate_template($this->settings['url']);
     }
 
@@ -78,11 +112,11 @@ class FinanceController extends BaseController
      */
     public function accounts()
     {
-        $this->settings['title'] = 'Cuentas Bancarias';
-        $this->settings['url']   = 'auth/finance/accounts';
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
 
-        $this->body['entity'] = 'accounts';
-
+        $this->setFinanceContext('Finanzas Cuentas', 'auth/finance/accounts', 'accounts');
         $this->generate_template($this->settings['url']);
     }
 
@@ -91,11 +125,11 @@ class FinanceController extends BaseController
      */
     public function categories()
     {
-        $this->settings['title'] = 'Categorías';
-        $this->settings['url']   = 'auth/finance/categories';
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
 
-        $this->body['entity'] = 'categories';
-
+        $this->setFinanceContext('Finanzas Categorías', 'auth/finance/categories', 'categories');
         $this->generate_template($this->settings['url']);
     }
 
@@ -104,11 +138,11 @@ class FinanceController extends BaseController
      */
     public function budgets()
     {
-        $this->settings['title'] = 'Presupuestos';
-        $this->settings['url']   = 'auth/finance/budgets';
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
 
-        $this->body['entity'] = 'budgets';
-
+        $this->setFinanceContext('Finanzas Presupuestos', 'auth/finance/budgets', 'budgets');
         $this->generate_template($this->settings['url']);
     }
 
@@ -117,11 +151,11 @@ class FinanceController extends BaseController
      */
     public function exchange_rates()
     {
-        $this->settings['title'] = 'Tasas de Cambio';
-        $this->settings['url']   = 'auth/finance/exchange_rates';
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
 
-        $this->body['entity'] = 'exchange_rates';
-
+        $this->setFinanceContext('Finanzas Tasas', 'auth/finance/exchange_rates', 'exchange_rates');
         $this->generate_template($this->settings['url']);
     }
 
@@ -130,11 +164,11 @@ class FinanceController extends BaseController
      */
     public function companies()
     {
-        $this->settings['title'] = 'Empresas';
-        $this->settings['url']   = 'auth/finance/companies';
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
 
-        $this->body['entity'] = 'companies';
-
+        $this->setFinanceContext('Finanzas Empresas', 'auth/finance/companies', 'companies');
         $this->generate_template($this->settings['url']);
     }
 
@@ -143,11 +177,11 @@ class FinanceController extends BaseController
      */
     public function departments()
     {
-        $this->settings['title'] = 'Departamentos';
-        $this->settings['url']   = 'auth/finance/departments';
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
 
-        $this->body['entity'] = 'departments';
-
+        $this->setFinanceContext('Finanzas Departamentos', 'auth/finance/departments', 'departments');
         $this->generate_template($this->settings['url']);
     }
 
@@ -156,18 +190,30 @@ class FinanceController extends BaseController
      */
     public function projects()
     {
-        $this->settings['title'] = 'Proyectos';
-        $this->settings['url']   = 'auth/finance/projects';
-        $this->body['entity'] = 'projects';
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
+
+        $this->setFinanceContext('Finanzas Proyectos', 'auth/finance/projects', 'projects');
         $this->generate_template($this->settings['url']);
     }
 
     public function exchangeRatesFetch()
     {
-        $command = new \App\Commands\FinanceFetchRates();
-        ob_start();
-        $command->run([]);
-        $output = ob_get_clean();
-        return $this->response->setJSON(['status' => 'success', 'message' => $output]);
+        if (! $this->financeAuthorization->canManageCatalogs()) {
+            return $this->response
+                ->setStatusCode(403)
+                ->setJSON([
+                    'status'  => 'error',
+                    'message' => 'No tienes permisos para actualizar catalogos financieros.',
+                ]);
+        }
+
+        Services::commands()->run('finance:fetch-rates', []);
+
+        return $this->response->setJSON([
+            'status'  => 'success',
+            'message' => 'Tasas actualizadas correctamente.',
+        ]);
     }
 }

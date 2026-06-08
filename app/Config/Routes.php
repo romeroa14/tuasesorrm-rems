@@ -224,9 +224,21 @@ $routes->group('', ['filter' => 'authApi'], function($routes) {
 // =============================================================================
 // MÓDULO FINANZAS
 // =============================================================================
-$routes->group('app/finance', ['filter' => 'auth'], function($routes) {
+$routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     $routes->get('/', 'FinanceController::index');
-    $routes->get('(:segment)', 'FinanceController::$1');
+    $routes->get('transactions', 'FinanceController::transactions');
+    $routes->get('expenses', 'FinanceController::expenses');
+    $routes->get('accounts', 'FinanceController::accounts');
+    $routes->get('categories', 'FinanceController::categories');
+    $routes->get('budgets', 'FinanceController::budgets');
+    $routes->get('exchange_rates', 'FinanceController::exchange_rates');
+    $routes->get('companies', 'FinanceController::companies');
+    $routes->get('departments', 'FinanceController::departments');
+    $routes->get('projects', 'FinanceController::projects');
+    $routes->post('workflows/ingresos', 'FinanceWorkflowController::ingreso');
+    $routes->post('workflows/egresos', 'FinanceWorkflowController::egreso');
+    $routes->post('workflows/(:num)/approve', 'FinanceWorkflowController::approve/$1');
+    $routes->post('workflows/(:num)/reject', 'FinanceWorkflowController::reject/$1');
     $routes->post('exchange_rates/fetch', 'FinanceController::exchangeRatesFetch');
     $routes->post('api/(:segment)', 'FinanceApiController::apiList/$1');
     $routes->get('api/(:segment)/(:num)', 'FinanceApiController::apiGet/$1/$2');

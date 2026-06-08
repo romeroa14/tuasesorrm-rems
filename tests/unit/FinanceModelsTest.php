@@ -7,7 +7,7 @@ namespace Tests\Unit;
 use CodeIgniter\Test\CIUnitTestCase;
 
 /**
- * Structural tests for all 13 finance module models.
+ * Structural tests for finance module models.
  *
  * Each test verifies:
  *  - The model file exists
@@ -66,7 +66,7 @@ final class FinanceModelsTest extends CIUnitTestCase
                 'FinanceAccount',
                 \App\Models\FinanceAccount::class,
                 'finance_accounts',
-                ['name', 'type', 'currency_id', 'balance'],
+                ['name', 'type', 'account_kind', 'currency_id', 'balance', 'initial_balance', 'current_balance', 'active'],
             ],
             '2.8 FinanceUserMapping' => [
                 'FinanceUserMapping',
@@ -103,6 +103,24 @@ final class FinanceModelsTest extends CIUnitTestCase
                 \App\Models\FinanceExchangeRate::class,
                 'finance_exchange_rates',
                 ['currency_id', 'rate', 'rate_date', 'source', 'is_auto'],
+            ],
+            '2.14 FinanceMovement' => [
+                'FinanceMovement',
+                \App\Models\FinanceMovement::class,
+                'finance_movements',
+                ['workflow_type', 'status', 'occurred_on', 'actor_user_id', 'approved_by', 'source_table', 'source_id', 'currency_id', 'rate_to_base', 'reversal_of_id', 'notes', 'posted_at'],
+            ],
+            '2.15 FinanceMovementLine' => [
+                'FinanceMovementLine',
+                \App\Models\FinanceMovementLine::class,
+                'finance_movement_lines',
+                ['movement_id', 'line_number', 'account_id', 'side', 'amount', 'currency_id', 'rate_to_base', 'category_id', 'company_id', 'project_id', 'department_id', 'description'],
+            ],
+            '2.16 FinanceApprovalEvent' => [
+                'FinanceApprovalEvent',
+                \App\Models\FinanceApprovalEvent::class,
+                'finance_approval_events',
+                ['movement_id', 'workflow_type', 'event_type', 'from_status', 'to_status', 'actor_user_id', 'notes', 'metadata_json'],
             ],
         ];
     }

@@ -1,7 +1,11 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-receipt text-primary"></i> Gastos</h1>
+        <?php if (empty($can_write_legacy)): ?>
+        <span class="badge badge-warning text-wrap p-2">Modo solo lectura mientras se reemplaza el libro legacy.</span>
+        <?php else: ?>
         <button class="btn btn-primary btn-sm" onclick="showModal('create')"><i class="fas fa-plus"></i> Nuevo Gasto</button>
+        <?php endif; ?>
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-list"></i> Listado de Gastos</h6></div>
@@ -63,7 +67,7 @@
                                 <div class="col-md-4"><div class="form-group"><label><i class="fas fa-flag text-muted"></i> Prioridad</label><select class="form-control" id="priority" name="priority"><option value="medium">Media</option><option value="low">Baja</option><option value="high">Alta</option></select></div></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><div class="form-group"><label><i class="fas fa-check-circle text-muted"></i> Estado</label><select class="form-control" id="status" name="status"><option value="pending">Pendiente</option><option value="approved">Aprobado</option><option value="paid">Pagado</option><option value="rejected">Rechazado</option></select></div></div>
+                                <div class="col-md-6"><div class="form-group"><label><i class="fas fa-check-circle text-muted"></i> Estado</label><select class="form-control" id="status" name="status"><option value="pending">Pendiente</option><option value="approved">Aprobado</option><option value="rejected">Rechazado</option></select></div></div>
                             </div>
                         </div>
                     </div>
@@ -103,20 +107,24 @@
 </div>
 <script>
 var dt, apiBase = '<?= base_url('/app/finance/api/expenses') ?>', editId = null;
+var canWriteLegacy = <?= !empty($can_write_legacy) ? 'true' : 'false' ?>;
 function loadTable() {
     $.post(apiBase, function(r) {
         var rows = [];
         if (r.status==='success' && Array.isArray(r.data)) r.data.forEach(function(d) {
-            var statLbl = {pending:'Pendiente',approved:'Aprobado',paid:'Pagado',rejected:'Rechazado'};
-            var statCls = {pending:'secondary',approved:'primary',paid:'success',rejected:'danger'};
+            var statLbl = {pending:'Pendiente',approved:'Aprobado',rejected:'Rechazado'};
+            var statCls = {pending:'secondary',approved:'primary',rejected:'danger'};
             var priLbl = {low:'Baja',medium:'Media',high:'Alta'};
+            var actions = canWriteLegacy
+                ? '<button class="btn btn-info btn-sm mr-1" onclick="edit('+d.id+')"><i class="fas fa-edit"></i></button>'+
+                  '<button class="btn btn-danger btn-sm" onclick="remove('+d.id+')"><i class="fas fa-trash"></i></button>'
+                : '—';
             rows.push([d.id, d.title||'—', d.expense_type_id||'—',
                 '$'+parseFloat(d.amount_usd||0).toFixed(2),
                 d.recipient||'—',
                 '<span class="badge badge-'+statCls[d.status]+'">'+(statLbl[d.status]||d.status)+'</span>',
                 d.expense_date||'—',
-                '<button class="btn btn-info btn-sm mr-1" onclick="edit('+d.id+')"><i class="fas fa-edit"></i></button>'+
-                '<button class="btn btn-danger btn-sm" onclick="remove('+d.id+')"><i class="fas fa-trash"></i></button>']);
+                actions]);
         });
         if (dt) dt.clear().rows.add(rows).draw();
         else dt = $('#dataTable').DataTable({
@@ -142,6 +150,7 @@ function loadDropdowns() {
     });
 }
 function showModal(mode,id) {
+    if (!canWriteLegacy) return;
     editId=mode==='edit'?id:null; $('#record_id').val('');
     $('#financeForm')[0].reset(); $('#modalTitle').text(mode==='create'?'Nuevo Gasto':'Editar Gasto');
     loadDropdowns();
@@ -163,8 +172,9 @@ function showModal(mode,id) {
     $('#financeModal').modal('show');
 }
 function edit(id){showModal('edit',id);}
-function remove(id){if(!confirm('¿Eliminar?')) return; $.post(apiBase+'/'+id+'/delete',function(r){if(r.status==='success')loadTable();else alert('Error: '+(r.message||''));});}
+function remove(id){if(!canWriteLegacy||!confirm('¿Eliminar?')) return; $.post(apiBase+'/'+id+'/delete',function(r){if(r.status==='success')loadTable();else alert('Error: '+(r.message||''));});}
 $('#financeForm').submit(function(e){e.preventDefault();var id=$('#record_id').val(); var url=apiBase+(id?'/'+id:'/create');
+    if(!canWriteLegacy)return;
     $.ajax({url:url, method:'POST', data:$(this).serialize(), dataType:'json',success:function(r){if(r.status==='success'){$('#financeModal').modal('hide');loadTable();}else alert(r.message||'Error');},error:function(){alert('Error de conexión');}});});
 $(document).ready(function(){loadTable();});
 </script>
