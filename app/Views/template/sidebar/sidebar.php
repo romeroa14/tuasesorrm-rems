@@ -6,8 +6,8 @@ use Config\FinanceMenu;
 
 $financeAuthorization = new FinanceAuthorization();
 $canAccessFinance = $financeAuthorization->canAccess();
-$financeMenuActive = str_starts_with($financeCurrentPath, 'app/finance');
 $financeCurrentPath = uri_string();
+$financeMenuActive = str_starts_with($financeCurrentPath, 'app/finance');
 $financeCurrentType = service('request')->getGet('type');
 $financeModules = FinanceSidebar::modules();
 ?>
