@@ -20,6 +20,7 @@ class FinanceReportService
             JOIN finance_movements m ON m.id = ml.movement_id
             JOIN finance_categories c ON c.id = ml.category_id
             WHERE m.status = 'posted'
+              AND ml.line_number = 1
               AND c.type = 'income'
               AND m.occurred_on >= ?
               AND m.occurred_on <= ?
@@ -33,6 +34,7 @@ class FinanceReportService
             JOIN finance_movements m ON m.id = ml.movement_id
             JOIN finance_categories c ON c.id = ml.category_id
             WHERE m.status = 'posted'
+              AND ml.line_number = 1
               AND c.type = 'expense'
               AND m.occurred_on >= ?
               AND m.occurred_on <= ?
@@ -60,9 +62,10 @@ class FinanceReportService
         $db = \Config\Database::connect();
 
         $builder = $db->table('finance_movement_lines ml')
-            ->select('ml.*, m.occurred_on, m.workflow_type, m.status, m.notes, c.name AS category_name, c.movement_type')
+            ->select('m.id, ml.amount, ml.description, ml.account_id, ml.currency_id, ml.category_id, m.occurred_on, m.workflow_type, m.status, m.notes, c.name AS category_name, c.movement_type')
             ->join('finance_movements m', 'm.id = ml.movement_id')
             ->join('finance_categories c', 'c.id = ml.category_id')
+            ->where('ml.line_number', 1)
             ->where('c.type', 'income');
 
         if ($movementType) {
@@ -83,9 +86,10 @@ class FinanceReportService
         $db = \Config\Database::connect();
 
         $builder = $db->table('finance_movement_lines ml')
-            ->select('ml.*, m.occurred_on, m.workflow_type, m.status, m.notes, c.name AS category_name, c.movement_type')
+            ->select('m.id, ml.amount, ml.description, ml.account_id, ml.currency_id, ml.category_id, m.occurred_on, m.workflow_type, m.status, m.notes, c.name AS category_name, c.movement_type')
             ->join('finance_movements m', 'm.id = ml.movement_id')
             ->join('finance_categories c', 'c.id = ml.category_id')
+            ->where('ml.line_number', 1)
             ->where('c.type', 'expense');
 
         if ($movementType) {

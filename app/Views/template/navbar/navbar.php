@@ -166,11 +166,22 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <img class="img-profile rounded-circle" src="/users/<?php 
-                $email = session()->get('email');
+            <?php
+                $email = (string) session()->get('email');
                 $emailSafe = str_replace('@', '_at_', $email);
-                if(!empty(session()->get('profile_photo'))): 
-            ?><?= $emailSafe.'/'.session()->get('profile_photo') ?><?php else:?>default-profile.jpg<?php endif;?>" style="max-width: 60px">
+                $profilePhoto = trim((string) session()->get('profile_photo'));
+                $defaultAvatar = 'data:image/svg+xml;utf8,' . rawurlencode(
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
+                    . '<rect width="64" height="64" fill="#e9ecef"/>'
+                    . '<circle cx="32" cy="24" r="14" fill="#adb5bd"/>'
+                    . '<path d="M12 58c4-12 16-18 20-18s16 6 20 18" fill="#adb5bd"/>'
+                    . '</svg>'
+                );
+                $avatarSrc = ($profilePhoto === '' || $profilePhoto === 'default.png')
+                    ? $defaultAvatar
+                    : '/users/' . $emailSafe . '/' . $profilePhoto;
+            ?>
+            <img class="img-profile rounded-circle" src="<?= esc($avatarSrc, 'attr') ?>" style="max-width: 60px">
             <span class="ml-2 d-none d-lg-inline text-white small"><?= session()->get('full_name') ?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

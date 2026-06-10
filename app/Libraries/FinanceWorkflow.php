@@ -138,7 +138,7 @@ class FinanceWorkflow
                     'amount'        => self::normalizeAmount($input['amount'] ?? 0),
                     'currency_id'   => $sharedDimensions['currency_id'],
                     'rate_to_base'  => $sharedDimensions['rate_to_base'],
-                    'category_id'   => $sharedDimensions['category_id'],
+                    'category_id'   => null,
                     'company_id'    => $sharedDimensions['company_id'],
                     'project_id'    => $sharedDimensions['project_id'],
                     'department_id' => $sharedDimensions['department_id'],
