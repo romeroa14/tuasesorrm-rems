@@ -208,14 +208,21 @@ class FinanceIncomeController extends BaseController
      */
     protected function requestData(): array
     {
-        $data = $this->request->getJSON(true);
-        if (is_array($data) && $data !== []) {
-            return $data;
+        $post = $this->request->getPost();
+        if (is_array($post) && $post !== []) {
+            return $post;
         }
 
-        $post = $this->request->getPost();
+        try {
+            $data = $this->request->getJSON(true);
+            if (is_array($data) && $data !== []) {
+                return $data;
+            }
+        } catch (\Throwable $exception) {
+            log_message('debug', 'FinanceIncomeController::requestData invalid JSON fallback - ' . $exception->getMessage());
+        }
 
-        return is_array($post) ? $post : [];
+        return [];
     }
 
     /**
