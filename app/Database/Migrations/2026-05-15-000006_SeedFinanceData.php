@@ -46,12 +46,12 @@ class SeedFinanceData extends Migration
         // ── Payment types (from tuaseso_profit1 dump) ──
         if ($db->tableExists('finance_payment_types') && $db->table('finance_payment_types')->countAllResults() === 0) {
             $db->table('finance_payment_types')->insertBatch([
-                ['name' => 'Transferencia Bancaria',          'code' => 'transfer', 'created_at' => $now, 'updated_at' => $now],
-                ['name' => 'Tarjeta de Crédito Corporativa',  'code' => 'credit_card', 'created_at' => $now, 'updated_at' => $now],
-                ['name' => 'Efectivo',                        'code' => 'cash', 'created_at' => $now, 'updated_at' => $now],
-                ['name' => 'Cheque',                          'code' => 'check', 'created_at' => $now, 'updated_at' => $now],
-                ['name' => 'Pago Móvil',                      'code' => 'pago_movil', 'created_at' => $now, 'updated_at' => $now],
-                ['name' => 'PayPal',                          'code' => 'paypal', 'created_at' => $now, 'updated_at' => $now],
+                ['name' => 'Transferencia Bancaria',          'code' => 'transfer', 'default_denomination' => 'BS',  'created_at' => $now, 'updated_at' => $now],
+                ['name' => 'Tarjeta de Crédito Corporativa',  'code' => 'credit_card', 'default_denomination' => 'USD', 'created_at' => $now, 'updated_at' => $now],
+                ['name' => 'Efectivo',                        'code' => 'cash', 'default_denomination' => 'USD', 'created_at' => $now, 'updated_at' => $now],
+                ['name' => 'Cheque',                          'code' => 'check', 'default_denomination' => 'BS', 'created_at' => $now, 'updated_at' => $now],
+                ['name' => 'Pago Móvil',                      'code' => 'pago_movil', 'default_denomination' => 'BS', 'created_at' => $now, 'updated_at' => $now],
+                ['name' => 'PayPal',                          'code' => 'paypal', 'default_denomination' => 'USD', 'created_at' => $now, 'updated_at' => $now],
             ]);
         }
 

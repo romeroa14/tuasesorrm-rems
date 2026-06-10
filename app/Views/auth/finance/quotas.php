@@ -34,6 +34,7 @@
                             <th>Nombre</th>
                             <th>N° Recibo</th>
                             <th>Monto</th>
+                            <th>Equiv. USD</th>
                             <th>Moneda</th>
                             <th>Tasa</th>
                             <th>Fecha Recepción</th>
@@ -106,6 +107,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" id="currency_denomination" name="currency_denomination">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-tag text-muted"></i> Denominación detectada</label>
+                                        <input type="text" class="form-control" id="detected_denomination" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-dollar-sign text-muted"></i> Equivalente USD</label>
+                                        <input type="text" class="form-control" id="amount_usd_display" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-money-bill-wave text-muted"></i> Equivalente BS</label>
+                                        <input type="text" class="form-control" id="amount_bs_display" readonly>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -146,14 +168,60 @@
 var dt;
 var editMode = false;
 var apiBase = '<?= base_url('/app/finance/quotas/api') ?>';
+var catalogUrl = '<?= base_url('/app/finance/api/catalog') ?>';
 var currentFilter = '<?= esc($current_type ?? '') ?>';
+var currencyContext = {};
 
 var typeLabels = { received: 'Recibida', delivered: 'Entregada' };
 var currencyLabels = { USDT: 'USDT', BS: 'Bs.', ZELLE: 'Zelle', CASH: 'Efectivo' };
 
-$('#currency').change(function() {
-    $('#exchange_rate_group').toggle($(this).val() === 'BS');
-});
+function formatMoney(value) {
+    if (!isFinite(value)) return '';
+    return value.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+}
+
+function getDenominationFromCurrency(currency) {
+    return String(currency || '').toUpperCase() === 'BS' ? 'BS' : 'USD';
+}
+
+function syncQuotaMoney() {
+    var currency = $('#currency').val();
+    var denomination = getDenominationFromCurrency(currency);
+    var latestRate = parseFloat(currencyContext.latest_bs_rate || 0);
+    var currentRate = parseFloat($('#exchange_rate').val() || 0);
+    var rate = denomination === 'BS' ? (currentRate > 0 ? currentRate : latestRate) : 1;
+    var amount = parseFloat($('#amount').val() || 0);
+
+    $('#exchange_rate_group').toggle(denomination === 'BS');
+    $('#currency_denomination').val(denomination);
+    $('#detected_denomination').val(denomination);
+
+    if (denomination === 'BS') {
+        $('#exchange_rate').val(rate > 0 ? rate.toFixed(4) : '');
+    } else {
+        $('#exchange_rate').val('1.0000');
+    }
+
+    if (!isFinite(amount) || amount <= 0) {
+        $('#amount_usd_display').val('');
+        $('#amount_bs_display').val('');
+        return;
+    }
+
+    var amountUsd = denomination === 'BS' ? (rate > 0 ? amount / rate : 0) : amount;
+    var amountBs = denomination === 'BS' ? amount : amount * rate;
+    $('#amount_usd_display').val(formatMoney(amountUsd));
+    $('#amount_bs_display').val(formatMoney(amountBs));
+}
+
+function loadContext(cb) {
+    $.get(catalogUrl, function(response) {
+        if (response.status === 'success' && response.data && response.data.currency_context) {
+            currencyContext = response.data.currency_context;
+        }
+        if (cb) cb();
+    });
+}
 
 $('.filter-option').click(function(e) {
     e.preventDefault();
@@ -174,6 +242,7 @@ function loadTable() {
                     row.name || '—',
                     row.receipt_number || '—',
                     parseFloat(row.amount || 0).toLocaleString('es-VE', {minimumFractionDigits: 2}),
+                    parseFloat(row.amount_usd || 0).toLocaleString('es-VE', {minimumFractionDigits: 2}),
                     currencyLabels[row.currency] || row.currency || '—',
                     row.exchange_rate ? parseFloat(row.exchange_rate).toFixed(4) : '—',
                     row.receipt_date || '—',
@@ -193,6 +262,7 @@ function loadTable() {
                     {title: 'Nombre'},
                     {title: 'N° Recibo'},
                     {title: 'Monto'},
+                    {title: 'Equiv. USD'},
                     {title: 'Moneda'},
                     {title: 'Tasa'},
                     {title: 'Fecha Recepción'},
@@ -212,6 +282,7 @@ function showModal(mode, id) {
     editMode = mode === 'edit';
     $('#record_id').val('');
     $('#quotaForm')[0].reset();
+    $('#exchange_rate').val('');
     $('#exchange_rate_group').hide();
     $('#modalTitle').text(mode === 'create' ? 'Nueva Cuota' : 'Editar Cuota');
 
@@ -231,10 +302,13 @@ function showModal(mode, id) {
                 $('#delivery_date').val(d.delivery_date);
                 $('#receipt_number').val(d.receipt_number);
                 $('#notes').val(d.notes);
+                $('#currency_denomination').val(d.currency_denomination || getDenominationFromCurrency(d.currency));
+                syncQuotaMoney();
             }
         });
     }
 
+    syncQuotaMoney();
     $('#quotaModal').modal('show');
 }
 
@@ -271,5 +345,12 @@ $('#quotaForm').submit(function(e) {
     });
 });
 
-$(document).ready(function() { loadTable(); });
+$('#currency, #exchange_rate, #amount').on('change keyup', syncQuotaMoney);
+
+$(document).ready(function() {
+    loadContext(function() {
+        syncQuotaMoney();
+        loadTable();
+    });
+});
 </script>

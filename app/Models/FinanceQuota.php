@@ -22,9 +22,12 @@ class FinanceQuota extends Model
         'receipt_date',
         'delivery_date',
         'currency',
+        'currency_denomination',
         'exchange_rate',
         'receipt_number',
         'amount',
+        'amount_usd',
+        'amount_bs',
         'notes',
     ];
 
@@ -39,6 +42,7 @@ class FinanceQuota extends Model
         'name'           => 'required|max_length[255]',
         'receipt_date'   => 'required|valid_date',
         'currency'       => 'required|in_list[USDT,BS,ZELLE,CASH]',
+        'currency_denomination' => 'permit_empty|in_list[USD,BS]',
         'receipt_number' => 'required|max_length[100]',
         'amount'         => 'required|decimal',
     ];

@@ -74,6 +74,10 @@ $financeModules = FinanceSidebar::modules();
                        href="<?= base_url('/app/finance/exchange_rates') ?>">
                         <i class="fas fa-dollar-sign"></i> Tasas de cambio
                     </a>
+                    <a class="collapse-item <?= ($title ?? '') === 'Finanzas Métodos de Pago' ? 'active' : '' ?>"
+                       href="<?= base_url('/app/finance/payment_types') ?>">
+                        <i class="fas fa-credit-card"></i> Métodos de pago
+                    </a>
                 <?php endif; ?>
             </div>
         </div>

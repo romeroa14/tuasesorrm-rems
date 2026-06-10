@@ -39,13 +39,13 @@ class SeedFinanceDemoData extends Migration
             (8, 'Capacitación', 'Cursos y formación')");
 
         // Payment types
-        $this->db->query("INSERT IGNORE INTO finance_payment_types (id, name, code) VALUES
-            (1, 'Transferencia Bancaria', 'TRANSFER'),
-            (2, 'Tarjeta de Crédito Corporativa', 'TDC_CORP'),
-            (3, 'Efectivo', 'CASH'),
-            (4, 'Cheque', 'CHECK'),
-            (5, 'Pago Móvil', 'PMOBILE'),
-            (6, 'PayPal', 'PAYPAL')");
+        $this->db->query("INSERT IGNORE INTO finance_payment_types (id, name, code, default_denomination) VALUES
+            (1, 'Transferencia Bancaria', 'TRANSFER', 'BS'),
+            (2, 'Tarjeta de Crédito Corporativa', 'TDC_CORP', 'USD'),
+            (3, 'Efectivo', 'CASH', 'USD'),
+            (4, 'Cheque', 'CHECK', 'BS'),
+            (5, 'Pago Móvil', 'PMOBILE', 'BS'),
+            (6, 'PayPal', 'PAYPAL', 'USD')");
 
         // Income/Expense categories
         $this->db->query("INSERT IGNORE INTO finance_categories (id, name, type, parent_id) VALUES

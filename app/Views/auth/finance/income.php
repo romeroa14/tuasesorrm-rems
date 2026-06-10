@@ -119,8 +119,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Monto <span class="text-danger">*</span></label>
-                                <input type="number" step="0.01" class="form-control" name="amount" required min="0.01">
+                                <label id="amount_label">Monto <span class="text-danger">*</span></label>
+                                <input type="number" step="0.01" class="form-control" name="amount" id="amount" required min="0.01">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -133,6 +133,35 @@
                             <div class="form-group">
                                 <label>Método de pago <span class="text-danger">*</span></label>
                                 <select class="form-control" name="payment_type_id" id="payment_type_id" required></select>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="currency_id" id="currency_id">
+                    <input type="hidden" name="rate_to_base" id="rate_to_base">
+                    <input type="hidden" name="currency_denomination" id="currency_denomination">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Denominación detectada</label>
+                                <input type="text" class="form-control" id="detected_denomination" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Tasa actual Bs/USD</label>
+                                <input type="text" class="form-control" id="display_rate_to_base" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Equivalente USD</label>
+                                <input type="text" class="form-control" id="equivalent_usd" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Equivalente BS</label>
+                                <input type="text" class="form-control" id="equivalent_bs" readonly>
                             </div>
                         </div>
                     </div>
@@ -165,6 +194,64 @@ var dateFrom = '<?= esc($date_from) ?>';
 var dateTo = '<?= esc($date_to) ?>';
 var canApprove = <?= ($can_approve ?? false) ? 'true' : 'false' ?>;
 
+function getCurrencyContext() {
+    return catalog && catalog.currency_context ? catalog.currency_context : {};
+}
+
+function getPaymentType(id) {
+    var match = null;
+    (catalog && catalog.payment_types ? catalog.payment_types : []).forEach(function(p) {
+        if (String(p.id) === String(id)) {
+            match = p;
+        }
+    });
+    return match;
+}
+
+function formatMoney(value) {
+    if (!isFinite(value)) return '';
+    return value.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatPrimaryAmount(amount, currencyId) {
+    var context = getCurrencyContext();
+    var denomination = String(currencyId) === String(context.bs_currency_id) ? 'BS' : 'USD';
+    var prefix = denomination === 'BS' ? 'Bs. ' : '$ ';
+
+    return prefix + formatMoney(parseFloat(amount || 0));
+}
+
+function refreshCurrencyDetection() {
+    var context = getCurrencyContext();
+    var paymentType = getPaymentType($('#payment_type_id').val());
+    var denomination = paymentType && paymentType.default_denomination ? paymentType.default_denomination : 'USD';
+    var bsRate = parseFloat(context.latest_bs_rate || 0);
+    var amount = parseFloat($('#amount').val() || 0);
+
+    $('#currency_denomination').val(denomination);
+    $('#detected_denomination').val(denomination);
+    $('#currency_id').val(denomination === 'BS' ? (context.bs_currency_id || '') : (context.usd_currency_id || ''));
+    $('#rate_to_base').val(denomination === 'BS' ? (bsRate > 0 ? bsRate.toFixed(6) : '') : '1');
+    $('#display_rate_to_base').val(bsRate > 0 ? bsRate.toFixed(4) : 'Sin tasa');
+    $('#amount_label').html((denomination === 'BS' ? 'Monto en Bs.' : 'Monto en USD') + ' <span class="text-danger">*</span>');
+
+    if (!isFinite(amount) || amount <= 0) {
+        $('#equivalent_usd').val('');
+        $('#equivalent_bs').val('');
+        return;
+    }
+
+    var equivalentUsd = denomination === 'BS'
+        ? (bsRate > 0 ? amount / bsRate : 0)
+        : amount;
+    var equivalentBs = denomination === 'BS'
+        ? amount
+        : (bsRate > 0 ? amount * bsRate : 0);
+
+    $('#equivalent_usd').val(formatMoney(equivalentUsd));
+    $('#equivalent_bs').val(formatMoney(equivalentBs));
+}
+
 function loadCatalog(cb) {
     $.get(catalogUrl, function(r) {
         if (r.status === 'success') {
@@ -180,6 +267,7 @@ function loadCatalog(cb) {
                 payOpts += '<option value="' + p.id + '">' + (p.name || p.code || '—') + '</option>';
             });
             $('#payment_type_id').html(payOpts);
+            refreshCurrencyDetection();
         }
         if (cb) cb();
     });
@@ -193,7 +281,7 @@ function loadTable() {
                 rows.push([
                     row.id,
                     row.category_name || '—',
-                    parseFloat(row.amount || 0).toLocaleString('es-VE', {minimumFractionDigits: 2}),
+                    formatPrimaryAmount(row.amount, row.currency_id),
                     row.description || row.notes || '—',
                     row.occurred_on || '—',
                     '<span class="badge badge-' + (row.status === 'posted' ? 'success' : (row.status === 'pending_approval' ? 'warning' : 'secondary')) + '">' + (row.status || '—') + '</span>'
@@ -221,7 +309,7 @@ function loadPending() {
         $('#pendingCard').show();
         var html = '';
         rows.forEach(function(m) {
-            html += '<tr><td>' + m.id + '</td><td>' + (m.category_name || '—') + '</td><td>' + parseFloat(m.amount).toFixed(2) + '</td><td>' + m.occurred_on + '</td>' +
+            html += '<tr><td>' + m.id + '</td><td>' + (m.category_name || '—') + '</td><td>' + formatPrimaryAmount(m.amount, m.currency_id) + '</td><td>' + m.occurred_on + '</td>' +
                 '<td><button class="btn btn-success btn-sm mr-1" onclick="approve(' + m.id + ')"><i class="fas fa-check"></i></button>' +
                 '<button class="btn btn-danger btn-sm" onclick="reject(' + m.id + ')"><i class="fas fa-times"></i></button></td></tr>';
         });
@@ -232,6 +320,7 @@ function loadPending() {
 function showModal() {
     $('#incomeForm')[0].reset();
     if (currentType) $('#movement_type').val(currentType);
+    refreshCurrencyDetection();
     $('#incomeModal').modal('show');
 }
 
@@ -256,6 +345,8 @@ $('#dateFilterForm').submit(function(e) {
     dateTo = $('#date_to').val();
     loadTable();
 });
+
+$('#payment_type_id, #amount').on('change keyup', refreshCurrencyDetection);
 
 $('#incomeForm').submit(function(e) {
     e.preventDefault();

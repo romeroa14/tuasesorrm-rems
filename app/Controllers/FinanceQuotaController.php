@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Libraries\FinanceAuthorization;
+use App\Libraries\FinanceMoneyService;
 use App\Models\FinanceQuota;
 use Config\FinanceMenu;
 use CodeIgniter\HTTP\RequestInterface;
@@ -15,12 +16,14 @@ class FinanceQuotaController extends BaseController
 {
     protected FinanceAuthorization $financeAuthorization;
     protected FinanceQuota $quotaModel;
+    protected FinanceMoneyService $moneyService;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         parent::initController($request, $response, $logger);
         $this->financeAuthorization = new FinanceAuthorization();
         $this->quotaModel = new FinanceQuota();
+        $this->moneyService = new FinanceMoneyService();
     }
 
     public function index()
@@ -91,14 +94,20 @@ class FinanceQuotaController extends BaseController
             return $this->jsonError('No data provided');
         }
 
-        if (! $this->quotaModel->insert($data)) {
-            return $this->jsonError(
-                implode(', ', $this->quotaModel->errors()) ?: 'Error al crear cuota.',
-                422
-            );
-        }
+        try {
+            $data = $this->moneyService->normalizeQuotaPayload($data);
 
-        return $this->jsonSuccess($this->quotaModel->find($this->quotaModel->getInsertID()));
+            if (! $this->quotaModel->insert($data)) {
+                return $this->jsonError(
+                    implode(', ', $this->quotaModel->errors()) ?: 'Error al crear cuota.',
+                    422
+                );
+            }
+
+            return $this->jsonSuccess($this->quotaModel->find($this->quotaModel->getInsertID()));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
+        }
     }
 
     public function apiUpdate(string $id): ResponseInterface
@@ -122,14 +131,20 @@ class FinanceQuotaController extends BaseController
             return $this->jsonError('No data provided');
         }
 
-        if (! $this->quotaModel->update($id, $data)) {
-            return $this->jsonError(
-                implode(', ', $this->quotaModel->errors()) ?: 'Error al actualizar cuota.',
-                422
-            );
-        }
+        try {
+            $data = $this->moneyService->normalizeQuotaPayload(array_merge($record, $data));
 
-        return $this->jsonSuccess($this->quotaModel->find($id));
+            if (! $this->quotaModel->update($id, $data)) {
+                return $this->jsonError(
+                    implode(', ', $this->quotaModel->errors()) ?: 'Error al actualizar cuota.',
+                    422
+                );
+            }
+
+            return $this->jsonSuccess($this->quotaModel->find($id));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
+        }
     }
 
     public function apiDelete(string $id): ResponseInterface

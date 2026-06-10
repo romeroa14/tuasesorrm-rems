@@ -17,6 +17,7 @@ class FinancePaymentType extends Model
     protected $allowedFields    = [
         'name',
         'code',
+        'default_denomination',
     ];
 
     // Dates
@@ -27,7 +28,11 @@ class FinancePaymentType extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules      = [
+        'name'                 => 'required|max_length[100]',
+        'code'                 => 'required|max_length[20]',
+        'default_denomination' => 'required|in_list[USD,BS]',
+    ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

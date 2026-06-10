@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Libraries\FinanceAuthorization;
+use App\Libraries\FinanceMoneyService;
 use App\Models\FinanceCustody;
 use App\Models\FinanceDailyCash;
 use App\Models\FinanceExchange;
@@ -16,11 +17,13 @@ use Psr\Log\LoggerInterface;
 class FinanceCashController extends BaseController
 {
     protected FinanceAuthorization $financeAuthorization;
+    protected FinanceMoneyService $moneyService;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         parent::initController($request, $response, $logger);
         $this->financeAuthorization = new FinanceAuthorization();
+        $this->moneyService = new FinanceMoneyService();
     }
 
     // ── Daily Petty Cash ──
@@ -55,16 +58,18 @@ class FinanceCashController extends BaseController
         }
 
         $model = new FinanceDailyCash();
-        $data = $this->requestPayload();
-        $data['closing_balance'] = (float) ($data['opening_balance'] ?? 0)
-            + (float) ($data['total_income'] ?? 0)
-            - (float) ($data['total_expense'] ?? 0);
+        try {
+            $data = $this->requestPayload();
+            $data = $this->moneyService->normalizeDailyCashPayload($data);
 
-        if (! $model->insert($data)) {
-            return $this->jsonError(implode(', ', $model->errors()) ?: 'Error al crear registro.', 422);
+            if (! $model->insert($data)) {
+                return $this->jsonError(implode(', ', $model->errors()) ?: 'Error al crear registro.', 422);
+            }
+
+            return $this->jsonSuccess($model->find($model->getInsertID()));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
         }
-
-        return $this->jsonSuccess($model->find($model->getInsertID()));
     }
 
     public function dailyCashApiGet(string $id): ResponseInterface
@@ -84,16 +89,18 @@ class FinanceCashController extends BaseController
             return $this->jsonError('Registro no encontrado.', 404);
         }
 
-        $data = $this->requestPayload();
-        $data['closing_balance'] = (float) ($data['opening_balance'] ?? $record['opening_balance'] ?? 0)
-            + (float) ($data['total_income'] ?? $record['total_income'] ?? 0)
-            - (float) ($data['total_expense'] ?? $record['total_expense'] ?? 0);
+        try {
+            $data = $this->requestPayload();
+            $data = $this->moneyService->normalizeDailyCashPayload(array_merge($record, $data));
 
-        if (! $model->update($id, $data)) {
-            return $this->jsonError(implode(', ', $model->errors()) ?: 'Error al actualizar registro.', 422);
+            if (! $model->update($id, $data)) {
+                return $this->jsonError(implode(', ', $model->errors()) ?: 'Error al actualizar registro.', 422);
+            }
+
+            return $this->jsonSuccess($model->find($id));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
         }
-
-        return $this->jsonSuccess($model->find($id));
     }
 
     public function dailyCashApiDelete(string $id): ResponseInterface
@@ -133,13 +140,18 @@ class FinanceCashController extends BaseController
         }
 
         $model = new FinanceCustody();
-        $data = $this->requestPayload();
+        try {
+            $data = $this->requestPayload();
+            $data = $this->moneyService->normalizeCustodyPayload($data);
 
-        if (! $model->insert($data)) {
-            return $this->jsonError(implode(', ', $model->errors()) ?: 'Error al crear registro.', 422);
+            if (! $model->insert($data)) {
+                return $this->jsonError(implode(', ', $model->errors()) ?: 'Error al crear registro.', 422);
+            }
+
+            return $this->jsonSuccess($model->find($model->getInsertID()));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
         }
-
-        return $this->jsonSuccess($model->find($model->getInsertID()));
     }
 
     public function custodyApiGet(string $id): ResponseInterface
@@ -184,13 +196,18 @@ class FinanceCashController extends BaseController
         }
 
         $model = new FinanceExchange();
-        $data = $this->requestPayload();
+        try {
+            $data = $this->requestPayload();
+            $data = $this->moneyService->normalizeExchangePayload($data);
 
-        if (! $model->insert($data)) {
-            return $this->jsonError(implode(', ', $model->errors()) ?: 'Error al crear registro.', 422);
+            if (! $model->insert($data)) {
+                return $this->jsonError(implode(', ', $model->errors()) ?: 'Error al crear registro.', 422);
+            }
+
+            return $this->jsonSuccess($model->find($model->getInsertID()));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
         }
-
-        return $this->jsonSuccess($model->find($model->getInsertID()));
     }
 
     public function exchangesApiGet(string $id): ResponseInterface
@@ -255,12 +272,21 @@ class FinanceCashController extends BaseController
             return $this->jsonError('Registro no encontrado.', 404);
         }
 
-        $data = $this->requestPayload();
-        if (! $model->update($id, $data)) {
-            return $this->jsonError(implode(', ', $model->errors()) ?: 'Error al actualizar registro.', 422);
-        }
+        try {
+            $data = $this->requestPayload();
+            if ($model instanceof FinanceCustody) {
+                $data = $this->moneyService->normalizeCustodyPayload(array_merge($record, $data));
+            } elseif ($model instanceof FinanceExchange) {
+                $data = $this->moneyService->normalizeExchangePayload(array_merge($record, $data));
+            }
+            if (! $model->update($id, $data)) {
+                return $this->jsonError(implode(', ', $model->errors()) ?: 'Error al actualizar registro.', 422);
+            }
 
-        return $this->jsonSuccess($model->find($id));
+            return $this->jsonSuccess($model->find($id));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
+        }
     }
 
     protected function deleteRecord($model, string $id): ResponseInterface

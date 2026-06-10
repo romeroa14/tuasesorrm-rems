@@ -232,6 +232,7 @@ $routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     $routes->get('categories', 'FinanceController::categories');
     $routes->get('budgets', 'FinanceController::budgets');
     $routes->get('exchange_rates', 'FinanceController::exchange_rates');
+    $routes->get('payment_types', 'FinanceController::payment_types');
     $routes->get('companies', 'FinanceController::companies');
     $routes->get('departments', 'FinanceController::departments');
     $routes->get('projects', 'FinanceController::projects');

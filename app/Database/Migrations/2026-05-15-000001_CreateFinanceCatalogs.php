@@ -47,11 +47,12 @@ class CreateFinanceCatalogs extends Migration
         // ── finance_payment_types ──
         if (! $db->tableExists('finance_payment_types')) {
             $this->forge->addField([
-                'id'         => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-                'name'       => ['type' => 'VARCHAR', 'constraint' => 100],
-                'code'       => ['type' => 'VARCHAR', 'constraint' => 20],
-                'created_at' => ['type' => 'DATETIME', 'null' => true],
-                'updated_at' => ['type' => 'DATETIME', 'null' => true],
+                'id'                   => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+                'name'                 => ['type' => 'VARCHAR', 'constraint' => 100],
+                'code'                 => ['type' => 'VARCHAR', 'constraint' => 20],
+                'default_denomination' => ['type' => 'ENUM', 'constraint' => ['USD', 'BS'], 'default' => 'USD'],
+                'created_at'           => ['type' => 'DATETIME', 'null' => true],
+                'updated_at'           => ['type' => 'DATETIME', 'null' => true],
             ]);
             $this->forge->addKey('id', true);
             $this->forge->addKey('code', false, true);

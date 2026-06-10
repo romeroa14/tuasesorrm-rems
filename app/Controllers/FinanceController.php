@@ -157,6 +157,17 @@ class FinanceController extends BaseController
         $this->generate_template($this->settings['url']);
     }
 
+    public function payment_types()
+    {
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
+
+        $this->setFinanceContext('Finanzas Métodos de Pago', 'auth/finance/payment_types', 'payment_types');
+        $this->body['can_manage_catalogs'] = $this->financeAuthorization->canManageCatalogs();
+        $this->generate_template($this->settings['url']);
+    }
+
     /**
      * Companies CRUD view with DataTable.
      */

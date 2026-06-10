@@ -21,6 +21,10 @@ class FinanceCustody extends Model
         'entry_date',
         'amount',
         'currency',
+        'currency_denomination',
+        'exchange_rate',
+        'amount_usd',
+        'amount_bs',
         'notes',
     ];
 
@@ -35,6 +39,7 @@ class FinanceCustody extends Model
         'entry_date' => 'required|valid_date',
         'amount'     => 'required|decimal',
         'currency'   => 'required|in_list[USDT,BS,ZELLE,CASH]',
+        'currency_denomination' => 'permit_empty|in_list[USD,BS]',
     ];
 
     protected $validationMessages   = [];

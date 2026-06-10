@@ -19,7 +19,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Monto</th>
+                            <th>Monto Origen</th>
+                            <th>Monto Destino</th>
                             <th>Moneda Origen</th>
                             <th>Moneda Destino</th>
                             <th>Tasa</th>
@@ -83,14 +84,44 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Monto <span class="text-danger">*</span></label>
+                                <label>Monto origen <span class="text-danger">*</span></label>
                                 <input type="number" step="0.01" class="form-control" name="amount" id="amount" required min="0" placeholder="0.00">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label>Monto destino</label>
+                                <input type="text" class="form-control" name="target_amount" id="target_amount" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="source_denomination" id="source_denomination">
+                    <input type="hidden" name="target_denomination" id="target_denomination">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Equivalente USD origen</label>
+                                <input type="text" class="form-control" id="source_amount_usd_display" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Equivalente BS origen</label>
+                                <input type="text" class="form-control" id="source_amount_bs_display" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label>Fecha <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" name="exchange_date" id="exchange_date" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Equivalente USD destino</label>
+                                <input type="text" class="form-control" id="target_amount_usd_display" readonly>
                             </div>
                         </div>
                     </div>
@@ -110,7 +141,61 @@
 
 <script>
 var dt, apiBase = '<?= base_url('/app/finance/exchanges/api') ?>';
+var catalogUrl = '<?= base_url('/app/finance/api/catalog') ?>';
 var currencyLabels = {USDT:'USDT', BS:'Bs.', ZELLE:'Zelle', CASH:'Efectivo'};
+var currencyContext = {};
+
+function formatMoney(value) {
+    if (!isFinite(value)) return '';
+    return value.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function getDenominationFromCurrency(currency) {
+    return String(currency || '').toUpperCase() === 'BS' ? 'BS' : 'USD';
+}
+
+function syncExchangeMoney() {
+    var sourceDenomination = getDenominationFromCurrency($('#source_currency').val());
+    var targetDenomination = getDenominationFromCurrency($('#target_currency').val());
+    var latestRate = parseFloat(currencyContext.latest_bs_rate || 0);
+    var currentRate = parseFloat($('#rate').val() || 0);
+    var rate = currentRate > 0 ? currentRate : latestRate;
+    var amount = parseFloat($('#amount').val() || 0);
+    var targetAmount = amount;
+
+    $('#source_denomination').val(sourceDenomination);
+    $('#target_denomination').val(targetDenomination);
+
+    if (sourceDenomination === targetDenomination) {
+        rate = 1;
+        targetAmount = amount;
+    } else if (sourceDenomination === 'USD' && targetDenomination === 'BS') {
+        targetAmount = amount * rate;
+    } else if (sourceDenomination === 'BS' && targetDenomination === 'USD') {
+        targetAmount = rate > 0 ? amount / rate : 0;
+    }
+
+    $('#rate').val(rate > 0 ? rate.toFixed(4) : '');
+    $('#target_amount').val(isFinite(targetAmount) ? formatMoney(targetAmount) : '');
+
+    var sourceUsd = sourceDenomination === 'BS' ? (rate > 0 ? amount / rate : 0) : amount;
+    var sourceBs = sourceDenomination === 'BS' ? amount : amount * rate;
+    var targetUsd = targetDenomination === 'BS' ? (rate > 0 ? targetAmount / rate : 0) : targetAmount;
+    var targetBs = targetDenomination === 'BS' ? targetAmount : targetAmount * rate;
+
+    $('#source_amount_usd_display').val(formatMoney(sourceUsd));
+    $('#source_amount_bs_display').val(formatMoney(sourceBs));
+    $('#target_amount_usd_display').val(formatMoney(targetUsd));
+}
+
+function loadContext(cb) {
+    $.get(catalogUrl, function(response) {
+        if (response.status === 'success' && response.data && response.data.currency_context) {
+            currencyContext = response.data.currency_context;
+        }
+        if (cb) cb();
+    });
+}
 
 function loadTable() {
     $.post(apiBase + '/list', function(r) {
@@ -119,7 +204,7 @@ function loadTable() {
             r.data.forEach(function(d) {
                 var actions = '<button class="btn btn-info btn-sm mr-1" onclick="edit(' + d.id + ')"><i class="fas fa-edit"></i></button>' +
                               '<button class="btn btn-danger btn-sm" onclick="remove(' + d.id + ')"><i class="fas fa-trash"></i></button>';
-                rows.push([d.id, d.name, parseFloat(d.amount).toFixed(2), currencyLabels[d.source_currency]||d.source_currency,
+                rows.push([d.id, d.name, parseFloat(d.amount).toFixed(2), parseFloat(d.target_amount || 0).toFixed(2), currencyLabels[d.source_currency]||d.source_currency,
                     currencyLabels[d.target_currency]||d.target_currency, d.rate ? parseFloat(d.rate).toFixed(4) : '—', d.exchange_date, actions]);
             });
         }
@@ -142,11 +227,16 @@ function showModal(mode, id) {
                 $('#target_currency').val(d.target_currency);
                 $('#rate').val(d.rate);
                 $('#amount').val(d.amount);
+                $('#target_amount').val(d.target_amount);
                 $('#exchange_date').val(d.exchange_date);
                 $('#notes').val(d.notes);
+                $('#source_denomination').val(d.source_denomination || getDenominationFromCurrency(d.source_currency));
+                $('#target_denomination').val(d.target_denomination || getDenominationFromCurrency(d.target_currency));
+                syncExchangeMoney();
             }
         });
     }
+    syncExchangeMoney();
     $('#exchangeModal').modal('show');
 }
 
@@ -167,5 +257,12 @@ $('#exchangeForm').submit(function(e) {
     });
 });
 
-$(document).ready(function() { loadTable(); });
+$('#source_currency, #target_currency, #rate, #amount').on('change keyup', syncExchangeMoney);
+
+$(document).ready(function() {
+    loadContext(function() {
+        syncExchangeMoney();
+        loadTable();
+    });
+});
 </script>

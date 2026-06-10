@@ -19,10 +19,12 @@
                         <tr>
                             <th>ID</th>
                             <th>Fecha</th>
+                            <th>Moneda</th>
                             <th>Saldo Inicial</th>
                             <th>Ingresos</th>
                             <th>Egresos</th>
                             <th>Saldo Final</th>
+                            <th>Saldo Final USD</th>
                             <th>Notas</th>
                             <th>Acciones</th>
                         </tr>
@@ -49,6 +51,23 @@
                         <input type="date" class="form-control" name="cash_date" id="cash_date" required>
                     </div>
                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Denominación <span class="text-danger">*</span></label>
+                                <select class="form-control" name="currency_denomination" id="currency_denomination" required>
+                                    <option value="USD">USD</option>
+                                    <option value="BS">BS</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Tasa Bs/USD</label>
+                                <input type="number" step="0.0001" class="form-control" name="exchange_rate" id="exchange_rate" placeholder="0.0000">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Saldo Inicial <span class="text-danger">*</span></label>
@@ -68,6 +87,32 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Saldo Inicial USD</label>
+                                <input type="text" class="form-control" id="opening_balance_usd_display" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Ingresos USD</label>
+                                <input type="text" class="form-control" id="total_income_usd_display" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Egresos USD</label>
+                                <input type="text" class="form-control" id="total_expense_usd_display" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Saldo Final USD</label>
+                                <input type="text" class="form-control" id="closing_balance_usd_display" readonly>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Notas</label>
                         <textarea class="form-control" name="notes" id="notes" rows="2"></textarea>
@@ -84,6 +129,45 @@
 
 <script>
 var dt, apiBase = '<?= base_url('/app/finance/daily_cash/api') ?>';
+var catalogUrl = '<?= base_url('/app/finance/api/catalog') ?>';
+var currencyContext = {};
+
+function formatMoney(value) {
+    if (!isFinite(value)) return '';
+    return value.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+}
+
+function syncDailyCashMoney() {
+    var denomination = $('#currency_denomination').val() || 'USD';
+    var latestRate = parseFloat(currencyContext.latest_bs_rate || 0);
+    var customRate = parseFloat($('#exchange_rate').val() || 0);
+    var rate = denomination === 'BS' ? (customRate > 0 ? customRate : latestRate) : 1;
+    var opening = parseFloat($('#opening_balance').val() || 0);
+    var income = parseFloat($('#total_income').val() || 0);
+    var expense = parseFloat($('#total_expense').val() || 0);
+    var closing = opening + income - expense;
+
+    if (denomination === 'BS') {
+        $('#exchange_rate').val(rate > 0 ? rate.toFixed(4) : '');
+    } else {
+        $('#exchange_rate').val('1.0000');
+    }
+
+    var divisor = rate > 0 ? rate : 1;
+    $('#opening_balance_usd_display').val(formatMoney(denomination === 'BS' ? opening / divisor : opening));
+    $('#total_income_usd_display').val(formatMoney(denomination === 'BS' ? income / divisor : income));
+    $('#total_expense_usd_display').val(formatMoney(denomination === 'BS' ? expense / divisor : expense));
+    $('#closing_balance_usd_display').val(formatMoney(denomination === 'BS' ? closing / divisor : closing));
+}
+
+function loadContext(cb) {
+    $.get(catalogUrl, function(response) {
+        if (response.status === 'success' && response.data && response.data.currency_context) {
+            currencyContext = response.data.currency_context;
+        }
+        if (cb) cb();
+    });
+}
 
 function loadTable() {
     $.post(apiBase + '/list', function(r) {
@@ -92,8 +176,8 @@ function loadTable() {
             r.data.forEach(function(d) {
                 var actions = '<button class="btn btn-info btn-sm mr-1" onclick="edit(' + d.id + ')"><i class="fas fa-edit"></i></button>' +
                               '<button class="btn btn-danger btn-sm" onclick="remove(' + d.id + ')"><i class="fas fa-trash"></i></button>';
-                rows.push([d.id, d.cash_date, parseFloat(d.opening_balance).toFixed(2), parseFloat(d.total_income).toFixed(2),
-                    parseFloat(d.total_expense).toFixed(2), parseFloat(d.closing_balance).toFixed(2), d.notes || '—', actions]);
+                rows.push([d.id, d.cash_date, d.currency_denomination || 'USD', parseFloat(d.opening_balance).toFixed(2), parseFloat(d.total_income).toFixed(2),
+                    parseFloat(d.total_expense).toFixed(2), parseFloat(d.closing_balance).toFixed(2), parseFloat(d.closing_balance_usd || 0).toFixed(2), d.notes || '—', actions]);
             });
         }
         if (dt) dt.clear().rows.add(rows).draw();
@@ -111,13 +195,17 @@ function showModal(mode, id) {
                 var d = r.data;
                 $('#record_id').val(d.id);
                 $('#cash_date').val(d.cash_date);
+                $('#currency_denomination').val(d.currency_denomination || 'USD');
+                $('#exchange_rate').val(d.exchange_rate || '');
                 $('#opening_balance').val(d.opening_balance);
                 $('#total_income').val(d.total_income);
                 $('#total_expense').val(d.total_expense);
                 $('#notes').val(d.notes);
+                syncDailyCashMoney();
             }
         });
     }
+    syncDailyCashMoney();
     $('#cashModal').modal('show');
 }
 
@@ -138,5 +226,12 @@ $('#cashForm').submit(function(e) {
     });
 });
 
-$(document).ready(function() { loadTable(); });
+$('#currency_denomination, #exchange_rate, #opening_balance, #total_income, #total_expense').on('change keyup', syncDailyCashMoney);
+
+$(document).ready(function() {
+    loadContext(function() {
+        syncDailyCashMoney();
+        loadTable();
+    });
+});
 </script>
