@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FinanceCategory extends Model
+class FinanceQuota extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'finance_categories';
+    protected $table            = 'finance_quotas';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,27 +17,36 @@ class FinanceCategory extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'name',
         'type',
-        'movement_type',
-        'parent_id',
-        'description',
+        'name',
+        'receipt_date',
+        'delivery_date',
+        'currency',
+        'exchange_rate',
+        'receipt_number',
+        'amount',
+        'notes',
     ];
 
-    // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // Validation
-    protected $validationRules      = [];
+    protected $validationRules = [
+        'type'           => 'required|in_list[received,delivered]',
+        'name'           => 'required|max_length[255]',
+        'receipt_date'   => 'required|valid_date',
+        'currency'       => 'required|in_list[USDT,BS,ZELLE,CASH]',
+        'receipt_number' => 'required|max_length[100]',
+        'amount'         => 'required|decimal',
+    ];
+
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
-    // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
     protected $afterInsert    = [];

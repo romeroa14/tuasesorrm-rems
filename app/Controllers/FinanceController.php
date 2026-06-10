@@ -6,10 +6,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Libraries\FinanceAuthorization;
-use App\Models\FinanceTransaction;
-use App\Models\FinanceExpense;
-use App\Models\FinanceAccount;
-use App\Models\FinanceExchangeRate;
+use App\Libraries\FinanceReportService;
+use Config\FinanceMenu;
 use Config\Services;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -50,6 +48,7 @@ class FinanceController extends BaseController
     {
         $this->settings['title'] = $title;
         $this->settings['url']   = $view;
+        $this->body['title'] = $title;
         $this->body['entity'] = $entity;
         $this->body['can_manage_catalogs'] = $this->financeAuthorization->canManageCatalogs();
         $this->body['can_write_legacy'] = $this->financeAuthorization->canWriteLegacy();
@@ -65,18 +64,17 @@ class FinanceController extends BaseController
             return $response;
         }
 
-        $this->setFinanceContext('Finanzas Dashboard', 'auth/finance/dashboard', 'dashboard');
+        $this->setFinanceContext('Finanzas — Inicio', 'auth/finance/dashboard', 'dashboard');
 
-        $transactionModel = new FinanceTransaction();
-        $expenseModel     = new FinanceExpense();
-        $exchangeModel    = new FinanceExchangeRate();
+        $reportService = new FinanceReportService();
+        $dateFrom = date('Y-m-01');
+        $dateTo = date('Y-m-t');
 
-        $this->body['total_transactions'] = $transactionModel->countAllResults();
-        $this->body['total_expenses']     = $expenseModel->countAllResults();
-        $this->body['latest_rates']       = $exchangeModel->orderBy('rate_date', 'DESC')
-            ->orderBy('created_at', 'DESC')
-            ->limit(5)
-            ->findAll();
+        $this->body['modules'] = FinanceMenu::modules();
+        $this->body['report'] = $reportService->getAccountingSheet($dateFrom, $dateTo);
+        $this->body['title'] = 'Finanzas — Inicio';
+        $this->body['date_from'] = $dateFrom;
+        $this->body['date_to'] = $dateTo;
 
         $this->generate_template($this->settings['url']);
     }

@@ -68,6 +68,30 @@ final class FinanceMigrationsTest extends CIUnitTestCase
                 '2026-06-07-140000_CreateFinanceApprovalEventsWorkflow',
                 \App\Database\Migrations\CreateFinanceApprovalEventsWorkflow::class,
             ],
+            '1.12 AddMovementTypeToCategories' => [
+                '2026-06-09-000001_AddMovementTypeToCategories',
+                \App\Database\Migrations\AddMovementTypeToCategories::class,
+            ],
+            '1.13 SeedIncomeExpenseCategories' => [
+                '2026-06-09-000002_SeedIncomeExpenseCategories',
+                \App\Database\Migrations\SeedIncomeExpenseCategories::class,
+            ],
+            '1.14 CreateFinanceQuotas' => [
+                '2026-06-09-000003_CreateFinanceQuotas',
+                \App\Database\Migrations\CreateFinanceQuotas::class,
+            ],
+            '1.15 CreateFinanceDailyCash' => [
+                '2026-06-09-000004_CreateFinanceDailyCash',
+                \App\Database\Migrations\CreateFinanceDailyCash::class,
+            ],
+            '1.16 CreateFinanceCustody' => [
+                '2026-06-09-000005_CreateFinanceCustody',
+                \App\Database\Migrations\CreateFinanceCustody::class,
+            ],
+            '1.17 CreateFinanceExchanges' => [
+                '2026-06-09-000006_CreateFinanceExchanges',
+                \App\Database\Migrations\CreateFinanceExchanges::class,
+            ],
         ];
     }
 

@@ -1,6 +1,16 @@
 <!-- Sidebar -->
-<?php $financeAuthorization = new \App\Libraries\FinanceAuthorization(); ?>
-<?php $canAccessFinance = $financeAuthorization->canAccess(); ?>
+<?php
+use App\Libraries\FinanceAuthorization;
+use App\Libraries\FinanceSidebar;
+use Config\FinanceMenu;
+
+$financeAuthorization = new FinanceAuthorization();
+$canAccessFinance = $financeAuthorization->canAccess();
+$financeMenuActive = str_starts_with($financeCurrentPath, 'app/finance');
+$financeCurrentPath = uri_string();
+$financeCurrentType = service('request')->getGet('type');
+$financeModules = FinanceSidebar::modules();
+?>
 <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-text mx-3">
@@ -21,23 +31,49 @@
     <!-- Administrativa -->
     <hr class="sidebar-divider">
     <div class="sidebar-heading">Administrativa</div>
-    <li class="nav-item <?= strpos($title ?? '', 'Finanza') !== false ? 'active' : '' ?>">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance" aria-expanded="false" aria-controls="collapseFinance">
+    <li class="nav-item <?= $financeMenuActive ? 'active' : '' ?>">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance"
+           aria-expanded="<?= $financeMenuActive ? 'true' : 'false' ?>" aria-controls="collapseFinance">
             <i class="fas fa-coins"></i>
             <span>Finanzas</span>
         </a>
-        <div id="collapseFinance" class="collapse <?= strpos($title ?? '', 'Finanza') !== false ? 'show' : '' ?>">
+        <div id="collapseFinance" class="collapse <?= $financeMenuActive ? 'show' : '' ?>">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item <?= $title == 'Finanzas Dashboard' ? 'active' : '' ?>" href="<?= base_url('/app/finance') ?>"><i class="fas fa-chart-pie"></i> Dashboard</a>
-                <a class="collapse-item <?= $title == 'Finanzas Transacciones' ? 'active' : '' ?>" href="<?= base_url('/app/finance/transactions') ?>"><i class="fas fa-exchange-alt"></i> Transacciones</a>
-                <a class="collapse-item <?= $title == 'Finanzas Gastos' ? 'active' : '' ?>" href="<?= base_url('/app/finance/expenses') ?>"><i class="fas fa-receipt"></i> Gastos</a>
-                <a class="collapse-item <?= $title == 'Finanzas Cuentas' ? 'active' : '' ?>" href="<?= base_url('/app/finance/accounts') ?>"><i class="fas fa-university"></i> Cuentas</a>
-                <a class="collapse-item <?= $title == 'Finanzas Categorías' ? 'active' : '' ?>" href="<?= base_url('/app/finance/categories') ?>"><i class="fas fa-tags"></i> Categorías</a>
-                <a class="collapse-item <?= $title == 'Finanzas Presupuestos' ? 'active' : '' ?>" href="<?= base_url('/app/finance/budgets') ?>"><i class="fas fa-chart-line"></i> Presupuestos</a>
-                <a class="collapse-item <?= $title == 'Finanzas Tasas' ? 'active' : '' ?>" href="<?= base_url('/app/finance/exchange_rates') ?>"><i class="fas fa-dollar-sign"></i> Tasas de Cambio</a>
-                <a class="collapse-item <?= $title == 'Finanzas Empresas' ? 'active' : '' ?>" href="<?= base_url('/app/finance/companies') ?>"><i class="fas fa-building"></i> Empresas</a>
-                <a class="collapse-item <?= $title == 'Finanzas Departamentos' ? 'active' : '' ?>" href="<?= base_url('/app/finance/departments') ?>"><i class="fas fa-sitemap"></i> Departamentos</a>
-                <a class="collapse-item <?= $title == 'Finanzas Proyectos' ? 'active' : '' ?>" href="<?= base_url('/app/finance/projects') ?>"><i class="fas fa-tasks"></i> Proyectos</a>
+                <h6 class="collapse-header">Resumen</h6>
+                <a class="collapse-item <?= ($title ?? '') === 'Finanzas — Inicio' ? 'active' : '' ?>"
+                   href="<?= base_url('/app/finance') ?>">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+
+                <?php foreach ($financeModules as $module): ?>
+                    <?php $moduleActive = FinanceSidebar::isModuleActive($module, $financeCurrentPath, $financeCurrentType); ?>
+                    <?php if (isset($module['url'])): ?>
+                        <a class="collapse-item <?= $moduleActive ? 'active' : '' ?>"
+                           href="<?= base_url($module['url']) ?>">
+                            <i class="<?= esc($module['icon']) ?>"></i> <?= esc($module['label']) ?>
+                        </a>
+                    <?php else: ?>
+                        <h6 class="collapse-header"><?= esc($module['label']) ?></h6>
+                        <?php foreach ($module['items'] as $item): ?>
+                            <a class="collapse-item <?= FinanceSidebar::isItemActive($item, $financeCurrentPath, $financeCurrentType) ? 'active' : '' ?>"
+                               href="<?= base_url($item['url']) ?>">
+                                <?= esc($item['label']) ?>
+                            </a>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+                <?php if ($financeAuthorization->canManageCatalogs()): ?>
+                    <h6 class="collapse-header">Configuración</h6>
+                    <a class="collapse-item <?= ($title ?? '') === 'Finanzas Cuentas' ? 'active' : '' ?>"
+                       href="<?= base_url('/app/finance/accounts') ?>">
+                        <i class="fas fa-university"></i> Cuentas bancarias
+                    </a>
+                    <a class="collapse-item <?= ($title ?? '') === 'Finanzas Tasas' ? 'active' : '' ?>"
+                       href="<?= base_url('/app/finance/exchange_rates') ?>">
+                        <i class="fas fa-dollar-sign"></i> Tasas de cambio
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     </li>

@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FinanceCategory extends Model
+class FinanceCustody extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'finance_categories';
+    protected $table            = 'finance_custody';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -16,26 +18,29 @@ class FinanceCategory extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'name',
-        'type',
-        'movement_type',
-        'parent_id',
-        'description',
+        'entry_date',
+        'amount',
+        'currency',
+        'notes',
     ];
 
-    // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // Validation
-    protected $validationRules      = [];
+    protected $validationRules = [
+        'name'       => 'required|max_length[255]',
+        'entry_date' => 'required|valid_date',
+        'amount'     => 'required|decimal',
+        'currency'   => 'required|in_list[USDT,BS,ZELLE,CASH]',
+    ];
+
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
-    // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
     protected $afterInsert    = [];

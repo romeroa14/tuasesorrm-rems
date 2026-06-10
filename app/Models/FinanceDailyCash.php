@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FinanceCategory extends Model
+class FinanceDailyCash extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'finance_categories';
+    protected $table            = 'finance_daily_cash';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,27 +17,30 @@ class FinanceCategory extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'name',
-        'type',
-        'movement_type',
-        'parent_id',
-        'description',
+        'cash_date',
+        'opening_balance',
+        'closing_balance',
+        'total_income',
+        'total_expense',
+        'notes',
     ];
 
-    // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // Validation
-    protected $validationRules      = [];
+    protected $validationRules = [
+        'cash_date'       => 'required|valid_date',
+        'opening_balance' => 'required|decimal',
+        'closing_balance' => 'required|decimal',
+    ];
+
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
-    // Callbacks
     protected $allowCallbacks = true;
     protected $beforeInsert   = [];
     protected $afterInsert    = [];
