@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">
-            <i class="fas fa-chart-bar text-primary"></i> <?= esc($title ?? $report['sheet_title'] ?? 'Hoja Contable (Ganancias y Pérdidas)') ?>
+            <i class="fas fa-chart-bar text-primary"></i> <?= esc($title ?? $report['sheet_title'] ?? 'Finanzas — Hoja Contable') ?>
         </h1>
         <button class="btn btn-outline-success btn-sm" onclick="window.print()">
             <i class="fas fa-print"></i> Imprimir / PDF

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">
-            <i class="fas fa-shield-alt text-warning"></i> <?= esc($title ?? 'Módulo 5 — Efectivo en resguardo') ?>
+            <i class="fas fa-shield-alt text-warning"></i> <?= esc($title ?? 'Finanzas — Efectivo en resguardo') ?>
         </h1>
         <button class="btn btn-primary btn-sm" onclick="showModal('create')">
             <i class="fas fa-plus"></i> Nuevo Registro

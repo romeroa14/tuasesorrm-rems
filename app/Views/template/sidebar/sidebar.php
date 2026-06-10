@@ -2,7 +2,6 @@
 <?php
 use App\Libraries\FinanceAuthorization;
 use App\Libraries\FinanceSidebar;
-use Config\FinanceMenu;
 
 $financeAuthorization = new FinanceAuthorization();
 $canAccessFinance = $financeAuthorization->canAccess();
@@ -39,7 +38,7 @@ $financeModules = FinanceSidebar::modules();
         </a>
         <div id="collapseFinance" class="collapse <?= $financeMenuActive ? 'show' : '' ?>">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Resumen</h6>
+                <h6 class="collapse-header">Secciones</h6>
                 <a class="collapse-item <?= ($title ?? '') === 'Finanzas — Inicio' ? 'active' : '' ?>"
                    href="<?= base_url('/app/finance') ?>">
                     <i class="fas fa-home"></i> Inicio
@@ -53,7 +52,9 @@ $financeModules = FinanceSidebar::modules();
                             <i class="<?= esc($module['icon']) ?>"></i> <?= esc($module['label']) ?>
                         </a>
                     <?php else: ?>
-                        <h6 class="collapse-header"><?= esc($module['label']) ?></h6>
+                        <h6 class="collapse-header">
+                            <i class="<?= esc($module['icon']) ?>"></i> <?= esc($module['label']) ?>
+                        </h6>
                         <?php foreach ($module['items'] as $item): ?>
                             <a class="collapse-item <?= FinanceSidebar::isItemActive($item, $financeCurrentPath, $financeCurrentType) ? 'active' : '' ?>"
                                href="<?= base_url($item['url']) ?>">

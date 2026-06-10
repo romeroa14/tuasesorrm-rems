@@ -8,6 +8,7 @@ use App\Libraries\FinanceAuthorization;
 use App\Models\FinanceCustody;
 use App\Models\FinanceDailyCash;
 use App\Models\FinanceExchange;
+use Config\FinanceMenu;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -30,9 +31,9 @@ class FinanceCashController extends BaseController
             return redirect()->to(base_url('/app/dashboard'));
         }
 
-        $this->settings['title'] = 'Módulo 4 — Caja chica diaria';
+        $this->settings['title'] = FinanceMenu::dailyCashTitle();
         $this->settings['url']   = 'auth/finance/daily_cash';
-        $this->body['title'] = 'Módulo 4 — Caja chica diaria';
+        $this->body['title'] = FinanceMenu::dailyCashTitle();
         $this->body['entity'] = 'daily_cash';
         $this->generate_template($this->settings['url']);
     }
@@ -108,9 +109,9 @@ class FinanceCashController extends BaseController
             return redirect()->to(base_url('/app/dashboard'));
         }
 
-        $this->settings['title'] = 'Módulo 5 — Efectivo en resguardo';
+        $this->settings['title'] = FinanceMenu::custodyTitle();
         $this->settings['url']   = 'auth/finance/custody';
-        $this->body['title'] = 'Módulo 5 — Efectivo en resguardo';
+        $this->body['title'] = FinanceMenu::custodyTitle();
         $this->body['entity'] = 'custody';
         $this->generate_template($this->settings['url']);
     }
@@ -159,9 +160,9 @@ class FinanceCashController extends BaseController
             return redirect()->to(base_url('/app/dashboard'));
         }
 
-        $this->settings['title'] = 'Módulo 6 — Canjes de efectivo';
+        $this->settings['title'] = FinanceMenu::exchangesTitle();
         $this->settings['url']   = 'auth/finance/exchanges';
-        $this->body['title'] = 'Módulo 6 — Canjes de efectivo';
+        $this->body['title'] = FinanceMenu::exchangesTitle();
         $this->body['entity'] = 'exchanges';
         $this->generate_template($this->settings['url']);
     }

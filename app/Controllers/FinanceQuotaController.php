@@ -31,9 +31,7 @@ class FinanceQuotaController extends BaseController
 
         $type = $this->request->getGet('type');
         $quotaTypes = FinanceMenu::quotaTypes();
-        $pageTitle = $type && isset($quotaTypes[$type])
-            ? $quotaTypes[$type]
-            : 'Módulo 3 — Cuotas';
+        $pageTitle = FinanceMenu::quotaTitle($type);
 
         $this->settings['title'] = $pageTitle;
         $this->settings['url']   = 'auth/finance/quotas';

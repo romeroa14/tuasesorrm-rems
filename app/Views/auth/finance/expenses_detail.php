@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">
-            <i class="fas fa-receipt text-danger"></i> <?= esc($title ?? 'Módulo 2 — Egresos') ?>
+            <i class="fas fa-receipt text-danger"></i> <?= esc($title ?? 'Finanzas — Egresos') ?>
         </h1>
         <div>
             <?php if ($can_draft ?? false): ?>

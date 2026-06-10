@@ -63,9 +63,7 @@ class FinanceIncomeController extends BaseController
         $type = $this->request->getGet('type');
         $incomeTypes = FinanceMenu::incomeTypes();
 
-        $pageTitle = $type && isset($incomeTypes[$type])
-            ? $incomeTypes[$type]
-            : 'Módulo 1 — Ingresos';
+        $pageTitle = FinanceMenu::incomeTitle($type);
 
         $this->setContext($pageTitle, 'auth/finance/income', 'income');
         $this->body['income_types'] = $incomeTypes;
@@ -85,9 +83,7 @@ class FinanceIncomeController extends BaseController
         $type = $this->request->getGet('type');
         $expenseTypes = FinanceMenu::expenseTypes();
 
-        $pageTitle = $type && isset($expenseTypes[$type])
-            ? $expenseTypes[$type]
-            : 'Módulo 2 — Egresos';
+        $pageTitle = FinanceMenu::expenseTitle($type);
 
         $this->setContext($pageTitle, 'auth/finance/expenses_detail', 'expenses_detail');
         $this->body['expense_types'] = $expenseTypes;
@@ -104,7 +100,7 @@ class FinanceIncomeController extends BaseController
             return $response;
         }
 
-        $this->setContext('Hoja Contable (Ganancias y Pérdidas)', 'auth/finance/profit_loss', 'profit_loss');
+        $this->setContext(FinanceMenu::profitLossTitle(), 'auth/finance/profit_loss', 'profit_loss');
 
         $dateFrom = $this->request->getGet('date_from') ?? date('Y-m-01');
         $dateTo   = $this->request->getGet('date_to') ?? date('Y-m-t');
