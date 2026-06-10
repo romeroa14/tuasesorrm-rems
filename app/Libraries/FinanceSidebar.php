@@ -13,7 +13,7 @@ class FinanceSidebar
      */
     public static function modules(): array
     {
-        return FinanceMenu::modules();
+        return FinanceMenu::sidebarModules();
     }
 
     public static function isItemActive(array $item, ?string $currentPath, ?string $currentType): bool

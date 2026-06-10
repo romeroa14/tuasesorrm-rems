@@ -58,6 +58,14 @@ class FinanceMenu extends BaseConfig
      */
     public static function modules(): array
     {
+        return self::dashboardModules();
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public static function dashboardModules(): array
+    {
         return [
             [
                 'id'    => 'income',
@@ -82,6 +90,58 @@ class FinanceMenu extends BaseConfig
                 'label' => 'Cuotas',
                 'icon'  => 'fas fa-hand-holding-usd text-info',
                 'items' => self::mapQuotaLinks(),
+            ],
+            [
+                'id'    => 'cash_management',
+                'label' => 'Caja y efectivo',
+                'icon'  => 'fas fa-wallet text-success',
+                'items' => [
+                    [
+                        'label' => 'Caja chica diaria',
+                        'url'   => '/app/finance/daily_cash',
+                    ],
+                    [
+                        'label' => 'Efectivo en resguardo',
+                        'url'   => '/app/finance/custody',
+                    ],
+                    [
+                        'label' => 'Canjes de efectivo',
+                        'url'   => '/app/finance/exchanges',
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public static function sidebarModules(): array
+    {
+        return [
+            [
+                'id'    => 'income',
+                'label' => 'Ingresos',
+                'icon'  => 'fas fa-arrow-up text-success',
+                'url'   => '/app/finance/income',
+            ],
+            [
+                'id'    => 'expense',
+                'label' => 'Egresos',
+                'icon'  => 'fas fa-arrow-down text-danger',
+                'url'   => '/app/finance/expenses_detail',
+            ],
+            [
+                'id'    => 'profit_loss',
+                'label' => 'Hoja contable',
+                'icon'  => 'fas fa-chart-bar text-warning',
+                'url'   => '/app/finance/profit_loss',
+            ],
+            [
+                'id'    => 'quotas',
+                'label' => 'Cuotas',
+                'icon'  => 'fas fa-hand-holding-usd text-info',
+                'url'   => '/app/finance/quotas',
             ],
             [
                 'id'    => 'cash_management',

@@ -70,7 +70,7 @@ class FinanceController extends BaseController
         $dateFrom = date('Y-m-01');
         $dateTo = date('Y-m-t');
 
-        $this->body['modules'] = FinanceMenu::modules();
+        $this->body['modules'] = FinanceMenu::dashboardModules();
         $this->body['report'] = $reportService->getAccountingSheet($dateFrom, $dateTo);
         $this->body['title'] = 'Finanzas — Inicio';
         $this->body['date_from'] = $dateFrom;
