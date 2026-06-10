@@ -19,7 +19,7 @@ class FinanceCatalogService
 
         return [
             'accounts'          => $this->getOperationalAccounts(),
-            'clearing_account'  => $this->tryResolveClearingAccountId(),
+            'clearing_account'  => $this->ensureClearingAccountId() ?? $this->tryResolveClearingAccountId(),
             'income_categories' => $this->getCategoriesByType('income'),
             'expense_categories'=> $this->getCategoriesByType('expense'),
             'currencies'        => $this->getCurrencies(),
@@ -119,6 +119,10 @@ class FinanceCatalogService
     {
         $clearingAccountId = $this->tryResolveClearingAccountId();
         if ($clearingAccountId === null) {
+            $clearingAccountId = $this->ensureClearingAccountId();
+        }
+
+        if ($clearingAccountId === null) {
             throw new InvalidArgumentException('No existe una cuenta de compensacion (clearing) configurada.');
         }
 
@@ -135,6 +139,42 @@ class FinanceCatalogService
         }
 
         return (int) $row['id'];
+    }
+
+    public function ensureClearingAccountId(): ?int
+    {
+        $existing = $this->tryResolveClearingAccountId();
+        if ($existing !== null) {
+            return $existing;
+        }
+
+        $currencyId = $this->resolveDefaultCurrencyId();
+        if ($currencyId === null) {
+            return null;
+        }
+
+        $model = new FinanceAccount();
+        $model->insert([
+            'name'            => 'Ledger Clearing',
+            'type'            => 'cash',
+            'account_kind'    => 'clearing',
+            'currency_id'     => $currencyId,
+            'balance'         => '0.00',
+            'initial_balance' => '0.00',
+            'current_balance' => '0.00',
+            'active'          => 1,
+        ]);
+
+        $insertId = (int) $model->getInsertID();
+
+        return $insertId > 0 ? $insertId : null;
+    }
+
+    private function resolveDefaultCurrencyId(): ?int
+    {
+        $usd = $this->findCurrencyByCodes(['USD']);
+
+        return isset($usd['id']) ? (int) $usd['id'] : null;
     }
 
     /**
