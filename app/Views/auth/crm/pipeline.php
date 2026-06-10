@@ -361,10 +361,14 @@ function renderPipeline(stages) {
 
                 html += `
                     <div class="pipeline-card" draggable="true" data-lead-id="${lead.lead_id}" data-conv-id="${convId}" data-tracking-status-id="${stage.id}" data-recipient="${lead.recipient_ig_username || ''}">
-                        ${formatIgBusinessLineHtml(lead)}
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div class="card-name">${channelIcon} ${lead.lead_name || 'Sin nombre'}</div>
-                            <div class="card-score" style="color: ${labelColor};">${lead.intention_score || 0}%</div>
+                        <div class="card-ig-account mb-1" style="font-size:12px; color:#c13584;">
+                            <i class="fab fa-instagram"></i> @${lead.recipient_ig_username || 'sin cuenta'}
+                            <span class="float-right small text-muted">${lead.created_at ? new Date(lead.created_at).toLocaleDateString('es-VE', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'}) : ''}</span>
+                        </div>
+                        <div class="card-name mb-1">${lead.lead_name || 'Sin nombre'}</div>
+                        <div class="mb-1">
+                            <span class="badge" style="background: ${labelColor}; color: white; font-size: 11px;">${lead.intention_label || 'frio'}</span>
+                            <span class="text-muted small ml-2">${lead.intention_score || 0}%</span>
                         </div>
                         <div class="card-info">
                             ${lead.interest_type ? '<span class="badge badge-info badge-sm mr-1">' + lead.interest_type + '</span>' : ''}

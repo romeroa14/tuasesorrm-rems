@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\CacheService;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class RealStateController extends BaseController
@@ -282,6 +283,9 @@ class RealStateController extends BaseController
                 'housing_type' => $data['housing_type'],
                 'creation_source' => 'web_form'
             ]);
+            
+            // Bust dashboard cache
+            CacheService::bust('dashboard');
             
             $flashData = ['success' => '¡Propiedad declarada correctamente! Por favor, revisa y confirma las actualizaciones antes de continuar.'];
         } else {
@@ -816,6 +820,8 @@ class RealStateController extends BaseController
             if (!empty($previousValues)) {
                 log_activity('update', 'properties', $id, $previousValues, $newValues);
             }
+            // Bust dashboard cache
+            CacheService::bust('dashboard');
             $this->session->setFlashdata(['success' => '¡Cambios guardados! Por favor, revisa y confirma las actualizaciones antes de continuar.']);
             if ($agent) {
                 $agent_id = $this->User->where('id', $agent)->first();
@@ -894,6 +900,8 @@ class RealStateController extends BaseController
                 'action_type' => 'property_rating'
             ]);
             
+            // Bust dashboard cache
+            CacheService::bust('dashboard');
             $this->create_notification('Tu propiedad RM00'.$id.' ha sido calificada"'.$status['name'].'"', $properties["agent"]);
             $this->session->setFlashdata(['success' => 'Calificado correctamente! Por favor, revisa y confirma las actualizaciones antes de continuar.']);
         } else {
@@ -1157,6 +1165,9 @@ class RealStateController extends BaseController
                 'creation_source' => 'web_form'
             ]);
             
+            // Bust dashboard cache
+            CacheService::bust('dashboard');
+            
             $this->session->setFlashdata(['success' => '¡Búsqueda creada correctamente! Por favor, revisa y confirma las actualizaciones antes de continuar.']);
         } else {
             $this->session->setFlashdata(['error' => 'Lo siento, no hemos podido crear la búsqueda. Por favor, inténtalo de nuevo más tarde.']);
@@ -1328,6 +1339,10 @@ class RealStateController extends BaseController
             
             /* ELIMINAMOS EL REGISTRO */
             $this->RealStateSearchesModel->where('realstatesearches.id', $id)->delete();
+            
+            // Bust dashboard cache
+            CacheService::bust('dashboard');
+            
             $this->session->setFlashdata(['success' => '¡Eliminado correctamente! Por favor, revisa y confirma las actualizaciones antes de continuar.']);
         }
         

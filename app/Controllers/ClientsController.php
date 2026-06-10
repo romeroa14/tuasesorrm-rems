@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\CacheService;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class ClientsController extends BaseController
@@ -332,6 +333,11 @@ class ClientsController extends BaseController
                 'creation_source' => 'web_form'
             ]);
             
+            // Bust pipeline/dashboard/stats cache
+            CacheService::bust('dashboard');
+            CacheService::bust('pipeline');
+            CacheService::bust('stats');
+            
             $this->session->setFlashdata(['success' => '¡Lead registrado correctamente! Por favor, revisa y confirma las actualizaciones antes de continuar.']);
         } else {    
             $this->session->setFlashdata(['error' => 'Lo siento, no hemos podido registrar el leads. Por favor, inténtalo de nuevo más tarde.']);
@@ -372,6 +378,11 @@ class ClientsController extends BaseController
                 'action_type' => 'logical_delete',
                 'reason' => 'lead_deletion'
             ]);
+            
+            // Bust pipeline/dashboard/stats cache
+            CacheService::bust('dashboard');
+            CacheService::bust('pipeline');
+            CacheService::bust('stats');
             
             $this->session->setFlashdata(['success' => '¡Eliminado correctamente! Por favor, revisa y confirma las actualizaciones antes de continuar.']);
         } else {
@@ -458,6 +469,11 @@ class ClientsController extends BaseController
                 if (!empty($previousValues)) {
                     log_activity('update', 'leads', $id, $previousValues, $newValues);
                 }
+                
+                // Bust pipeline/dashboard/stats cache
+                CacheService::bust('dashboard');
+                CacheService::bust('pipeline');
+                CacheService::bust('stats');
                 
                 $this->session->setFlashdata(['success' => '¡Editado correctamente! Por favor, revisa y confirma las actualizaciones antes de continuar.']);
             } else {
@@ -972,6 +988,11 @@ class ClientsController extends BaseController
         }
         
         if ($this->AssignedClients->db->affectedRows() > 0) {
+            // Bust pipeline/dashboard/stats cache
+            CacheService::bust('dashboard');
+            CacheService::bust('pipeline');
+            CacheService::bust('stats');
+            
             $this->session->setFlashdata(['success' => '¡Cliente asignado correctamente! Por favor, revisa y confirma las actualizaciones antes de continuar.']);
             $this->generate_wa_assigned_client(
                 $user['phone'],
@@ -1199,6 +1220,11 @@ class ClientsController extends BaseController
                 log_activity('update', 'assigned_clients', $client['id'], $previousValues, $newValues);
             }
             
+            // Bust pipeline/dashboard/stats cache
+            CacheService::bust('dashboard');
+            CacheService::bust('pipeline');
+            CacheService::bust('stats');
+            
             $this->session->setFlashdata(['success' => '¡Cliente abordado correctamente! Por favor, revisa y confirma las actualizaciones antes de continuar.']);
         } else {
             $this->session->setFlashdata(['error' => 'Lo siento, no hemos podido guardar los cambios. Por favor, inténtalo de nuevo más tarde.']);
@@ -1350,6 +1376,11 @@ class ClientsController extends BaseController
                         log_activity('update', 'leads', $id, $previousValues, $newValues);
                     }
                 }
+                
+                // Bust pipeline/dashboard/stats cache
+                CacheService::bust('dashboard');
+                CacheService::bust('pipeline');
+                CacheService::bust('stats');
                 
                 return $this->response->setJSON([
                     'status'  => 'success',

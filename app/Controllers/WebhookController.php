@@ -5,6 +5,7 @@ use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\Leads;
 use App\Models\Funnels;
+use App\Libraries\CacheService;
 use App\Libraries\CrmPipelineEnrollment;
 use App\Libraries\MetaInstagramGraph;
 use App\Libraries\ScoringService;
@@ -349,6 +350,9 @@ class WebhookController extends ResourceController
         // 3. Score the conversation (LLM-based with keyword fallback)
         $scorer = new \App\Libraries\AiScoringService();
         $scorer->scoreConversation($conversation['id'], $conversation['lead_id']);
+
+        // Bust pipeline cache — new conversations affect pipeline data
+        CacheService::bust('pipeline');
 
         return $messageId;
     }

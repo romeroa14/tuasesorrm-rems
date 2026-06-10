@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\CacheService;
 use CodeIgniter\HTTP\ResponseInterface;
 use DateTime;
 
@@ -27,17 +28,45 @@ class DashboardController extends BaseController
         
         /* ASIGNAMOS LA URL PARA ACCEDER A LA PÁGINA */
         $this->settings["url"] = 'auth/dashboard/dashboard';
+
+        // --- CACHED: property counts ---
+        $userId = session()->get('id');
         
-        $this->body["approved_properties_declaraciones"] = $this->countPropertiesByStatus(1);
-        $this->body["unapproved_properties_declaraciones"] = $this->countPropertiesByStatus(2);
-        $this->body["rejected_properties_declaraciones"] = $this->countPropertiesByStatus(3);
+        $globalCounts = CacheService::remember('dashboard:counts:global', 60, function () {
+            return [
+                'approved' => $this->countPropertiesByStatus(1),
+                'unapproved' => $this->countPropertiesByStatus(2),
+                'rejected' => $this->countPropertiesByStatus(3),
+            ];
+        });
         
-        $this->body["my_approved_properties"] = $this->countPropertiesByStatus(1, session()->get('id'));
-        $this->body["my_unapproved_properties"] = $this->countPropertiesByStatus(2, session()->get('id'));
-        $this->body["my_rejected_properties"] = $this->countPropertiesByStatus(3, session()->get('id'));
+        $myCounts = CacheService::remember("dashboard:counts:user:{$userId}", 60, function () use ($userId) {
+            return [
+                'approved' => $this->countPropertiesByStatus(1, $userId),
+                'unapproved' => $this->countPropertiesByStatus(2, $userId),
+                'rejected' => $this->countPropertiesByStatus(3, $userId),
+            ];
+        });
         
-        $this->body["full_properties_declaraciones"] = $this->Properties->countAllResults();
-        $this->body["my_full_properties"] = $this->Properties->where('agent', session()->get('id'))->countAllResults();
+        $fullCounts = CacheService::remember('dashboard:full:global', 60, function () {
+            return $this->Properties->countAllResults();
+        });
+        
+        $myFullCounts = CacheService::remember("dashboard:full:user:{$userId}", 60, function () use ($userId) {
+            return $this->Properties->where('agent', $userId)->countAllResults();
+        });
+        
+        $this->body["approved_properties_declaraciones"] = $globalCounts['approved'];
+        $this->body["unapproved_properties_declaraciones"] = $globalCounts['unapproved'];
+        $this->body["rejected_properties_declaraciones"] = $globalCounts['rejected'];
+        
+        $this->body["my_approved_properties"] = $myCounts['approved'];
+        $this->body["my_unapproved_properties"] = $myCounts['unapproved'];
+        $this->body["my_rejected_properties"] = $myCounts['rejected'];
+        
+        $this->body["full_properties_declaraciones"] = $fullCounts;
+        $this->body["my_full_properties"] = $myFullCounts;
+        // --- END CACHED ---
         
         /* GENERAMOS NUESTRA PÁGINA */
         $this->generate_template($this->settings["url"]);

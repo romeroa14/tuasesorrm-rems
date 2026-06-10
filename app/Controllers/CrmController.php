@@ -5,6 +5,7 @@ use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\IntentionLog;
 use App\Libraries\InstagramDmGraphSync;
+use App\Libraries\CacheService;
 use App\Libraries\ScoringService;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -83,7 +84,7 @@ class CrmController extends BaseController
     // ============ API ENDPOINTS ============
 
     /**
-     * Get all conversations for inbox
+     * Get all conversations for inbox (con paginacion)
      */
     public function api_conversations()
     {
@@ -95,15 +96,31 @@ class CrmController extends BaseController
             'intention_label' => $this->request->getGet('intention_label'),
         ];
 
-        $conversations = $this->conversationModel->getInbox($filters);
+        $limit = (int) ($this->request->getGet('limit') ?? 200);
+        $offset = (int) ($this->request->getGet('offset') ?? 0);
+        $limit = min(max($limit, 1), 500); // clamp entre 1 y 500
+
+        $conversations = $this->conversationModel->getInbox($filters, $limit, $offset);
+        $total = $this->conversationModel->getInboxCount($filters);
+
+        // --- OPTIMIZADO: batch load de last_message elimina N+1 ---
+        $convIds = array_column($conversations, 'id');
+        $lastMessages = $this->conversationModel->getLastMessagesBatch($convIds);
 
         foreach ($conversations as &$conv) {
-            $lastMsg = $this->messageModel->getLastMessage($conv['id']);
+            $lastMsg = $lastMessages[$conv['id']] ?? null;
             $conv['last_message'] = $lastMsg ? $lastMsg['content'] : '';
             $conv['last_message_type'] = $lastMsg ? $lastMsg['content_type'] : 'text';
         }
+        // --- FIN OPTIMIZACION ---
 
-        return $this->response->setJSON(['status' => 'success', 'data' => $conversations]);
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $conversations,
+            'total' => $total,
+            'limit' => $limit,
+            'offset' => $offset,
+        ]);
     }
 
     /**
@@ -269,22 +286,30 @@ class CrmController extends BaseController
     {
         $db = \Config\Database::connect();
 
-        $byStatus = $db->query("
-            SELECT ts.id, ts.name, COUNT(l.id) AS lead_count
-            FROM trackingstatus ts
-            LEFT JOIN assignedclients ac ON ac.trackingstatus_id = ts.id
-            LEFT JOIN leads l ON l.id = ac.lead_id
-            GROUP BY ts.id, ts.name
-            ORDER BY ts.id
-        ")->getResultArray();
+        // --- CACHED: pipeline counts ---
+        $data = CacheService::remember('pipeline:counts', 60, function () use ($db) {
+            $byStatus = $db->query("
+                SELECT ts.id, ts.name, COUNT(l.id) AS lead_count
+                FROM trackingstatus ts
+                LEFT JOIN assignedclients ac ON ac.trackingstatus_id = ts.id
+                LEFT JOIN leads l ON l.id = ac.lead_id
+                GROUP BY ts.id, ts.name
+                ORDER BY ts.id
+            ")->getResultArray();
 
-        $crmWithoutRow = (int) $db->query("
-            SELECT COUNT(DISTINCT l.id) AS n
-            FROM leads l
-            INNER JOIN conversations c ON c.lead_id = l.id
-            LEFT JOIN assignedclients ac ON ac.lead_id = l.id
-            WHERE ac.id IS NULL
-        ")->getRow()->n;
+            $crmWithoutRow = (int) $db->query("
+                SELECT COUNT(DISTINCT l.id) AS n
+                FROM leads l
+                INNER JOIN conversations c ON c.lead_id = l.id
+                LEFT JOIN assignedclients ac ON ac.lead_id = l.id
+                WHERE ac.id IS NULL
+            ")->getRow()->n;
+
+            return ['byStatus' => $byStatus, 'crmWithoutRow' => $crmWithoutRow];
+        });
+
+        $byStatus = $data['byStatus'];
+        $crmWithoutRow = $data['crmWithoutRow'];
 
         return $this->response->setJSON([
             'status' => 'success',
@@ -341,6 +366,10 @@ class CrmController extends BaseController
             ]);
         }
 
+        // Bust pipeline cache
+        CacheService::bust('pipeline');
+        CacheService::bust('pipeline:counts');
+
         return $this->response->setJSON(['status' => 'success']);
     }
 
@@ -378,6 +407,10 @@ class CrmController extends BaseController
         // Update conversations.assigned_to to show agent name in inbox
         $db->query("UPDATE conversations SET assigned_to = ? WHERE lead_id = ?", [$assignedId, $leadId]);
 
+        // Bust pipeline cache
+        CacheService::bust('pipeline');
+        CacheService::bust('pipeline:counts');
+
         return $this->response->setJSON(['status' => 'success']);
     }
 
@@ -389,8 +422,14 @@ class CrmController extends BaseController
         $db = \Config\Database::connect();
 
         try {
-            // Tracked leads (with assignedclients)
-            $result = $db->query("
+            // --- CACHED: pipeline queries ---
+            $pipelineLimit = (int) ($this->request->getGet('limit') ?? 100);
+            $pipelineLimit = min(max($pipelineLimit, 1), 500);
+
+            // Tracked leads (with assignedclients) — cached
+            $userId = session()->get('id');
+            $result = CacheService::remember("pipeline:data:{$userId}", 30, function () use ($db, $pipelineLimit) {
+                return $db->query("
             SELECT 
                 ts.id as status_id,
                 ts.name as status_name,
@@ -403,6 +442,7 @@ class CrmController extends BaseController
                 l.interest_type,
                 l.budget_detected,
                 l.zone_interest,
+l.created_at,
                 ac.assigned_id,
                 u.full_name as agent_name,
                 c.channel,
@@ -413,16 +453,22 @@ class CrmController extends BaseController
             LEFT JOIN assignedclients ac ON ac.trackingstatus_id = ts.id
             LEFT JOIN leads l ON l.id = ac.lead_id
             LEFT JOIN users u ON u.id = ac.assigned_id
-            INNER JOIN conversations c ON c.lead_id = l.id AND c.channel = 'instagram' AND c.id = (
-                SELECT MAX(c2.id) FROM conversations c2 WHERE c2.lead_id = l.id AND c2.channel = 'instagram'
-            )
+            INNER JOIN (
+                SELECT lead_id, MAX(id) AS max_id
+                FROM conversations
+                WHERE channel = 'instagram'
+                GROUP BY lead_id
+            ) cm ON cm.lead_id = l.id
+            INNER JOIN conversations c ON c.id = cm.max_id
             ORDER BY ts.id, l.intention_score DESC
             ")->getResultArray();
+            });
 
-            // Unassigned leads (not in assignedclients) — solo para admins
+            // Unassigned leads (not in assignedclients) — solo para admins — cached
             $unassigned = [];
             if (in_array(session()->get('id_fk_rol'), [2, 3, 6, 8])) {
-                $unassigned = $db->query("
+                $unassigned = CacheService::remember("pipeline:unassigned:{$userId}", 30, function () use ($db, $pipelineLimit) {
+                    return $db->query("
                 SELECT 
                     NULL as status_id,
                     'Sin Asignar' as status_name,
@@ -435,6 +481,7 @@ class CrmController extends BaseController
                     l.interest_type,
                     l.budget_detected,
                     l.zone_interest,
+l.created_at,
                     NULL as assigned_id,
                     NULL as agent_name,
                     c.channel,
@@ -446,7 +493,9 @@ class CrmController extends BaseController
                 LEFT JOIN assignedclients ac ON ac.lead_id = l.id
                 WHERE ac.id IS NULL
                 ORDER BY l.id DESC
+                LIMIT $pipelineLimit
             ")->getResultArray();
+                });
             }
 
             $result = array_merge($unassigned, $result);
@@ -556,31 +605,44 @@ class CrmController extends BaseController
     {
         $db = \Config\Database::connect();
 
-        $totalLeads = $db->query('SELECT COUNT(*) as total FROM leads')->getRow()->total;
-        $totalConversations = $db->query('SELECT COUNT(*) as total FROM conversations')->getRow()->total;
-        $openConversations = $db->query("SELECT COUNT(*) as total FROM conversations WHERE status = 'open'")->getRow()->total;
-        $unassigned = $db->query("SELECT COUNT(*) as total FROM conversations WHERE assigned_to IS NULL AND status != 'archived'")->getRow()->total;
+        // --- CACHED: stats (120s TTL) ---
+        $data = CacheService::remember('stats', 120, function () use ($db) {
+            $totalLeads = $db->query('SELECT COUNT(*) as total FROM leads')->getRow()->total;
+            $totalConversations = $db->query('SELECT COUNT(*) as total FROM conversations')->getRow()->total;
+            $openConversations = $db->query("SELECT COUNT(*) as total FROM conversations WHERE status = 'open'")->getRow()->total;
+            $unassigned = $db->query("SELECT COUNT(*) as total FROM conversations WHERE assigned_to IS NULL AND status != 'archived'")->getRow()->total;
 
-        $byLabel = $db->query("
-            SELECT intention_label, COUNT(*) as total 
-            FROM leads 
-            WHERE intention_label IS NOT NULL 
-            GROUP BY intention_label
-        ")->getResultArray();
+            $byLabel = $db->query("
+                SELECT intention_label, COUNT(*) as total 
+                FROM leads 
+                WHERE intention_label IS NOT NULL 
+                GROUP BY intention_label
+            ")->getResultArray();
 
-        $byChannel = $db->query('
-            SELECT channel, COUNT(*) as total 
-            FROM conversations 
-            GROUP BY channel
-        ')->getResultArray();
+            $byChannel = $db->query('
+                SELECT channel, COUNT(*) as total 
+                FROM conversations 
+                GROUP BY channel
+            ')->getResultArray();
 
-        $recentScores = $db->query('
-            SELECT il.*, l.name as lead_name 
-            FROM intention_logs il 
-            JOIN leads l ON l.id = il.lead_id 
-            ORDER BY il.created_at DESC 
-            LIMIT 10
-        ')->getResultArray();
+            $recentScores = $db->query('
+                SELECT il.*, l.name as lead_name 
+                FROM intention_logs il 
+                JOIN leads l ON l.id = il.lead_id 
+                ORDER BY il.created_at DESC 
+                LIMIT 10
+            ')->getResultArray();
+
+            return compact('totalLeads', 'totalConversations', 'openConversations', 'unassigned', 'byLabel', 'byChannel', 'recentScores');
+        });
+
+        $totalLeads = $data['totalLeads'];
+        $totalConversations = $data['totalConversations'];
+        $openConversations = $data['openConversations'];
+        $unassigned = $data['unassigned'];
+        $byLabel = $data['byLabel'];
+        $byChannel = $data['byChannel'];
+        $recentScores = $data['recentScores'];
 
         return $this->response->setJSON([
             'status' => 'success',

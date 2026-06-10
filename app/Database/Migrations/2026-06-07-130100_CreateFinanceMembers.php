@@ -23,7 +23,6 @@ class CreateFinanceMembers extends Migration
                 'user_id' => [
                     'type'       => 'INT',
                     'constraint' => 11,
-                    'unsigned'   => true,
                 ],
                 'member_role' => [
                     'type'       => 'ENUM',
