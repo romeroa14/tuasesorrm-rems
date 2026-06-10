@@ -19,12 +19,13 @@
                         <tr>
                             <th>ID</th>
                             <th>Fecha</th>
-                            <th>Moneda</th>
+                            <th>Denominación</th>
                             <th>Saldo Inicial</th>
                             <th>Ingresos</th>
                             <th>Egresos</th>
                             <th>Saldo Final</th>
                             <th>Saldo Final USD</th>
+                            <th>Saldo Final BS</th>
                             <th>Notas</th>
                             <th>Acciones</th>
                         </tr>
@@ -37,7 +38,7 @@
 </div>
 
 <div class="modal fade" id="cashModal" tabindex="-1">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-gradient-success text-white">
                 <h5 class="modal-title" id="modalTitle"><i class="fas fa-cash-register"></i> Registro de Caja</h5>
@@ -46,76 +47,79 @@
             <form id="cashForm">
                 <div class="modal-body">
                     <input type="hidden" id="record_id" name="id">
-                    <div class="form-group">
-                        <label>Fecha <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" name="cash_date" id="cash_date" required>
-                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Denominación <span class="text-danger">*</span></label>
-                                <select class="form-control" name="currency_denomination" id="currency_denomination" required>
-                                    <option value="USD">USD</option>
-                                    <option value="BS">BS</option>
-                                </select>
+                                <label>Fecha <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" name="cash_date" id="cash_date" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Tasa Bs/USD</label>
-                                <input type="number" step="0.0001" class="form-control" name="exchange_rate" id="exchange_rate" placeholder="0.0000">
+                                <label>Método de pago (denominación) <span class="text-danger">*</span></label>
+                                <select class="form-control" name="payment_type_id" id="payment_type_id" required></select>
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="currency_denomination" id="currency_denomination">
+                    <input type="hidden" name="exchange_rate" id="exchange_rate">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Saldo Inicial <span class="text-danger">*</span></label>
+                                <label>Denominación detectada</label>
+                                <input type="text" class="form-control" id="detected_denomination" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Tasa actual Bs/USD</label>
+                                <input type="text" class="form-control" id="display_rate_to_base" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label id="opening_balance_label">Saldo Inicial <span class="text-danger">*</span></label>
                                 <input type="number" step="0.01" class="form-control" name="opening_balance" id="opening_balance" value="0" required>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label id="closing_balance_label">Saldo Final calculado</label>
+                                <input type="text" class="form-control" id="closing_balance_display" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Ingresos</label>
+                                <label id="total_income_label">Ingresos</label>
                                 <input type="number" step="0.01" class="form-control" name="total_income" id="total_income" value="0">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Egresos</label>
+                                <label id="total_expense_label">Egresos</label>
                                 <input type="number" step="0.01" class="form-control" name="total_expense" id="total_expense" value="0">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Notas</label>
+                                <textarea class="form-control" name="notes" id="notes" rows="2"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Saldo Inicial USD</label>
-                                <input type="text" class="form-control" id="opening_balance_usd_display" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Ingresos USD</label>
-                                <input type="text" class="form-control" id="total_income_usd_display" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Egresos USD</label>
-                                <input type="text" class="form-control" id="total_expense_usd_display" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Saldo Final USD</label>
-                                <input type="text" class="form-control" id="closing_balance_usd_display" readonly>
-                            </div>
-                        </div>
+                        <div class="col-md-3"><div class="form-group"><label>Saldo Inicial USD</label><input type="text" class="form-control" id="opening_balance_usd_display" readonly></div></div>
+                        <div class="col-md-3"><div class="form-group"><label>Ingresos USD</label><input type="text" class="form-control" id="total_income_usd_display" readonly></div></div>
+                        <div class="col-md-3"><div class="form-group"><label>Egresos USD</label><input type="text" class="form-control" id="total_expense_usd_display" readonly></div></div>
+                        <div class="col-md-3"><div class="form-group"><label>Saldo Final USD</label><input type="text" class="form-control" id="closing_balance_usd_display" readonly></div></div>
                     </div>
-                    <div class="form-group">
-                        <label>Notas</label>
-                        <textarea class="form-control" name="notes" id="notes" rows="2"></textarea>
+                    <div class="row">
+                        <div class="col-md-3"><div class="form-group"><label>Saldo Inicial BS</label><input type="text" class="form-control" id="opening_balance_bs_display" readonly></div></div>
+                        <div class="col-md-3"><div class="form-group"><label>Ingresos BS</label><input type="text" class="form-control" id="total_income_bs_display" readonly></div></div>
+                        <div class="col-md-3"><div class="form-group"><label>Egresos BS</label><input type="text" class="form-control" id="total_expense_bs_display" readonly></div></div>
+                        <div class="col-md-3"><div class="form-group"><label>Saldo Final BS</label><input type="text" class="form-control" id="closing_balance_bs_display" readonly></div></div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -127,44 +131,73 @@
     </div>
 </div>
 
+<script src="<?= base_url('/js/finance-catalog-money.js') ?>"></script>
 <script>
-var dt, apiBase = '<?= base_url('/app/finance/daily_cash/api') ?>';
+var dt, catalog = null, apiBase = '<?= base_url('/app/finance/daily_cash/api') ?>';
 var catalogUrl = '<?= base_url('/app/finance/api/catalog') ?>';
-var currencyContext = {};
 
-function formatMoney(value) {
-    if (!isFinite(value)) return '';
-    return value.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+function getContext() { return catalog && catalog.currency_context ? catalog.currency_context : {}; }
+function getPaymentType(id) {
+    var match = null;
+    (catalog && catalog.payment_types ? catalog.payment_types : []).forEach(function(p) {
+        if (String(p.id) === String(id)) match = p;
+    });
+    return match;
 }
 
 function syncDailyCashMoney() {
-    var denomination = $('#currency_denomination').val() || 'USD';
-    var latestRate = parseFloat(currencyContext.latest_bs_rate || 0);
-    var customRate = parseFloat($('#exchange_rate').val() || 0);
-    var rate = denomination === 'BS' ? (customRate > 0 ? customRate : latestRate) : 1;
+    var paymentType = getPaymentType($('#payment_type_id').val());
+    var denomination = paymentType && paymentType.default_denomination ? paymentType.default_denomination : 'USD';
+    var rate = parseFloat(getContext().latest_bs_rate || 0);
     var opening = parseFloat($('#opening_balance').val() || 0);
     var income = parseFloat($('#total_income').val() || 0);
     var expense = parseFloat($('#total_expense').val() || 0);
     var closing = opening + income - expense;
+    var prefix = denomination === 'BS' ? 'Bs. ' : '$ ';
 
-    if (denomination === 'BS') {
-        $('#exchange_rate').val(rate > 0 ? rate.toFixed(4) : '');
-    } else {
-        $('#exchange_rate').val('1.0000');
+    $('#currency_denomination').val(denomination);
+    $('#detected_denomination').val(denomination);
+    $('#exchange_rate').val(denomination === 'BS' && rate > 0 ? rate.toFixed(6) : '1.000000');
+    $('#display_rate_to_base').val(denomination === 'BS' && rate > 0 ? rate.toFixed(4) : '1.0000');
+    $('#opening_balance_label').html(prefix + 'Saldo Inicial <span class="text-danger">*</span>');
+    $('#total_income_label').text(prefix + 'Ingresos');
+    $('#total_expense_label').text(prefix + 'Egresos');
+    $('#closing_balance_label').text(prefix + 'Saldo Final calculado');
+    $('#closing_balance_display').val(formatFinanceMoney(closing));
+
+    function convert(value) {
+        var usd = denomination === 'BS' ? (rate > 0 ? value / rate : 0) : value;
+        var bs = denomination === 'BS' ? value : value * rate;
+        return { usd: usd, bs: bs };
     }
 
-    var divisor = rate > 0 ? rate : 1;
-    $('#opening_balance_usd_display').val(formatMoney(denomination === 'BS' ? opening / divisor : opening));
-    $('#total_income_usd_display').val(formatMoney(denomination === 'BS' ? income / divisor : income));
-    $('#total_expense_usd_display').val(formatMoney(denomination === 'BS' ? expense / divisor : expense));
-    $('#closing_balance_usd_display').val(formatMoney(denomination === 'BS' ? closing / divisor : closing));
+    var openingEq = convert(opening);
+    var incomeEq = convert(income);
+    var expenseEq = convert(expense);
+    var closingEq = convert(closing);
+
+    $('#opening_balance_usd_display').val(formatFinanceMoney(openingEq.usd));
+    $('#total_income_usd_display').val(formatFinanceMoney(incomeEq.usd));
+    $('#total_expense_usd_display').val(formatFinanceMoney(expenseEq.usd));
+    $('#closing_balance_usd_display').val(formatFinanceMoney(closingEq.usd));
+    $('#opening_balance_bs_display').val(formatFinanceMoney(openingEq.bs));
+    $('#total_income_bs_display').val(formatFinanceMoney(incomeEq.bs));
+    $('#total_expense_bs_display').val(formatFinanceMoney(expenseEq.bs));
+    $('#closing_balance_bs_display').val(formatFinanceMoney(closingEq.bs));
 }
 
-function loadContext(cb) {
-    $.get(catalogUrl, function(response) {
-        if (response.status === 'success' && response.data && response.data.currency_context) {
-            currencyContext = response.data.currency_context;
-        }
+function populatePaymentTypes(selectedId) {
+    var opts = '<option value="">Seleccionar...</option>';
+    (catalog && catalog.payment_types ? catalog.payment_types : []).forEach(function(p) {
+        opts += '<option value="' + p.id + '">' + (p.name || p.code || '—') + '</option>';
+    });
+    $('#payment_type_id').html(opts);
+    if (selectedId) $('#payment_type_id').val(String(selectedId));
+}
+
+function loadCatalog(cb) {
+    $.get(catalogUrl, function(r) {
+        if (r.status === 'success') catalog = r.data;
         if (cb) cb();
     });
 }
@@ -174,10 +207,20 @@ function loadTable() {
         var rows = [];
         if (r.status === 'success' && Array.isArray(r.data)) {
             r.data.forEach(function(d) {
+                var denomination = d.currency_denomination || 'USD';
+                var prefix = denomination === 'BS' ? 'Bs. ' : '$ ';
                 var actions = '<button class="btn btn-info btn-sm mr-1" onclick="edit(' + d.id + ')"><i class="fas fa-edit"></i></button>' +
                               '<button class="btn btn-danger btn-sm" onclick="remove(' + d.id + ')"><i class="fas fa-trash"></i></button>';
-                rows.push([d.id, d.cash_date, d.currency_denomination || 'USD', parseFloat(d.opening_balance).toFixed(2), parseFloat(d.total_income).toFixed(2),
-                    parseFloat(d.total_expense).toFixed(2), parseFloat(d.closing_balance).toFixed(2), parseFloat(d.closing_balance_usd || 0).toFixed(2), d.notes || '—', actions]);
+                rows.push([
+                    d.id, d.cash_date, denomination,
+                    prefix + parseFloat(d.opening_balance).toFixed(2),
+                    prefix + parseFloat(d.total_income).toFixed(2),
+                    prefix + parseFloat(d.total_expense).toFixed(2),
+                    prefix + parseFloat(d.closing_balance).toFixed(2),
+                    parseFloat(d.closing_balance_usd || 0).toFixed(2),
+                    parseFloat(d.closing_balance_bs || 0).toFixed(2),
+                    d.notes || '—', actions
+                ]);
             });
         }
         if (dt) dt.clear().rows.add(rows).draw();
@@ -195,8 +238,7 @@ function showModal(mode, id) {
                 var d = r.data;
                 $('#record_id').val(d.id);
                 $('#cash_date').val(d.cash_date);
-                $('#currency_denomination').val(d.currency_denomination || 'USD');
-                $('#exchange_rate').val(d.exchange_rate || '');
+                populatePaymentTypes(d.payment_type_id);
                 $('#opening_balance').val(d.opening_balance);
                 $('#total_income').val(d.total_income);
                 $('#total_expense').val(d.total_expense);
@@ -204,13 +246,14 @@ function showModal(mode, id) {
                 syncDailyCashMoney();
             }
         });
+    } else {
+        populatePaymentTypes();
+        syncDailyCashMoney();
     }
-    syncDailyCashMoney();
     $('#cashModal').modal('show');
 }
 
 function edit(id) { showModal('edit', id); }
-
 function remove(id) {
     if (!confirm('¿Eliminar registro?')) return;
     $.post(apiBase + '/' + id + '/delete', function(r) { if (r.status === 'success') loadTable(); });
@@ -219,19 +262,12 @@ function remove(id) {
 $('#cashForm').submit(function(e) {
     e.preventDefault();
     var id = $('#record_id').val();
-    var url = id ? apiBase + '/' + id : apiBase + '/create';
-    $.ajax({url: url, method: 'POST', data: $(this).serialize(), dataType: 'json',
+    $.ajax({url: id ? apiBase + '/' + id : apiBase + '/create', method: 'POST', data: $(this).serialize(), dataType: 'json',
         success: function(r) { if (r.status === 'success') { $('#cashModal').modal('hide'); loadTable(); } else alert('Error: ' + r.message); },
-        error: function() { alert('Error de conexión'); }
+        error: function(xhr) { alert('Error: ' + ((xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : 'Error de conexión')); }
     });
 });
 
-$('#currency_denomination, #exchange_rate, #opening_balance, #total_income, #total_expense').on('change keyup', syncDailyCashMoney);
-
-$(document).ready(function() {
-    loadContext(function() {
-        syncDailyCashMoney();
-        loadTable();
-    });
-});
+$('#payment_type_id, #opening_balance, #total_income, #total_expense').on('change keyup', syncDailyCashMoney);
+$(document).ready(function() { loadCatalog(function() { loadTable(); }); });
 </script>

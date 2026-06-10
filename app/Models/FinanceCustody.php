@@ -20,6 +20,7 @@ class FinanceCustody extends Model
         'name',
         'entry_date',
         'amount',
+        'payment_type_id',
         'currency',
         'currency_denomination',
         'exchange_rate',
@@ -35,10 +36,11 @@ class FinanceCustody extends Model
     protected $deletedField  = 'deleted_at';
 
     protected $validationRules = [
-        'name'       => 'required|max_length[255]',
-        'entry_date' => 'required|valid_date',
-        'amount'     => 'required|decimal',
-        'currency'   => 'required|in_list[USDT,BS,ZELLE,CASH]',
+        'name'            => 'required|max_length[255]',
+        'entry_date'      => 'required|valid_date',
+        'amount'          => 'required|decimal',
+        'payment_type_id' => 'required|is_natural_no_zero',
+        'currency'        => 'permit_empty|in_list[USDT,BS,ZELLE,CASH]',
         'currency_denomination' => 'permit_empty|in_list[USD,BS]',
     ];
 

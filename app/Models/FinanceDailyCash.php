@@ -18,6 +18,7 @@ class FinanceDailyCash extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'cash_date',
+        'payment_type_id',
         'currency_denomination',
         'exchange_rate',
         'opening_balance',
@@ -42,10 +43,11 @@ class FinanceDailyCash extends Model
     protected $deletedField  = 'deleted_at';
 
     protected $validationRules = [
-        'cash_date'       => 'required|valid_date',
+        'cash_date'             => 'required|valid_date',
+        'payment_type_id'       => 'required|is_natural_no_zero',
         'currency_denomination' => 'permit_empty|in_list[USD,BS]',
-        'opening_balance' => 'required|decimal',
-        'closing_balance' => 'required|decimal',
+        'opening_balance'       => 'required|decimal',
+        'closing_balance'       => 'required|decimal',
     ];
 
     protected $validationMessages   = [];

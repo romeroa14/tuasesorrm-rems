@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Libraries;
 
+use App\Models\FinancePaymentType;
 use InvalidArgumentException;
 
 class FinanceMoneyService
@@ -28,6 +29,50 @@ class FinanceMoneyService
         $normalized = strtoupper(trim((string) $currency));
 
         return in_array($normalized, ['BS', 'VES'], true) ? 'BS' : 'USD';
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     */
+    public function resolveDenomination(array $payload): string
+    {
+        $requested = strtoupper(trim((string) ($payload['currency_denomination'] ?? '')));
+        if (in_array($requested, ['USD', 'BS'], true)) {
+            return $requested;
+        }
+
+        $paymentTypeId = (int) ($payload['payment_type_id'] ?? $payload['source_payment_type_id'] ?? 0);
+        if ($paymentTypeId > 0) {
+            return $this->denominationFromPaymentTypeId($paymentTypeId);
+        }
+
+        if (! empty($payload['currency'])) {
+            return $this->currencyTokenToDenomination((string) $payload['currency']);
+        }
+
+        if (! empty($payload['source_currency'])) {
+            return $this->currencyTokenToDenomination((string) $payload['source_currency']);
+        }
+
+        return 'USD';
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     */
+    public function resolveLegacyCurrency(array $payload, string $paymentTypeField = 'payment_type_id'): string
+    {
+        $paymentTypeId = (int) ($payload[$paymentTypeField] ?? 0);
+        if ($paymentTypeId > 0) {
+            return $this->legacyCurrencyFromPaymentTypeId($paymentTypeId);
+        }
+
+        $legacy = strtoupper(trim((string) ($payload['currency'] ?? $payload['source_currency'] ?? '')));
+        if ($legacy !== '') {
+            return $legacy;
+        }
+
+        return 'USDT';
     }
 
     /**
@@ -64,10 +109,12 @@ class FinanceMoneyService
      */
     public function normalizeQuotaPayload(array $payload): array
     {
-        $denomination = $this->currencyTokenToDenomination($payload['currency'] ?? null);
-        $money = $this->describeAmount($payload['amount'] ?? 0, $denomination, $payload['exchange_rate'] ?? null);
+        $denomination = $this->resolveDenomination($payload);
+        $rate = $payload['exchange_rate'] ?? $payload['rate_to_base'] ?? null;
+        $money = $this->describeAmount($payload['amount'] ?? 0, $denomination, $rate);
 
         return array_merge($payload, $money, [
+            'currency'      => $this->resolveLegacyCurrency($payload),
             'exchange_rate' => $money['exchange_rate'],
         ]);
     }
@@ -79,10 +126,12 @@ class FinanceMoneyService
      */
     public function normalizeCustodyPayload(array $payload): array
     {
-        $denomination = $this->currencyTokenToDenomination($payload['currency'] ?? null);
-        $money = $this->describeAmount($payload['amount'] ?? 0, $denomination, $payload['exchange_rate'] ?? null);
+        $denomination = $this->resolveDenomination($payload);
+        $rate = $payload['exchange_rate'] ?? $payload['rate_to_base'] ?? null;
+        $money = $this->describeAmount($payload['amount'] ?? 0, $denomination, $rate);
 
         return array_merge($payload, $money, [
+            'currency'      => $this->resolveLegacyCurrency($payload),
             'exchange_rate' => $money['exchange_rate'],
         ]);
     }
@@ -94,8 +143,12 @@ class FinanceMoneyService
      */
     public function normalizeDailyCashPayload(array $payload): array
     {
+        if (! empty($payload['payment_type_id'])) {
+            $payload['currency_denomination'] = $this->denominationFromPaymentTypeId((int) $payload['payment_type_id']);
+        }
+
         $denomination = $this->normalizeDenomination((string) ($payload['currency_denomination'] ?? 'USD'));
-        $rate = $this->resolveReferenceRate($denomination, $payload['exchange_rate'] ?? null);
+        $rate = $this->resolveReferenceRate($denomination, $payload['exchange_rate'] ?? $payload['rate_to_base'] ?? null);
 
         $opening = $this->describeAmount($payload['opening_balance'] ?? 0, $denomination, $rate);
         $income = $this->describeAmount($payload['total_income'] ?? 0, $denomination, $rate);
@@ -129,8 +182,22 @@ class FinanceMoneyService
      */
     public function normalizeExchangePayload(array $payload): array
     {
-        $sourceDenomination = $this->currencyTokenToDenomination($payload['source_currency'] ?? null);
-        $targetDenomination = $this->currencyTokenToDenomination($payload['target_currency'] ?? null);
+        if (! empty($payload['source_payment_type_id'])) {
+            $payload['source_denomination'] = $this->denominationFromPaymentTypeId((int) $payload['source_payment_type_id']);
+            $payload['source_currency'] = $this->legacyCurrencyFromPaymentTypeId((int) $payload['source_payment_type_id']);
+        }
+
+        if (! empty($payload['target_payment_type_id'])) {
+            $payload['target_denomination'] = $this->denominationFromPaymentTypeId((int) $payload['target_payment_type_id']);
+            $payload['target_currency'] = $this->legacyCurrencyFromPaymentTypeId((int) $payload['target_payment_type_id']);
+        }
+
+        $sourceDenomination = $this->normalizeDenomination((string) ($payload['source_denomination'] ?? $this->resolveDenomination([
+            'currency' => $payload['source_currency'] ?? null,
+        ])));
+        $targetDenomination = $this->normalizeDenomination((string) ($payload['target_denomination'] ?? $this->resolveDenomination([
+            'currency' => $payload['target_currency'] ?? null,
+        ])));
         $sourceAmount = $this->normalizeAmount($payload['amount'] ?? 0);
         $rate = $this->resolveRateForExchange($sourceDenomination, $targetDenomination, $payload['rate'] ?? null);
 
@@ -155,6 +222,42 @@ class FinanceMoneyService
             'target_amount_usd'   => $target['amount_usd'],
             'target_amount_bs'    => $target['amount_bs'],
         ]);
+    }
+
+    private function denominationFromPaymentTypeId(int $paymentTypeId): string
+    {
+        $model = new FinancePaymentType();
+        $paymentType = $model->find($paymentTypeId);
+
+        if (! is_array($paymentType)) {
+            throw new InvalidArgumentException('Metodo de pago no encontrado.');
+        }
+
+        $default = strtoupper(trim((string) ($paymentType['default_denomination'] ?? 'USD')));
+
+        return in_array($default, ['USD', 'BS'], true) ? $default : 'USD';
+    }
+
+    private function legacyCurrencyFromPaymentTypeId(int $paymentTypeId): string
+    {
+        $model = new FinancePaymentType();
+        $paymentType = $model->find($paymentTypeId);
+
+        if (! is_array($paymentType)) {
+            throw new InvalidArgumentException('Metodo de pago no encontrado.');
+        }
+
+        if (($paymentType['default_denomination'] ?? '') === 'BS') {
+            return 'BS';
+        }
+
+        $code = strtoupper(trim((string) ($paymentType['code'] ?? '')));
+
+        return match ($code) {
+            'CASH', 'EFECTIVO' => 'CASH',
+            'ZELLE'            => 'ZELLE',
+            default            => 'USDT',
+        };
     }
 
     private function normalizeDenomination(string $denomination): string
