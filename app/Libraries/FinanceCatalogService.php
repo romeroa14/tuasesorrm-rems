@@ -19,7 +19,7 @@ class FinanceCatalogService
 
         return [
             'accounts'          => $this->getOperationalAccounts(),
-            'clearing_account'  => $this->resolveClearingAccountId(),
+            'clearing_account'  => $this->tryResolveClearingAccountId(),
             'income_categories' => $this->getCategoriesByType('income'),
             'expense_categories'=> $this->getCategoriesByType('expense'),
             'currencies'        => $this->getCurrencies(),
@@ -83,12 +83,18 @@ class FinanceCatalogService
     {
         $usdCurrency = $this->findCurrencyByCodes(['USD']);
         $bsCurrency = $this->findCurrencyByCodes(['VES', 'BS']);
-        $bsRate = $this->resolveLatestRateToBase($bsCurrency['id'] ?? null);
+        $bsCurrencyId = isset($bsCurrency['id']) ? (int) $bsCurrency['id'] : null;
+        $bsRate = $this->resolveLatestRateToBase($bsCurrencyId);
+
+        // Tasas historicas de DolarAPI se guardaron bajo USD (Bs por 1 USD).
+        if ($bsRate === null && isset($usdCurrency['id'])) {
+            $bsRate = $this->resolveLatestRateToBase((int) $usdCurrency['id']);
+        }
 
         return [
             'base_currency_code' => 'USD',
-            'usd_currency_id'    => $usdCurrency['id'] ?? null,
-            'bs_currency_id'     => $bsCurrency['id'] ?? null,
+            'usd_currency_id'    => isset($usdCurrency['id']) ? (int) $usdCurrency['id'] : null,
+            'bs_currency_id'     => $bsCurrencyId,
             'bs_currency_code'   => $bsCurrency['code'] ?? 'VES',
             'latest_bs_rate'     => $bsRate,
         ];
@@ -111,11 +117,21 @@ class FinanceCatalogService
 
     public function resolveClearingAccountId(): int
     {
+        $clearingAccountId = $this->tryResolveClearingAccountId();
+        if ($clearingAccountId === null) {
+            throw new InvalidArgumentException('No existe una cuenta de compensacion (clearing) configurada.');
+        }
+
+        return $clearingAccountId;
+    }
+
+    public function tryResolveClearingAccountId(): ?int
+    {
         $model = new FinanceAccount();
         $row = $model->where('account_kind', 'clearing')->first();
 
         if (! is_array($row) || ! isset($row['id'])) {
-            throw new InvalidArgumentException('No existe una cuenta de compensacion (clearing) configurada.');
+            return null;
         }
 
         return (int) $row['id'];
