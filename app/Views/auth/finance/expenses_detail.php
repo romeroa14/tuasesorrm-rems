@@ -131,8 +131,8 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Moneda</label>
-                                <select class="form-control" name="currency_id" id="currency_id"></select>
+                                <label>Método de pago <span class="text-danger">*</span></label>
+                                <select class="form-control" name="payment_type_id" id="payment_type_id" required></select>
                             </div>
                         </div>
                     </div>
@@ -174,11 +174,11 @@ function loadCatalog(cb) {
                 accOpts += '<option value="' + a.id + '">' + a.name + '</option>';
             });
             $('#account_id').html(accOpts);
-            var curOpts = '<option value="">—</option>';
-            (catalog.currencies || []).forEach(function(c) {
-                curOpts += '<option value="' + c.id + '">' + (c.code || c.name) + '</option>';
+            var payOpts = '<option value="">Seleccionar...</option>';
+            (catalog.payment_types || []).forEach(function(p) {
+                payOpts += '<option value="' + p.id + '">' + (p.name || p.code || '—') + '</option>';
             });
-            $('#currency_id').html(curOpts);
+            $('#payment_type_id').html(payOpts);
         }
         if (cb) cb();
     });

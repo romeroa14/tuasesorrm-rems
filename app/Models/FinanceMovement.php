@@ -25,6 +25,7 @@ class FinanceMovement extends Model
         'source_table',
         'source_id',
         'currency_id',
+        'payment_type_id',
         'rate_to_base',
         'reversal_of_id',
         'notes',

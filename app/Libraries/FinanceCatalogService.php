@@ -7,6 +7,7 @@ namespace App\Libraries;
 use App\Models\FinanceAccount;
 use App\Models\FinanceCategory;
 use App\Models\FinanceCurrency;
+use App\Models\FinancePaymentType;
 use InvalidArgumentException;
 
 class FinanceCatalogService
@@ -19,6 +20,7 @@ class FinanceCatalogService
             'income_categories' => $this->getCategoriesByType('income'),
             'expense_categories'=> $this->getCategoriesByType('expense'),
             'currencies'        => $this->getCurrencies(),
+            'payment_types'     => $this->getPaymentTypes(),
         ];
     }
 
@@ -58,6 +60,16 @@ class FinanceCatalogService
         $model = new FinanceCurrency();
 
         return $model->orderBy('code', 'ASC')->findAll();
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function getPaymentTypes(): array
+    {
+        $model = new FinancePaymentType();
+
+        return $model->orderBy('name', 'ASC')->findAll();
     }
 
     public function resolveCategoryId(string $movementType, string $categoryType): int

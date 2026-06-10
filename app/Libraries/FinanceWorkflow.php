@@ -102,6 +102,7 @@ class FinanceWorkflow
 
         $sharedDimensions = [
             'currency_id'  => self::nullableInt($input['currency_id'] ?? null),
+            'payment_type_id' => self::nullableInt($input['payment_type_id'] ?? null),
             'rate_to_base' => self::normalizeRate($input['rate_to_base'] ?? 1),
             'category_id'  => self::nullableInt($input['category_id'] ?? null),
             'company_id'   => self::nullableInt($input['company_id'] ?? null),
@@ -117,6 +118,7 @@ class FinanceWorkflow
             'actor_user_id' => $actorUserId,
             'approved_by'   => self::nullableInt($decision['approved_by'] ?? null),
             'currency_id'   => $sharedDimensions['currency_id'],
+            'payment_type_id' => $sharedDimensions['payment_type_id'],
             'rate_to_base'  => $sharedDimensions['rate_to_base'],
             'notes'         => self::normalizeDescription($input['notes'] ?? $input['description'] ?? null),
             'posted_at'     => ($decision['status'] ?? 'draft') === 'posted' ? date('Y-m-d H:i:s') : null,
