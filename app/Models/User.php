@@ -59,4 +59,22 @@ class User extends Model
         ->first();
     }
 
+    /**
+     * Get commission participant records for this user.
+     */
+    public function commissions()
+    {
+        $participantModel = new CommissionParticipantModel();
+        return $participantModel->where('user_id', $this->id)->findAll();
+    }
+
+    /**
+     * Get advance records for this user.
+     */
+    public function advances()
+    {
+        $advanceModel = new CommissionAdvanceModel();
+        return $advanceModel->where('user_id', $this->id)->findAll();
+    }
+
 }

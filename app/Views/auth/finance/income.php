@@ -75,6 +75,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Tipo</th>
+                            <th>Cliente</th>
                             <th>Monto</th>
                             <th>Descripción</th>
                             <th>Fecha</th>
@@ -166,6 +167,18 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label class="mb-0">Cliente</label>
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="openCreateClientModal()">
+                                <i class="fas fa-user-plus"></i> Crear cliente
+                            </button>
+                        </div>
+                        <select class="form-control" name="lead_id" id="lead_id" style="width:100%">
+                            <option value=""></option>
+                        </select>
+                        <small class="form-text text-muted">Opcional. Busca por nombre, teléfono o correo, o créalo si no existe.</small>
+                    </div>
+                    <div class="form-group">
                         <label>Descripción</label>
                         <input type="text" class="form-control" name="description" placeholder="Detalle del ingreso">
                     </div>
@@ -183,10 +196,15 @@
     </div>
 </div>
 
+<?= view('auth/finance/partials/create_client_modal') ?>
+
 <script>
 var dt, catalog = null;
+var lastClientSearch = '';
 var apiBase = '<?= base_url('/app/finance/income/api') ?>';
 var catalogUrl = '<?= base_url('/app/finance/api/catalog') ?>';
+var clientsSearchUrl = '<?= base_url('/app/finance/api/clients/search') ?>';
+var clientsCreateUrl = '<?= base_url('/app/finance/api/clients/create') ?>';
 var pendingUrl = '<?= base_url('/app/finance/api/pending') ?>';
 var workflowUrl = '<?= base_url('/app/finance/workflows') ?>';
 var currentType = '<?= $current_type ?? '' ?>';
@@ -252,6 +270,71 @@ function refreshCurrencyDetection() {
     $('#equivalent_bs').val(formatMoney(equivalentBs));
 }
 
+function formatClientOptionLabel(client) {
+    var label = client.name || 'Sin nombre';
+    if (client.phone) label += ' — ' + client.phone;
+    return label;
+}
+
+function setLeadSelection(id, text) {
+    if (!$('#lead_id').length) return;
+    var option = new Option(text, id, true, true);
+    $('#lead_id').append(option).trigger('change');
+}
+
+function openCreateClientModal() {
+    $('#createClientForm')[0].reset();
+    var prefill = (lastClientSearch || '').trim();
+    if (prefill && !/^\d/.test(prefill)) {
+        $('#create_client_name').val(prefill);
+    } else if (prefill) {
+        $('#create_client_phone').val(prefill);
+    }
+    $('#createClientModal').modal('show');
+}
+
+function formatClientLabel(row) {
+    if (!row.lead_name) return '—';
+    var label = row.lead_name;
+    if (row.lead_phone) label += ' (' + row.lead_phone + ')';
+    return label;
+}
+
+function initLeadSelect() {
+    if (!$('#lead_id').length) return;
+    if ($('#lead_id').hasClass('select2-hidden-accessible')) {
+        $('#lead_id').val(null).trigger('change');
+        return;
+    }
+    $('#lead_id').select2({
+        dropdownParent: $('#incomeModal'),
+        placeholder: 'Buscar cliente...',
+        allowClear: true,
+        width: '100%',
+        minimumInputLength: 2,
+        language: {
+            inputTooShort: function() { return 'Escribe al menos 2 caracteres'; },
+            noResults: function() { return 'Sin resultados — usa "Crear cliente"'; },
+            searching: function() { return 'Buscando...'; }
+        },
+        ajax: {
+            url: clientsSearchUrl,
+            dataType: 'json',
+            delay: 300,
+            data: function(params) {
+                lastClientSearch = params.term || '';
+                return { q: params.term || '' };
+            },
+            processResults: function(response) {
+                var items = (response.data || []).map(function(c) {
+                    return { id: c.id, text: formatClientOptionLabel(c) };
+                });
+                return { results: items };
+            }
+        }
+    });
+}
+
 function loadCatalog(cb) {
     $.get(catalogUrl, function(r) {
         if (r.status === 'success') {
@@ -281,6 +364,7 @@ function loadTable() {
                 rows.push([
                     row.id,
                     row.category_name || '—',
+                    formatClientLabel(row),
                     formatPrimaryAmount(row.amount, row.currency_id),
                     row.description || row.notes || '—',
                     row.occurred_on || '—',
@@ -320,6 +404,9 @@ function loadPending() {
 function showModal() {
     $('#incomeForm')[0].reset();
     if (currentType) $('#movement_type').val(currentType);
+    if ($('#lead_id').hasClass('select2-hidden-accessible')) {
+        $('#lead_id').val(null).trigger('change');
+    }
     refreshCurrencyDetection();
     $('#incomeModal').modal('show');
 }
@@ -369,7 +456,34 @@ $('#incomeForm').submit(function(e) {
     });
 });
 
+$('#createClientForm').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: clientsCreateUrl,
+        method: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(r) {
+            if (r.status !== 'success' || !r.data) {
+                alert('Error: ' + (r.message || 'No se pudo crear el cliente'));
+                return;
+            }
+            var client = r.data;
+            setLeadSelection(client.id, formatClientOptionLabel(client));
+            $('#createClientModal').modal('hide');
+            if (client.existing) {
+                alert(client.message || 'Cliente existente seleccionado.');
+            }
+        },
+        error: function(xhr) {
+            var msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Error de conexión';
+            alert('Error: ' + msg);
+        }
+    });
+});
+
 $(document).ready(function() {
+    initLeadSelect();
     loadCatalog(function() { loadTable(); loadPending(); });
 });
 </script>

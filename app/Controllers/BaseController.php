@@ -108,6 +108,11 @@ abstract class BaseController extends Controller
         'ManagementPropertyChecklistModel',
         'BusinessConditionsModel',
         'CommissionSheetModel',
+        'CommissionPropertyModel',
+        'CommissionParticipantModel',
+        'CommissionAdvanceModel',
+        'CommissionSettlementModel',
+        'CommissionSettlementDetailModel',
         'ActivityTableModel',
         'UserActivityLogModel',
     ];

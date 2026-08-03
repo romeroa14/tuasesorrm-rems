@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FinanceTransaction extends Model
+class CommissionSettlementDetailModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'finance_transactions';
+    protected $table            = 'commission_settlement_details';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,26 +15,27 @@ class FinanceTransaction extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'type',
-        'amount',
-        'currency_id',
-        'account_id',
-        'category_id',
-        'user_id',
-        'description',
-        'date',
         'settlement_id',
+        'user_id',
+        'gross_commission',
+        'total_advances',
+        'notes',
     ];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules = [
+        'settlement_id'    => 'required|integer|is_not_unique[commission_settlements.id]',
+        'user_id'          => 'required|integer|is_not_unique[users.id]',
+        'gross_commission' => 'permit_empty|numeric|greater_than_equal_to[0]',
+        'total_advances'   => 'permit_empty|numeric|greater_than_equal_to[0]',
+    ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

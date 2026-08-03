@@ -4,18 +4,23 @@ declare(strict_types=1);
 
 namespace App\Libraries;
 
+use App\Libraries\CacheService;
 use App\Models\FinanceAccount;
 use App\Models\FinanceCategory;
+use App\Models\FinanceCompany;
 use App\Models\FinanceCurrency;
 use App\Models\FinanceExchangeRate;
 use App\Models\FinancePaymentType;
+use App\Models\Leads;
 use InvalidArgumentException;
+use RuntimeException;
 
 class FinanceCatalogService
 {
     public function getCatalogPayload(): array
     {
         $currencyContext = $this->getCurrencyContext();
+        $companyContext = new FinanceCompanyContext();
 
         return [
             'accounts'          => $this->getOperationalAccounts(),
@@ -24,8 +29,20 @@ class FinanceCatalogService
             'expense_categories'=> $this->getCategoriesByType('expense'),
             'currencies'        => $this->getCurrencies(),
             'payment_types'     => $this->getPaymentTypes(),
+            'companies'         => $this->getCompanies(),
+            'active_company_id' => $companyContext->getActiveCompanyId(),
             'currency_context'  => $currencyContext,
         ];
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    public function getCompanies(): array
+    {
+        $model = new FinanceCompany();
+
+        return $model->orderBy('name', 'ASC')->findAll();
     }
 
     /**
@@ -178,6 +195,158 @@ class FinanceCatalogService
     }
 
     /**
+     * @return list<array<string, mixed>>
+     */
+    public function searchClients(string $term = '', int $limit = 25): array
+    {
+        $model = new Leads();
+        $builder = $model
+            ->select('id, name, phone, email')
+            ->orderBy('name', 'ASC')
+            ->limit(max(1, min($limit, 50)));
+
+        $term = trim($term);
+        if ($term !== '') {
+            $builder->groupStart()
+                ->like('name', $term)
+                ->orLike('phone', $term)
+                ->orLike('email', $term)
+                ->groupEnd();
+        }
+
+        return $builder->findAll();
+    }
+
+    /**
+     * @param array<string, mixed> $input
+     *
+     * @return array<string, mixed>
+     */
+    public function createClient(array $input, int $userId): array
+    {
+        $name = trim((string) ($input['name'] ?? ''));
+        $phone = trim((string) ($input['phone'] ?? ''));
+        $email = trim((string) ($input['email'] ?? ''));
+        $observation = trim((string) ($input['observation'] ?? ''));
+
+        if ($name === '') {
+            throw new InvalidArgumentException('El nombre del cliente es obligatorio.');
+        }
+
+        if ($phone === '') {
+            throw new InvalidArgumentException('El teléfono del cliente es obligatorio.');
+        }
+
+        if ($userId <= 0) {
+            throw new InvalidArgumentException('No se pudo identificar al usuario que registra el cliente.');
+        }
+
+        $model = new Leads();
+        $existing = $model
+            ->where('phone', $phone)
+            ->where('status !=', 'Eliminado')
+            ->first();
+
+        if (is_array($existing)) {
+            return [
+                'id'       => (int) $existing['id'],
+                'name'     => (string) ($existing['name'] ?? $name),
+                'phone'    => (string) ($existing['phone'] ?? $phone),
+                'email'    => $existing['email'] ?? null,
+                'existing' => true,
+                'message'  => 'Ya existía un cliente con ese teléfono; se seleccionó el registro existente.',
+            ];
+        }
+
+        $businessModelId = $this->resolveDefaultCatalogId('businessmodel');
+        $housingTypeId = $this->resolveDefaultCatalogId('housingtype');
+
+        if ($businessModelId === null || $housingTypeId === null) {
+            throw new InvalidArgumentException('Faltan catálogos de interés o tipo de propiedad en el CRM.');
+        }
+
+        if ($observation === '') {
+            $observation = 'Registrado desde el módulo de finanzas.';
+        }
+
+        $data = [
+            'id_user'          => $userId,
+            'id_funnel'        => $this->ensureFinanceFunnelId(),
+            'id_businessmodel' => $businessModelId,
+            'id_housingtype'   => $housingTypeId,
+            'name'             => $name,
+            'phone'            => $phone,
+            'email'            => $email !== '' ? $email : null,
+            'observation'      => $observation,
+            'status'           => 'Activo',
+        ];
+
+        if (! $model->insert($data)) {
+            throw new RuntimeException('No se pudo crear el cliente.');
+        }
+
+        $insertId = (int) $model->getInsertID();
+        if ($insertId <= 0) {
+            throw new RuntimeException('No se pudo crear el cliente.');
+        }
+
+        if (function_exists('log_activity')) {
+            log_activity('create', 'leads', $insertId, null, [
+                'user_id'         => $userId,
+                'lead_name'       => $name,
+                'lead_phone'      => $phone,
+                'funnel_id'       => $data['id_funnel'],
+                'creation_source' => 'finance_module',
+            ]);
+        }
+
+        if (class_exists(CacheService::class)) {
+            CacheService::bust('dashboard');
+            CacheService::bust('pipeline');
+            CacheService::bust('stats');
+        }
+
+        return [
+            'id'       => $insertId,
+            'name'     => $name,
+            'phone'    => $phone,
+            'email'    => $email !== '' ? $email : null,
+            'existing' => false,
+            'message'  => 'Cliente creado correctamente.',
+        ];
+    }
+
+    private function ensureFinanceFunnelId(): int
+    {
+        $db = db_connect();
+        $funnelName = 'Finanzas - Registro manual';
+        $row = $db->table('funnels')->where('name', $funnelName)->get()->getRowArray();
+
+        if (is_array($row) && isset($row['id'])) {
+            return (int) $row['id'];
+        }
+
+        $db->table('funnels')->insert([
+            'name'       => $funnelName,
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        return (int) $db->insertID();
+    }
+
+    private function resolveDefaultCatalogId(string $table): ?int
+    {
+        $db = db_connect();
+        if (! $db->tableExists($table)) {
+            return null;
+        }
+
+        $row = $db->table($table)->orderBy('id', 'ASC')->limit(1)->get()->getRowArray();
+
+        return is_array($row) && isset($row['id']) ? (int) $row['id'] : null;
+    }
+
+    /**
      * @param array<string, mixed> $input
      *
      * @return array<string, mixed>
@@ -205,6 +374,24 @@ class FinanceCatalogService
         }
 
         $input = $this->applyCurrencyDefaults($input);
+
+        if (empty($input['company_id'])) {
+            $activeCompany = (new FinanceCompanyContext())->getActiveCompanyId();
+            if ($activeCompany !== null) {
+                $input['company_id'] = $activeCompany;
+            }
+        }
+
+        $leadId = isset($input['lead_id']) ? (int) $input['lead_id'] : 0;
+        if ($leadId <= 0) {
+            $input['lead_id'] = null;
+        } else {
+            $lead = (new Leads())->select('id')->find($leadId);
+            if (! is_array($lead)) {
+                throw new InvalidArgumentException('El cliente seleccionado no existe.');
+            }
+            $input['lead_id'] = $leadId;
+        }
 
         return $input;
     }
@@ -298,13 +485,27 @@ class FinanceCatalogService
         return is_array($row) ? $row : null;
     }
 
-    private function resolveLatestRateToBase(?int $currencyId): ?float
+    private function resolveLatestRateToBase(?int $currencyId, string $preferredSource = 'oficial'): ?float
     {
         if ($currencyId === null) {
             return null;
         }
 
         $model = new FinanceExchangeRate();
+
+        if ($preferredSource !== '') {
+            $preferred = $model
+                ->where('currency_id', $currencyId)
+                ->where('source', $preferredSource)
+                ->orderBy('rate_date', 'DESC')
+                ->orderBy('id', 'DESC')
+                ->first();
+
+            if (is_array($preferred) && isset($preferred['rate'])) {
+                return (float) $preferred['rate'];
+            }
+        }
+
         $row = $model
             ->where('currency_id', $currencyId)
             ->orderBy('rate_date', 'DESC')

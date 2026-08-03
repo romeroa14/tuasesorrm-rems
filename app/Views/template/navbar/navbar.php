@@ -210,12 +210,20 @@
 $.post('<?= base_url('/app/finance/api/exchange_rates') ?>', function(r) {
     if (r.status==='success' && Array.isArray(r.data)) {
         var rates = {};
-        r.data.forEach(function(d) { rates[(d.currency_code||'')+'-'+d.source] = parseFloat(d.rate).toFixed(2); });
-        $('#rate-usd-oficial').html('<span class="badge badge-primary px-1" style="font-size:10px">$</span> BCV: '+ (rates['USD-oficial']||'—'));
-        $('#rate-usd-paralelo').html(' <span class="badge badge-warning text-dark px-1" style="font-size:10px">$</span> USDT: '+ (rates['USD-paralelo']||'—'));
-        $('#rate-eur-oficial').html(' <span class="badge badge-info px-1" style="font-size:10px">€</span> EURO: '+ (rates['EUR-oficial']||'—'));
-        $('#rate-eur-paralelo').html(' <span class="badge badge-secondary px-1" style="font-size:10px">€</span> PAR: '+ (rates['EUR-paralelo']||'—'));
-        if (rates['USD-efectivo']) $('#rate-efectivo').text(rates['USD-efectivo']);
+        r.data.forEach(function(d) {
+            if (!d.source) return;
+            var key = (d.currency_code || '') + '-' + d.source;
+            var current = rates[key];
+            if (!current || (d.rate_date || '') >= (current.date || '')) {
+                rates[key] = { value: parseFloat(d.rate).toFixed(2), date: d.rate_date || '' };
+            }
+        });
+        function latest(key) { return rates[key] ? rates[key].value : '—'; }
+        $('#rate-usd-oficial').html('<span class="badge badge-primary px-1" style="font-size:10px">$</span> BCV: '+ latest('USD-oficial'));
+        $('#rate-usd-paralelo').html(' <span class="badge badge-warning text-dark px-1" style="font-size:10px">$</span> USDT: '+ latest('USD-paralelo'));
+        $('#rate-eur-oficial').html(' <span class="badge badge-info px-1" style="font-size:10px">€</span> EURO: '+ latest('EUR-oficial'));
+        $('#rate-eur-paralelo').html(' <span class="badge badge-secondary px-1" style="font-size:10px">€</span> PAR: '+ latest('EUR-paralelo'));
+        if (rates['USD-efectivo']) $('#rate-efectivo').text(rates['USD-efectivo'].value);
     }
 });
 </script>

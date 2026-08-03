@@ -244,6 +244,7 @@ class FinanceLedger
             'approved_by'    => self::nullableInt($movement['approved_by'] ?? null),
             'source_table'   => $movement['source_table'] ?? null,
             'source_id'      => self::nullableInt($movement['source_id'] ?? null),
+            'lead_id'        => self::nullableInt($movement['lead_id'] ?? null),
             'currency_id'    => self::nullableInt($movement['currency_id'] ?? ($lines[0]['currency_id'] ?? null)),
             'payment_type_id'=> self::nullableInt($movement['payment_type_id'] ?? null),
             'rate_to_base'   => self::normalizeRate($movement['rate_to_base'] ?? 1),

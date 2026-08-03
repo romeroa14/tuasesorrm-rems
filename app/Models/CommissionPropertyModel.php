@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FinanceTransaction extends Model
+class CommissionPropertyModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'finance_transactions';
+    protected $table            = 'commission_properties';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,15 +15,13 @@ class FinanceTransaction extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'type',
-        'amount',
-        'currency_id',
-        'account_id',
-        'category_id',
-        'user_id',
-        'description',
-        'date',
-        'settlement_id',
+        'reference',
+        'sale_price',
+        'commission_pct',
+        'registration_fee',
+        'sale_date',
+        'status',
+        'notes',
     ];
 
     // Dates
@@ -34,7 +32,14 @@ class FinanceTransaction extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules = [
+        'reference'        => 'required|max_length[255]',
+        'sale_price'       => 'required|numeric|greater_than[0]',
+        'commission_pct'   => 'required|numeric|greater_than[0]',
+        'registration_fee' => 'permit_empty|numeric|greater_than_equal_to[0]',
+        'sale_date'        => 'required|valid_date',
+        'status'           => 'permit_empty|in_list[pending,settled,cancelled]',
+    ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

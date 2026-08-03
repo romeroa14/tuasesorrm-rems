@@ -17,6 +17,7 @@ class FinanceMember extends Model
     protected $allowedFields    = [
         'user_id',
         'member_role',
+        'finance_profile',
         'is_active',
         'approval_limit',
         'can_manage_members',
@@ -31,6 +32,7 @@ class FinanceMember extends Model
     protected $validationRules      = [
         'user_id'            => 'required|integer',
         'member_role'        => 'required|in_list[owner,admin,assistant]',
+        'finance_profile'    => 'permit_empty|in_list[full,loader,approver,viewer]',
         'is_active'          => 'permit_empty|in_list[0,1]',
         'can_manage_members' => 'permit_empty|in_list[0,1]',
     ];

@@ -117,6 +117,7 @@ class FinanceWorkflow
             'occurred_on'   => self::requiredDate($input, 'occurred_on'),
             'actor_user_id' => $actorUserId,
             'approved_by'   => self::nullableInt($decision['approved_by'] ?? null),
+            'lead_id'       => self::nullableInt($input['lead_id'] ?? null),
             'currency_id'   => $sharedDimensions['currency_id'],
             'payment_type_id' => $sharedDimensions['payment_type_id'],
             'rate_to_base'  => $sharedDimensions['rate_to_base'],
@@ -131,6 +132,9 @@ class FinanceWorkflow
                     'currency_id'   => $sharedDimensions['currency_id'],
                     'rate_to_base'  => $sharedDimensions['rate_to_base'],
                     'category_id'   => $sharedDimensions['category_id'],
+                    'company_id'    => $sharedDimensions['company_id'],
+                    'project_id'    => $sharedDimensions['project_id'],
+                    'department_id' => $sharedDimensions['department_id'],
                     'description'   => $sharedDimensions['description'],
                 ],
                 [

@@ -226,6 +226,17 @@ $routes->group('', ['filter' => 'authApi'], function($routes) {
 // =============================================================================
 $routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     $routes->get('/', 'FinanceController::index');
+    $routes->post('set-company', 'FinanceController::setCompany');
+    $routes->get('wallets', 'FinanceController::wallets');
+    $routes->post('wallets/api/list', 'FinanceController::walletsApiList');
+    $routes->post('wallets/api/transfer', 'FinanceController::walletsApiTransfer');
+    $routes->get('period_closes', 'FinanceController::periodCloses');
+    $routes->post('period-closes/run', 'FinanceController::periodCloseRun');
+    $routes->get('export/profit_loss', 'FinanceController::exportProfitLossPdf');
+    $routes->get('reports/statistics', 'FinanceReportsController::statistics');
+    $routes->post('reports/api/statistics', 'FinanceReportsController::apiStatistics');
+    $routes->get('members', 'FinanceController::members');
+    $routes->post('members/save', 'FinanceController::membersSave');
     $routes->get('transactions', 'FinanceController::transactions');
     $routes->get('expenses', 'FinanceController::expenses');
     $routes->get('accounts', 'FinanceController::accounts');
@@ -248,6 +259,8 @@ $routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     $routes->post('expenses_detail/api/list', 'FinanceIncomeController::apiExpenseList');
     $routes->post('expenses_detail/api/create', 'FinanceIncomeController::apiCreateExpense');
     $routes->get('api/catalog', 'FinanceIncomeController::apiCatalog');
+    $routes->get('api/clients/search', 'FinanceIncomeController::apiSearchClients');
+    $routes->post('api/clients/create', 'FinanceIncomeController::apiCreateClient');
     $routes->post('api/pending', 'FinanceIncomeController::apiPendingList');
     $routes->get('quotas', 'FinanceQuotaController::index');
     $routes->post('quotas/api/list', 'FinanceQuotaController::apiList');
@@ -279,4 +292,34 @@ $routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     $routes->post('api/(:segment)/create', 'FinanceApiController::apiCreate/$1');
     $routes->post('api/(:segment)/(:num)', 'FinanceApiController::apiUpdate/$1/$2');
     $routes->post('api/(:segment)/(:num)/delete', 'FinanceApiController::apiDelete/$1/$2');
+
+    // ── Commission Settlement Module ──
+    $routes->group('commission', function($routes) {
+        // Properties + Participants
+        $routes->get('properties', 'CommissionController::properties');
+        $routes->get('property-form/(:num)', 'CommissionController::propertyForm/$1');
+        $routes->get('property-form', 'CommissionController::propertyForm');
+        $routes->post('save-property', 'CommissionController::saveProperty');
+        $routes->post('delete-property/(:num)', 'CommissionController::deleteProperty/$1');
+        $routes->get('get-participants/(:num)', 'CommissionController::getPropertyParticipants/$1');
+        $routes->post('save-participant', 'CommissionController::saveParticipant');
+        $routes->post('delete-participant/(:num)', 'CommissionController::deleteParticipant/$1');
+
+        // Advances
+        $routes->get('advances', 'CommissionController::advances');
+        $routes->get('advance-form/(:num)', 'CommissionController::advanceForm/$1');
+        $routes->get('advance-form', 'CommissionController::advanceForm');
+        $routes->post('save-advance', 'CommissionController::saveAdvance');
+        $routes->post('delete-advance/(:num)', 'CommissionController::deleteAdvance/$1');
+
+        // Settlements + Report
+        $routes->get('settlements', 'CommissionController::settlements');
+        $routes->get('settlement-form/(:num)', 'CommissionController::settlementForm/$1');
+        $routes->get('settlement-form', 'CommissionController::settlementForm');
+        $routes->post('save-settlement', 'CommissionController::saveSettlement');
+        $routes->post('calculate-settlement/(:num)', 'CommissionController::calculateSettlement/$1');
+        $routes->post('finalize-settlement/(:num)', 'CommissionController::finalizeSettlement/$1');
+        $routes->get('settlement-detail/(:num)', 'CommissionController::settlementDetail/$1');
+        $routes->get('report', 'CommissionController::report');
+    });
 });

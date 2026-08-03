@@ -24,6 +24,7 @@ class FinanceMovement extends Model
         'approved_by',
         'source_table',
         'source_id',
+        'lead_id',
         'currency_id',
         'payment_type_id',
         'rate_to_base',

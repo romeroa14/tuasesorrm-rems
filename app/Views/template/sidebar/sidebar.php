@@ -45,7 +45,19 @@ $financeModules = FinanceSidebar::modules();
                 </a>
 
                 <?php foreach ($financeModules as $module): ?>
-                    <?php $moduleActive = FinanceSidebar::isModuleActive($module, $financeCurrentPath, $financeCurrentType); ?>
+                    <?php
+                    $moduleId = $module['id'] ?? '';
+                    if ($moduleId === 'income' && ! $financeAuthorization->canViewIncome()) continue;
+                    if ($moduleId === 'expense' && ! $financeAuthorization->canViewExpense()) continue;
+                    if ($moduleId === 'quotas' && ! $financeAuthorization->canViewIncome()) continue;
+                    if ($moduleId === 'cash_management' && ! $financeAuthorization->canViewExpense() && ! $financeAuthorization->canViewIncome()) continue;
+                    if ($moduleId === 'commission' && ! $financeAuthorization->canViewReports() && ! $financeAuthorization->canViewIncome()) continue;
+                    if ($moduleId === 'wallets' && ! $financeAuthorization->canManageWallets() && ! $financeAuthorization->canViewReports()) continue;
+                    if ($moduleId === 'reports' && ! $financeAuthorization->canViewReports() && ! $financeAuthorization->canViewDashboard()) continue;
+                    if ($moduleId === 'period_closes' && ! $financeAuthorization->canViewReports() && ! $financeAuthorization->canClosePeriod()) continue;
+                    if ($moduleId === 'profit_loss' && ! $financeAuthorization->canViewReports() && ! $financeAuthorization->canViewDashboard()) continue;
+                    $moduleActive = FinanceSidebar::isModuleActive($module, $financeCurrentPath, $financeCurrentType);
+                    ?>
                     <?php if (isset($module['url'])): ?>
                         <a class="collapse-item <?= $moduleActive ? 'active' : '' ?>"
                            href="<?= base_url($module['url']) ?>">
@@ -77,6 +89,20 @@ $financeModules = FinanceSidebar::modules();
                     <a class="collapse-item <?= ($title ?? '') === 'Finanzas Métodos de Pago' ? 'active' : '' ?>"
                        href="<?= base_url('/app/finance/payment_types') ?>">
                         <i class="fas fa-credit-card"></i> Métodos de pago
+                    </a>
+                    <a class="collapse-item <?= ($title ?? '') === 'Finanzas Categorías' ? 'active' : '' ?>"
+                       href="<?= base_url('/app/finance/categories') ?>">
+                        <i class="fas fa-tags"></i> Categorías
+                    </a>
+                    <a class="collapse-item <?= ($title ?? '') === 'Finanzas Empresas' ? 'active' : '' ?>"
+                       href="<?= base_url('/app/finance/companies') ?>">
+                        <i class="fas fa-building"></i> Empresas
+                    </a>
+                <?php endif; ?>
+                <?php if ($financeAuthorization->canManageMembers()): ?>
+                    <a class="collapse-item <?= ($title ?? '') === 'Finanzas — Miembros' ? 'active' : '' ?>"
+                       href="<?= base_url('/app/finance/members') ?>">
+                        <i class="fas fa-users-cog"></i> Miembros
                     </a>
                 <?php endif; ?>
             </div>

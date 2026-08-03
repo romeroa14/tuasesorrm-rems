@@ -30,6 +30,9 @@ class FinanceQuota extends Model
         'amount_usd',
         'amount_bs',
         'notes',
+        'company_id',
+        'finance_movement_id',
+        'financing_plan_id',
     ];
 
     protected $useTimestamps = true;

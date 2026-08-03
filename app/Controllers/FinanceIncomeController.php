@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Libraries\FinanceAuthorization;
 use App\Libraries\FinanceCatalogService;
+use App\Libraries\FinanceCompanyContext;
 use App\Libraries\FinanceReportService;
 use App\Libraries\FinanceWorkflow;
 use Config\FinanceMenu;
@@ -19,6 +20,7 @@ class FinanceIncomeController extends BaseController
     protected FinanceReportService $reportService;
     protected FinanceCatalogService $catalogService;
     protected FinanceWorkflow $financeWorkflow;
+    protected FinanceCompanyContext $companyContext;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -27,6 +29,7 @@ class FinanceIncomeController extends BaseController
         $this->reportService = new FinanceReportService();
         $this->catalogService = new FinanceCatalogService();
         $this->financeWorkflow = new FinanceWorkflow();
+        $this->companyContext = new FinanceCompanyContext();
     }
 
     protected function requireFinanceAccess()
@@ -60,6 +63,10 @@ class FinanceIncomeController extends BaseController
             return $response;
         }
 
+        if (! $this->financeAuthorization->canViewIncome()) {
+            return redirect()->to(base_url('/app/finance'));
+        }
+
         $type = $this->request->getGet('type');
         $incomeTypes = FinanceMenu::incomeTypes();
 
@@ -78,6 +85,10 @@ class FinanceIncomeController extends BaseController
     {
         if ($response = $this->requireFinanceAccess()) {
             return $response;
+        }
+
+        if (! $this->financeAuthorization->canViewExpense()) {
+            return redirect()->to(base_url('/app/finance'));
         }
 
         $type = $this->request->getGet('type');
@@ -100,12 +111,20 @@ class FinanceIncomeController extends BaseController
             return $response;
         }
 
+        if (! $this->financeAuthorization->canViewReports() && ! $this->financeAuthorization->canViewDashboard()) {
+            return redirect()->to(base_url('/app/finance'));
+        }
+
         $this->setContext(FinanceMenu::profitLossTitle(), 'auth/finance/profit_loss', 'profit_loss');
 
         $dateFrom = $this->request->getGet('date_from') ?? date('Y-m-01');
         $dateTo   = $this->request->getGet('date_to') ?? date('Y-m-t');
 
-        $this->body['report'] = $this->reportService->getAccountingSheet($dateFrom, $dateTo);
+        $this->body['report'] = $this->reportService->getAccountingSheet(
+            $dateFrom,
+            $dateTo,
+            $this->companyContext->getActiveCompanyId()
+        );
         $this->body['date_from'] = $dateFrom;
         $this->body['date_to'] = $dateTo;
 
@@ -125,10 +144,42 @@ class FinanceIncomeController extends BaseController
         }
     }
 
-    public function apiIncomeList(): ResponseInterface
+    public function apiSearchClients(): ResponseInterface
     {
         if (! $this->financeAuthorization->canAccess()) {
             return $this->jsonError('No tienes acceso al modulo de finanzas.', 403);
+        }
+
+        $term = trim((string) ($this->request->getGet('q') ?? $this->request->getPost('q') ?? ''));
+
+        return $this->jsonSuccess($this->catalogService->searchClients($term));
+    }
+
+    public function apiCreateClient(): ResponseInterface
+    {
+        if (! $this->financeAuthorization->canDraftWorkflow()) {
+            return $this->jsonError('No tienes permisos para registrar clientes desde finanzas.', 403);
+        }
+
+        try {
+            $membership = $this->requireMembership();
+            $userId = (int) ($membership['user_id'] ?? 0);
+            $result = $this->catalogService->createClient($this->requestData(), $userId);
+
+            return $this->jsonSuccess($result);
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
+        } catch (\Throwable $exception) {
+            log_message('error', 'FinanceIncomeController::apiCreateClient - ' . $exception->getMessage());
+
+            return $this->jsonError('No se pudo crear el cliente.', 500);
+        }
+    }
+
+    public function apiIncomeList(): ResponseInterface
+    {
+        if (! $this->financeAuthorization->canViewIncome()) {
+            return $this->jsonError('No tienes permisos para ver ingresos.', 403);
         }
 
         $type = $this->request->getGet('type') ?: $this->request->getPost('type');
@@ -142,8 +193,8 @@ class FinanceIncomeController extends BaseController
 
     public function apiExpenseList(): ResponseInterface
     {
-        if (! $this->financeAuthorization->canAccess()) {
-            return $this->jsonError('No tienes acceso al modulo de finanzas.', 403);
+        if (! $this->financeAuthorization->canViewExpense()) {
+            return $this->jsonError('No tienes permisos para ver egresos.', 403);
         }
 
         $type = $this->request->getGet('type') ?: $this->request->getPost('type');

@@ -22,6 +22,9 @@ class FinanceMenu extends BaseConfig
             'registros'                => 'Ingresos por registros',
             'honorarios_profesionales' => 'Ingresos por honorarios profesionales',
             'alquiler'                 => 'Ingresos por alquiler',
+            'cuotas_financiamiento'    => 'Ingresos por cuotas de financiamiento',
+            'nomina_ingreso'           => 'Ingresos por nómina (gestoría)',
+            'pagos_generales'          => 'Ingresos por pagos generales',
             'otros'                    => 'Ingresos otros (administración, cambios, etc.)',
             'gestoria_fichas'          => 'Ingresos por gestoría fichas',
         ];
@@ -36,6 +39,10 @@ class FinanceMenu extends BaseConfig
             'comisiones_venta_primaria'   => 'Pagos comisiones por venta primarios',
             'comisiones_venta_secundaria' => 'Pagos por comisiones por venta secundario',
             'comisiones_alquiler'         => 'Pago de comisiones de alquiler',
+            'nomina_egreso'               => 'Pagos de nómina (empleados)',
+            'marketing'                   => 'Gastos de marketing',
+            'gastos_oficina'              => 'Gastos de oficina',
+            'retiros_accionistas'         => 'Retiros de accionistas',
             'planilla_pub'                => 'Pagos de planilla pub',
             'fichas_catastrales'          => 'Pagos de fichas catastrales',
             'otros_servicios'             => 'Otros pagos servicios',
@@ -80,6 +87,12 @@ class FinanceMenu extends BaseConfig
                 'items' => self::mapTypeLinks('expenses_detail', self::expenseTypes()),
             ],
             [
+                'id'    => 'reports',
+                'label' => 'Reportes estadísticos',
+                'icon'  => 'fas fa-chart-pie text-primary',
+                'url'   => '/app/finance/reports/statistics',
+            ],
+            [
                 'id'    => 'profit_loss',
                 'label' => 'Hoja contable',
                 'icon'  => 'fas fa-chart-bar text-warning',
@@ -110,6 +123,41 @@ class FinanceMenu extends BaseConfig
                     ],
                 ],
             ],
+            [
+                'id'    => 'wallets',
+                'label' => 'Carteras',
+                'icon'  => 'fas fa-piggy-bank text-info',
+                'url'   => '/app/finance/wallets',
+            ],
+            [
+                'id'    => 'period_closes',
+                'label' => 'Cierres mensuales',
+                'icon'  => 'fas fa-calendar-check text-secondary',
+                'url'   => '/app/finance/period_closes',
+            ],
+            [
+                'id'    => 'commission',
+                'label' => 'Comisiones',
+                'icon'  => 'fas fa-percentage text-primary',
+                'items' => [
+                    [
+                        'label' => 'Propiedades',
+                        'url'   => '/app/finance/commission/properties',
+                    ],
+                    [
+                        'label' => 'Adelantos',
+                        'url'   => '/app/finance/commission/advances',
+                    ],
+                    [
+                        'label' => 'Liquidaciones',
+                        'url'   => '/app/finance/commission/settlements',
+                    ],
+                    [
+                        'label' => 'Reporte',
+                        'url'   => '/app/finance/commission/report',
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -130,6 +178,12 @@ class FinanceMenu extends BaseConfig
                 'label' => 'Egresos',
                 'icon'  => 'fas fa-arrow-down text-danger',
                 'url'   => '/app/finance/expenses_detail',
+            ],
+            [
+                'id'    => 'reports',
+                'label' => 'Reportes estadísticos',
+                'icon'  => 'fas fa-chart-pie text-primary',
+                'url'   => '/app/finance/reports/statistics',
             ],
             [
                 'id'    => 'profit_loss',
@@ -159,6 +213,41 @@ class FinanceMenu extends BaseConfig
                     [
                         'label' => 'Canjes de efectivo',
                         'url'   => '/app/finance/exchanges',
+                    ],
+                ],
+            ],
+            [
+                'id'    => 'wallets',
+                'label' => 'Carteras',
+                'icon'  => 'fas fa-piggy-bank text-info',
+                'url'   => '/app/finance/wallets',
+            ],
+            [
+                'id'    => 'period_closes',
+                'label' => 'Cierres mensuales',
+                'icon'  => 'fas fa-calendar-check text-secondary',
+                'url'   => '/app/finance/period_closes',
+            ],
+            [
+                'id'    => 'commission',
+                'label' => 'Comisiones',
+                'icon'  => 'fas fa-percentage text-primary',
+                'items' => [
+                    [
+                        'label' => 'Propiedades',
+                        'url'   => '/app/finance/commission/properties',
+                    ],
+                    [
+                        'label' => 'Adelantos',
+                        'url'   => '/app/finance/commission/advances',
+                    ],
+                    [
+                        'label' => 'Liquidaciones',
+                        'url'   => '/app/finance/commission/settlements',
+                    ],
+                    [
+                        'label' => 'Reporte',
+                        'url'   => '/app/finance/commission/report',
                     ],
                 ],
             ],
