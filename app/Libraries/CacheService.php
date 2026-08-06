@@ -8,6 +8,21 @@ use Config\Cache as CacheConfig;
 
 class CacheService
 {
+    private static function normalizeKey(string $key): string
+    {
+        $reserved = (string) (config(CacheConfig::class)->reservedCharacters ?? '{}()/\\@:');
+        if ($reserved === '') {
+            return $key;
+        }
+
+        $replacements = [];
+        foreach (str_split($reserved) as $char) {
+            $replacements[$char] = '_';
+        }
+
+        return strtr($key, $replacements);
+    }
+
     /**
      * @template T
      *
@@ -17,6 +32,7 @@ class CacheService
      */
     public static function remember(string $key, int $ttl, callable $callback)
     {
+        $key = self::normalizeKey($key);
         $cache = cache();
         $cached = $cache->get($key);
 
