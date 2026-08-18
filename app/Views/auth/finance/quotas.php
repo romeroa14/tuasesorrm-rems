@@ -189,8 +189,17 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Nombre / Cliente <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="name" name="name" required>
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <label class="mb-0">Cliente <span class="text-danger">*</span></label>
+                                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="openCreateClientModal()">
+                                                <i class="fas fa-user-plus"></i> Crear cliente
+                                            </button>
+                                        </div>
+                                        <select class="form-control" name="lead_id" id="quota_lead_id" style="width:100%" required>
+                                            <option value=""></option>
+                                        </select>
+                                        <input type="hidden" id="name" name="name">
+                                        <small class="form-text text-muted">Busca por nombre, teléfono o correo en el CRM.</small>
                                     </div>
                                 </div>
                             </div>
@@ -228,6 +237,56 @@ var currentFilter = '<?= esc($current_type ?? '') ?>';
 var selectedPlanId = null;
 var selectedPlan = null;
 
+function showFinanceAlert(type, title, message) {
+    if (typeof Swal === 'undefined') {
+        alert((title ? title + ': ' : '') + message);
+        return;
+    }
+
+    Swal.fire({
+        icon: type,
+        title: title,
+        text: message,
+        confirmButtonColor: type === 'success' ? '#1cc88a' : '#e74a3b'
+    });
+}
+
+function showFinanceError(message, title) {
+    showFinanceAlert('error', title || 'Error', parseFinanceErrorMessage(message));
+}
+
+function showFinanceSuccess(message, title) {
+    showFinanceAlert('success', title || 'Listo', message);
+}
+
+function parseFinanceErrorMessage(raw) {
+    if (!raw) return 'Error de conexión';
+    if (raw.indexOf('Duplicate entry') !== -1 && raw.indexOf('receipt_number') !== -1) {
+        return 'El número de recibo ya está registrado. Usa uno diferente.';
+    }
+    return raw;
+}
+
+function confirmFinanceAction(title, text, onConfirm) {
+    if (typeof Swal === 'undefined') {
+        if (confirm(text || title)) onConfirm();
+        return;
+    }
+
+    Swal.fire({
+        icon: 'warning',
+        title: title,
+        text: text,
+        showCancelButton: true,
+        confirmButtonColor: '#e74a3b',
+        cancelButtonColor: '#858796',
+        confirmButtonText: 'Sí, continuar',
+        cancelButtonText: 'Cancelar'
+    }).then(function(result) {
+        if (result.isConfirmed) onConfirm();
+    });
+}
+
 function moneyFmt(v) {
     return '$' + parseFloat(v || 0).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
@@ -242,6 +301,26 @@ function setPlanLeadSelection(id, text) {
     if (!$('#plan_lead_id').length) return;
     var option = new Option(text, id, true, true);
     $('#plan_lead_id').append(option).trigger('change');
+}
+
+function setQuotaLeadSelection(id, text) {
+    if (!$('#quota_lead_id').length) return;
+    var option = new Option(text, id, true, true);
+    $('#quota_lead_id').append(option).trigger('change');
+    syncQuotaClientName();
+}
+
+function syncQuotaClientName() {
+    var text = $('#quota_lead_id option:selected').text() || '';
+    var name = text.split(' — ')[0].trim();
+    $('#name').val(name);
+}
+
+function resetQuotaLeadSelect() {
+    if ($('#quota_lead_id').hasClass('select2-hidden-accessible')) {
+        $('#quota_lead_id').val(null).trigger('change');
+    }
+    $('#name').val('');
 }
 
 function openCreateClientModal() {
@@ -286,6 +365,39 @@ function initPlanLeadSelect() {
             }
         }
     });
+}
+
+function initQuotaLeadSelect() {
+    if (!$('#quota_lead_id').length) return;
+    if ($('#quota_lead_id').hasClass('select2-hidden-accessible')) return;
+
+    $('#quota_lead_id').select2({
+        dropdownParent: $('#quotaModal'),
+        placeholder: 'Buscar cliente...',
+        allowClear: true,
+        width: '100%',
+        minimumInputLength: 2,
+        language: {
+            inputTooShort: function() { return 'Escribe al menos 2 caracteres'; },
+            noResults: function() { return 'Sin resultados — usa "Crear cliente"'; },
+            searching: function() { return 'Buscando...'; }
+        },
+        ajax: {
+            url: clientsSearchUrl,
+            dataType: 'json',
+            delay: 300,
+            data: function(params) {
+                lastClientSearch = params.term || '';
+                return { q: params.term || '' };
+            },
+            processResults: function(response) {
+                var items = (response.data || []).map(function(c) {
+                    return { id: c.id, text: formatClientOptionLabel(c) };
+                });
+                return { results: items };
+            }
+        }
+    }).on('change', syncQuotaClientName);
 }
 
 function resetPlanLeadSelect() {
@@ -395,7 +507,15 @@ function payInstallment(installmentId) {
     $('#financing_plan_id').val(selectedPlan.id);
     $('#installment_id').val(installmentId);
     $('#type').val('received');
-    $('#name').val(selectedPlan.client_name || '');
+    if (selectedPlan.lead_id) {
+        setQuotaLeadSelection(
+            selectedPlan.lead_id,
+            formatClientOptionLabel({ name: selectedPlan.client_name, phone: selectedPlan.lead_phone })
+        );
+    } else {
+        resetQuotaLeadSelect();
+        $('#name').val(selectedPlan.client_name || '');
+    }
     $('#amount').val(row.pending_amount || row.amount);
     $('#installmentHint').show().html(
         'Cuota <strong>#' + row.installment_number + '</strong> — ' + (row.month_label || row.due_date) +
@@ -421,7 +541,7 @@ function showPlanModal() {
 $('#planForm').submit(function(e) {
     e.preventDefault();
     if (!$('#plan_lead_id').val()) {
-        alert('Selecciona un cliente del CRM.');
+        showFinanceError('Selecciona un cliente del CRM.');
         return;
     }
     $.post(planApiBase + '/create', $(this).serialize(), function(res) {
@@ -429,9 +549,10 @@ $('#planForm').submit(function(e) {
             $('#planModal').modal('hide');
             selectPlan(res.data.id);
             loadPlans();
-        } else alert('Error: ' + (res.message || ''));
+            showFinanceSuccess('Plan de pago generado correctamente.');
+        } else showFinanceError(res.message || 'No se pudo crear el plan.');
     }).fail(function(xhr) {
-        alert('Error: ' + ((xhr.responseJSON && xhr.responseJSON.message) || 'Error de conexión'));
+        showFinanceError((xhr.responseJSON && xhr.responseJSON.message) || 'Error de conexión');
     });
 });
 
@@ -444,19 +565,23 @@ $('#createClientForm').submit(function(e) {
         dataType: 'json',
         success: function(r) {
             if (r.status !== 'success' || !r.data) {
-                alert('Error: ' + (r.message || 'No se pudo crear el cliente'));
+                showFinanceError(r.message || 'No se pudo crear el cliente');
                 return;
             }
             var client = r.data;
-            setPlanLeadSelection(client.id, formatClientOptionLabel(client));
+            if ($('#quotaModal').hasClass('show')) {
+                setQuotaLeadSelection(client.id, formatClientOptionLabel(client));
+            } else {
+                setPlanLeadSelection(client.id, formatClientOptionLabel(client));
+            }
             $('#createClientModal').modal('hide');
             if (client.existing) {
-                alert(client.message || 'Cliente existente seleccionado.');
+                showFinanceSuccess(client.message || 'Cliente existente seleccionado.', 'Cliente');
             }
         },
         error: function(xhr) {
             var msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Error de conexión';
-            alert('Error: ' + msg);
+            showFinanceError(msg);
         }
     });
 });
@@ -492,7 +617,9 @@ function showModal(mode, id) {
     $('#record_id, #financing_plan_id, #installment_id').val('');
     $('#installmentHint').hide();
     $('#quotaForm')[0].reset();
+    resetQuotaLeadSelect();
     $('#type').val('received');
+    initQuotaLeadSelect();
     if (mode !== 'edit' || !id) {
         moneyHelper.populatePaymentTypes();
         moneyHelper.refresh();
@@ -501,19 +628,28 @@ function showModal(mode, id) {
 }
 
 function remove(id) {
-    if (!confirm('¿Eliminar esta cuota?')) return;
-    $.post(apiBase + '/' + id + '/delete', function(r) {
-        if (r.status === 'success') { loadTable(); if (selectedPlanId) selectPlan(selectedPlanId); }
-        else alert('Error: ' + (r.message || ''));
+    confirmFinanceAction('Eliminar cuota', '¿Eliminar este movimiento de cuota?', function() {
+        $.post(apiBase + '/' + id + '/delete', function(r) {
+            if (r.status === 'success') {
+                loadTable();
+                if (selectedPlanId) selectPlan(selectedPlanId);
+                showFinanceSuccess('Cuota eliminada.');
+            } else showFinanceError(r.message || 'No se pudo eliminar.');
+        });
     });
 }
 
 $('#quotaForm').submit(function(e) {
     e.preventDefault();
-    if (!$('#payment_type_id').val()) {
-        alert('Selecciona un método de pago.');
+    if (!$('#quota_lead_id').val()) {
+        showFinanceError('Selecciona un cliente del CRM.');
         return;
     }
+    if (!$('#payment_type_id').val()) {
+        showFinanceError('Selecciona un método de pago.');
+        return;
+    }
+    syncQuotaClientName();
     var id = $('#record_id').val();
     $.ajax({
         url: id ? apiBase + '/' + id : apiBase + '/create',
@@ -525,10 +661,12 @@ $('#quotaForm').submit(function(e) {
                 $('#quotaModal').modal('hide');
                 loadTable();
                 if (selectedPlanId) selectPlan(selectedPlanId);
-            } else alert('Error: ' + (res.message || ''));
+                showFinanceSuccess('Pago registrado y validado correctamente.');
+            } else showFinanceError(res.message || 'No se pudo guardar el pago.');
         },
         error: function(xhr) {
-            alert('Error: ' + ((xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : 'Error de conexión'));
+            var msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Error de conexión';
+            showFinanceError(msg);
         }
     });
 });
@@ -537,6 +675,7 @@ $(document).ready(function() {
     moneyHelper = new FinanceCatalogMoney({ catalogUrl: catalogUrl, amountLabel: '#amount_label' });
     moneyHelper.bind();
     initPlanLeadSelect();
+    initQuotaLeadSelect();
     moneyHelper.loadCatalog(function() {
         loadPlans();
         loadTable();

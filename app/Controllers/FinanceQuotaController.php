@@ -9,8 +9,11 @@ use App\Libraries\FinanceAuthorization;
 use App\Libraries\FinanceCompanyContext;
 use App\Libraries\FinanceMoneyService;
 use App\Libraries\FinanceQuotaIncomeService;
+use App\Models\FinanceFinancingPlan;
 use App\Models\FinanceQuota;
+use App\Models\Leads;
 use Config\FinanceMenu;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -117,11 +120,23 @@ class FinanceQuotaController extends BaseController
                 $data['company_id'] = $this->companyContext->getActiveCompanyId();
             }
 
+            $data = $this->prepareQuotaInput($data);
             $data = $this->moneyService->normalizeQuotaPayload($data);
+
+            $receiptNumber = trim((string) ($data['receipt_number'] ?? ''));
+            if ($receiptNumber !== '') {
+                $duplicate = $this->quotaModel->where('receipt_number', $receiptNumber)->first();
+                if (is_array($duplicate)) {
+                    return $this->jsonError(
+                        'El número de recibo "' . $receiptNumber . '" ya está registrado. Usa uno diferente.',
+                        422
+                    );
+                }
+            }
 
             if (! $this->quotaModel->insert($data)) {
                 return $this->jsonError(
-                    implode(', ', $this->quotaModel->errors()) ?: 'Error al crear cuota.',
+                    $this->formatQuotaInsertError($this->quotaModel->errors()),
                     422
                 );
             }
@@ -150,6 +165,10 @@ class FinanceQuotaController extends BaseController
             return $this->jsonSuccess($record);
         } catch (\InvalidArgumentException $exception) {
             return $this->jsonError($exception->getMessage(), 422);
+        } catch (DatabaseException $exception) {
+            log_message('error', 'FinanceQuotaController::apiCreate - ' . $exception->getMessage());
+
+            return $this->jsonError($this->formatDatabaseError($exception->getMessage()), 422);
         }
     }
 
@@ -228,5 +247,65 @@ class FinanceQuotaController extends BaseController
                 'status'  => 'error',
                 'message' => $message,
             ]);
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
+     */
+    protected function prepareQuotaInput(array $data): array
+    {
+        $leadId = isset($data['lead_id']) ? (int) $data['lead_id'] : 0;
+
+        if ($leadId <= 0 && ! empty($data['financing_plan_id'])) {
+            $plan = (new FinanceFinancingPlan())->select('lead_id, client_name')->find((int) $data['financing_plan_id']);
+            if (is_array($plan) && ! empty($plan['lead_id'])) {
+                $leadId = (int) $plan['lead_id'];
+                $data['lead_id'] = $leadId;
+            }
+        }
+
+        if ($leadId > 0) {
+            $lead = (new Leads())->select('id, name')->find($leadId);
+            if (! is_array($lead)) {
+                throw new \InvalidArgumentException('El cliente seleccionado no existe.');
+            }
+
+            $data['lead_id'] = $leadId;
+            if (trim((string) ($data['name'] ?? '')) === '') {
+                $data['name'] = (string) ($lead['name'] ?? '');
+            }
+        } elseif (($data['type'] ?? 'received') === 'received') {
+            throw new \InvalidArgumentException('Debe seleccionar un cliente del CRM.');
+        }
+
+        if (trim((string) ($data['name'] ?? '')) === '') {
+            throw new \InvalidArgumentException('El nombre del cliente es obligatorio.');
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param array<int|string, string>|array<string, string> $errors
+     */
+    protected function formatQuotaInsertError(array $errors): string
+    {
+        $message = trim(implode(', ', array_values($errors)));
+        if ($message === '') {
+            return 'Error al crear cuota.';
+        }
+
+        return $this->formatDatabaseError($message);
+    }
+
+    protected function formatDatabaseError(string $message): string
+    {
+        if (str_contains($message, 'Duplicate entry') && str_contains($message, 'receipt_number')) {
+            return 'El número de recibo ya está registrado. Usa uno diferente.';
+        }
+
+        return $message;
     }
 }

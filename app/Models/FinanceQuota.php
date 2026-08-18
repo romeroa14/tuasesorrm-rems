@@ -19,6 +19,7 @@ class FinanceQuota extends Model
     protected $allowedFields    = [
         'type',
         'name',
+        'lead_id',
         'receipt_date',
         'delivery_date',
         'payment_type_id',

@@ -68,6 +68,7 @@ class FinanceQuotaIncomeService
             'occurred_on'     => $quotaRow['receipt_date'] ?? date('Y-m-d'),
             'payment_type_id' => $quotaRow['payment_type_id'] ?? null,
             'company_id'      => $quotaRow['company_id'] ?? null,
+            'lead_id'         => ! empty($quotaRow['lead_id']) ? (int) $quotaRow['lead_id'] : null,
             'description'     => 'Cuota: ' . ($quotaRow['name'] ?? '') . ' — Recibo ' . ($quotaRow['receipt_number'] ?? ''),
             'notes'           => $quotaRow['notes'] ?? null,
             'submit'          => true,
