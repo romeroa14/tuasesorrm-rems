@@ -31,9 +31,15 @@ class FinanceFinancingController extends BaseController
             return $this->jsonError('No tienes permisos para ver planes de pago.', 403);
         }
 
-        return $this->jsonSuccess(
-            $this->amortizationService->listPlansSummary($this->companyContext->getActiveCompanyId())
-        );
+        try {
+            return $this->jsonSuccess(
+                $this->amortizationService->listPlansSummary($this->companyContext->getActiveCompanyId())
+            );
+        } catch (\Throwable $exception) {
+            log_message('error', 'FinanceFinancingController::apiListPlans - ' . $exception->getMessage());
+
+            return $this->jsonError('No se pudieron cargar los planes de pago.', 500);
+        }
     }
 
     public function apiGetPlan(string $id): ResponseInterface

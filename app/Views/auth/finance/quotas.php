@@ -335,7 +335,7 @@ function openCreateClientModal() {
 }
 
 function initPlanLeadSelect() {
-    if (!$('#plan_lead_id').length) return;
+    if (!$('#plan_lead_id').length || typeof $.fn.select2 !== 'function') return;
     if ($('#plan_lead_id').hasClass('select2-hidden-accessible')) return;
 
     $('#plan_lead_id').select2({
@@ -368,7 +368,7 @@ function initPlanLeadSelect() {
 }
 
 function initQuotaLeadSelect() {
-    if (!$('#quota_lead_id').length) return;
+    if (!$('#quota_lead_id').length || typeof $.fn.select2 !== 'function') return;
     if ($('#quota_lead_id').hasClass('select2-hidden-accessible')) return;
 
     $('#quota_lead_id').select2({
@@ -421,26 +421,34 @@ function statusBadge(status) {
 }
 
 function loadPlans() {
-    $.post(planApiBase + '/list', function(res) {
-        var html = '';
-        if (res.status !== 'success' || !res.data.length) {
-            html = '<div class="list-group-item text-muted">No hay planes. Crea uno con "Nuevo plan de pago".</div>';
-        } else {
-            res.data.forEach(function(p) {
-                var active = String(selectedPlanId) === String(p.id) ? ' active' : '';
-                html += '<a href="#" class="list-group-item list-group-item-action' + active + '" data-plan-id="' + p.id + '">' +
-                    '<div class="font-weight-bold">' + (p.client_name || 'Sin cliente') + '</div>' +
-                    '<div class="small text-muted">' + (p.lead_phone || '') + '</div>' +
-                    '<div class="small">' + (p.project_name || '—') + ' · Apt ' + (p.unit_ref || '—') + '</div>' +
-                    '<div class="small text-danger">Pendiente: ' + moneyFmt(p.pending_total) + '</div></a>';
+    $('#plansList').html('<div class="list-group-item text-muted small">Cargando...</div>');
+    $.post(planApiBase + '/list')
+        .done(function(res) {
+            var html = '';
+            var plans = (res && res.status === 'success' && Array.isArray(res.data)) ? res.data : [];
+            if (!plans.length) {
+                html = '<div class="list-group-item text-muted">No hay planes. Crea uno con "Nuevo plan de pago".</div>';
+            } else {
+                plans.forEach(function(p) {
+                    var active = String(selectedPlanId) === String(p.id) ? ' active' : '';
+                    html += '<a href="#" class="list-group-item list-group-item-action' + active + '" data-plan-id="' + p.id + '">' +
+                        '<div class="font-weight-bold">' + (p.client_name || 'Sin cliente') + '</div>' +
+                        '<div class="small text-muted">' + (p.lead_phone || '') + '</div>' +
+                        '<div class="small">' + (p.project_name || '—') + ' · Apt ' + (p.unit_ref || '—') + '</div>' +
+                        '<div class="small text-danger">Pendiente: ' + moneyFmt(p.pending_total) + '</div></a>';
+                });
+            }
+            $('#plansList').html(html);
+            $('#plansList a').on('click', function(e) {
+                e.preventDefault();
+                selectPlan($(this).data('plan-id'));
             });
-        }
-        $('#plansList').html(html);
-        $('#plansList a').on('click', function(e) {
-            e.preventDefault();
-            selectPlan($(this).data('plan-id'));
+        })
+        .fail(function(xhr) {
+            var msg = (xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : 'No se pudo cargar los planes.';
+            $('#plansList').html('<div class="list-group-item text-danger small">' + msg + '</div>');
+            showFinanceError(msg, 'Planes de pago');
         });
-    });
 }
 
 function selectPlan(id) {
@@ -587,29 +595,40 @@ $('#createClientForm').submit(function(e) {
 });
 
 function loadTable() {
-    $.post(apiBase + '/list', { type: currentFilter }, function(response) {
-        var rows = [];
-        if (response.status === 'success' && Array.isArray(response.data)) {
-            response.data.forEach(function(row) {
-                var denomination = row.currency_denomination || 'USD';
-                rows.push([
-                    row.id,
-                    row.type === 'received' ? 'Recibida' : 'Entregada',
-                    row.name || '—',
-                    row.receipt_number || '—',
-                    moneyHelper.formatPrimaryAmount(row.amount, denomination),
-                    paymentTypeLabel(row.payment_type_id),
-                    '$ ' + formatFinanceMoney(parseFloat(row.amount_usd || 0)),
-                    'Bs. ' + formatFinanceMoney(parseFloat(row.amount_bs || 0)),
-                    parseFloat(row.exchange_rate || 0).toFixed(4),
-                    row.receipt_date || '—',
-                    '<button class="btn btn-danger btn-sm" onclick="remove(' + row.id + ')"><i class="fas fa-trash"></i></button>'
-                ]);
+    $.post(apiBase + '/list', { type: currentFilter })
+        .done(function(response) {
+            var rows = [];
+            if (response.status === 'success' && Array.isArray(response.data)) {
+                response.data.forEach(function(row) {
+                    var denomination = row.currency_denomination || 'USD';
+                    rows.push([
+                        row.id,
+                        row.type === 'received' ? 'Recibida' : 'Entregada',
+                        row.name || '—',
+                        row.receipt_number || '—',
+                        moneyHelper.formatPrimaryAmount(row.amount, denomination),
+                        paymentTypeLabel(row.payment_type_id),
+                        '$ ' + formatFinanceMoney(parseFloat(row.amount_usd || 0)),
+                        'Bs. ' + formatFinanceMoney(parseFloat(row.amount_bs || 0)),
+                        parseFloat(row.exchange_rate || 0).toFixed(4),
+                        row.receipt_date || '—',
+                        '<button class="btn btn-danger btn-sm" onclick="remove(' + row.id + ')"><i class="fas fa-trash"></i></button>'
+                    ]);
+                });
+            }
+            if (dt) dt.clear().rows.add(rows).draw();
+            else dt = $('#quotasTable').DataTable({
+                data: rows,
+                pageLength: 10,
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'
+                }
             });
-        }
-        if (dt) dt.clear().rows.add(rows).draw();
-        else dt = $('#quotasTable').DataTable({ data: rows, pageLength: 10, language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' } });
-    });
+        })
+        .fail(function(xhr) {
+            var msg = (xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : 'No se pudo cargar los movimientos.';
+            showFinanceError(msg, 'Movimientos');
+        });
 }
 
 function showModal(mode, id) {
@@ -674,10 +693,8 @@ $('#quotaForm').submit(function(e) {
 $(document).ready(function() {
     moneyHelper = new FinanceCatalogMoney({ catalogUrl: catalogUrl, amountLabel: '#amount_label' });
     moneyHelper.bind();
-    initPlanLeadSelect();
-    initQuotaLeadSelect();
+    loadPlans();
     moneyHelper.loadCatalog(function() {
-        loadPlans();
         loadTable();
     });
 });
