@@ -7,6 +7,7 @@ namespace App\Libraries;
 use App\Models\FinanceFinancingInstallment;
 use App\Models\FinanceFinancingPlan;
 use App\Models\FinanceQuota;
+use App\Models\Leads;
 use DateInterval;
 use DateTimeImmutable;
 use InvalidArgumentException;
@@ -48,15 +49,16 @@ class FinanceAmortizationService
         $schedule = $this->buildSchedule($financingAmount, $installmentCount, $startDate, $regularAmount);
         $endDate = $schedule[count($schedule) - 1]['due_date'] ?? $startDate;
 
-        $clientName = trim((string) ($input['client_name'] ?? ''));
+        $client = $this->resolveClientFromInput($input);
+        $clientName = $client['client_name'];
         $projectName = trim((string) ($input['project_name'] ?? ''));
         $unitRef = trim((string) ($input['unit_ref'] ?? $input['property_ref'] ?? ''));
 
         $planRow = [
             'company_id'         => isset($input['company_id']) ? (int) $input['company_id'] : null,
-            'lead_id'              => isset($input['lead_id']) && (int) $input['lead_id'] > 0 ? (int) $input['lead_id'] : null,
-            'name'                 => trim((string) ($input['name'] ?? '')) ?: trim($projectName . ' ' . $unitRef . ' — ' . $clientName),
-            'client_name'          => $clientName !== '' ? $clientName : null,
+            'lead_id'            => $client['lead_id'],
+            'name'               => trim((string) ($input['name'] ?? '')) ?: trim($projectName . ' ' . $unitRef . ' — ' . $clientName),
+            'client_name'        => $clientName,
             'project_name'         => $projectName !== '' ? $projectName : null,
             'property_ref'         => $unitRef !== '' ? $unitRef : null,
             'unit_ref'             => $unitRef !== '' ? $unitRef : null,
@@ -141,7 +143,7 @@ class FinanceAmortizationService
             'pending'   => round($totals['pending'], 2),
         ];
 
-        return $plan;
+        return $this->attachLeadData($plan);
     }
 
     /**
@@ -169,7 +171,10 @@ class FinanceAmortizationService
 
             $result[] = [
                 'id'               => $detail['id'],
+                'lead_id'          => $detail['lead_id'] ?? null,
                 'client_name'      => $detail['client_name'] ?? '',
+                'lead_phone'       => $detail['lead_phone'] ?? '',
+                'lead_email'       => $detail['lead_email'] ?? '',
                 'project_name'     => $detail['project_name'] ?? '',
                 'unit_ref'         => $detail['unit_ref'] ?? $detail['property_ref'] ?? '',
                 'financing_amount' => $detail['financing_amount'] ?? 0,
@@ -243,6 +248,63 @@ class FinanceAmortizationService
         if ($pending === 0) {
             $this->planModel->update($planId, ['status' => 'completed']);
         }
+    }
+
+    /**
+     * @param array<string, mixed> $input
+     *
+     * @return array{lead_id: int, client_name: string, lead_phone: ?string, lead_email: ?string}
+     */
+    private function resolveClientFromInput(array $input): array
+    {
+        $leadId = isset($input['lead_id']) ? (int) $input['lead_id'] : 0;
+        if ($leadId <= 0) {
+            throw new InvalidArgumentException('Debe seleccionar un cliente del CRM.');
+        }
+
+        $lead = (new Leads())->select('id, name, phone, email')->find($leadId);
+        if (! is_array($lead)) {
+            throw new InvalidArgumentException('Cliente no encontrado.');
+        }
+
+        $name = trim((string) ($lead['name'] ?? ''));
+        if ($name === '') {
+            throw new InvalidArgumentException('El cliente seleccionado no tiene nombre válido.');
+        }
+
+        return [
+            'lead_id'      => $leadId,
+            'client_name'  => $name,
+            'lead_phone'   => isset($lead['phone']) && $lead['phone'] !== '' ? (string) $lead['phone'] : null,
+            'lead_email'   => isset($lead['email']) && $lead['email'] !== '' ? (string) $lead['email'] : null,
+        ];
+    }
+
+    /**
+     * @param array<string, mixed> $plan
+     *
+     * @return array<string, mixed>
+     */
+    private function attachLeadData(array $plan): array
+    {
+        $leadId = isset($plan['lead_id']) ? (int) $plan['lead_id'] : 0;
+        $plan['lead_phone'] = null;
+        $plan['lead_email'] = null;
+
+        if ($leadId <= 0) {
+            return $plan;
+        }
+
+        $lead = (new Leads())->select('id, name, phone, email')->find($leadId);
+        if (! is_array($lead)) {
+            return $plan;
+        }
+
+        $plan['client_name'] = trim((string) ($lead['name'] ?? $plan['client_name'] ?? ''));
+        $plan['lead_phone'] = isset($lead['phone']) && $lead['phone'] !== '' ? (string) $lead['phone'] : null;
+        $plan['lead_email'] = isset($lead['email']) && $lead['email'] !== '' ? (string) $lead['email'] : null;
+
+        return $plan;
     }
 
     /**

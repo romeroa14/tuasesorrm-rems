@@ -112,7 +112,20 @@
             <form id="planForm">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6"><div class="form-group"><label>Cliente <span class="text-danger">*</span></label><input type="text" class="form-control" name="client_name" required></div></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label class="mb-0">Cliente <span class="text-danger">*</span></label>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="openCreateClientModal()">
+                                        <i class="fas fa-user-plus"></i> Crear cliente
+                                    </button>
+                                </div>
+                                <select class="form-control" name="lead_id" id="plan_lead_id" style="width:100%" required>
+                                    <option value=""></option>
+                                </select>
+                                <small class="form-text text-muted">Busca por nombre, teléfono o correo en el CRM.</small>
+                            </div>
+                        </div>
                         <div class="col-md-6"><div class="form-group"><label>Proyecto</label><input type="text" class="form-control" name="project_name" placeholder="SKY"></div></div>
                     </div>
                     <div class="row">
@@ -196,18 +209,85 @@
     </div>
 </div>
 
+<?= view('auth/finance/partials/create_client_modal') ?>
+
 <script src="<?= base_url('/js/finance-catalog-money.js') ?>"></script>
 <script>
 var dt, editMode = false, moneyHelper;
+var lastClientSearch = '';
 var apiBase = '<?= base_url('/app/finance/quotas/api') ?>';
 var planApiBase = '<?= base_url('/app/finance/financing/api') ?>';
 var catalogUrl = '<?= base_url('/app/finance/api/catalog') ?>';
+var clientsSearchUrl = '<?= base_url('/app/finance/api/clients/search') ?>';
+var clientsCreateUrl = '<?= base_url('/app/finance/api/clients/create') ?>';
 var currentFilter = '<?= esc($current_type ?? '') ?>';
 var selectedPlanId = null;
 var selectedPlan = null;
 
 function moneyFmt(v) {
     return '$' + parseFloat(v || 0).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatClientOptionLabel(client) {
+    var label = client.name || 'Sin nombre';
+    if (client.phone) label += ' — ' + client.phone;
+    return label;
+}
+
+function setPlanLeadSelection(id, text) {
+    if (!$('#plan_lead_id').length) return;
+    var option = new Option(text, id, true, true);
+    $('#plan_lead_id').append(option).trigger('change');
+}
+
+function openCreateClientModal() {
+    $('#createClientForm')[0].reset();
+    var prefill = (lastClientSearch || '').trim();
+    if (prefill && !/^\d/.test(prefill)) {
+        $('#create_client_name').val(prefill);
+    } else if (prefill) {
+        $('#create_client_phone').val(prefill);
+    }
+    $('#createClientModal').modal('show');
+}
+
+function initPlanLeadSelect() {
+    if (!$('#plan_lead_id').length) return;
+    if ($('#plan_lead_id').hasClass('select2-hidden-accessible')) return;
+
+    $('#plan_lead_id').select2({
+        dropdownParent: $('#planModal'),
+        placeholder: 'Buscar cliente...',
+        allowClear: true,
+        width: '100%',
+        minimumInputLength: 2,
+        language: {
+            inputTooShort: function() { return 'Escribe al menos 2 caracteres'; },
+            noResults: function() { return 'Sin resultados — usa "Crear cliente"'; },
+            searching: function() { return 'Buscando...'; }
+        },
+        ajax: {
+            url: clientsSearchUrl,
+            dataType: 'json',
+            delay: 300,
+            data: function(params) {
+                lastClientSearch = params.term || '';
+                return { q: params.term || '' };
+            },
+            processResults: function(response) {
+                var items = (response.data || []).map(function(c) {
+                    return { id: c.id, text: formatClientOptionLabel(c) };
+                });
+                return { results: items };
+            }
+        }
+    });
+}
+
+function resetPlanLeadSelect() {
+    if ($('#plan_lead_id').hasClass('select2-hidden-accessible')) {
+        $('#plan_lead_id').val(null).trigger('change');
+    }
 }
 
 function recalcFinancing() {
@@ -234,6 +314,7 @@ function loadPlans() {
                 var active = String(selectedPlanId) === String(p.id) ? ' active' : '';
                 html += '<a href="#" class="list-group-item list-group-item-action' + active + '" data-plan-id="' + p.id + '">' +
                     '<div class="font-weight-bold">' + (p.client_name || 'Sin cliente') + '</div>' +
+                    '<div class="small text-muted">' + (p.lead_phone || '') + '</div>' +
                     '<div class="small">' + (p.project_name || '—') + ' · Apt ' + (p.unit_ref || '—') + '</div>' +
                     '<div class="small text-danger">Pendiente: ' + moneyFmt(p.pending_total) + '</div></a>';
             });
@@ -262,6 +343,8 @@ function renderPlan(plan) {
 
     var fields = [
         ['Cliente', plan.client_name || '—'],
+        ['Teléfono', plan.lead_phone || '—'],
+        ['Correo', plan.lead_email || '—'],
         ['Proyecto', plan.project_name || '—'],
         ['Ofic./Apart.', plan.unit_ref || plan.property_ref || '—'],
         ['Precio', moneyFmt(plan.total_price)],
@@ -319,12 +402,18 @@ function payInstallment(installmentId) {
 
 function showPlanModal() {
     $('#planForm')[0].reset();
+    resetPlanLeadSelect();
     recalcFinancing();
+    initPlanLeadSelect();
     $('#planModal').modal('show');
 }
 
 $('#planForm').submit(function(e) {
     e.preventDefault();
+    if (!$('#plan_lead_id').val()) {
+        alert('Selecciona un cliente del CRM.');
+        return;
+    }
     $.post(planApiBase + '/create', $(this).serialize(), function(res) {
         if (res.status === 'success') {
             $('#planModal').modal('hide');
@@ -333,6 +422,32 @@ $('#planForm').submit(function(e) {
         } else alert('Error: ' + (res.message || ''));
     }).fail(function(xhr) {
         alert('Error: ' + ((xhr.responseJSON && xhr.responseJSON.message) || 'Error de conexión'));
+    });
+});
+
+$('#createClientForm').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: clientsCreateUrl,
+        method: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(r) {
+            if (r.status !== 'success' || !r.data) {
+                alert('Error: ' + (r.message || 'No se pudo crear el cliente'));
+                return;
+            }
+            var client = r.data;
+            setPlanLeadSelection(client.id, formatClientOptionLabel(client));
+            $('#createClientModal').modal('hide');
+            if (client.existing) {
+                alert(client.message || 'Cliente existente seleccionado.');
+            }
+        },
+        error: function(xhr) {
+            var msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Error de conexión';
+            alert('Error: ' + msg);
+        }
     });
 });
 
@@ -403,6 +518,7 @@ $('#quotaForm').submit(function(e) {
 $(document).ready(function() {
     moneyHelper = new FinanceCatalogMoney({ catalogUrl: catalogUrl, amountLabel: '#amount_label' });
     moneyHelper.bind();
+    initPlanLeadSelect();
     moneyHelper.loadCatalog(function() {
         loadPlans();
         loadTable();
