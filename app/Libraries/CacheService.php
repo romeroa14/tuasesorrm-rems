@@ -48,10 +48,11 @@ class CacheService
 
     public static function bust(string $prefix): void
     {
+        $prefix = self::normalizeKey($prefix);
         $cache = cache();
         $cache->delete($prefix);
 
-        $pattern = rtrim($prefix, ':') . '*';
+        $pattern = $prefix . '*';
         $cachePrefix = (string) (config(CacheConfig::class)->prefix ?? '');
 
         if (self::deleteRedisKeys($cachePrefix . $pattern)) {
@@ -138,7 +139,7 @@ class CacheService
             return;
         }
 
-        $needle = rtrim(str_replace('*', '', $pattern), ':');
+        $needle = rtrim(str_replace('*', '', $pattern), '_');
         if ($needle === '') {
             return;
         }

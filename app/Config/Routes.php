@@ -268,6 +268,9 @@ $routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     $routes->post('quotas/api/create', 'FinanceQuotaController::apiCreate');
     $routes->post('quotas/api/(:num)', 'FinanceQuotaController::apiUpdate/$1');
     $routes->post('quotas/api/(:num)/delete', 'FinanceQuotaController::apiDelete/$1');
+    $routes->post('financing/api/list', 'FinanceFinancingController::apiListPlans');
+    $routes->get('financing/api/(:num)', 'FinanceFinancingController::apiGetPlan/$1');
+    $routes->post('financing/api/create', 'FinanceFinancingController::apiCreatePlan');
     $routes->get('daily_cash', 'FinanceCashController::dailyCash');
     $routes->post('daily_cash/api/list', 'FinanceCashController::dailyCashApiList');
     $routes->post('daily_cash/api/create', 'FinanceCashController::dailyCashApiCreate');

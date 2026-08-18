@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Libraries\FinanceAmortizationService;
 use App\Libraries\FinanceAuthorization;
 use App\Libraries\FinanceCompanyContext;
 use App\Libraries\FinanceMoneyService;
@@ -20,6 +21,7 @@ class FinanceQuotaController extends BaseController
     protected FinanceQuota $quotaModel;
     protected FinanceMoneyService $moneyService;
     protected FinanceQuotaIncomeService $quotaIncomeService;
+    protected FinanceAmortizationService $amortizationService;
     protected FinanceCompanyContext $companyContext;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
@@ -29,6 +31,7 @@ class FinanceQuotaController extends BaseController
         $this->quotaModel = new FinanceQuota();
         $this->moneyService = new FinanceMoneyService();
         $this->quotaIncomeService = new FinanceQuotaIncomeService();
+        $this->amortizationService = new FinanceAmortizationService();
         $this->companyContext = new FinanceCompanyContext();
     }
 
@@ -126,6 +129,7 @@ class FinanceQuotaController extends BaseController
             $quotaId = (int) $this->quotaModel->getInsertID();
             $record = $this->quotaModel->find($quotaId);
 
+            $movementId = 0;
             if (($record['type'] ?? '') === 'received') {
                 $incomeResult = $this->quotaIncomeService->createIncomeFromQuota($record);
                 $movementId = (int) ($incomeResult['movement']['id'] ?? 0);
@@ -135,6 +139,12 @@ class FinanceQuotaController extends BaseController
                     $record['income_created'] = true;
                     $record['finance_movement_id'] = $movementId;
                 }
+            }
+
+            $installmentId = (int) ($record['installment_id'] ?? $data['installment_id'] ?? 0);
+            if ($installmentId > 0 && ($record['type'] ?? '') === 'received') {
+                $this->amortizationService->applyQuotaPayment($installmentId, $record, $movementId > 0 ? $movementId : null);
+                $record['installment_applied'] = true;
             }
 
             return $this->jsonSuccess($record);
