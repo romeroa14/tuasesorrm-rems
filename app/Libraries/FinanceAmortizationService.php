@@ -136,7 +136,9 @@ class FinanceAmortizationService
         }
         unset($row);
 
-        $plan['installments'] = $installments;
+        $plan['installment_count'] = (int) ($plan['installments'] ?? count($installments));
+        $plan['installment_schedule'] = $installments;
+        $plan['installments'] = $plan['installment_count'];
         $plan['totals'] = [
             'scheduled' => round($totals['scheduled'], 2),
             'paid'      => round($totals['paid'], 2),
@@ -180,7 +182,7 @@ class FinanceAmortizationService
                 'financing_amount' => $detail['financing_amount'] ?? 0,
                 'pending_total'    => $detail['totals']['pending'] ?? 0,
                 'paid_total'       => $detail['totals']['paid'] ?? 0,
-                'installments'     => $detail['installments'] ?? [],
+                'installment_count'=> $detail['installment_count'] ?? 0,
                 'status'           => $detail['status'] ?? 'active',
             ];
         }

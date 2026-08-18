@@ -90,6 +90,10 @@
                             <th>Nombre</th>
                             <th>N° Recibo</th>
                             <th>Monto</th>
+                            <th>Método de pago</th>
+                            <th>Equiv. USD</th>
+                            <th>Equiv. BS</th>
+                            <th>Tasa</th>
                             <th>Fecha</th>
                             <th>Acciones</th>
                         </tr>
@@ -367,7 +371,7 @@ function renderPlan(plan) {
     $('#sumPending').text(moneyFmt(plan.totals.pending));
 
     var rows = '';
-    (plan.installments || []).forEach(function(row) {
+    (plan.installment_schedule || []).forEach(function(row) {
         var canPay = row.status !== 'paid';
         rows += '<tr>' +
             '<td>' + row.installment_number + '</td>' +
@@ -384,7 +388,7 @@ function renderPlan(plan) {
 
 function payInstallment(installmentId) {
     if (!selectedPlan) return;
-    var row = (selectedPlan.installments || []).find(function(r) { return String(r.id) === String(installmentId); });
+    var row = (selectedPlan.installment_schedule || []).find(function(r) { return String(r.id) === String(installmentId); });
     if (!row) return;
 
     showModal('create');
@@ -397,7 +401,13 @@ function payInstallment(installmentId) {
         'Cuota <strong>#' + row.installment_number + '</strong> — ' + (row.month_label || row.due_date) +
         ' — Programada: ' + moneyFmt(row.amount) + ' — Pendiente: <strong>' + moneyFmt(row.pending_amount) + '</strong>'
     );
+    moneyHelper.populatePaymentTypes();
     moneyHelper.refresh();
+}
+
+function paymentTypeLabel(id) {
+    var paymentType = moneyHelper.getPaymentType(id);
+    return paymentType ? (paymentType.name || paymentType.code || '—') : '—';
 }
 
 function showPlanModal() {
@@ -463,6 +473,10 @@ function loadTable() {
                     row.name || '—',
                     row.receipt_number || '—',
                     moneyHelper.formatPrimaryAmount(row.amount, denomination),
+                    paymentTypeLabel(row.payment_type_id),
+                    '$ ' + formatFinanceMoney(parseFloat(row.amount_usd || 0)),
+                    'Bs. ' + formatFinanceMoney(parseFloat(row.amount_bs || 0)),
+                    parseFloat(row.exchange_rate || 0).toFixed(4),
                     row.receipt_date || '—',
                     '<button class="btn btn-danger btn-sm" onclick="remove(' + row.id + ')"><i class="fas fa-trash"></i></button>'
                 ]);
@@ -496,6 +510,10 @@ function remove(id) {
 
 $('#quotaForm').submit(function(e) {
     e.preventDefault();
+    if (!$('#payment_type_id').val()) {
+        alert('Selecciona un método de pago.');
+        return;
+    }
     var id = $('#record_id').val();
     $.ajax({
         url: id ? apiBase + '/' + id : apiBase + '/create',
