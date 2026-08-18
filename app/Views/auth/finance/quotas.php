@@ -1,4 +1,40 @@
 <div class="container-fluid">
+<style>
+    #planModal .select2-container,
+    #quotaModal .select2-container { width: 100% !important; }
+    #planModal .select2-selection--single,
+    #quotaModal .select2-selection--single {
+        height: calc(1.5em + .75rem + 2px);
+        border: 1px solid #d1d3e2;
+        border-radius: .35rem;
+        padding: .375rem .75rem;
+    }
+    #planModal .select2-selection__rendered,
+    #quotaModal .select2-selection__rendered {
+        line-height: calc(1.5em + .75rem);
+        padding-left: 0;
+        color: #6e707e;
+    }
+    #planModal .select2-selection__arrow,
+    #quotaModal .select2-selection__arrow { height: calc(1.5em + .75rem + 2px); }
+    #planModal .select2-dropdown,
+    #quotaModal .select2-dropdown {
+        border-color: #d1d3e2;
+        z-index: 10060 !important;
+    }
+    #planModal .select2-search__field,
+    #quotaModal .select2-search__field {
+        border: 1px solid #d1d3e2 !important;
+        border-radius: .35rem;
+        padding: .375rem .75rem;
+    }
+    .finance-client-locked {
+        border: 1px solid #d1d3e2;
+        border-radius: .35rem;
+        background: #f8f9fc;
+        padding: .5rem .75rem;
+    }
+</style>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">
             <i class="fas fa-hand-holding-usd text-primary"></i> <?= esc($title ?? 'Finanzas — Cuotas') ?>
@@ -124,10 +160,10 @@
                                         <i class="fas fa-user-plus"></i> Crear cliente
                                     </button>
                                 </div>
-                                <select class="form-control" name="lead_id" id="plan_lead_id" style="width:100%" required>
+                                <select name="lead_id" id="plan_lead_id" required>
                                     <option value=""></option>
                                 </select>
-                                <small class="form-text text-muted">Busca por nombre, teléfono o correo en el CRM.</small>
+                                <small class="form-text text-muted">Escribe para filtrar o abre la lista para ver clientes recientes.</small>
                             </div>
                         </div>
                         <div class="col-md-6"><div class="form-group"><label>Proyecto</label><input type="text" class="form-control" name="project_name" placeholder="SKY"></div></div>
@@ -188,18 +224,25 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group mb-0">
                                         <div class="d-flex justify-content-between align-items-center mb-1">
                                             <label class="mb-0">Cliente <span class="text-danger">*</span></label>
-                                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="openCreateClientModal()">
+                                            <button type="button" class="btn btn-outline-primary btn-sm" id="quotaCreateClientBtn" onclick="openCreateClientModal()">
                                                 <i class="fas fa-user-plus"></i> Crear cliente
                                             </button>
                                         </div>
-                                        <select class="form-control" name="lead_id" id="quota_lead_id" style="width:100%" required>
-                                            <option value=""></option>
-                                        </select>
+                                        <input type="hidden" name="lead_id" id="quota_lead_id_field" value="">
+                                        <div id="quota_client_picker">
+                                            <select id="quota_lead_id">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div id="quota_client_locked" class="finance-client-locked d-none">
+                                            <div class="font-weight-bold" id="quota_client_locked_name"></div>
+                                            <div class="small text-muted" id="quota_client_locked_phone"></div>
+                                        </div>
                                         <input type="hidden" id="name" name="name">
-                                        <small class="form-text text-muted">Busca por nombre, teléfono o correo en el CRM.</small>
+                                        <small class="form-text text-muted" id="quota_client_hint">Busca por nombre, teléfono o correo.</small>
                                     </div>
                                 </div>
                             </div>
@@ -298,29 +341,107 @@ function formatClientOptionLabel(client) {
 }
 
 function setPlanLeadSelection(id, text) {
-    if (!$('#plan_lead_id').length) return;
-    var option = new Option(text, id, true, true);
-    $('#plan_lead_id').append(option).trigger('change');
+    var $el = $('#plan_lead_id');
+    if (!$el.length) return;
+    $el.find('option').not(':first').remove();
+    $el.append(new Option(text, id, true, true)).trigger('change');
 }
 
 function setQuotaLeadSelection(id, text) {
-    if (!$('#quota_lead_id').length) return;
-    var option = new Option(text, id, true, true);
-    $('#quota_lead_id').append(option).trigger('change');
+    $('#quota_lead_id_field').val(id);
+    var $el = $('#quota_lead_id');
+    if (!$el.length) return;
+    $el.find('option').not(':first').remove();
+    $el.append(new Option(text, id, true, true)).trigger('change');
     syncQuotaClientName();
 }
 
 function syncQuotaClientName() {
-    var text = $('#quota_lead_id option:selected').text() || '';
+    var text = $('#quota_lead_id option:selected').text() || $('#quota_client_locked_name').text() || '';
     var name = text.split(' — ')[0].trim();
     $('#name').val(name);
+    if ($('#quota_client_picker').is(':visible')) {
+        $('#quota_lead_id_field').val($('#quota_lead_id').val() || '');
+    }
 }
 
 function resetQuotaLeadSelect() {
+    $('#quota_lead_id_field').val('');
     if ($('#quota_lead_id').hasClass('select2-hidden-accessible')) {
         $('#quota_lead_id').val(null).trigger('change');
+    } else {
+        $('#quota_lead_id').val('');
     }
     $('#name').val('');
+}
+
+function showQuotaClientPicker() {
+    $('#quota_client_locked').addClass('d-none');
+    $('#quota_client_picker').removeClass('d-none');
+    $('#quotaCreateClientBtn').removeClass('d-none');
+    $('#quota_client_hint').text('Busca por nombre, teléfono o correo.');
+}
+
+function lockQuotaClient(id, name, phone) {
+    $('#quota_lead_id_field').val(id);
+    $('#quota_client_locked_name').text(name || 'Sin nombre');
+    $('#quota_client_locked_phone').text(phone || '');
+    $('#quota_client_picker').addClass('d-none');
+    $('#quota_client_locked').removeClass('d-none');
+    $('#quotaCreateClientBtn').addClass('d-none');
+    $('#quota_client_hint').text('Cliente tomado del plan de pago.');
+    syncQuotaClientName();
+}
+
+function leadSelectConfig(dropdownParent) {
+    return {
+        dropdownParent: dropdownParent,
+        placeholder: 'Seleccionar cliente...',
+        allowClear: true,
+        width: '100%',
+        minimumInputLength: 0,
+        language: {
+            inputTooShort: function() { return 'Escribe para filtrar la lista'; },
+            noResults: function() { return 'Sin resultados — usa "Crear cliente"'; },
+            searching: function() { return 'Buscando...'; }
+        },
+        ajax: {
+            url: clientsSearchUrl,
+            dataType: 'json',
+            delay: 250,
+            data: function(params) {
+                lastClientSearch = params.term || '';
+                return { q: params.term || '' };
+            },
+            processResults: function(response) {
+                var items = (response.data || []).map(function(c) {
+                    return { id: c.id, text: formatClientOptionLabel(c) };
+                });
+                return { results: items };
+            },
+            cache: true
+        }
+    };
+}
+
+function initPlanLeadSelect() {
+    if (!$('#plan_lead_id').length || typeof $.fn.select2 !== 'function') return;
+    if ($('#plan_lead_id').hasClass('select2-hidden-accessible')) return;
+    $('#plan_lead_id').select2(leadSelectConfig($('#planModal')));
+}
+
+function initQuotaLeadSelect() {
+    if (!$('#quota_lead_id').length || typeof $.fn.select2 !== 'function') return;
+    if ($('#quota_lead_id').hasClass('select2-hidden-accessible')) {
+        return;
+    }
+    $('#quota_lead_id').select2(leadSelectConfig($('#quotaModal'))).on('change', syncQuotaClientName);
+}
+
+function resetPlanLeadSelect() {
+    if ($('#plan_lead_id').hasClass('select2-hidden-accessible')) {
+        $('#plan_lead_id').val(null).trigger('change');
+    }
 }
 
 function openCreateClientModal() {
@@ -332,78 +453,6 @@ function openCreateClientModal() {
         $('#create_client_phone').val(prefill);
     }
     $('#createClientModal').modal('show');
-}
-
-function initPlanLeadSelect() {
-    if (!$('#plan_lead_id').length || typeof $.fn.select2 !== 'function') return;
-    if ($('#plan_lead_id').hasClass('select2-hidden-accessible')) return;
-
-    $('#plan_lead_id').select2({
-        dropdownParent: $('#planModal'),
-        placeholder: 'Buscar cliente...',
-        allowClear: true,
-        width: '100%',
-        minimumInputLength: 2,
-        language: {
-            inputTooShort: function() { return 'Escribe al menos 2 caracteres'; },
-            noResults: function() { return 'Sin resultados — usa "Crear cliente"'; },
-            searching: function() { return 'Buscando...'; }
-        },
-        ajax: {
-            url: clientsSearchUrl,
-            dataType: 'json',
-            delay: 300,
-            data: function(params) {
-                lastClientSearch = params.term || '';
-                return { q: params.term || '' };
-            },
-            processResults: function(response) {
-                var items = (response.data || []).map(function(c) {
-                    return { id: c.id, text: formatClientOptionLabel(c) };
-                });
-                return { results: items };
-            }
-        }
-    });
-}
-
-function initQuotaLeadSelect() {
-    if (!$('#quota_lead_id').length || typeof $.fn.select2 !== 'function') return;
-    if ($('#quota_lead_id').hasClass('select2-hidden-accessible')) return;
-
-    $('#quota_lead_id').select2({
-        dropdownParent: $('#quotaModal'),
-        placeholder: 'Buscar cliente...',
-        allowClear: true,
-        width: '100%',
-        minimumInputLength: 2,
-        language: {
-            inputTooShort: function() { return 'Escribe al menos 2 caracteres'; },
-            noResults: function() { return 'Sin resultados — usa "Crear cliente"'; },
-            searching: function() { return 'Buscando...'; }
-        },
-        ajax: {
-            url: clientsSearchUrl,
-            dataType: 'json',
-            delay: 300,
-            data: function(params) {
-                lastClientSearch = params.term || '';
-                return { q: params.term || '' };
-            },
-            processResults: function(response) {
-                var items = (response.data || []).map(function(c) {
-                    return { id: c.id, text: formatClientOptionLabel(c) };
-                });
-                return { results: items };
-            }
-        }
-    }).on('change', syncQuotaClientName);
-}
-
-function resetPlanLeadSelect() {
-    if ($('#plan_lead_id').hasClass('select2-hidden-accessible')) {
-        $('#plan_lead_id').val(null).trigger('change');
-    }
 }
 
 function recalcFinancing() {
@@ -516,11 +565,9 @@ function payInstallment(installmentId) {
     $('#installment_id').val(installmentId);
     $('#type').val('received');
     if (selectedPlan.lead_id) {
-        setQuotaLeadSelection(
-            selectedPlan.lead_id,
-            formatClientOptionLabel({ name: selectedPlan.client_name, phone: selectedPlan.lead_phone })
-        );
+        lockQuotaClient(selectedPlan.lead_id, selectedPlan.client_name, selectedPlan.lead_phone);
     } else {
+        showQuotaClientPicker();
         resetQuotaLeadSelect();
         $('#name').val(selectedPlan.client_name || '');
     }
@@ -542,7 +589,9 @@ function showPlanModal() {
     $('#planForm')[0].reset();
     resetPlanLeadSelect();
     recalcFinancing();
-    initPlanLeadSelect();
+    $('#planModal').one('shown.bs.modal', function() {
+        initPlanLeadSelect();
+    });
     $('#planModal').modal('show');
 }
 
@@ -636,9 +685,12 @@ function showModal(mode, id) {
     $('#record_id, #financing_plan_id, #installment_id').val('');
     $('#installmentHint').hide();
     $('#quotaForm')[0].reset();
+    showQuotaClientPicker();
     resetQuotaLeadSelect();
     $('#type').val('received');
-    initQuotaLeadSelect();
+    $('#quotaModal').one('shown.bs.modal', function() {
+        initQuotaLeadSelect();
+    });
     if (mode !== 'edit' || !id) {
         moneyHelper.populatePaymentTypes();
         moneyHelper.refresh();
@@ -660,7 +712,8 @@ function remove(id) {
 
 $('#quotaForm').submit(function(e) {
     e.preventDefault();
-    if (!$('#quota_lead_id').val()) {
+    syncQuotaClientName();
+    if (!$('#quota_lead_id_field').val()) {
         showFinanceError('Selecciona un cliente del CRM.');
         return;
     }
