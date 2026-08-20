@@ -283,6 +283,10 @@ class FinanceMenu extends BaseConfig
             'label' => 'Resumen cartera',
             'url'   => '/app/finance/quotas?view=summary',
         ];
+        $items[] = [
+            'label' => 'Constructoras',
+            'url'   => '/app/finance/builders',
+        ];
         foreach (self::quotaTypes() as $key => $label) {
             $items[] = [
                 'label' => $label,

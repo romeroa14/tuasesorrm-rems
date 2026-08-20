@@ -77,9 +77,14 @@
             <div class="card shadow mb-3" id="planHeaderCard" style="display:none;">
                 <div class="card-header py-3 bg-dark text-white d-flex justify-content-between align-items-center">
                     <h6 class="m-0 font-weight-bold"><i class="fas fa-table"></i> Plan de pago</h6>
-                    <button type="button" class="btn btn-light btn-sm" id="btnPrintPlan" onclick="printSelectedPlan()">
-                        <i class="fas fa-print"></i> Imprimir plan
-                    </button>
+                    <div>
+                        <button type="button" class="btn btn-outline-light btn-sm mr-1" onclick="closePlanView()" title="Volver a la lista">
+                            <i class="fas fa-times"></i> Cerrar
+                        </button>
+                        <button type="button" class="btn btn-light btn-sm" id="btnPrintPlan" onclick="printSelectedPlan()">
+                            <i class="fas fa-print"></i> Imprimir plan
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row" id="planHeaderFields"></div>
@@ -209,7 +214,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Tipo</th>
-                            <th>Nombre</th>
+                            <th>Nombre / Cliente</th>
+                            <th>Entregada a</th>
                             <th>N° Recibo</th>
                             <th>Monto</th>
                             <th>Método de pago</th>
@@ -303,16 +309,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tipo <span class="text-danger">*</span></label>
-                                        <select class="form-control" id="type" name="type" required>
+                                        <select class="form-control" id="type" name="type" required onchange="toggleQuotaTypeFields()">
                                             <option value="received">Recibida (genera ingreso)</option>
-                                            <option value="delivered">Entregada</option>
+                                            <option value="delivered">Entregada a constructora</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" id="quotaClientCol">
                                     <div class="form-group mb-0">
                                         <div class="d-flex justify-content-between align-items-center mb-1">
-                                            <label class="mb-0">Cliente <span class="text-danger">*</span></label>
+                                            <label class="mb-0">Cliente <span class="text-danger" id="quotaClientRequired">*</span></label>
                                             <button type="button" class="btn btn-outline-primary btn-sm" id="quotaCreateClientBtn" onclick="openCreateClientModal()">
                                                 <i class="fas fa-user-plus"></i> Crear cliente
                                             </button>
@@ -329,6 +335,22 @@
                                         </div>
                                         <input type="hidden" id="name" name="name">
                                         <small class="form-text text-muted" id="quota_client_hint">Busca por nombre, teléfono o correo.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="quotaBuilderRow" style="display:none;">
+                                <div class="col-md-12">
+                                    <div class="form-group mb-0">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <label class="mb-0">Entregada a (constructora) <span class="text-danger">*</span></label>
+                                            <a href="<?= base_url('/app/finance/builders') ?>" class="btn btn-outline-secondary btn-sm" target="_blank">
+                                                <i class="fas fa-hard-hat"></i> Gestionar constructoras
+                                            </a>
+                                        </div>
+                                        <select class="form-control" id="builder_id" name="builder_id">
+                                            <option value="">Seleccione constructora...</option>
+                                        </select>
+                                        <small class="form-text text-muted">Registra el traspaso del pago a la constructora. No genera ingreso ni afecta el plan.</small>
                                     </div>
                                 </div>
                             </div>
@@ -363,11 +385,57 @@ var planPrintBase = '<?= base_url('/app/finance/financing/print') ?>';
 var catalogUrl = '<?= base_url('/app/finance/api/catalog') ?>';
 var clientsSearchUrl = '<?= base_url('/app/finance/api/clients/search') ?>';
 var clientsCreateUrl = '<?= base_url('/app/finance/api/clients/create') ?>';
+var buildersApiUrl = '<?= base_url('/app/finance/api/builders') ?>';
 var currentFilter = '<?= esc($current_type ?? '') ?>';
 var selectedPlanId = null;
 var selectedPlan = null;
 var portfolioLoaded = false;
+var buildersCatalog = [];
 var initialQuotasTab = '<?= esc($initial_view ?? 'manage') ?>';
+
+function closePlanView() {
+    selectedPlanId = null;
+    selectedPlan = null;
+    $('#planHeaderCard, #planScheduleCard').hide();
+    $('#planEmptyState').show();
+    $('#plansList .list-group-item').removeClass('active');
+}
+
+function toggleQuotaTypeFields() {
+    var isDelivered = $('#type').val() === 'delivered';
+    $('#quotaBuilderRow').toggle(isDelivered);
+    $('#quotaClientCol').toggle(!isDelivered || !!$('#financing_plan_id').val());
+    $('#quotaClientRequired').toggleClass('d-none', isDelivered && !$('#financing_plan_id').val());
+    if (isDelivered) {
+        $('#quota_client_hint').text('Opcional: referencia del cliente asociado al pago.');
+    } else {
+        $('#quota_client_hint').text('Busca por nombre, teléfono o correo.');
+        $('#builder_id').val('');
+    }
+}
+
+function populateBuildersSelect(selectedId) {
+    var html = '<option value="">Seleccione constructora...</option>';
+    buildersCatalog.forEach(function(b) {
+        if ((b.status || 'active') !== 'active') return;
+        var sel = String(selectedId || '') === String(b.id) ? ' selected' : '';
+        html += '<option value="' + b.id + '"' + sel + '>' + (b.name || 'Sin nombre') +
+            (b.project_name ? ' (' + b.project_name + ')' : '') + '</option>';
+    });
+    $('#builder_id').html(html);
+}
+
+function loadBuildersCatalog(callback) {
+    $.post(buildersApiUrl, function(res) {
+        if (res.status === 'success' && Array.isArray(res.data)) {
+            buildersCatalog = res.data;
+            populateBuildersSelect();
+        }
+        if (typeof callback === 'function') callback();
+    }).fail(function() {
+        if (typeof callback === 'function') callback();
+    });
+}
 
 function printSelectedPlan(planId) {
     var id = planId || selectedPlanId;
@@ -825,6 +893,7 @@ function loadTable() {
                         row.id,
                         row.type === 'received' ? 'Recibida' : 'Entregada',
                         row.name || '—',
+                        row.type === 'delivered' ? (row.builder_name || '—') : '—',
                         row.receipt_number || '—',
                         moneyHelper.formatPrimaryAmount(row.amount, denomination),
                         paymentTypeLabel(row.payment_type_id),
@@ -859,6 +928,7 @@ function showModal(mode, id) {
     showQuotaClientPicker();
     resetQuotaLeadSelect();
     $('#type').val('received');
+    toggleQuotaTypeFields();
     $('#quotaModal').one('shown.bs.modal', function() {
         initQuotaLeadSelect();
     });
@@ -884,7 +954,13 @@ function remove(id) {
 $('#quotaForm').submit(function(e) {
     e.preventDefault();
     syncQuotaClientName();
-    if (!$('#quota_lead_id_field').val()) {
+    var isDelivered = $('#type').val() === 'delivered';
+    if (isDelivered) {
+        if (!$('#builder_id').val()) {
+            showFinanceError('Selecciona la constructora a la que se entrega el pago.');
+            return;
+        }
+    } else if (!$('#quota_lead_id_field').val()) {
         showFinanceError('Selecciona un cliente del CRM.');
         return;
     }
@@ -918,6 +994,7 @@ $('#quotaForm').submit(function(e) {
 $(document).ready(function() {
     moneyHelper = new FinanceCatalogMoney({ catalogUrl: catalogUrl, amountLabel: '#amount_label' });
     moneyHelper.bind();
+    loadBuildersCatalog();
     loadPlans();
     moneyHelper.loadCatalog(function() {
         loadTable();

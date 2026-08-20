@@ -98,6 +98,10 @@ $financeModules = FinanceSidebar::modules();
                        href="<?= base_url('/app/finance/companies') ?>">
                         <i class="fas fa-building"></i> Empresas
                     </a>
+                    <a class="collapse-item <?= ($title ?? '') === 'Finanzas Constructoras' ? 'active' : '' ?>"
+                       href="<?= base_url('/app/finance/builders') ?>">
+                        <i class="fas fa-hard-hat"></i> Constructoras
+                    </a>
                 <?php endif; ?>
                 <?php if ($financeAuthorization->canManageMembers()): ?>
                     <a class="collapse-item <?= ($title ?? '') === 'Finanzas — Miembros' ? 'active' : '' ?>"

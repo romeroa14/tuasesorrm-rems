@@ -8,6 +8,7 @@ use App\Controllers\BaseController;
 use App\Libraries\FinanceAuthorization;
 use App\Models\FinanceAccount;
 use App\Models\FinanceBudget;
+use App\Models\FinanceBuilder;
 use App\Models\FinanceCategory;
 use App\Models\FinanceCompany;
 use App\Models\FinanceCurrency;
@@ -52,6 +53,7 @@ class FinanceApiController extends BaseController
         'categories'     => FinanceCategory::class,
         'budgets'        => FinanceBudget::class,
         'exchange_rates' => FinanceExchangeRate::class,
+        'builders'       => FinanceBuilder::class,
         'companies'      => FinanceCompany::class,
         'departments'    => FinanceDepartment::class,
         'projects'       => FinanceProject::class,
@@ -72,6 +74,7 @@ class FinanceApiController extends BaseController
         'categories'     => 'Categoría',
         'budgets'        => 'Presupuesto',
         'exchange_rates' => 'Tasa de Cambio',
+        'builders'       => 'Constructora',
         'companies'      => 'Empresa',
         'departments'    => 'Departamento',
         'projects'       => 'Proyecto',

@@ -9,6 +9,7 @@ use App\Libraries\FinanceAuthorization;
 use App\Libraries\FinanceCompanyContext;
 use App\Libraries\FinanceMoneyService;
 use App\Libraries\FinanceQuotaIncomeService;
+use App\Models\FinanceBuilder;
 use App\Models\FinanceFinancingPlan;
 use App\Models\FinanceQuota;
 use App\Models\Leads;
@@ -68,7 +69,10 @@ class FinanceQuotaController extends BaseController
 
         $type = $this->request->getGet('type') ?: $this->request->getPost('type');
 
-        $builder = $this->quotaModel->orderBy('receipt_date', 'DESC');
+        $builder = $this->quotaModel
+            ->select('finance_quotas.*, finance_builders.name AS builder_name')
+            ->join('finance_builders', 'finance_builders.id = finance_quotas.builder_id', 'left')
+            ->orderBy('receipt_date', 'DESC');
 
         if ($type) {
             $builder->where('type', $type);
@@ -257,6 +261,39 @@ class FinanceQuotaController extends BaseController
      */
     protected function prepareQuotaInput(array $data): array
     {
+        $type = ($data['type'] ?? 'received') === 'delivered' ? 'delivered' : 'received';
+        $data['type'] = $type;
+
+        if ($type === 'delivered') {
+            $builderId = isset($data['builder_id']) ? (int) $data['builder_id'] : 0;
+            if ($builderId <= 0) {
+                throw new \InvalidArgumentException('Debe seleccionar la constructora a la que se entrega.');
+            }
+
+            $builder = (new FinanceBuilder())->select('id, name')->find($builderId);
+            if (! is_array($builder)) {
+                throw new \InvalidArgumentException('La constructora seleccionada no existe.');
+            }
+
+            $data['builder_id'] = $builderId;
+            $data['name'] = 'Entrega a ' . trim((string) ($builder['name'] ?? 'constructora'));
+
+            $leadId = isset($data['lead_id']) ? (int) $data['lead_id'] : 0;
+            if ($leadId > 0) {
+                $lead = (new Leads())->select('id')->find($leadId);
+                if (! is_array($lead)) {
+                    throw new \InvalidArgumentException('El cliente seleccionado no existe.');
+                }
+                $data['lead_id'] = $leadId;
+            } else {
+                $data['lead_id'] = null;
+            }
+
+            return $data;
+        }
+
+        $data['builder_id'] = null;
+
         $leadId = isset($data['lead_id']) ? (int) $data['lead_id'] : 0;
 
         if ($leadId <= 0 && ! empty($data['financing_plan_id'])) {

@@ -394,6 +394,16 @@ class FinanceController extends BaseController
         $this->generate_template($this->settings['url']);
     }
 
+    public function builders()
+    {
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
+
+        $this->setFinanceContext('Finanzas Constructoras', 'auth/finance/builders', 'builders');
+        $this->generate_template($this->settings['url']);
+    }
+
     /**
      * Departments CRUD view with DataTable.
      */

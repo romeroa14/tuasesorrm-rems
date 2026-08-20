@@ -20,6 +20,7 @@ class FinanceQuota extends Model
         'type',
         'name',
         'lead_id',
+        'builder_id',
         'receipt_date',
         'delivery_date',
         'payment_type_id',
