@@ -195,7 +195,16 @@ class FinanceMenu extends BaseConfig
                 'id'    => 'quotas',
                 'label' => 'Cuotas',
                 'icon'  => 'fas fa-hand-holding-usd text-info',
-                'url'   => '/app/finance/quotas',
+                'items' => [
+                    [
+                        'label' => 'Planes y pagos',
+                        'url'   => '/app/finance/quotas',
+                    ],
+                    [
+                        'label' => 'Constructoras',
+                        'url'   => '/app/finance/builders',
+                    ],
+                ],
             ],
             [
                 'id'    => 'cash_management',

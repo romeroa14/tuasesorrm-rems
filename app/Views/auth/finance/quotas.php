@@ -342,15 +342,14 @@
                                 <div class="col-md-12">
                                     <div class="form-group mb-0">
                                         <div class="d-flex justify-content-between align-items-center mb-1">
-                                            <label class="mb-0">Entregada a (constructora) <span class="text-danger">*</span></label>
-                                            <a href="<?= base_url('/app/finance/builders') ?>" class="btn btn-outline-secondary btn-sm" target="_blank">
-                                                <i class="fas fa-hard-hat"></i> Gestionar constructoras
-                                            </a>
+                                            <label class="mb-0">Entregada a <span class="text-danger">*</span></label>
+                                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="openCreateBuilderModal()">
+                                                <i class="fas fa-plus"></i> Crear constructora
+                                            </button>
                                         </div>
                                         <select class="form-control" id="builder_id" name="builder_id">
                                             <option value="">Seleccione constructora...</option>
                                         </select>
-                                        <small class="form-text text-muted">Registra el traspaso del pago a la constructora. No genera ingreso ni afecta el plan.</small>
                                     </div>
                                 </div>
                             </div>
@@ -374,6 +373,34 @@
 </div>
 
 <?= view('auth/finance/partials/create_client_modal') ?>
+
+<div class="modal fade" id="createBuilderModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title"><i class="fas fa-hard-hat"></i> Nueva constructora</h5>
+                <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+            </div>
+            <form id="createBuilderForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nombre <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="name" id="create_builder_name" required placeholder="Ej: Inversiones SKY CA">
+                    </div>
+                    <div class="form-group mb-0">
+                        <label>Proyecto</label>
+                        <input type="text" class="form-control" name="project_name" id="create_builder_project" placeholder="Ej: SKY">
+                    </div>
+                    <input type="hidden" name="status" value="active">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Crear y seleccionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script src="<?= base_url('/js/finance-catalog-money.js') ?>"></script>
 <script>
@@ -683,6 +710,14 @@ function resetPlanLeadSelect() {
     }
 }
 
+function openCreateBuilderModal() {
+    $('#createBuilderForm')[0].reset();
+    if (selectedPlan && selectedPlan.project_name) {
+        $('#create_builder_project').val(selectedPlan.project_name);
+    }
+    $('#createBuilderModal').modal('show');
+}
+
 function openCreateClientModal() {
     $('#createClientForm')[0].reset();
     var prefill = (lastClientSearch || '').trim();
@@ -874,6 +909,32 @@ $('#createClientForm').submit(function(e) {
             if (client.existing) {
                 showFinanceSuccess(client.message || 'Cliente existente seleccionado.', 'Cliente');
             }
+        },
+        error: function(xhr) {
+            var msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Error de conexión';
+            showFinanceError(msg);
+        }
+    });
+});
+
+$('#createBuilderForm').submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: buildersApiUrl + '/create',
+        method: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(r) {
+            if (r.status !== 'success' || !r.data) {
+                showFinanceError(r.message || 'No se pudo crear la constructora');
+                return;
+            }
+            var builder = r.data;
+            buildersCatalog.push(builder);
+            populateBuildersSelect(builder.id);
+            $('#builder_id').val(String(builder.id));
+            $('#createBuilderModal').modal('hide');
+            showFinanceSuccess('Constructora registrada.', 'Listo');
         },
         error: function(xhr) {
             var msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Error de conexión';

@@ -102,6 +102,15 @@ class FinanceApiController extends BaseController
     ];
 
     /**
+     * Entities tied to operational workflows (cuotas, etc.).
+     *
+     * @var list<string>
+     */
+    protected array $workflowEntities = [
+        'builders',
+    ];
+
+    /**
      * Legacy records stay readable but are no longer writable.
      *
      * @var list<string>
@@ -180,6 +189,10 @@ class FinanceApiController extends BaseController
 
         if (in_array($entity, $this->catalogEntities, true)) {
             return $this->financeAuthorization->canManageCatalogs();
+        }
+
+        if (in_array($entity, $this->workflowEntities, true)) {
+            return $this->financeAuthorization->canDraftWorkflow();
         }
 
         return false;

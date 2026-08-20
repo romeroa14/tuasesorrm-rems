@@ -5,10 +5,9 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Desarrolladores / constructoras</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Listado</h6>
         </div>
         <div class="card-body">
-            <p class="text-muted small">Registra las constructoras a las que se entregan pagos de cuotas (tipo Entregada).</p>
             <div class="table-responsive">
                 <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
                     <thead class="thead-light">
@@ -16,9 +15,6 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Proyecto</th>
-                            <th>Contacto</th>
-                            <th>Teléfono</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -42,21 +38,9 @@
                         <label>Nombre <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="name" required placeholder="Ej: Inversiones SKY CA">
                     </div>
-                    <div class="form-group">
-                        <label>Proyecto asociado</label>
-                        <input type="text" class="form-control" name="project_name" placeholder="Ej: SKY">
-                    </div>
-                    <div class="form-group">
-                        <label>Contacto</label>
-                        <input type="text" class="form-control" name="contact_person">
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6"><div class="form-group"><label>Teléfono</label><input type="text" class="form-control" name="phone"></div></div>
-                        <div class="col-md-6"><div class="form-group"><label>Email</label><input type="email" class="form-control" name="email"></div></div>
-                    </div>
                     <div class="form-group mb-0">
-                        <label>Notas</label>
-                        <textarea class="form-control" name="notes" rows="2"></textarea>
+                        <label>Proyecto</label>
+                        <input type="text" class="form-control" name="project_name" placeholder="Ej: SKY">
                     </div>
                     <input type="hidden" name="status" value="active">
                 </div>
@@ -81,9 +65,6 @@ function loadTable() {
                     d.id,
                     d.name || '—',
                     d.project_name || '—',
-                    d.contact_person || '—',
-                    d.phone || '—',
-                    d.status === 'active' ? 'Activa' : 'Inactiva',
                     '<button class="btn btn-info btn-sm mr-1" onclick="edit(' + d.id + ')"><i class="fas fa-edit"></i></button>' +
                     '<button class="btn btn-danger btn-sm" onclick="remove(' + d.id + ')"><i class="fas fa-trash"></i></button>'
                 ]);
@@ -103,10 +84,8 @@ function showModal(mode, id) {
         $.get(apiBase + '/' + id, function(r) {
             if (r.status === 'success') {
                 var d = r.data;
-                Object.keys(d).forEach(function(k) {
-                    var el = $('[name="' + k + '"]');
-                    if (el.length) el.val(d[k]);
-                });
+                $('[name="name"]').val(d.name || '');
+                $('[name="project_name"]').val(d.project_name || '');
                 $('#record_id').val(d.id);
             }
         });
@@ -119,6 +98,7 @@ function remove(id) {
     if (!confirm('¿Eliminar esta constructora?')) return;
     $.post(apiBase + '/' + id + '/delete', function(r) {
         if (r.status === 'success') loadTable();
+        else alert(r.message || 'No se pudo eliminar');
     });
 }
 
@@ -135,6 +115,9 @@ $('#financeForm').submit(function(e) {
                 $('#financeModal').modal('hide');
                 loadTable();
             } else alert(r.message || 'Error al guardar');
+        },
+        error: function(xhr) {
+            alert((xhr.responseJSON && xhr.responseJSON.message) || 'Error al guardar');
         }
     });
 });
