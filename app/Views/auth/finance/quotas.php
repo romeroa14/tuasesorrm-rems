@@ -49,6 +49,16 @@
         </div>
     </div>
 
+    <ul class="nav nav-tabs mb-3" id="quotasMainTabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#" data-quotas-tab="manage"><i class="fas fa-tasks"></i> Gestión de planes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-quotas-tab="summary"><i class="fas fa-chart-bar"></i> Resumen cartera</a>
+        </li>
+    </ul>
+
+    <div id="quotasTabManage">
     <div class="row">
         <div class="col-lg-4 mb-4">
             <div class="card shadow h-100">
@@ -65,8 +75,11 @@
 
         <div class="col-lg-8 mb-4">
             <div class="card shadow mb-3" id="planHeaderCard" style="display:none;">
-                <div class="card-header py-3 bg-dark text-white">
+                <div class="card-header py-3 bg-dark text-white d-flex justify-content-between align-items-center">
                     <h6 class="m-0 font-weight-bold"><i class="fas fa-table"></i> Plan de pago</h6>
+                    <button type="button" class="btn btn-light btn-sm" id="btnPrintPlan" onclick="printSelectedPlan()">
+                        <i class="fas fa-print"></i> Imprimir plan
+                    </button>
                 </div>
                 <div class="card-body">
                     <div class="row" id="planHeaderFields"></div>
@@ -111,8 +124,81 @@
             </div>
         </div>
     </div>
+    </div>
 
-    <div class="card shadow mb-4 mt-2">
+    <div id="quotasTabSummary" style="display:none;">
+        <div class="row mb-3">
+            <div class="col-md-3 col-6 mb-2">
+                <div class="card border-left-primary shadow py-2"><div class="card-body py-2">
+                    <div class="text-xs text-primary font-weight-bold text-uppercase">Unidades</div>
+                    <div class="h5 mb-0" id="sumUnits">0</div>
+                </div></div>
+            </div>
+            <div class="col-md-3 col-6 mb-2">
+                <div class="card border-left-info shadow py-2"><div class="card-body py-2">
+                    <div class="text-xs text-info font-weight-bold text-uppercase">Total financiado</div>
+                    <div class="h5 mb-0" id="sumGrandScheduled">$0.00</div>
+                </div></div>
+            </div>
+            <div class="col-md-3 col-6 mb-2">
+                <div class="card border-left-success shadow py-2"><div class="card-body py-2">
+                    <div class="text-xs text-success font-weight-bold text-uppercase">Pagado</div>
+                    <div class="h5 mb-0 text-success" id="sumGrandPaid">$0.00</div>
+                </div></div>
+            </div>
+            <div class="col-md-3 col-6 mb-2">
+                <div class="card border-left-danger shadow py-2"><div class="card-body py-2">
+                    <div class="text-xs text-danger font-weight-bold text-uppercase">Por cobrar</div>
+                    <div class="h5 mb-0 text-danger" id="sumGrandPending">$0.00</div>
+                </div></div>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-building"></i> Por edificio / proyecto</h6></div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered mb-0" id="summaryByProjectTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Proyecto</th>
+                                <th class="text-center">Unidades</th>
+                                <th class="text-right">Total</th>
+                                <th class="text-right">Pagado</th>
+                                <th class="text-right">Por cobrar</th>
+                            </tr>
+                        </thead>
+                        <tbody><tr><td colspan="5" class="text-muted text-center">Cargando...</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-user"></i> Por cliente y propiedad</h6></div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered mb-0" id="summaryByClientTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Proyecto</th>
+                                <th>Apt/Ofic.</th>
+                                <th class="text-center">Cuotas</th>
+                                <th class="text-right">Total</th>
+                                <th class="text-right">Pagado</th>
+                                <th class="text-right">Por cobrar</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody><tr><td colspan="8" class="text-muted text-center">Cargando...</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4 mt-2" id="quotasMovementsCard">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-receipt"></i> Movimientos de cuotas registrados</h6>
         </div>
@@ -273,12 +359,97 @@ var dt, editMode = false, moneyHelper;
 var lastClientSearch = '';
 var apiBase = '<?= base_url('/app/finance/quotas/api') ?>';
 var planApiBase = '<?= base_url('/app/finance/financing/api') ?>';
+var planPrintBase = '<?= base_url('/app/finance/financing/print') ?>';
 var catalogUrl = '<?= base_url('/app/finance/api/catalog') ?>';
 var clientsSearchUrl = '<?= base_url('/app/finance/api/clients/search') ?>';
 var clientsCreateUrl = '<?= base_url('/app/finance/api/clients/create') ?>';
 var currentFilter = '<?= esc($current_type ?? '') ?>';
 var selectedPlanId = null;
 var selectedPlan = null;
+var portfolioLoaded = false;
+var initialQuotasTab = '<?= esc($initial_view ?? 'manage') ?>';
+
+function printSelectedPlan(planId) {
+    var id = planId || selectedPlanId;
+    if (!id) return;
+    window.open(planPrintBase + '/' + id, '_blank');
+}
+
+function switchQuotasTab(tab) {
+    $('#quotasMainTabs .nav-link').removeClass('active');
+    $('#quotasMainTabs .nav-link[data-quotas-tab="' + tab + '"]').addClass('active');
+    if (tab === 'summary') {
+        $('#quotasTabManage, #quotasMovementsCard').hide();
+        $('#quotasTabSummary').show();
+        if (!portfolioLoaded) loadPortfolioSummary();
+    } else {
+        $('#quotasTabSummary').hide();
+        $('#quotasTabManage, #quotasMovementsCard').show();
+    }
+}
+
+function loadPortfolioSummary() {
+    $('#summaryByProjectTable tbody').html('<tr><td colspan="5" class="text-muted text-center">Cargando...</td></tr>');
+    $('#summaryByClientTable tbody').html('<tr><td colspan="8" class="text-muted text-center">Cargando...</td></tr>');
+
+    $.post(planApiBase + '/summary')
+        .done(function(res) {
+            if (res.status !== 'success' || !res.data) {
+                showFinanceError(res.message || 'No se pudo cargar el resumen.');
+                return;
+            }
+            portfolioLoaded = true;
+            renderPortfolioSummary(res.data);
+        })
+        .fail(function(xhr) {
+            var msg = (xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : 'Error de conexión';
+            showFinanceError(msg, 'Resumen cartera');
+        });
+}
+
+function renderPortfolioSummary(data) {
+    var totals = data.totals || {};
+    $('#sumUnits').text(totals.units || 0);
+    $('#sumGrandScheduled').text(moneyFmt(totals.total_scheduled || 0));
+    $('#sumGrandPaid').text(moneyFmt(totals.total_paid || 0));
+    $('#sumGrandPending').text(moneyFmt(totals.total_pending || 0));
+
+    var projectRows = '';
+    (data.by_project || []).forEach(function(row) {
+        projectRows += '<tr>' +
+            '<td><strong>' + (row.project_name || '—') + '</strong></td>' +
+            '<td class="text-center">' + (row.units || 0) + '</td>' +
+            '<td class="text-right">' + moneyFmt(row.total_scheduled) + '</td>' +
+            '<td class="text-right text-success">' + moneyFmt(row.total_paid) + '</td>' +
+            '<td class="text-right text-danger">' + moneyFmt(row.total_pending) + '</td>' +
+            '</tr>';
+    });
+    if (!projectRows) projectRows = '<tr><td colspan="5" class="text-muted text-center">Sin planes registrados.</td></tr>';
+    $('#summaryByProjectTable tbody').html(projectRows);
+
+    var clientRows = '';
+    (data.by_plan || []).forEach(function(row) {
+        var paidLabel = (row.installments_paid || 0) + '/' + (row.installment_count || 0);
+        clientRows += '<tr>' +
+            '<td>' + (row.client_name || '—') + '</td>' +
+            '<td>' + (row.project_name || '—') + '</td>' +
+            '<td>' + (row.unit_ref || '—') + '</td>' +
+            '<td class="text-center">' + paidLabel + '</td>' +
+            '<td class="text-right">' + moneyFmt(row.total_scheduled) + '</td>' +
+            '<td class="text-right text-success">' + moneyFmt(row.total_paid) + '</td>' +
+            '<td class="text-right text-danger">' + moneyFmt(row.total_pending) + '</td>' +
+            '<td><button type="button" class="btn btn-outline-secondary btn-sm" onclick="printSelectedPlan(' + row.plan_id + ')" title="Imprimir"><i class="fas fa-print"></i></button> ' +
+            '<button type="button" class="btn btn-outline-primary btn-sm" onclick="openPlanFromSummary(' + row.plan_id + ')" title="Ver plan"><i class="fas fa-eye"></i></button></td>' +
+            '</tr>';
+    });
+    if (!clientRows) clientRows = '<tr><td colspan="8" class="text-muted text-center">Sin planes registrados.</td></tr>';
+    $('#summaryByClientTable tbody').html(clientRows);
+}
+
+function openPlanFromSummary(planId) {
+    switchQuotasTab('manage');
+    selectPlan(planId);
+}
 
 function showFinanceAlert(type, title, message) {
     if (typeof Swal === 'undefined') {
@@ -732,6 +903,7 @@ $('#quotaForm').submit(function(e) {
             if (res.status === 'success') {
                 $('#quotaModal').modal('hide');
                 loadTable();
+                portfolioLoaded = false;
                 if (selectedPlanId) selectPlan(selectedPlanId);
                 showFinanceSuccess('Pago registrado y validado correctamente.');
             } else showFinanceError(res.message || 'No se pudo guardar el pago.');
@@ -750,5 +922,14 @@ $(document).ready(function() {
     moneyHelper.loadCatalog(function() {
         loadTable();
     });
+
+    $('#quotasMainTabs .nav-link').on('click', function(e) {
+        e.preventDefault();
+        switchQuotasTab($(this).data('quotas-tab'));
+    });
+
+    if (initialQuotasTab === 'summary') {
+        switchQuotasTab('summary');
+    }
 });
 </script>

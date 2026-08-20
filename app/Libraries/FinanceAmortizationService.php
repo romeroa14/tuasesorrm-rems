@@ -191,6 +191,158 @@ class FinanceAmortizationService
     }
 
     /**
+     * @return array<string, mixed>
+     */
+    public function getPortfolioSummary(?int $companyId = null): array
+    {
+        $builder = $this->planModel->orderBy('project_name', 'ASC')->orderBy('client_name', 'ASC');
+
+        if ($companyId !== null) {
+            $builder->groupStart()
+                ->where('company_id', $companyId)
+                ->orWhere('company_id', null)
+                ->groupEnd();
+        }
+
+        $plans = $builder->findAll();
+        $byPlan = [];
+        $byProject = [];
+        $byClient = [];
+        $grand = [
+            'units'           => 0,
+            'total_scheduled' => 0.0,
+            'total_paid'      => 0.0,
+            'total_pending'   => 0.0,
+        ];
+
+        foreach ($plans as $plan) {
+            $planId = (int) $plan['id'];
+            $totals = $this->aggregateInstallmentTotals($planId);
+            $plan = $this->attachLeadData($plan);
+
+            $row = [
+                'plan_id'              => $planId,
+                'lead_id'              => $plan['lead_id'] ?? null,
+                'client_name'          => $plan['client_name'] ?? 'Sin cliente',
+                'lead_phone'           => $plan['lead_phone'] ?? '',
+                'project_name'         => trim((string) ($plan['project_name'] ?? '')) ?: 'Sin proyecto',
+                'unit_ref'             => $plan['unit_ref'] ?? $plan['property_ref'] ?? '—',
+                'total_price'          => (float) ($plan['total_price'] ?? 0),
+                'financing_amount'     => (float) ($plan['financing_amount'] ?? $totals['scheduled']),
+                'total_scheduled'      => $totals['scheduled'],
+                'total_paid'           => $totals['paid'],
+                'total_pending'        => $totals['pending'],
+                'installments_paid'    => $totals['paid_count'],
+                'installments_pending' => $totals['pending_count'],
+                'installment_count'    => (int) ($plan['installments'] ?? $totals['total_count']),
+                'status'               => $plan['status'] ?? 'active',
+            ];
+
+            $byPlan[] = $row;
+
+            $grand['units']++;
+            $grand['total_scheduled'] += $row['total_scheduled'];
+            $grand['total_paid'] += $row['total_paid'];
+            $grand['total_pending'] += $row['total_pending'];
+
+            $projectKey = $row['project_name'];
+            if (! isset($byProject[$projectKey])) {
+                $byProject[$projectKey] = [
+                    'project_name'    => $projectKey,
+                    'units'           => 0,
+                    'total_scheduled' => 0.0,
+                    'total_paid'      => 0.0,
+                    'total_pending'   => 0.0,
+                ];
+            }
+            $byProject[$projectKey]['units']++;
+            $byProject[$projectKey]['total_scheduled'] += $row['total_scheduled'];
+            $byProject[$projectKey]['total_paid'] += $row['total_paid'];
+            $byProject[$projectKey]['total_pending'] += $row['total_pending'];
+
+            $clientKey = (string) ($row['lead_id'] ?? '') . '|' . $row['client_name'];
+            if (! isset($byClient[$clientKey])) {
+                $byClient[$clientKey] = [
+                    'lead_id'         => $row['lead_id'],
+                    'client_name'     => $row['client_name'],
+                    'lead_phone'      => $row['lead_phone'],
+                    'units'           => 0,
+                    'total_scheduled' => 0.0,
+                    'total_paid'      => 0.0,
+                    'total_pending'   => 0.0,
+                    'plans'           => [],
+                ];
+            }
+            $byClient[$clientKey]['units']++;
+            $byClient[$clientKey]['total_scheduled'] += $row['total_scheduled'];
+            $byClient[$clientKey]['total_paid'] += $row['total_paid'];
+            $byClient[$clientKey]['total_pending'] += $row['total_pending'];
+            $byClient[$clientKey]['plans'][] = $row;
+        }
+
+        foreach ($byProject as &$group) {
+            $group['total_scheduled'] = round($group['total_scheduled'], 2);
+            $group['total_paid'] = round($group['total_paid'], 2);
+            $group['total_pending'] = round($group['total_pending'], 2);
+        }
+        unset($group);
+
+        $byClient = array_values($byClient);
+        usort($byClient, static fn ($a, $b) => strcmp($a['client_name'], $b['client_name']));
+
+        $byProject = array_values($byProject);
+        usort($byProject, static fn ($a, $b) => strcmp($a['project_name'], $b['project_name']));
+
+        $grand['total_scheduled'] = round($grand['total_scheduled'], 2);
+        $grand['total_paid'] = round($grand['total_paid'], 2);
+        $grand['total_pending'] = round($grand['total_pending'], 2);
+
+        return [
+            'totals'     => $grand,
+            'by_plan'    => $byPlan,
+            'by_project' => $byProject,
+            'by_client'  => $byClient,
+        ];
+    }
+
+    /**
+     * @return array{scheduled: float, paid: float, pending: float, paid_count: int, pending_count: int, total_count: int}
+     */
+    private function aggregateInstallmentTotals(int $planId): array
+    {
+        $rows = $this->installmentModel
+            ->where('financing_plan_id', $planId)
+            ->findAll();
+
+        $scheduled = 0.0;
+        $paid = 0.0;
+        $paidCount = 0;
+        $pendingCount = 0;
+
+        foreach ($rows as $row) {
+            $amount = (float) ($row['amount'] ?? 0);
+            $paidAmount = (float) ($row['paid_amount'] ?? 0);
+            $scheduled += $amount;
+            $paid += $paidAmount;
+
+            if (($row['status'] ?? '') === 'paid') {
+                $paidCount++;
+            } else {
+                $pendingCount++;
+            }
+        }
+
+        return [
+            'scheduled'     => round($scheduled, 2),
+            'paid'          => round($paid, 2),
+            'pending'       => round(max(0, $scheduled - $paid), 2),
+            'paid_count'    => $paidCount,
+            'pending_count' => $pendingCount,
+            'total_count'   => count($rows),
+        ];
+    }
+
+    /**
      * @param array<string, mixed> $quotaRow
      */
     public function applyQuotaPayment(int $installmentId, array $quotaRow, ?int $movementId = null): array

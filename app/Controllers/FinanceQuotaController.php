@@ -55,6 +55,7 @@ class FinanceQuotaController extends BaseController
         $this->body['current_type'] = $type;
         $this->body['quota_types'] = $quotaTypes;
         $this->body['can_draft'] = $this->financeAuthorization->canDraftWorkflow();
+        $this->body['initial_view'] = $this->request->getGet('view') === 'summary' ? 'summary' : 'manage';
 
         $this->generate_template($this->settings['url']);
     }

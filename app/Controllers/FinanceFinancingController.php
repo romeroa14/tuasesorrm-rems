@@ -56,6 +56,40 @@ class FinanceFinancingController extends BaseController
         return $this->jsonSuccess($plan);
     }
 
+    public function apiPortfolioSummary(): ResponseInterface
+    {
+        if (! $this->financeAuthorization->canViewIncome()) {
+            return $this->jsonError('No tienes permisos para ver el resumen de cartera.', 403);
+        }
+
+        try {
+            return $this->jsonSuccess(
+                $this->amortizationService->getPortfolioSummary($this->companyContext->getActiveCompanyId())
+            );
+        } catch (\Throwable $exception) {
+            log_message('error', 'FinanceFinancingController::apiPortfolioSummary - ' . $exception->getMessage());
+
+            return $this->jsonError('No se pudo cargar el resumen de cartera.', 500);
+        }
+    }
+
+    public function printPlan(string $id)
+    {
+        if (! $this->financeAuthorization->canViewIncome()) {
+            return redirect()->to(base_url('/app/finance/quotas'));
+        }
+
+        $plan = $this->amortizationService->getPlanDetail((int) $id);
+        if ($plan === null) {
+            return redirect()->to(base_url('/app/finance/quotas'))->with('error', 'Plan no encontrado.');
+        }
+
+        return view('auth/finance/quotas_print', [
+            'plan' => $plan,
+            'printed_at' => date('d/m/Y H:i'),
+        ]);
+    }
+
     public function apiCreatePlan(): ResponseInterface
     {
         if (! $this->financeAuthorization->canDraftWorkflow()) {

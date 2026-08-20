@@ -279,6 +279,10 @@ class FinanceMenu extends BaseConfig
     private static function mapQuotaLinks(): array
     {
         $items = [];
+        $items[] = [
+            'label' => 'Resumen cartera',
+            'url'   => '/app/finance/quotas?view=summary',
+        ];
         foreach (self::quotaTypes() as $key => $label) {
             $items[] = [
                 'label' => $label,
