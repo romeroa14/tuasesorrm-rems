@@ -166,12 +166,26 @@ class WebhookController extends ResourceController
                     continue;
                 }
 
-                // Negocio → cliente (Inbox Meta / app).
-                // DESACTIVADO temporalmente: el CRM ya guarda los mensajes salientes via api_send_message.
-                // El webhook duplicaba el registro y generaba errores 500 que Meta reintentaba sin parar.
+                // Negocio → cliente (Inbox Meta / app Instagram).
                 if ($senderIsUs && ! $recipientIsUs && $toFieldId !== '') {
-                    // Solo registrar en log, sin procesar (evita ciclos de reintento de Meta).
-                    log_message('info', 'Webhook Instagram: mensaje saliente ignorado (procesado por CRM), to=' . $toFieldId);
+                    if ($this->shouldCaptureOutboundWebhook()) {
+                        try {
+                            $this->processInstagramBusinessOutboundMessage(
+                                $toFieldId,
+                                $messageText,
+                                $messageId,
+                                $contentType,
+                                $mediaUrl,
+                                $timestamp,
+                                $recipientIgId
+                            );
+                        } catch (\Throwable $e) {
+                            log_message('error', 'Webhook Instagram outbound: ' . $e->getMessage());
+                        }
+                    } else {
+                        log_message('info', 'Webhook Instagram: mensaje saliente ignorado (META_WEBHOOK_CAPTURE_OUTBOUND=false), to=' . $toFieldId);
+                    }
+
                     continue;
                 }
 
@@ -688,6 +702,19 @@ class WebhookController extends ResourceController
         $rawTs = $event['timestamp'] ?? null;
 
         return $rawTs !== null ? (int) ($rawTs / 1000) : time();
+    }
+
+    /**
+     * Captura mensajes enviados desde la app de Instagram / Meta Inbox (dedup por external_message_id).
+     */
+    private function shouldCaptureOutboundWebhook(): bool
+    {
+        $value = getenv('META_WEBHOOK_CAPTURE_OUTBOUND');
+        if ($value === false || $value === '') {
+            return true;
+        }
+
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**

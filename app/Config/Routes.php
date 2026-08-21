@@ -164,6 +164,7 @@ $routes->get('/app/crm/api/pipeline/counts', 'CrmController::api_pipeline_counts
 $routes->post('/app/crm/api/pipeline/move', 'CrmController::api_pipeline_move', ['filter' => 'auth']); /* Mover lead entre columnas Kanban */
 $routes->post('/app/crm/api/pipeline/sync-instagram-messages', 'CrmController::api_pipeline_sync_instagram_messages', ['filter' => 'auth']); /* Graph → BD últimos DM */
 $routes->get('/app/crm/api/stats', 'CrmController::api_stats', ['filter' => 'auth']); /* Estadísticas CRM */
+$routes->get('/app/crm/api/instagram-accounts', 'CrmController::api_instagram_accounts', ['filter' => 'auth']); /* Cuentas IG ATC */
 $routes->get('/app/crm/api/rescore/(:num)', 'CrmController::api_rescore/$1', ['filter' => 'auth']); /* Recalcular score */
 $routes->get('/app/crm/export/meta', 'CrmController::export_meta', ['filter' => 'auth']); /* Exportar para Meta */
 

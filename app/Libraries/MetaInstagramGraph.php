@@ -57,6 +57,55 @@ class MetaInstagramGraph
     }
 
     /**
+     * Mapa IG Business Account ID → username (env + cuentas vistas en BD).
+     *
+     * @return array<string, string>
+     */
+    public static function listRecipientAccounts(): array
+    {
+        $map = [];
+
+        $json = getenv('META_IG_RECIPIENT_USERNAMES_JSON');
+        if ($json !== false && $json !== '') {
+            $decoded = json_decode($json, true);
+            if (is_array($decoded)) {
+                foreach ($decoded as $id => $username) {
+                    $id = (string) $id;
+                    if ($id !== '') {
+                        $map[$id] = ltrim((string) $username, '@');
+                    }
+                }
+            }
+        }
+
+        try {
+            $db = \Config\Database::connect();
+            $rows = $db->query("
+                SELECT recipient_ig_id, recipient_ig_username
+                FROM conversations
+                WHERE channel = 'instagram' AND recipient_ig_id != ''
+                GROUP BY recipient_ig_id, recipient_ig_username
+                ORDER BY recipient_ig_username
+            ")->getResultArray();
+
+            foreach ($rows as $row) {
+                $id = (string) ($row['recipient_ig_id'] ?? '');
+                if ($id === '' || isset($map[$id])) {
+                    continue;
+                }
+                $username = ltrim((string) ($row['recipient_ig_username'] ?? ''), '@');
+                $map[$id] = $username !== '' ? $username : $id;
+            }
+        } catch (\Throwable $e) {
+            log_message('warning', 'MetaInstagramGraph::listRecipientAccounts ' . $e->getMessage());
+        }
+
+        asort($map);
+
+        return $map;
+    }
+
+    /**
      * JSON en .env: {"17841400xxx":"mi_cuenta","17841400yyy":"otra_cuenta"}
      */
     private static function fromEnvMap(string $recipientIgId): ?string

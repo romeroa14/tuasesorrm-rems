@@ -32,6 +32,12 @@
                                 </div>
                             </div>
                             <div class="d-flex flex-wrap gap-1">
+                                <select class="form-control form-control-sm mb-1" id="filter-recipient-ig" style="font-size: 11px;">
+                                    <option value="">Todas las cuentas IG</option>
+                                    <?php foreach (($instagram_accounts ?? []) as $igId => $igUsername): ?>
+                                        <option value="<?= esc($igId) ?>">@<?= esc($igUsername) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                                 <select class="form-control form-control-sm mb-1" id="filter-channel" style="font-size: 11px;">
                                     <option value="">Todos los canales</option>
                                     <option value="instagram" selected>📷 Instagram</option>
@@ -292,27 +298,27 @@
 <script>
 let currentConversationId = null;
 let conversations = [];
-let refreshInterval = null;
+let listRefreshInterval = null;
+let messageRefreshInterval = null;
+let lastMessageCount = 0;
+const LIST_POLL_MS = 5000;
+const MESSAGE_POLL_MS = 4000;
 
 $(document).ready(function() {
-    // Check URL param for auto-open FIRST
     const urlParams = new URLSearchParams(window.location.search);
     const openId = urlParams.get('open');
+
+    startListPolling();
+
     if (openId) {
-        // Focus mode: hide sidebar (default), no polling
-        setTimeout(() => openConversation(parseInt(openId)), 300);
+        setTimeout(function() { openConversation(parseInt(openId, 10)); }, 300);
     } else {
-        // Normal mode: show sidebar + shrink chat
         $('#conversation-sidebar').show();
         $('#chat-column').removeClass('col-md-8 col-lg-9').addClass('col-md-5 col-lg-6');
-        loadConversations();
-        refreshInterval = setInterval(loadConversations, 10000);
     }
 
-    // Filter change handlers
-    $('#filter-channel, #filter-label, #filter-status').on('change', loadConversations);
-    
-    // Search
+    $('#filter-channel, #filter-label, #filter-status, #filter-recipient-ig').on('change', loadConversations);
+
     $('#search-conversations').on('input', function() {
         const search = $(this).val().toLowerCase();
         $('.conversation-item').each(function() {
@@ -320,14 +326,38 @@ $(document).ready(function() {
             $(this).toggle(name.includes(search));
         });
     });
-
 });
+
+function startListPolling() {
+    loadConversations();
+    if (listRefreshInterval) clearInterval(listRefreshInterval);
+    listRefreshInterval = setInterval(loadConversations, LIST_POLL_MS);
+}
+
+function startMessagePolling() {
+    if (messageRefreshInterval) clearInterval(messageRefreshInterval);
+    messageRefreshInterval = setInterval(refreshOpenConversationQuiet, MESSAGE_POLL_MS);
+}
+
+function stopMessagePolling() {
+    if (messageRefreshInterval) {
+        clearInterval(messageRefreshInterval);
+        messageRefreshInterval = null;
+    }
+}
+
+function isScrolledToBottom() {
+    var area = document.getElementById('messages-area');
+    if (!area) return true;
+    return (area.scrollHeight - area.scrollTop - area.clientHeight) < 80;
+}
 
 function loadConversations() {
     const params = new URLSearchParams({
         channel: $('#filter-channel').val() || '',
         intention_label: $('#filter-label').val() || '',
         status: $('#filter-status').val() || '',
+        recipient_ig_id: $('#filter-recipient-ig').val() || '',
     });
 
     $.get('/app/crm/api/conversations?' + params, function(response) {
@@ -389,37 +419,54 @@ function renderConversationList(convs) {
 
 function openConversation(id) {
     currentConversationId = id;
-    
-    // Highlight active
+    lastMessageCount = 0;
+    startMessagePolling();
+
     $('.conversation-item').removeClass('active');
     $(`.conversation-item[data-id="${id}"]`).addClass('active');
 
-    // Show subtle loading — don't clear current messages
     $('#no-chat-selected').hide();
     $('.chat-loading-overlay').remove();
     $('#chat-column').append('<div class="chat-loading-overlay" style="position:absolute;top:60px;left:0;right:0;text-align:center;z-index:5;padding-top:20px;"><i class="fas fa-spinner fa-spin text-primary"></i></div>');
-    
-    $.get(`/app/crm/api/messages/${id}`, function(response) {
-        if (response.status === 'success') {
+
+    fetchConversationMessages(id, true);
+}
+
+function refreshOpenConversationQuiet() {
+    if (!currentConversationId) return;
+    fetchConversationMessages(currentConversationId, false);
+}
+
+function fetchConversationMessages(id, showLoading) {
+    $.get('/app/crm/api/messages/' + id, function(response) {
+        if (response.status !== 'success') return;
+
+        if (showLoading) {
             $('.chat-loading-overlay').remove();
-            renderMessages(response.data.messages);
-            renderLeadDetail(response.data.conversation);
-            
-            // Show input area
+        }
+
+        var msgs = response.data.messages || [];
+        var conv = response.data.conversation;
+
+        if (msgs.length !== lastMessageCount) {
+            var stickToBottom = showLoading || isScrolledToBottom();
+            renderMessages(msgs);
+            lastMessageCount = msgs.length;
+            if (stickToBottom) scrollToBottom();
+        }
+
+        renderLeadDetail(conv);
+
+        if (showLoading) {
             $('#message-input-area').show();
             $('#chat-header').css('display', '').removeClass('d-none').show();
-            
-            // Update header
-            const conv = response.data.conversation;
             $('#chat-lead-name').text(conv.lead_name || 'Sin nombre');
             $('#chat-channel-info').html(
-                getChannelIcon(conv.channel) + ' ' + (conv.external_username || conv.channel) 
+                getChannelIcon(conv.channel) + ' ' + (conv.external_username || conv.channel)
                 + (conv.recipient_ig_username ? ' → @' + conv.recipient_ig_username : '')
                 + ' <span class="badge ml-1" style="background:' + getLabelColor(conv.intention_label) + ';color:white;font-size:10px">' + getLabelText(conv.intention_label) + ' ' + (conv.intention_score || 0) + '%</span>'
             );
             $('#chat-avatar').text((conv.lead_name || '?')[0].toUpperCase());
-
-            // Scroll to bottom
             scrollToBottom();
         }
     });
@@ -500,22 +547,28 @@ function sendMessage() {
         content: content
     }, function(response) {
         if (response.status === 'success') {
-            // Add message to chat
             const now = new Date();
             const time = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+            const delivered = response.data && response.data.graph_sent ? ' ✓✓' : ' ⏳';
             const html = `
                 <div class="d-flex justify-content-end">
                     <div class="message-bubble outbound">
                         <div class="msg-sender"><?= session()->get('full_name') ?></div>
                         <div>${escapeHtml(content)}</div>
-                        <div class="msg-time">${time} ✓✓</div>
+                        <div class="msg-time">${time}${delivered}</div>
                     </div>
                 </div>
             `;
             $('#messages-area').append(html);
             $('#message-input').val('');
             scrollToBottom();
+            lastMessageCount += 1;
+        } else {
+            alert(response.message || 'No se pudo enviar el mensaje.');
         }
+    }).fail(function(xhr) {
+        var msg = (xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : 'Error de red al enviar.';
+        alert(msg);
     });
 }
 

@@ -94,6 +94,35 @@
                 </div>
             </div>
 
+            <!-- Instagram accounts -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Conversaciones por cuenta Instagram (ATC)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Cuenta</th>
+                                            <th>Conversaciones</th>
+                                            <th>Abiertas</th>
+                                            <th>Sin asignar</th>
+                                            <th>Sin leer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ig-account-tbody">
+                                        <tr><td colspan="5" class="text-center text-muted">Cargando...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Intention Labels Summary -->
             <div class="row mb-4">
                 <div class="col-lg-12">
@@ -157,6 +186,26 @@ function loadCrmStats() {
         $('#stat-open').text(data.open_conversations);
         $('#stat-unassigned').text(data.unassigned);
         $('#stat-total-conv').text(data.total_conversations);
+
+        // Instagram accounts table
+        let igRows = '';
+        if (data.by_instagram_account && data.by_instagram_account.length > 0) {
+            data.by_instagram_account.forEach(function(row) {
+                var uname = (row.recipient_ig_username || 'sin cuenta').replace(/^@/, '');
+                igRows += `
+                    <tr>
+                        <td><i class="fab fa-instagram text-danger"></i> @${uname}</td>
+                        <td>${row.conversations}</td>
+                        <td>${row.open_count}</td>
+                        <td>${row.unassigned}</td>
+                        <td>${row.unread}</td>
+                    </tr>
+                `;
+            });
+        } else {
+            igRows = '<tr><td colspan="5" class="text-center text-muted">Sin datos de cuentas Instagram</td></tr>';
+        }
+        $('#ig-account-tbody').html(igRows);
 
         // Label chart
         if (typeof Chart !== 'undefined') {

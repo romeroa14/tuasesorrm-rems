@@ -45,6 +45,9 @@ class Conversation extends Model
         if (!empty($filters['intention_label'])) {
             $builder->where('leads.intention_label', $filters['intention_label']);
         }
+        if (!empty($filters['recipient_ig_id'])) {
+            $builder->where('conversations.recipient_ig_id', $filters['recipient_ig_id']);
+        }
 
         $row = $builder->first();
         return $row ? (int) $row['total'] : 0;
@@ -71,6 +74,9 @@ class Conversation extends Model
         }
         if (!empty($filters['intention_label'])) {
             $builder->where('leads.intention_label', $filters['intention_label']);
+        }
+        if (!empty($filters['recipient_ig_id'])) {
+            $builder->where('conversations.recipient_ig_id', $filters['recipient_ig_id']);
         }
 
         return $builder->findAll($limit, $offset);

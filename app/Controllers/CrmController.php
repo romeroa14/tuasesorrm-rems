@@ -6,6 +6,8 @@ use App\Models\Message;
 use App\Models\IntentionLog;
 use App\Libraries\InstagramDmGraphSync;
 use App\Libraries\CacheService;
+use App\Libraries\MetaInstagramGraph;
+use App\Libraries\MetaInstagramSend;
 use App\Libraries\ScoringService;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -35,6 +37,7 @@ class CrmController extends BaseController
             'title' => 'CRM Inbox',
             'slogan' => ' | Asesores RM',
             'view' => 'auth/crm/inbox',
+            'instagram_accounts' => MetaInstagramGraph::listRecipientAccounts(),
         ];
 
         return view('template/header/header', $data)
@@ -94,6 +97,7 @@ class CrmController extends BaseController
             'assigned_to' => $this->request->getGet('assigned_to'),
             'unassigned' => $this->request->getGet('unassigned'),
             'intention_label' => $this->request->getGet('intention_label'),
+            'recipient_ig_id' => $this->request->getGet('recipient_ig_id'),
         ];
 
         $limit = (int) ($this->request->getGet('limit') ?? 200);
@@ -161,6 +165,38 @@ class CrmController extends BaseController
             return $this->response->setJSON(['status' => 'error', 'message' => 'Conversación no encontrada']);
         }
 
+        $externalMessageId = '';
+        $graphSent = false;
+
+        if (($conversation['channel'] ?? '') === 'instagram') {
+            $recipientIgId = (string) ($conversation['recipient_ig_id'] ?? '');
+            $customerId = (string) ($conversation['external_id'] ?? '');
+
+            if ($recipientIgId === '') {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Esta conversación no tiene cuenta IG receptora asociada.',
+                ]);
+            }
+            if ($customerId === '') {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'No se encontró el ID del cliente en Instagram.',
+                ]);
+            }
+
+            $sendResult = MetaInstagramSend::sendTextMessage($recipientIgId, $customerId, $content);
+            if (! ($sendResult['ok'] ?? false)) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => $sendResult['error'] ?? 'No se pudo enviar el mensaje a Instagram.',
+                ]);
+            }
+
+            $externalMessageId = (string) ($sendResult['message_id'] ?? '');
+            $graphSent = empty($sendResult['skipped']);
+        }
+
         $messageId = $this->messageModel->insert([
             'conversation_id' => $conversationId,
             'direction' => 'outbound',
@@ -168,6 +204,7 @@ class CrmController extends BaseController
             'sender_id' => $agentId,
             'content' => $content,
             'content_type' => 'text',
+            'external_message_id' => $externalMessageId !== '' ? $externalMessageId : null,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
@@ -202,7 +239,28 @@ class CrmController extends BaseController
             'data' => [
                 'message_id' => $messageId,
                 'sent_at' => date('Y-m-d H:i:s'),
+                'graph_sent' => $graphSent,
+                'external_message_id' => $externalMessageId,
             ],
+        ]);
+    }
+
+    /**
+     * Cuentas IG Business configuradas (filtros inbox / dashboard).
+     */
+    public function api_instagram_accounts()
+    {
+        $accounts = [];
+        foreach (MetaInstagramGraph::listRecipientAccounts() as $id => $username) {
+            $accounts[] = [
+                'recipient_ig_id' => $id,
+                'recipient_ig_username' => $username,
+            ];
+        }
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'data' => $accounts,
         ]);
     }
 
@@ -625,6 +683,20 @@ l.created_at,
                 GROUP BY channel
             ')->getResultArray();
 
+            $byInstagramAccount = $db->query("
+                SELECT
+                    recipient_ig_id,
+                    COALESCE(NULLIF(recipient_ig_username, ''), 'sin cuenta') AS recipient_ig_username,
+                    COUNT(*) AS conversations,
+                    SUM(CASE WHEN status = 'open' THEN 1 ELSE 0 END) AS open_count,
+                    SUM(CASE WHEN assigned_to IS NULL AND status != 'archived' THEN 1 ELSE 0 END) AS unassigned,
+                    SUM(unread_count) AS unread
+                FROM conversations
+                WHERE channel = 'instagram'
+                GROUP BY recipient_ig_id, recipient_ig_username
+                ORDER BY conversations DESC
+            ")->getResultArray();
+
             $recentScores = $db->query('
                 SELECT il.*, l.name as lead_name 
                 FROM intention_logs il 
@@ -633,7 +705,7 @@ l.created_at,
                 LIMIT 10
             ')->getResultArray();
 
-            return compact('totalLeads', 'totalConversations', 'openConversations', 'unassigned', 'byLabel', 'byChannel', 'recentScores');
+            return compact('totalLeads', 'totalConversations', 'openConversations', 'unassigned', 'byLabel', 'byChannel', 'byInstagramAccount', 'recentScores');
         });
 
         $totalLeads = $data['totalLeads'];
@@ -642,6 +714,7 @@ l.created_at,
         $unassigned = $data['unassigned'];
         $byLabel = $data['byLabel'];
         $byChannel = $data['byChannel'];
+        $byInstagramAccount = $data['byInstagramAccount'];
         $recentScores = $data['recentScores'];
 
         return $this->response->setJSON([
@@ -653,6 +726,7 @@ l.created_at,
                 'unassigned' => $unassigned,
                 'by_label' => $byLabel,
                 'by_channel' => $byChannel,
+                'by_instagram_account' => $byInstagramAccount,
                 'recent_scores' => $recentScores,
             ],
         ]);

@@ -95,7 +95,7 @@ class RedisQueue
         }
     }
 
-    public function retryDeadLetter(): int
+    public function retryDeadLetter(int $limit = 0): int
     {
         if (!$this->available) {
             return 0;
@@ -103,8 +103,16 @@ class RedisQueue
         $count = 0;
         try {
             while (($item = $this->client->lpop(self::QUEUE_DEAD)) !== null) {
+                $payload = json_decode($item, true);
+                if (is_array($payload)) {
+                    unset($payload['attempts']);
+                    $item = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                }
                 $this->client->lpush(self::QUEUE_INBOUND, [$item]);
                 $count++;
+                if ($limit > 0 && $count >= $limit) {
+                    break;
+                }
             }
         } catch (\Throwable $e) {
             log_message('error', 'RedisQueue::retryDeadLetter failed — ' . $e->getMessage());

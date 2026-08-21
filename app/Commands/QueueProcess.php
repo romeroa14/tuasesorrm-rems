@@ -3,6 +3,7 @@
 namespace App\Commands;
 
 use App\Controllers\WebhookController;
+use App\Libraries\DatabaseReconnect;
 use App\Libraries\RedisQueue;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
@@ -53,9 +54,12 @@ class QueueProcess extends BaseCommand
 
             $messageId = $payload['message_id'] ?? 'unknown';
             $senderId  = $payload['sender_id'] ?? 'unknown';
+            unset($payload['attempts']);
 
             try {
-                // Fresh controller + DB connection per message (prevents "MySQL has gone away")
+                DatabaseReconnect::ensureLive();
+
+                // Fresh controller per message (prevents stale state across long-lived workers)
                 $request  = Services::request();
                 $response = Services::response();
                 $logger   = Services::logger();
