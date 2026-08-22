@@ -81,8 +81,11 @@
                         <button type="button" class="btn btn-outline-light btn-sm mr-1" onclick="closePlanView()" title="Volver a la lista">
                             <i class="fas fa-times"></i> Cerrar
                         </button>
-                        <button type="button" class="btn btn-light btn-sm" id="btnPrintPlan" onclick="printSelectedPlan()">
+                        <button type="button" class="btn btn-light btn-sm mr-1" id="btnPrintPlan" onclick="printSelectedPlan()">
                             <i class="fas fa-print"></i> Imprimir plan
+                        </button>
+                        <button type="button" class="btn btn-outline-light btn-sm" id="btnSendStatement" onclick="sendAccountStatement()">
+                            <i class="fas fa-envelope"></i> Enviar estado de cuenta
                         </button>
                     </div>
                 </div>
@@ -393,6 +396,20 @@
                                 <div class="col-md-4"><div class="form-group"><label>N° Recibo <span class="text-danger">*</span></label><input type="text" class="form-control" id="receipt_number" name="receipt_number" required></div></div>
                             </div>
                             <?php echo view('auth/finance/partials/payment_amount_fields'); ?>
+                            <div class="row" id="quotaNotifyRow">
+                                <div class="col-md-6">
+                                    <div class="custom-control custom-checkbox mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="send_receipt_email" name="send_receipt_email" value="1" checked>
+                                        <label class="custom-control-label" for="send_receipt_email">Enviar recibo por correo al cliente</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="custom-control custom-checkbox mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="send_receipt_whatsapp" name="send_receipt_whatsapp" value="1">
+                                        <label class="custom-control-label" for="send_receipt_whatsapp">Aviso WhatsApp (Hilos, opcional)</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group mb-0"><label>Notas</label><textarea class="form-control" id="notes" name="notes" rows="2"></textarea></div>
                         </div>
                     </div>
@@ -469,6 +486,7 @@ function toggleQuotaTypeFields() {
     $('#quotaClientRequired').toggleClass('d-none', isDelivered && !$('#financing_plan_id').val());
     $('#period_month, #period_year').prop('required', !isDelivered);
     $('#periodMonthRequired, #periodYearRequired').toggleClass('d-none', isDelivered);
+    $('#quotaNotifyRow').toggle(!isDelivered);
     if (isDelivered) {
         $('#quota_client_hint').text('Opcional: referencia del cliente asociado al pago.');
     } else {
@@ -528,6 +546,33 @@ function printSelectedPlan(planId) {
     var id = planId || selectedPlanId;
     if (!id) return;
     window.open(planPrintBase + '/' + id, '_blank');
+}
+
+function sendAccountStatement() {
+    if (!selectedPlanId) {
+        showFinanceError('Selecciona un plan de pago.');
+        return;
+    }
+    var email = selectedPlan && selectedPlan.lead_email ? selectedPlan.lead_email : '';
+    var promptMsg = email
+        ? 'Se enviará el estado de cuenta en PDF a: ' + email
+        : 'El cliente no tiene correo en CRM. Actualiza el lead antes de enviar.';
+    if (!email) {
+        showFinanceError(promptMsg);
+        return;
+    }
+    confirmFinanceAction('Enviar estado de cuenta', promptMsg, function() {
+        $.post(planApiBase + '/' + selectedPlanId + '/send-statement', { send_email: 1 }, function(res) {
+            if (res.status === 'success') {
+                showFinanceSuccess(res.data.message || 'Estado de cuenta enviado.', 'Correo');
+            } else {
+                showFinanceError(res.message || 'No se pudo enviar.');
+            }
+        }).fail(function(xhr) {
+            var msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Error de conexión';
+            showFinanceError(msg);
+        });
+    });
 }
 
 function switchQuotasTab(tab) {
@@ -1130,6 +1175,21 @@ $('#quotaForm').submit(function(e) {
                     msg += ' <a href="' + res.data.receipt_url + '" target="_blank">Ver recibo</a>';
                     if (res.data.receipt_pdf_url) {
                         msg += ' · <a href="' + res.data.receipt_pdf_url + '" target="_blank">PDF</a>';
+                    }
+                }
+                if (res.data && res.data.notifications) {
+                    var n = res.data.notifications;
+                    if (n.email && n.email.sent) {
+                        msg += '<br><small>Recibo enviado por correo.</small>';
+                    } else if (n.email && !n.email.skipped && n.email.error) {
+                        msg += '<br><small class="text-danger">Correo: ' + escapeHtml(n.email.error).substring(0, 120) + '</small>';
+                    } else if (n.email && n.email.reason) {
+                        msg += '<br><small>' + escapeHtml(n.email.reason) + '</small>';
+                    }
+                    if (n.whatsapp && n.whatsapp.sent) {
+                        msg += '<br><small>WhatsApp enviado.</small>';
+                    } else if (n.whatsapp && n.whatsapp.reason) {
+                        msg += '<br><small>WhatsApp: ' + escapeHtml(n.whatsapp.reason) + '</small>';
                     }
                 }
                 showFinanceSuccess(msg, 'Listo');

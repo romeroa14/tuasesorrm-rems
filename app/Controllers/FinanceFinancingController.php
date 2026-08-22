@@ -7,6 +7,8 @@ namespace App\Controllers;
 use App\Libraries\FinanceAmortizationService;
 use App\Libraries\FinanceAuthorization;
 use App\Libraries\FinanceCompanyContext;
+use App\Libraries\FinanceNotificationService;
+use App\Libraries\FinanceStatementService;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -16,6 +18,8 @@ class FinanceFinancingController extends BaseController
     protected FinanceAuthorization $financeAuthorization;
     protected FinanceAmortizationService $amortizationService;
     protected FinanceCompanyContext $companyContext;
+    protected FinanceStatementService $statementService;
+    protected FinanceNotificationService $notificationService;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -23,6 +27,8 @@ class FinanceFinancingController extends BaseController
         $this->financeAuthorization = new FinanceAuthorization();
         $this->amortizationService = new FinanceAmortizationService();
         $this->companyContext = new FinanceCompanyContext();
+        $this->statementService = new FinanceStatementService();
+        $this->notificationService = new FinanceNotificationService();
     }
 
     public function apiListPlans(): ResponseInterface
@@ -88,6 +94,79 @@ class FinanceFinancingController extends BaseController
             'plan' => $plan,
             'printed_at' => date('d/m/Y H:i'),
         ]);
+    }
+
+    public function statement(string $id)
+    {
+        if (! $this->financeAuthorization->canViewIncome()) {
+            return redirect()->to(base_url('/app/finance/quotas'));
+        }
+
+        try {
+            $context = $this->statementService->buildContext((int) $id);
+            $context['forPdf'] = false;
+
+            return view('auth/finance/quota_statement', $context);
+        } catch (\Throwable $e) {
+            return redirect()->to(base_url('/app/finance/quotas'))->with('error', $e->getMessage());
+        }
+    }
+
+    public function statementPdf(string $id)
+    {
+        if (! $this->financeAuthorization->canViewIncome()) {
+            return $this->response->setStatusCode(403)->setBody('Sin permisos.');
+        }
+
+        try {
+            $pdf = $this->statementService->generatePdf((int) $id);
+
+            return $this->response
+                ->setHeader('Content-Type', 'application/pdf')
+                ->setHeader('Content-Disposition', 'inline; filename="estado-de-cuenta-' . (int) $id . '.pdf"')
+                ->setBody($pdf);
+        } catch (\Throwable $e) {
+            return $this->response->setStatusCode(404)->setBody($e->getMessage());
+        }
+    }
+
+    public function apiSendStatement(string $id): ResponseInterface
+    {
+        if (! $this->financeAuthorization->canDraftWorkflow()) {
+            return $this->jsonError('No tienes permisos para enviar estados de cuenta.', 403);
+        }
+
+        $data = $this->requestData();
+        $sendEmail = ! isset($data['send_email']) || filter_var($data['send_email'], FILTER_VALIDATE_BOOLEAN);
+        $sendWhatsapp = isset($data['send_whatsapp']) && filter_var($data['send_whatsapp'], FILTER_VALIDATE_BOOLEAN);
+
+        try {
+            $notifications = $this->notificationService->sendAccountStatement((int) $id, [
+                'send_email'    => $sendEmail,
+                'send_whatsapp' => $sendWhatsapp,
+            ]);
+
+            $emailSent = ! empty($notifications['email']['sent']);
+            $waSent = ! empty($notifications['whatsapp']['sent']);
+
+            if (! $emailSent && ! $waSent) {
+                $reason = $notifications['email']['reason']
+                    ?? $notifications['email']['error']
+                    ?? $notifications['whatsapp']['reason']
+                    ?? 'No se pudo enviar la notificación.';
+
+                return $this->jsonError($reason, 422);
+            }
+
+            return $this->jsonSuccess([
+                'notifications' => $notifications,
+                'message'       => $emailSent ? 'Estado de cuenta enviado por correo.' : 'Notificación WhatsApp enviada.',
+            ]);
+        } catch (\Throwable $e) {
+            log_message('error', 'FinanceFinancingController::apiSendStatement ' . $e->getMessage());
+
+            return $this->jsonError($e->getMessage(), 500);
+        }
     }
 
     public function apiCreatePlan(): ResponseInterface

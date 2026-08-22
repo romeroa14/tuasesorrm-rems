@@ -9,6 +9,7 @@ use App\Libraries\FinanceAuthorization;
 use App\Libraries\FinanceCompanyContext;
 use App\Libraries\FinanceMoneyService;
 use App\Libraries\FinanceQuotaIncomeService;
+use App\Libraries\FinanceNotificationService;
 use App\Libraries\FinanceReceiptService;
 use App\Models\FinanceBuilder;
 use App\Models\FinanceFinancingInstallment;
@@ -30,6 +31,7 @@ class FinanceQuotaController extends BaseController
     protected FinanceAmortizationService $amortizationService;
     protected FinanceCompanyContext $companyContext;
     protected FinanceReceiptService $receiptService;
+    protected FinanceNotificationService $notificationService;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -41,6 +43,7 @@ class FinanceQuotaController extends BaseController
         $this->amortizationService = new FinanceAmortizationService();
         $this->companyContext = new FinanceCompanyContext();
         $this->receiptService = new FinanceReceiptService();
+        $this->notificationService = new FinanceNotificationService();
     }
 
     public function index()
@@ -176,6 +179,13 @@ class FinanceQuotaController extends BaseController
             if (($record['type'] ?? '') === 'received') {
                 $record['receipt_url'] = base_url('/app/finance/quotas/receipt/' . $quotaId);
                 $record['receipt_pdf_url'] = base_url('/app/finance/quotas/receipt/' . $quotaId . '/pdf');
+
+                $sendEmail = ! isset($data['send_receipt_email']) || filter_var($data['send_receipt_email'], FILTER_VALIDATE_BOOLEAN);
+                $sendWhatsapp = isset($data['send_receipt_whatsapp']) && filter_var($data['send_receipt_whatsapp'], FILTER_VALIDATE_BOOLEAN);
+                $record['notifications'] = $this->notificationService->afterQuotaPayment($quotaId, [
+                    'send_email'    => $sendEmail,
+                    'send_whatsapp' => $sendWhatsapp,
+                ]);
             }
 
             return $this->jsonSuccess($record);

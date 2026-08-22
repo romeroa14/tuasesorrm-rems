@@ -276,6 +276,9 @@ $routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     $routes->post('financing/api/summary', 'FinanceFinancingController::apiPortfolioSummary');
     $routes->get('financing/api/(:num)', 'FinanceFinancingController::apiGetPlan/$1');
     $routes->get('financing/print/(:num)', 'FinanceFinancingController::printPlan/$1');
+    $routes->get('financing/statement/(:num)/pdf', 'FinanceFinancingController::statementPdf/$1');
+    $routes->get('financing/statement/(:num)', 'FinanceFinancingController::statement/$1');
+    $routes->post('financing/api/(:num)/send-statement', 'FinanceFinancingController::apiSendStatement/$1');
     $routes->post('financing/api/create', 'FinanceFinancingController::apiCreatePlan');
     $routes->get('daily_cash', 'FinanceCashController::dailyCash');
     $routes->post('daily_cash/api/list', 'FinanceCashController::dailyCashApiList');
