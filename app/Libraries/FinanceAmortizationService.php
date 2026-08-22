@@ -377,7 +377,7 @@ class FinanceAmortizationService
             'status'              => $status,
             'finance_quota_id'    => (int) ($quotaRow['id'] ?? 0) ?: null,
             'finance_movement_id' => $movementId,
-            'paid_at'             => ($quotaRow['receipt_date'] ?? date('Y-m-d')) . ' 00:00:00',
+            'paid_at'             => ($quotaRow['payment_date'] ?? $quotaRow['receipt_date'] ?? date('Y-m-d')) . ' 00:00:00',
         ]);
 
         if (! empty($quotaRow['id'])) {

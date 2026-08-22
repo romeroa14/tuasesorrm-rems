@@ -10,6 +10,7 @@ use App\Libraries\FinanceCompanyContext;
 use App\Libraries\FinanceMoneyService;
 use App\Libraries\FinanceQuotaIncomeService;
 use App\Models\FinanceBuilder;
+use App\Models\FinanceFinancingInstallment;
 use App\Models\FinanceFinancingPlan;
 use App\Models\FinanceQuota;
 use App\Models\Leads;
@@ -126,6 +127,7 @@ class FinanceQuotaController extends BaseController
             }
 
             $data = $this->prepareQuotaInput($data);
+            $data = $this->resolveQuotaPeriodFields($data);
             $data = $this->moneyService->normalizeQuotaPayload($data);
 
             $receiptNumber = trim((string) ($data['receipt_number'] ?? ''));
@@ -200,6 +202,7 @@ class FinanceQuotaController extends BaseController
 
         try {
             $data = $this->moneyService->normalizeQuotaPayload(array_merge($record, $data));
+            $data = $this->resolveQuotaPeriodFields(array_merge($record, $data));
 
             if (! $this->quotaModel->update($id, $data)) {
                 return $this->jsonError(
@@ -321,6 +324,60 @@ class FinanceQuotaController extends BaseController
         if (trim((string) ($data['name'] ?? '')) === '') {
             throw new \InvalidArgumentException('El nombre del cliente es obligatorio.');
         }
+
+        return $data;
+    }
+
+    /**
+     * Mes/año del período cubierto y fecha real de pago.
+     *
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
+     */
+    protected function resolveQuotaPeriodFields(array $data): array
+    {
+        $installmentId = (int) ($data['installment_id'] ?? 0);
+        if ($installmentId > 0 && (empty($data['period_month']) || empty($data['period_year']))) {
+            $installment = (new FinanceFinancingInstallment())->find($installmentId);
+            if (is_array($installment) && ! empty($installment['due_date'])) {
+                $timestamp = strtotime((string) $installment['due_date']);
+                if ($timestamp !== false) {
+                    if (empty($data['period_month'])) {
+                        $data['period_month'] = (int) date('n', $timestamp);
+                    }
+                    if (empty($data['period_year'])) {
+                        $data['period_year'] = (int) date('Y', $timestamp);
+                    }
+                }
+            }
+        }
+
+        $type = ($data['type'] ?? 'received') === 'delivered' ? 'delivered' : 'received';
+
+        if ($type === 'received') {
+            $month = (int) ($data['period_month'] ?? 0);
+            $year = (int) ($data['period_year'] ?? 0);
+            if ($month < 1 || $month > 12) {
+                throw new \InvalidArgumentException('Selecciona el mes correspondiente al pago.');
+            }
+            if ($year < 2000 || $year > 2100) {
+                throw new \InvalidArgumentException('Indica el año del período.');
+            }
+            $data['period_month'] = $month;
+            $data['period_year'] = $year;
+        } else {
+            $month = (int) ($data['period_month'] ?? 0);
+            $year = (int) ($data['period_year'] ?? 0);
+            $data['period_month'] = ($month >= 1 && $month <= 12) ? $month : null;
+            $data['period_year'] = ($year >= 2000 && $year <= 2100) ? $year : null;
+        }
+
+        $paymentDate = trim((string) ($data['payment_date'] ?? ''));
+        if ($paymentDate === '') {
+            $paymentDate = trim((string) ($data['receipt_date'] ?? date('Y-m-d')));
+        }
+        $data['payment_date'] = $paymentDate;
 
         return $data;
     }

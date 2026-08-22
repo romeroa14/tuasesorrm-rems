@@ -222,7 +222,9 @@
                             <th>Equiv. USD</th>
                             <th>Equiv. BS</th>
                             <th>Tasa</th>
-                            <th>Fecha</th>
+                            <th>Período</th>
+                            <th>Fecha pago</th>
+                            <th>Fecha recep.</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -354,7 +356,39 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><div class="form-group"><label>Fecha recepción <span class="text-danger">*</span></label><input type="date" class="form-control" id="receipt_date" name="receipt_date" required value="<?= date('Y-m-d') ?>"></div></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Mes correspondiente <span class="text-danger" id="periodMonthRequired">*</span></label>
+                                        <select class="form-control" id="period_month" name="period_month" required>
+                                            <option value="">Seleccione...</option>
+                                            <?php
+                                            $monthNames = [
+                                                1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
+                                                5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
+                                                9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre',
+                                            ];
+                                            foreach ($monthNames as $num => $label): ?>
+                                                <option value="<?= $num ?>"><?= esc($label) ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Año del período <span class="text-danger" id="periodYearRequired">*</span></label>
+                                        <input type="number" class="form-control" id="period_year" name="period_year" min="2000" max="2100" required value="<?= date('Y') ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Fecha de pago <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" id="payment_date" name="payment_date" required value="<?= date('Y-m-d') ?>">
+                                        <small class="form-text text-muted">Día en que el cliente realizó el pago.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><div class="form-group"><label>Fecha recepción <span class="text-danger">*</span></label><input type="date" class="form-control" id="receipt_date" name="receipt_date" required value="<?= date('Y-m-d') ?>"><small class="form-text text-muted">Día en que se registró en oficina.</small></div></div>
                                 <div class="col-md-4"><div class="form-group"><label>Fecha entrega</label><input type="date" class="form-control" id="delivery_date" name="delivery_date"></div></div>
                                 <div class="col-md-4"><div class="form-group"><label>N° Recibo <span class="text-danger">*</span></label><input type="text" class="form-control" id="receipt_number" name="receipt_number" required></div></div>
                             </div>
@@ -433,12 +467,38 @@ function toggleQuotaTypeFields() {
     $('#quotaBuilderRow').toggle(isDelivered);
     $('#quotaClientCol').toggle(!isDelivered || !!$('#financing_plan_id').val());
     $('#quotaClientRequired').toggleClass('d-none', isDelivered && !$('#financing_plan_id').val());
+    $('#period_month, #period_year').prop('required', !isDelivered);
+    $('#periodMonthRequired, #periodYearRequired').toggleClass('d-none', isDelivered);
     if (isDelivered) {
         $('#quota_client_hint').text('Opcional: referencia del cliente asociado al pago.');
     } else {
         $('#quota_client_hint').text('Busca por nombre, teléfono o correo.');
         $('#builder_id').val('');
     }
+}
+
+function setPeriodFromDueDate(dueDate) {
+    if (!dueDate) return;
+    var parts = String(dueDate).split('-');
+    if (parts.length < 2) return;
+    var year = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
+    if (month >= 1 && month <= 12) $('#period_month').val(String(month));
+    if (year >= 2000) $('#period_year').val(String(year));
+}
+
+function formatPeriodLabel(row) {
+    if (!row.period_month || !row.period_year) return '—';
+    var months = ['', 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    return (months[row.period_month] || row.period_month) + ' ' + row.period_year;
+}
+
+function resetQuotaPeriodFields() {
+    var today = new Date();
+    $('#period_month').val('');
+    $('#period_year').val(String(today.getFullYear()));
+    $('#payment_date').val(today.toISOString().slice(0, 10));
+    $('#receipt_date').val(today.toISOString().slice(0, 10));
 }
 
 function populateBuildersSelect(selectedId) {
@@ -846,6 +906,9 @@ function payInstallment(installmentId) {
         $('#name').val(selectedPlan.client_name || '');
     }
     $('#amount').val(row.pending_amount || row.amount);
+    setPeriodFromDueDate(row.due_date);
+    $('#payment_date').val(new Date().toISOString().slice(0, 10));
+    $('#receipt_date').val(new Date().toISOString().slice(0, 10));
     $('#installmentHint').show().html(
         'Cuota <strong>#' + row.installment_number + '</strong> — ' + (row.month_label || row.due_date) +
         ' — Programada: ' + moneyFmt(row.amount) + ' — Pendiente: <strong>' + moneyFmt(row.pending_amount) + '</strong>'
@@ -961,6 +1024,8 @@ function loadTable() {
                         '$ ' + formatFinanceMoney(parseFloat(row.amount_usd || 0)),
                         'Bs. ' + formatFinanceMoney(parseFloat(row.amount_bs || 0)),
                         parseFloat(row.exchange_rate || 0).toFixed(4),
+                        formatPeriodLabel(row),
+                        row.payment_date || '—',
                         row.receipt_date || '—',
                         '<button class="btn btn-danger btn-sm" onclick="remove(' + row.id + ')"><i class="fas fa-trash"></i></button>'
                     ]);
@@ -986,6 +1051,7 @@ function showModal(mode, id) {
     $('#record_id, #financing_plan_id, #installment_id').val('');
     $('#installmentHint').hide();
     $('#quotaForm')[0].reset();
+    resetQuotaPeriodFields();
     showQuotaClientPicker();
     resetQuotaLeadSelect();
     $('#type').val('received');
@@ -1027,6 +1093,10 @@ $('#quotaForm').submit(function(e) {
     }
     if (!$('#payment_type_id').val()) {
         showFinanceError('Selecciona un método de pago.');
+        return;
+    }
+    if (!isDelivered && !$('#period_month').val()) {
+        showFinanceError('Selecciona el mes correspondiente al pago.');
         return;
     }
     syncQuotaClientName();

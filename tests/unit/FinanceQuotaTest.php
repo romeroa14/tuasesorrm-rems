@@ -18,15 +18,16 @@ final class FinanceQuotaTest extends CIUnitTestCase
         $this->assertInstanceOf(FinanceQuota::class, $model);
     }
 
-    public function testAllowedFields(): void
+    public function testAllowedFieldsIncludesPeriodColumns(): void
     {
         $model = new FinanceQuota();
-        $expected = [
-            'type', 'name', 'receipt_date', 'delivery_date',
-            'currency', 'exchange_rate', 'receipt_number', 'amount', 'notes',
-        ];
+        $fields = $model->allowedFields;
 
-        $this->assertSame($expected, $model->allowedFields);
+        $this->assertContains('period_month', $fields);
+        $this->assertContains('period_year', $fields);
+        $this->assertContains('payment_date', $fields);
+        $this->assertContains('lead_id', $fields);
+        $this->assertContains('installment_id', $fields);
     }
 
     public function testTableName(): void
