@@ -24,6 +24,7 @@ class Leads extends Model
         'name',
         'phone',
         'email',
+        'national_id',
         'instagram_username',
         'instagram_full_name',
         'profile_pic',

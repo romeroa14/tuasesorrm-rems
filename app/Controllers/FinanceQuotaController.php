@@ -9,6 +9,7 @@ use App\Libraries\FinanceAuthorization;
 use App\Libraries\FinanceCompanyContext;
 use App\Libraries\FinanceMoneyService;
 use App\Libraries\FinanceQuotaIncomeService;
+use App\Libraries\FinanceReceiptService;
 use App\Models\FinanceBuilder;
 use App\Models\FinanceFinancingInstallment;
 use App\Models\FinanceFinancingPlan;
@@ -28,6 +29,7 @@ class FinanceQuotaController extends BaseController
     protected FinanceQuotaIncomeService $quotaIncomeService;
     protected FinanceAmortizationService $amortizationService;
     protected FinanceCompanyContext $companyContext;
+    protected FinanceReceiptService $receiptService;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -38,6 +40,7 @@ class FinanceQuotaController extends BaseController
         $this->quotaIncomeService = new FinanceQuotaIncomeService();
         $this->amortizationService = new FinanceAmortizationService();
         $this->companyContext = new FinanceCompanyContext();
+        $this->receiptService = new FinanceReceiptService();
     }
 
     public function index()
@@ -167,6 +170,12 @@ class FinanceQuotaController extends BaseController
             if ($installmentId > 0 && ($record['type'] ?? '') === 'received') {
                 $this->amortizationService->applyQuotaPayment($installmentId, $record, $movementId > 0 ? $movementId : null);
                 $record['installment_applied'] = true;
+                $record = $this->quotaModel->find($quotaId);
+            }
+
+            if (($record['type'] ?? '') === 'received') {
+                $record['receipt_url'] = base_url('/app/finance/quotas/receipt/' . $quotaId);
+                $record['receipt_pdf_url'] = base_url('/app/finance/quotas/receipt/' . $quotaId . '/pdf');
             }
 
             return $this->jsonSuccess($record);
@@ -237,6 +246,48 @@ class FinanceQuotaController extends BaseController
         }
 
         return $this->jsonSuccess(['id' => (int) $id, 'deleted' => true]);
+    }
+
+    /**
+     * Vista HTML del recibo (formato legal).
+     */
+    public function receipt(string $id)
+    {
+        if (! $this->financeAuthorization->canViewIncome()) {
+            return redirect()->to(base_url('/app/finance'))->with('error', 'Sin permisos.');
+        }
+
+        try {
+            $context = $this->receiptService->buildContext((int) $id);
+            $context['forPdf'] = false;
+
+            return view('auth/finance/quota_receipt', $context);
+        } catch (\Throwable $e) {
+            return $this->response->setStatusCode(404)->setBody($e->getMessage());
+        }
+    }
+
+    /**
+     * Descarga PDF del recibo.
+     */
+    public function receiptPdf(string $id)
+    {
+        if (! $this->financeAuthorization->canViewIncome()) {
+            return $this->response->setStatusCode(403)->setBody('Sin permisos.');
+        }
+
+        try {
+            $context = $this->receiptService->buildContext((int) $id);
+            $pdf = $this->receiptService->generatePdf((int) $id);
+            $filename = 'recibo-' . preg_replace('/[^A-Za-z0-9._-]+/', '-', (string) ($context['receipt_number'] ?? $id)) . '.pdf';
+
+            return $this->response
+                ->setHeader('Content-Type', 'application/pdf')
+                ->setHeader('Content-Disposition', 'inline; filename="' . $filename . '"')
+                ->setBody($pdf);
+        } catch (\Throwable $e) {
+            return $this->response->setStatusCode(404)->setBody($e->getMessage());
+        }
     }
 
     protected function jsonSuccess($data): ResponseInterface

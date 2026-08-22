@@ -625,6 +625,15 @@ function showFinanceError(message, title) {
 }
 
 function showFinanceSuccess(message, title) {
+    if (typeof Swal !== 'undefined' && message.indexOf('<a ') !== -1) {
+        Swal.fire({
+            icon: 'success',
+            title: title || 'Listo',
+            html: message,
+            confirmButtonColor: '#1cc88a'
+        });
+        return;
+    }
     showFinanceAlert('success', title || 'Listo', message);
 }
 
@@ -1027,6 +1036,10 @@ function loadTable() {
                         formatPeriodLabel(row),
                         row.payment_date || '—',
                         row.receipt_date || '—',
+                        (row.type === 'received'
+                            ? '<a class="btn btn-outline-primary btn-sm mr-1" href="/app/finance/quotas/receipt/' + row.id + '" target="_blank" title="Ver recibo"><i class="fas fa-file-pdf"></i></a>'
+                            + '<a class="btn btn-outline-secondary btn-sm mr-1" href="/app/finance/quotas/receipt/' + row.id + '/pdf" target="_blank" title="PDF"><i class="fas fa-download"></i></a>'
+                            : '') +
                         '<button class="btn btn-danger btn-sm" onclick="remove(' + row.id + ')"><i class="fas fa-trash"></i></button>'
                     ]);
                 });
@@ -1112,7 +1125,14 @@ $('#quotaForm').submit(function(e) {
                 loadTable();
                 portfolioLoaded = false;
                 if (selectedPlanId) selectPlan(selectedPlanId);
-                showFinanceSuccess('Pago registrado y validado correctamente.');
+                var msg = 'Pago registrado y validado correctamente.';
+                if (res.data && res.data.receipt_url && $('#type').val() === 'received') {
+                    msg += ' <a href="' + res.data.receipt_url + '" target="_blank">Ver recibo</a>';
+                    if (res.data.receipt_pdf_url) {
+                        msg += ' · <a href="' + res.data.receipt_pdf_url + '" target="_blank">PDF</a>';
+                    }
+                }
+                showFinanceSuccess(msg, 'Listo');
             } else showFinanceError(res.message || 'No se pudo guardar el pago.');
         },
         error: function(xhr) {

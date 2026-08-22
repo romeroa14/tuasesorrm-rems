@@ -201,7 +201,7 @@ class FinanceCatalogService
     {
         $model = new Leads();
         $builder = $model
-            ->select('id, name, phone, email')
+            ->select('id, name, phone, email, national_id')
             ->orderBy('name', 'ASC')
             ->limit(max(1, min($limit, 50)));
 
@@ -227,6 +227,7 @@ class FinanceCatalogService
         $name = trim((string) ($input['name'] ?? ''));
         $phone = trim((string) ($input['phone'] ?? ''));
         $email = trim((string) ($input['email'] ?? ''));
+        $nationalId = trim((string) ($input['national_id'] ?? ''));
         $observation = trim((string) ($input['observation'] ?? ''));
 
         if ($name === '') {
@@ -253,6 +254,7 @@ class FinanceCatalogService
                 'name'     => (string) ($existing['name'] ?? $name),
                 'phone'    => (string) ($existing['phone'] ?? $phone),
                 'email'    => $existing['email'] ?? null,
+                'national_id' => $existing['national_id'] ?? null,
                 'existing' => true,
                 'message'  => 'Ya existía un cliente con ese teléfono; se seleccionó el registro existente.',
             ];
@@ -277,6 +279,7 @@ class FinanceCatalogService
             'name'             => $name,
             'phone'            => $phone,
             'email'            => $email !== '' ? $email : null,
+            'national_id'      => $nationalId !== '' ? strtoupper($nationalId) : null,
             'observation'      => $observation,
             'status'           => 'Activo',
         ];
@@ -307,11 +310,12 @@ class FinanceCatalogService
         }
 
         return [
-            'id'       => $insertId,
-            'name'     => $name,
-            'phone'    => $phone,
-            'email'    => $email !== '' ? $email : null,
-            'existing' => false,
+            'id'          => $insertId,
+            'name'        => $name,
+            'phone'       => $phone,
+            'email'       => $email !== '' ? $email : null,
+            'national_id' => $nationalId !== '' ? strtoupper($nationalId) : null,
+            'existing'    => false,
             'message'  => 'Cliente creado correctamente.',
         ];
     }

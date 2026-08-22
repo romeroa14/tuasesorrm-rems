@@ -22,6 +22,11 @@
                         <label>Correo</label>
                         <input type="email" class="form-control" name="email" id="create_client_email" placeholder="Opcional">
                     </div>
+                    <div class="form-group">
+                        <label>Cédula de identidad</label>
+                        <input type="text" class="form-control" name="national_id" id="create_client_national_id" placeholder="Ej: V-6305589">
+                        <small class="form-text text-muted">Requerida para generar recibos legales.</small>
+                    </div>
                     <div class="form-group mb-0">
                         <label>Observación</label>
                         <textarea class="form-control" name="observation" id="create_client_observation" rows="2" placeholder="Opcional"></textarea>
