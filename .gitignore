@@ -164,3 +164,14 @@ backup*.zip
 #-------------------------
 /inbox/
 
+
+# Secrets, backups and data dumps must never be tracked
+.env2
+db.php
+*.bak
+*.sql.gz
+/tuaseso_profit*.sql
+/sql/tuaseso_db*.sql
+/Informe-cuenta-*.pdf
+/*.xlsx
+__pycache__/
