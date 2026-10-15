@@ -27,6 +27,13 @@ class AiIntegrationController extends ResourceController
      */
     public function ingest()
     {
+        $expected = (string) getenv('AI_INGEST_TOKEN');
+        $provided = $this->request->getHeaderLine('X-Ingest-Token');
+
+        if ($expected === '' || !hash_equals($expected, $provided)) {
+            return $this->failUnauthorized('Invalid or missing ingest token');
+        }
+
         $payload = $this->request->getJSON(true);
 
         if (!$payload) {
