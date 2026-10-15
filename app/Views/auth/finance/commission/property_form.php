@@ -30,6 +30,7 @@
         </div>
         <div class="card-body">
             <form id="propertyForm" method="post" action="<?= base_url('/app/finance/commission/save-property') ?>">
+                <?= csrf_field() ?>
                 <?php if ($isEdit): ?>
                     <input type="hidden" name="id" value="<?= esc($property['id']) ?>">
                 <?php endif; ?>

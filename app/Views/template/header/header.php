@@ -18,6 +18,16 @@
         <link href="<?= base_url('vendor/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css') ?>" rel="stylesheet" >
         <!-- jQuery (moved to head to avoid reference errors in inline scripts) -->
         <script src="<?= base_url('vendor/jquery/jquery.min.js') ?>"></script>
+        <script>
+            // CSRF: every same-origin jQuery request carries the token (cookie-based protection).
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    if (settings.crossDomain) { return; }
+                    var m = document.cookie.match(new RegExp('(?:^|; )<?= esc(config('Security')->cookieName, 'js') ?>=([^;]*)'));
+                    if (m) { xhr.setRequestHeader('X-CSRF-TOKEN', decodeURIComponent(m[1])); }
+                }
+            });
+        </script>
     </head>
     <body id="page-top"
     <?php if (! empty($body_class ?? null)): ?>

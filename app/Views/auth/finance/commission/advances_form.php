@@ -30,6 +30,7 @@
         </div>
         <div class="card-body">
             <form id="advanceForm" method="post" action="<?= base_url('/app/finance/commission/save-advance') ?>">
+                <?= csrf_field() ?>
                 <?php if ($isEdit): ?>
                     <input type="hidden" name="id" value="<?= esc($advance['id']) ?>">
                 <?php endif; ?>

@@ -30,6 +30,7 @@
         </div>
         <div class="card-body">
             <form method="post" action="<?= base_url('/app/finance/commission/save-settlement') ?>">
+                <?= csrf_field() ?>
                 <?php if ($isEdit): ?>
                     <input type="hidden" name="id" value="<?= esc($settlement['id']) ?>">
                 <?php endif; ?>
