@@ -303,6 +303,14 @@ class CrmController extends BaseController
      */
     public function api_return_to_ai()
     {
+        // Only the superadmin decides whether the AI answers a conversation.
+        if ((int) session()->get('id_fk_rol') !== 2) {
+            return $this->response->setStatusCode(403)->setJSON([
+                'status' => 'error',
+                'message' => 'Solo el superadmin puede reactivar la IA',
+            ]);
+        }
+
         $conversationId = $this->request->getPost('conversation_id');
 
         if (empty($conversationId)) {
