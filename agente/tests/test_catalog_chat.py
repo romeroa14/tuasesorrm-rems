@@ -3,6 +3,8 @@
 from langchain_core.messages import AIMessage
 from fastapi.testclient import TestClient
 
+from tests.conftest import AUTH
+
 from agente.server import app
 
 
@@ -34,7 +36,7 @@ def _patch_catalog(monkeypatch, recorded: dict):
 def test_catalog_chat_does_not_call_supervisor(monkeypatch):
     recorded: dict = {}
     _patch_catalog(monkeypatch, recorded)
-    client = TestClient(app)
+    client = TestClient(app, headers=AUTH)
     response = client.post(
         "/v1/catalog/chat",
         json={"message": "busco un apartamento", "soul": "Eres el catalogo.", "debug": True},
@@ -58,7 +60,7 @@ def test_catalog_chat_does_not_call_supervisor(monkeypatch):
 def test_each_request_builds_an_agent_with_that_soul(monkeypatch):
     recorded: dict = {}
     _patch_catalog(monkeypatch, recorded)
-    client = TestClient(app)
+    client = TestClient(app, headers=AUTH)
     first = client.post("/v1/catalog/chat", json={"message": "hola", "soul": "Soul uno"})
     second = client.post("/v1/catalog/chat", json={"message": "hola", "soul": "Soul dos"})
     assert first.status_code == 200
@@ -69,7 +71,7 @@ def test_each_request_builds_an_agent_with_that_soul(monkeypatch):
 
 
 def test_empty_message_or_soul_is_422():
-    client = TestClient(app)
+    client = TestClient(app, headers=AUTH)
     empty_message = client.post("/v1/catalog/chat", json={"message": "", "soul": "alma"})
     empty_soul = client.post("/v1/catalog/chat", json={"message": "hola", "soul": ""})
     assert empty_message.status_code == 422
@@ -81,7 +83,7 @@ def test_missing_model_key_matches_supervisor_503(monkeypatch):
         openrouter_api_key = "  "
 
     monkeypatch.setattr("agente.server.get_settings", lambda: EmptyKey())
-    client = TestClient(app)
+    client = TestClient(app, headers=AUTH)
     catalog = client.post("/v1/catalog/chat", json={"message": "hola", "soul": "alma"})
     supervisor = client.post("/v1/chat", json={"message": "hola"})
     assert catalog.status_code == 503
@@ -102,7 +104,7 @@ def test_supervisor_route_still_calls_run_agent_turn(monkeypatch):
         return ("supervisor-reply", [])
 
     monkeypatch.setattr("agente.server.run_agent_turn", fake_turn)
-    client = TestClient(app)
+    client = TestClient(app, headers=AUTH)
     response = client.post("/v1/chat", json={"message": "cuantas visitas"})
     assert response.status_code == 200
     assert response.json()["reply"] == "supervisor-reply"
