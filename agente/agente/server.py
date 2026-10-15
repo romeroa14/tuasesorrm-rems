@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import hmac
+import os
 from typing import Any
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException
 from pydantic import BaseModel, Field
 
 from agente import __version__
@@ -67,12 +69,20 @@ def _missing_key():
     }
 
 
+def require_agent_token(authorization: str = Header(default="")) -> None:
+    """Shared-secret check; fails closed when AGENT_API_TOKEN is not configured."""
+    expected = os.getenv("AGENT_API_TOKEN", "").strip()
+    provided = authorization.removeprefix("Bearer ").strip()
+    if not expected or not hmac.compare_digest(expected, provided):
+        raise HTTPException(status_code=401, detail="invalid_or_missing_token")
+
+
 @app.get("/health")
 def health():
     return {"status": "ok", "service": "agente-rems", "version": __version__}
 
 
-@app.post("/v1/chat", response_model=ChatResponse)
+@app.post("/v1/chat", response_model=ChatResponse, dependencies=[Depends(require_agent_token)])
 def chat(req: ChatRequest):
     s = get_settings()
     if not (s.openrouter_api_key or "").strip():
@@ -97,7 +107,7 @@ def chat(req: ChatRequest):
     )
 
 
-@app.post("/v1/catalog/chat", response_model=CatalogChatResponse)
+@app.post("/v1/catalog/chat", response_model=CatalogChatResponse, dependencies=[Depends(require_agent_token)])
 def catalog_chat(req: CatalogChatRequest):
     s = get_settings()
     if not (s.openrouter_api_key or "").strip():
