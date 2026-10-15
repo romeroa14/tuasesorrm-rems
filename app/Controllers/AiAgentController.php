@@ -221,31 +221,40 @@ class AiAgentController extends BaseController
 
     public function thread($id)
     {
-        $this->ensureAgentThreads();
-        $userId = $this->currentUserId();
-        $thread = $this->ownedThread((int) $id, $userId);
-        if ($thread === null) {
-            return $this->response->setStatusCode(404)->setJSON([
+        try {
+            $this->ensureAgentThreads();
+            $userId = $this->currentUserId();
+            $thread = $this->ownedThread((int) $id, $userId);
+            if ($thread === null) {
+                return $this->response->setStatusCode(404)->setJSON([
+                    'status' => 'error',
+                    'message' => 'Esa conversación no existe.',
+                ]);
+            }
+            $messages = db_connect()->table('ai_agent_messages')
+                ->select('role, content, created_at')
+                ->where('thread_id', (int) $thread['id'])
+                ->orderBy('id', 'ASC')
+                ->limit(200)
+                ->get()
+                ->getResultArray();
+
+            return $this->response->setJSON([
+                'thread' => [
+                    'id' => (int) $thread['id'],
+                    'title' => $thread['title'],
+                    'updated_at' => $thread['updated_at'],
+                ],
+                'messages' => $messages,
+            ]);
+        } catch (\Throwable $e) {
+            log_message('error', 'AiAgentController::thread failed: ' . get_class($e) . ': ' . $e->getMessage());
+
+            return $this->response->setStatusCode(500)->setJSON([
                 'status' => 'error',
-                'message' => 'Esa conversación no existe.',
+                'message' => 'No se pudo cargar la conversación.',
             ]);
         }
-        $messages = db_connect()->table('ai_agent_messages')
-            ->select('role, content, created_at')
-            ->where('thread_id', (int) $thread['id'])
-            ->orderBy('id', 'ASC')
-            ->limit(200)
-            ->get()
-            ->getResultArray();
-
-        return $this->response->setJSON([
-            'thread' => [
-                'id' => (int) $thread['id'],
-                'title' => $thread['title'],
-                'updated_at' => $thread['updated_at'],
-            ],
-            'messages' => $messages,
-        ]);
     }
 
     public function delete_thread($id)
