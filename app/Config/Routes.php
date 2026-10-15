@@ -144,8 +144,8 @@ $routes->get('/app/trackingstatus/toggle/(:num)', 'TrackingStatusController::tog
 $routes->get('/app/ai/agent-chat', 'AiAgentController::agent_chat', ['filter' => 'auth']);
 $routes->post('/app/ai/chat', 'AiAgentController::api_chat', ['filter' => 'auth']);
 $routes->get('/app/ai/threads', 'AiAgentController::threads', ['filter' => 'auth']);
-$routes->get('/app/ai/threads/(:num)', 'AiAgentController::thread', ['filter' => 'auth']);
-$routes->delete('/app/ai/threads/(:num)', 'AiAgentController::delete_thread', ['filter' => 'auth']);
+$routes->get('/app/ai/threads/(:num)', 'AiAgentController::thread/$1', ['filter' => 'auth']);
+$routes->delete('/app/ai/threads/(:num)', 'AiAgentController::delete_thread/$1', ['filter' => 'auth']);
 
 // =============================================================================
 // CRM MODULE
