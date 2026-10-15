@@ -76,7 +76,9 @@ class QueueProcess extends BaseCommand
                     $payload['timestamp'] ?? time(),
                     $payload['recipient_ig_id'] ?? '',
                     $payload['referral_source'] ?? '',
-                    $payload['referral_ad_id'] ?? ''
+                    $payload['referral_ad_id'] ?? '',
+                    $payload['referral_ad_title'] ?? '',
+                    $payload['referral_photo_url'] ?? ''
                 );
 
                 CLI::write("✓ Procesado: {$senderId}", 'green');

@@ -167,6 +167,36 @@ class CrmController extends BaseController
 
         $externalMessageId = '';
         $graphSent = false;
+        $db = \Config\Database::connect();
+        $lockName = 'crmsend' . (int) $conversationId;
+        $locked = $db->query('SELECT GET_LOCK(?, 25) AS locked', [$lockName])->getRowArray();
+        if ((int) ($locked['locked'] ?? 0) !== 1) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Ya hay un envío en curso para esta conversación. Espera un momento.',
+            ]);
+        }
+
+        try {
+        $duplicate = $db->query(
+            'SELECT id, external_message_id FROM messages
+             WHERE conversation_id = ? AND direction = ? AND content = ?
+               AND created_at >= (NOW() - INTERVAL 25 SECOND)
+             ORDER BY id DESC LIMIT 1',
+            [$conversationId, 'outbound', $content]
+        )->getRowArray();
+        if ($duplicate) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'data' => [
+                    'message_id' => (int) $duplicate['id'],
+                    'sent_at' => date('Y-m-d H:i:s'),
+                    'graph_sent' => true,
+                    'duplicate' => true,
+                    'external_message_id' => (string) ($duplicate['external_message_id'] ?? ''),
+                ],
+            ]);
+        }
 
         if (($conversation['channel'] ?? '') === 'instagram') {
             $recipientIgId = (string) ($conversation['recipient_ig_id'] ?? '');
@@ -240,9 +270,13 @@ class CrmController extends BaseController
                 'message_id' => $messageId,
                 'sent_at' => date('Y-m-d H:i:s'),
                 'graph_sent' => $graphSent,
+                'duplicate' => false,
                 'external_message_id' => $externalMessageId,
             ],
         ]);
+        } finally {
+            $db->query('SELECT RELEASE_LOCK(?)', [$lockName]);
+        }
     }
 
     /**
@@ -486,13 +520,14 @@ class CrmController extends BaseController
 
             // Tracked leads (with assignedclients) — cached
             $userId = session()->get('id');
-            $result = CacheService::remember("pipeline:data:{$userId}", 30, function () use ($db, $pipelineLimit) {
+            $result = CacheService::remember("pipeline:data:v2:{$userId}", 30, function () use ($db, $pipelineLimit) {
                 return $db->query("
             SELECT 
                 ts.id as status_id,
                 ts.name as status_name,
                 l.id as lead_id,
                 l.name as lead_name,
+                l.profile_pic,
                 l.phone,
                 l.instagram_username,
                 l.intention_score,
@@ -506,7 +541,10 @@ l.created_at,
                 c.channel,
                 c.id as conversation_id,
                 c.recipient_ig_id,
-                c.recipient_ig_username
+                c.recipient_ig_username,
+                c.ad_id,
+                c.ad_title,
+                c.referral_source
             FROM trackingstatus ts
             LEFT JOIN assignedclients ac ON ac.trackingstatus_id = ts.id
             LEFT JOIN leads l ON l.id = ac.lead_id
@@ -525,13 +563,14 @@ l.created_at,
             // Unassigned leads (not in assignedclients) — solo para admins — cached
             $unassigned = [];
             if (in_array(session()->get('id_fk_rol'), [2, 3, 6, 8])) {
-                $unassigned = CacheService::remember("pipeline:unassigned:{$userId}", 30, function () use ($db, $pipelineLimit) {
+                $unassigned = CacheService::remember("pipeline:unassigned:v2:{$userId}", 30, function () use ($db, $pipelineLimit) {
                     return $db->query("
                 SELECT 
                     NULL as status_id,
                     'Sin Asignar' as status_name,
                     l.id as lead_id,
                     l.name as lead_name,
+                    l.profile_pic,
                     l.phone,
                     l.instagram_username,
                     l.intention_score,
@@ -545,7 +584,11 @@ l.created_at,
                     c.channel,
                     c.id as conversation_id,
                     c.recipient_ig_id,
-                    c.recipient_ig_username
+                    c.recipient_ig_username,
+                    c.ad_id,
+                    c.ad_title,
+                    c.referral_source,
+                    l.pipeline_status_id
                 FROM leads l
                 INNER JOIN conversations c ON c.lead_id = l.id AND c.channel = 'instagram'
                 LEFT JOIN assignedclients ac ON ac.lead_id = l.id
@@ -574,10 +617,20 @@ l.created_at,
             'leads' => [],
         ];
 
+        foreach ($db->query('SELECT id, emoji, name FROM trackingstatus WHERE is_active = 1 ORDER BY id ASC')->getResultArray() as $statusRow) {
+            $pipeline[(int) $statusRow['id']] = [
+                'id' => (int) $statusRow['id'],
+                'name' => trim(($statusRow['emoji'] ?? '') . ' ' . $statusRow['name']),
+                'leads' => [],
+            ];
+        }
+
         foreach ($result as $row) {
             if ($row['status_id'] === null) {
-                // Unassigned lead
-                if ($row['lead_id']) {
+                $suggested = (int) ($row['pipeline_status_id'] ?? 0);
+                if ($row['lead_id'] && $suggested > 0 && isset($pipeline[$suggested])) {
+                    $pipeline[$suggested]['leads'][$row['lead_id']] = $row;
+                } elseif ($row['lead_id']) {
                     $pipeline['unassigned']['leads'][$row['lead_id']] = $row;
                 }
                 continue;

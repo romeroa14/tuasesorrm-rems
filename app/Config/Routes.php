@@ -43,7 +43,7 @@ $routes->get('/app/statements/view/(:num)', 'RealStateController::view_statement
 $routes->post('/app/statements/rate_property/(:num)', 'RealStateController::rate_property/$1', ['filter' => 'auth']); /*Calificar propiedad*/
 $routes->post('/app/my_properties/upload_documentary/(:num)', 'RealStateController::upload_documentary_properties/$1', ['filter' => 'auth']); /*Subir documentos de la propiedad*/
 $routes->post('/app/my_properties/delete_documentary/(:num)', 'RealStateController::delete_file/$1', ['filter' => 'auth']); /*Eliminar documentos de la propiedad*/
-$routes->get('/app/my_properties/delete_image/(:num)/(:any)', 'RealStateController::delete_file/$1/$2', ['filter' => 'auth']); /*Eliminar documentos de la propiedad*/
+$routes->get('/app/my_properties/delete_image/(:num)/(:num)', 'RealStateController::delete_property_image/$1/$2', ['filter' => 'auth']); /*Eliminar imagen por id de fila*/
 $routes->post('/app/my_properties/acea_update/(:num)/(:any)', 'RealStateController::property_update/$1/$2', ['filter' => 'auth']); /*Gestion de caracteristicas ACEA*/
 $routes->post('/app/my_properties/business_conditions_update/(:num)/(:any)', 'RealStateController::property_update/$1/$2', ['filter' => 'auth']); /*Gestion de Condiciones de negocios*/
 $routes->post('/app/my_properties/property_update/(:num)/(:any)', 'RealStateController::property_update/$1/$2', ['filter' => 'auth']); /*Gestion de actualización propiedad*/
@@ -135,6 +135,7 @@ $routes->post('/app/trackingstatus/create', 'TrackingStatusController::create', 
 $routes->get('/app/trackingstatus/edit/(:num)', 'TrackingStatusController::edit/$1', ['filter' => 'auth']);
 $routes->post('/app/trackingstatus/edit/(:num)', 'TrackingStatusController::edit/$1', ['filter' => 'auth']);
 $routes->get('/app/trackingstatus/delete/(:num)', 'TrackingStatusController::delete/$1', ['filter' => 'auth']);
+$routes->get('/app/trackingstatus/toggle/(:num)', 'TrackingStatusController::toggle/$1', ['filter' => 'auth']);
 
 // =============================================================================
 // AI — Agente (microservicio Python agente/)
@@ -142,6 +143,9 @@ $routes->get('/app/trackingstatus/delete/(:num)', 'TrackingStatusController::del
 
 $routes->get('/app/ai/agent-chat', 'AiAgentController::agent_chat', ['filter' => 'auth']);
 $routes->post('/app/ai/chat', 'AiAgentController::api_chat', ['filter' => 'auth']);
+$routes->get('/app/ai/threads', 'AiAgentController::threads', ['filter' => 'auth']);
+$routes->get('/app/ai/threads/(:num)', 'AiAgentController::thread', ['filter' => 'auth']);
+$routes->delete('/app/ai/threads/(:num)', 'AiAgentController::delete_thread', ['filter' => 'auth']);
 
 // =============================================================================
 // CRM MODULE
@@ -207,19 +211,57 @@ $routes->group('api/public', function($routes) {
 // HISTORIAL DE ACTIVIDADES - ACTIVITY LOG
 // =============================================================================
 
-$routes->get('/app/activity_log/all', 'ActivityLogController::index', ['filter' => 'auth']); /*Historial de actividades*/
-$routes->get('/app/activity_log/api/all', 'ActivityLogController::getAllActivities', ['filter' => 'auth']); /*API obtener actividades*/
-$routes->get('/app/activity_log/api/stats', 'ActivityLogController::getActivityStats', ['filter' => 'auth']); /*API estadísticas*/
-$routes->get('/app/activity_log/api/user/(:num)', 'ActivityLogController::getUserActivities/$1', ['filter' => 'auth']); /*API actividades por usuario*/
+$routes->get('/app/activity_log/all', 'ActivityLogController::index', ['filter' => ['auth', 'platformAdmin']]); /*Historial de actividades*/
+$routes->get('/app/activity_log/api/all', 'ActivityLogController::getAllActivities', ['filter' => ['auth', 'platformAdmin']]); /*API obtener actividades*/
+$routes->get('/app/activity_log/api/stats', 'ActivityLogController::getActivityStats', ['filter' => ['auth', 'platformAdmin']]); /*API estadísticas*/
+$routes->get('/app/activity_log/api/user/(:num)', 'ActivityLogController::getUserActivities/$1', ['filter' => ['auth', 'platformAdmin']]); /*API actividades por usuario*/
+
+// =============================================================================
+// ADMIN PLATAFORMA — USUARIOS, ROLES Y FINANZAS
+// =============================================================================
+$routes->group('app/admin', ['filter' => ['auth', 'platformAdmin']], static function ($routes) {
+    $routes->get('users', 'AdminUsersController::index');
+    $routes->get('users/api/list', 'AdminUsersController::apiList');
+    $routes->post('users/api/save', 'AdminUsersController::apiSave');
+    $routes->post('users/api/delete', 'AdminUsersController::apiDelete');
+    $routes->post('users/api/bulk-delete', 'AdminUsersController::apiBulkDelete');
+});
 
 // =============================================================================
 // API PRIVADA - REQUIERE AUTENTICACIÓN
 // =============================================================================
 
-$routes->post('/api/v1/login', 'AuthApiController::login');
+$routes->options('/api/v1/login', 'AtcApiController::preflight');
+$routes->options('/api/v1/(:segment)', 'AtcApiController::preflight');
+$routes->options('/api/v1/(:segment)/(:segment)', 'AtcApiController::preflight');
+$routes->options('/api/v1/(:segment)/(:segment)/(:segment)', 'AtcApiController::preflight');
+$routes->post('/api/v1/login', 'AtcApiController::login');
 
-$routes->group('', ['filter' => 'authApi'], function($routes) {
-    // Tus rutas protegidas aquí
+$routes->group('api/v1', ['filter' => 'authApi'], function ($routes) {
+    $routes->get('me', 'AtcApiController::me');
+    $routes->get('dashboard', 'AtcApiController::dashboard');
+    $routes->get('pipeline', 'AtcApiController::pipeline');
+    $routes->get('leads', 'AtcApiController::leads');
+    $routes->get('leads/export', 'AtcApiController::exportLeads');
+    $routes->get('leads/(:num)', 'AtcApiController::lead/$1');
+    $routes->post('leads/(:num)/claim', 'AtcApiController::claim/$1');
+    $routes->post('leads/(:num)/assign', 'AtcApiController::assign/$1');
+    $routes->get('agents', 'AtcApiController::agents');
+    $routes->get('agenda', 'AtcApiController::agenda');
+    $routes->get('stats', 'AtcApiController::stats');
+    $routes->post('stats/report', 'AtcApiController::serviceReport');
+    $routes->post('leads/(:num)/schedule', 'AtcApiController::schedule/$1');
+    $routes->post('leads/(:num)/property', 'AtcApiController::linkProperty/$1');
+    $routes->get('properties', 'AtcApiController::properties');
+    $routes->post('leads/(:num)/reply', 'AtcApiController::reply/$1');
+    $routes->get('ai-agent', 'AtcApiController::aiAgent');
+    $routes->post('ai-agent/sandbox', 'AtcApiController::sandboxAiAgent');
+    $routes->post('ai-agent', 'AtcApiController::saveAiAgent');
+    $routes->get('statuses', 'AtcApiController::statuses');
+    $routes->post('statuses', 'AtcApiController::createStatus');
+    $routes->post('statuses/(:num)/toggle', 'AtcApiController::toggleStatus/$1');
+    $routes->post('statuses/(:num)/delete', 'AtcApiController::deleteStatus/$1');
+    $routes->post('statuses/(:num)', 'AtcApiController::updateStatus/$1');
 });
 
 // =============================================================================
@@ -258,6 +300,8 @@ $routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     $routes->get('profit_loss', 'FinanceIncomeController::profitLoss');
     $routes->post('income/api/list', 'FinanceIncomeController::apiIncomeList');
     $routes->post('income/api/create', 'FinanceIncomeController::apiCreateIncome');
+    $routes->get('income/api/(:num)', 'FinanceIncomeController::apiGetIncome/$1');
+    $routes->post('income/api/(:num)', 'FinanceIncomeController::apiUpdateIncome/$1');
     $routes->post('expenses_detail/api/list', 'FinanceIncomeController::apiExpenseList');
     $routes->post('expenses_detail/api/create', 'FinanceIncomeController::apiCreateExpense');
     $routes->get('api/catalog', 'FinanceIncomeController::apiCatalog');
@@ -265,6 +309,7 @@ $routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     $routes->post('api/clients/create', 'FinanceIncomeController::apiCreateClient');
     $routes->post('api/pending', 'FinanceIncomeController::apiPendingList');
     $routes->get('quotas', 'FinanceQuotaController::index');
+    $routes->get('quota-movements', 'FinanceQuotaController::movements');
     $routes->post('quotas/api/list', 'FinanceQuotaController::apiList');
     $routes->get('quotas/api/(:num)', 'FinanceQuotaController::apiGet/$1');
     $routes->post('quotas/api/create', 'FinanceQuotaController::apiCreate');
@@ -280,6 +325,8 @@ $routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     $routes->get('financing/statement/(:num)', 'FinanceFinancingController::statement/$1');
     $routes->post('financing/api/(:num)/send-statement', 'FinanceFinancingController::apiSendStatement/$1');
     $routes->post('financing/api/create', 'FinanceFinancingController::apiCreatePlan');
+    $routes->post('financing/api/(:num)', 'FinanceFinancingController::apiUpdatePlan/$1');
+    $routes->post('financing/api/installment/(:num)', 'FinanceFinancingController::apiUpdateInstallment/$1');
     $routes->get('daily_cash', 'FinanceCashController::dailyCash');
     $routes->post('daily_cash/api/list', 'FinanceCashController::dailyCashApiList');
     $routes->post('daily_cash/api/create', 'FinanceCashController::dailyCashApiCreate');
@@ -308,6 +355,8 @@ $routes->group('app/finance', ['filter' => 'financeMember'], function($routes) {
     // ── Commission Settlement Module ──
     $routes->group('commission', function($routes) {
         // Properties + Participants
+        $routes->get('profile', 'CommissionController::profile');
+        $routes->post('save-profile', 'CommissionController::saveProfile');
         $routes->get('properties', 'CommissionController::properties');
         $routes->get('property-form/(:num)', 'CommissionController::propertyForm/$1');
         $routes->get('property-form', 'CommissionController::propertyForm');

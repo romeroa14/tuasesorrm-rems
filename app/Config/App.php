@@ -29,7 +29,13 @@ class App extends BaseConfig
      *
      * @var list<string>
      */
-    public array $allowedHostnames = ['subdominio.rems.local', 'rems.asesoresrm.com.ve', 'rems.admetricas.com'];
+    public array $allowedHostnames = [
+        'subdominio.rems.local',
+        'asesoresrm.com.ve',
+        'www.asesoresrm.com.ve',
+        'rems.asesoresrm.com.ve',
+        'rems.admetricas.com',
+    ];
 
     /**
      * --------------------------------------------------------------------------

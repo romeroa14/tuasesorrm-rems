@@ -18,10 +18,15 @@ class CommissionPropertyModel extends Model
         'reference',
         'sale_price',
         'commission_pct',
+        'scheme_code',
         'registration_fee',
         'sale_date',
         'status',
         'notes',
+        'client_source',
+        'lead_id',
+        'finance_movement_id',
+        'financing_plan_id',
     ];
 
     // Dates

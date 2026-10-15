@@ -43,6 +43,7 @@ class Properties extends Model
         'owner',
         'owner_mail',
         'owner_phone',
+        'management_notes',
         'status',
         'city',
     ];
@@ -90,9 +91,9 @@ class Properties extends Model
         ->where('status.name', 'Aprobado');
     }
 
-    public function getStatementProperties($not_realestate)
+    public function getStatementProperties($not_realestate, ?string $dateFrom = null, ?string $dateTo = null)
     {
-        $query = $this->select('id_properties, users.full_name, housingtype.name, properties.address, businessmodel.name AS business_model, status.name AS status, CONCAT("%", managementpropertychecklist.percentage), properties.created_at')
+        $query = $this->select('properties.id_properties, users.full_name, housingtype.name, properties.address, businessmodel.name AS business_model, status.name AS status, CONCAT("%", managementpropertychecklist.percentage) AS percentage, properties.created_at')
         ->join('users', 'users.id = properties.agent')
         ->join('housingtype', 'housingtype.id = properties.housing_type')
         ->join('businessmodel', 'businessmodel.id = properties.business_model')
@@ -101,7 +102,14 @@ class Properties extends Model
         
         $not_realestate ? $query->whereIn('status.id', [1, 2]) : $query->whereNotIn('status.id', [1, 2]);
 
-        return $query->findAll();
+        if ($dateFrom !== null && $dateFrom !== '') {
+            $query->where('DATE(properties.created_at) >=', $dateFrom);
+        }
+        if ($dateTo !== null && $dateTo !== '') {
+            $query->where('DATE(properties.created_at) <=', $dateTo);
+        }
+
+        return $query->orderBy('properties.created_at', 'DESC')->findAll();
     }
 
     public function getMyProperties()
@@ -163,7 +171,7 @@ class Properties extends Model
     public function getViewStatementProperties($id_property)
     {
         return $this
-        ->select('CONCAT("%", managementpropertychecklist.percentage) as percentage, properties.business_conditions AS business_conditions, properties.map_coordinates, city.id as city, properties.owner, municipality.id as municipality, properties.owner_mail, properties.owner_phone, users.phone AS phone_agent, users.profile_photo AS profile_photo_agent, users.email AS email_agent, properties.meters_land, markettype.id AS market_type, businessmodel.id AS business_model, areatype.id AS area_type, status.name AS status_name, properties.created_at, properties.garages, properties.bathrooms, properties.bedrooms, municipality.name AS municipality_name, state.id AS state, properties.meters_construction, properties.address, properties.id_properties, housingtype.id AS housing_type, users.full_name AS name_agent, users.id AS id_agent, properties.environments AS environments, properties.amenities, properties.exterior, properties.adjacencies, properties.price, properties.price_additional')
+        ->select('CONCAT("%", managementpropertychecklist.percentage) as percentage, properties.business_conditions AS business_conditions, properties.map_coordinates, city.id as city, properties.owner, municipality.id as municipality, properties.owner_mail, properties.owner_phone, properties.management_notes, users.phone AS phone_agent, users.profile_photo AS profile_photo_agent, users.email AS email_agent, properties.meters_land, markettype.id AS market_type, businessmodel.id AS business_model, areatype.id AS area_type, status.name AS status_name, properties.created_at, properties.garages, properties.bathrooms, properties.bedrooms, municipality.name AS municipality_name, state.id AS state, properties.meters_construction, properties.address, properties.id_properties, housingtype.id AS housing_type, users.full_name AS name_agent, users.id AS id_agent, properties.environments AS environments, properties.amenities, properties.exterior, properties.adjacencies, properties.price, properties.price_additional')
         ->join('housingtype', 'housingtype.id = properties.housing_type')
         ->join('municipality ', 'municipality.id = properties.municipality')
         ->join('state ', 'state.id = properties.state')

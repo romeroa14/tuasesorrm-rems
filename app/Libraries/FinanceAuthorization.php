@@ -192,7 +192,19 @@ class FinanceAuthorization
 
     public function can(string $ability, ?int $userId = null): bool
     {
+        $resolvedUserId = $userId ?? (is_numeric(session()->get('id')) ? (int) session()->get('id') : null);
+        if ($resolvedUserId !== null && PlatformAdmin::isAdmin($resolvedUserId)) {
+            return true;
+        }
+
         $membership = $this->membershipForUser($userId);
+        if ($membership === null) {
+            return false;
+        }
+
+        if ($ability === 'members.manage' && empty($membership['can_manage_members'])) {
+            return false;
+        }
 
         return self::roleCan(
             $membership['member_role'] ?? null,
@@ -280,11 +292,23 @@ class FinanceAuthorization
             return null;
         }
 
+        if (PlatformAdmin::isAdmin($resolvedUserId)) {
+            return [
+                'user_id'            => $resolvedUserId,
+                'member_role'        => 'owner',
+                'finance_profile'    => 'full',
+                'is_active'          => 1,
+                'can_manage_members' => 1,
+            ];
+        }
+
         if ($this->isMembershipTableReady()) {
             $member = $this->financeMemberModel->findActiveByUserId($resolvedUserId);
             if ($member !== null) {
                 return $member;
             }
+
+            return null;
         }
 
         return $this->fallbackMembership($resolvedUserId);
@@ -331,16 +355,6 @@ class FinanceAuthorization
                 'finance_profile'    => 'full',
                 'is_active'          => 1,
                 'can_manage_members' => 1,
-            ];
-        }
-
-        if ($roleId === 2) {
-            return [
-                'user_id'            => $userId,
-                'member_role'        => 'admin',
-                'finance_profile'    => 'approver',
-                'is_active'          => 1,
-                'can_manage_members' => 0,
             ];
         }
 

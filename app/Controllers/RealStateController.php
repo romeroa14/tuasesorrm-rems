@@ -13,154 +13,196 @@ class RealStateController extends BaseController
     ////////////// PAGINA DE DECLARACIONES //////////////
     ///////////////////////////////////////////////////*/
     public function statements(){
-        /* TÍTULO Y SLOGAN DE PÁGINA */
-        $this->settings["title"] = "Declaraciones";
-        
-        /* ASIGNAMOS LA URL PARA ACCEDER A LA PÁGINA */
-        $this->settings["url"] = 'auth/properties/statements';
-
-        /* USAREMOS EL COMPONENTE DATATABLE */
-
-        /* TITULO DE TABLA */
-        $title = 'Declaraciones';
-
-        /* DESCRIPCION DE TABLA */
-        $description = 'Gestiona las propiedades declaradas por los agentes, manipula y observa de cerca cada una de las captaciones.';
-
-        /* CABEZA DE TABLA */
-        $header = array(
-            array(
-                'name' => 'RM',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Agente',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Propiedad',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Dirección',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Negocio',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Estatus',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'P.A.B.R.',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Fecha C.',
-                'filtrable' => false
-            )
-        );
-
-        /* PREFIJO PARA LA TABLA */
-        $prefix = 'pr_';
-
-        /* CONFIGURACION PARA EDITAR REGISTROS */
-        $action = [
-            array(
-                'button_name' => 'Gestionar',
-                'url' => '/app/statements/view/',
-                'pk' => 'id_properties',
-                'class_style' => 'btn-primary w-100 mt-1',
-            ), 
-        ];
-
-        /* CONSULTA QUERY CI4 */
-        $query = $this->Properties->getStatementProperties(true);
-
-        /* GENERAMOS NUESTRO DATATABLE */
-        $this->table($query, $title, $description, $header, $prefix, $action);
-
-        /* GENERAMOS NUESTRA PÁGINA */
-        $this->generate_template($this->settings["url"]);
+        $this->renderStatementsPage(true);
     }
 
     /*///////////////////////////////////////////////////
     /////// PAGINA DE DECLARACIONES DESESTIMADAS ////////
     ///////////////////////////////////////////////////*/
     public function statements_dismissed(){
-        /* TÍTULO Y SLOGAN DE PÁGINA */
-        $this->settings["title"] = "Declaraciones desestimadas";
-        
-        /* ASIGNAMOS LA URL PARA ACCEDER A LA PÁGINA */
-        $this->settings["url"] = 'auth/properties/statements_dismissed';
+        $this->renderStatementsPage(false);
+    }
 
-        /* USAREMOS EL COMPONENTE DATATABLE */
+    private function renderStatementsPage(bool $activeStatements): void
+    {
+        $this->settings['title'] = $activeStatements ? 'Declaraciones' : 'Declaraciones desestimadas';
+        $this->settings['url'] = 'auth/properties/statements';
 
-        /* TITULO DE TABLA */
-        $title = 'Declaraciones desestimadas';
+        $dateFrom = (string) ($this->request->getGet('start_date')
+            ?? $this->request->getGet('date_from')
+            ?? date('Y-m-01'));
+        $dateTo = (string) ($this->request->getGet('end_date')
+            ?? $this->request->getGet('date_to')
+            ?? date('Y-m-d'));
 
-        /* DESCRIPCION DE TABLA */
-        $description = 'Gestiona las propiedades desestimadas, manipula y observa de cerca cada una de las captaciones.';
+        $title = $activeStatements ? 'Declaraciones' : 'Declaraciones desestimadas';
+        $description = $activeStatements
+            ? 'Gestiona las propiedades declaradas por los agentes, manipula y observa de cerca cada una de las captaciones.'
+            : 'Gestiona las propiedades desestimadas, manipula y observa de cerca cada una de las captaciones.';
 
-        /* CABEZA DE TABLA */
-        $header = array(
-            array(
-                'name' => 'RM',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Agente',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Propiedad',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Dirección',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Negocio',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Estatus',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'P.A.B.R.',
-                'filtrable' => false
-            ),
-            array(
-                'name' => 'Fecha C.',
-                'filtrable' => false
-            )
-        );
-
-        /* PREFIJO PARA LA TABLA */
-        $prefix = 'pr_';
-
-        /* CONFIGURACION PARA EDITAR REGISTROS */
-        $action = [
-            array(
-                'button_name' => 'Gestionar',
-                'url' => '/app/statements/view/',
-                'pk' => 'id_properties',
-                'class_style' => 'btn-primary w-100 mt-1',
-            ), 
+        $header = [
+            ['name' => 'RM', 'filtrable' => false],
+            ['name' => 'Agente', 'filtrable' => false],
+            ['name' => 'Propiedad', 'filtrable' => false],
+            ['name' => 'Dirección', 'filtrable' => false],
+            ['name' => 'Negocio', 'filtrable' => false],
+            ['name' => 'Estatus', 'filtrable' => false],
+            ['name' => 'P.A.B.R.', 'filtrable' => false],
+            ['name' => 'Fecha C.', 'filtrable' => false],
         ];
 
-        /* CONSULTA QUERY CI4 */
-        $query = $this->Properties->getStatementProperties(false);
+        $action = [[
+            'button_name' => 'Gestionar',
+            'url'         => '/app/statements/view/',
+            'pk'          => 'id_properties',
+            'class_style' => 'btn-primary w-100 mt-1',
+        ]];
 
-        /* GENERAMOS NUESTRO DATATABLE */
-        $this->table($query, $title, $description, $header, $prefix, $action);
+        $query = $this->Properties->getStatementProperties($activeStatements, $dateFrom, $dateTo);
 
-        /* GENERAMOS NUESTRA PÁGINA */
-        $this->generate_template($this->settings["url"]);
+        $docLists = $this->buildDocumentPropertyLists($query);
+
+        $this->body['start_date'] = $dateFrom;
+        $this->body['end_date'] = $dateTo;
+        $this->body['statements_active'] = $activeStatements;
+        $this->body['statements_list_path'] = $activeStatements ? '/app/statements/all' : '/app/statements/dismissed/all';
+        $this->body['statement_stats'] = $this->buildStatementStats($query);
+        $this->body['top_agents'] = $this->buildTopAgents($query);
+        $this->body['properties_with_docs'] = $docLists['with'];
+        $this->body['properties_without_docs'] = $docLists['without'];
+
+        $this->table($query, $title, $description, $header, 'pr_', $action, false);
+        $this->settings['datatable'] = ['prefix' => 'pr_'];
+        $this->generate_template($this->settings['url']);
+    }
+
+    /**
+     * @param list<array<string, mixed>> $rows
+     *
+     * @return array{total:int, approved_with_docs:int, approved_without_docs:int}
+     */
+    private function buildStatementStats(array $rows): array
+    {
+        $stats = [
+            'total'                   => count($rows),
+            'approved_with_docs'      => 0,
+            'approved_without_docs'   => 0,
+        ];
+
+        foreach ($rows as $row) {
+            if (! $this->isApprovedStatementStatus($row['status'] ?? '')) {
+                continue;
+            }
+
+            $propertyId = (int) ($row['id_properties'] ?? 0);
+            if ($propertyId <= 0) {
+                continue;
+            }
+
+            if ($this->propertyHasDocumentary($propertyId)) {
+                $stats['approved_with_docs']++;
+            } else {
+                $stats['approved_without_docs']++;
+            }
+        }
+
+        return $stats;
+    }
+
+    /**
+     * @param list<array<string, mixed>> $rows
+     *
+     * @return list<array{agent:string,count:int}>
+     */
+    private function buildTopAgents(array $rows): array
+    {
+        $counts = [];
+        foreach ($rows as $row) {
+            if (! $this->isApprovedStatementStatus($row['status'] ?? '')) {
+                continue;
+            }
+            $agent = trim((string) ($row['full_name'] ?? 'Sin agente'));
+            $counts[$agent] = ($counts[$agent] ?? 0) + 1;
+        }
+
+        arsort($counts);
+        $top = [];
+        foreach (array_slice($counts, 0, 10, true) as $agent => $count) {
+            $top[] = ['agent' => $agent, 'count' => $count];
+        }
+
+        return $top;
+    }
+
+    /**
+     * @param list<array<string, mixed>> $rows
+     *
+     * @return array{with:list<array{id:int,label:string,view_url:string}>,without:list<array{id:int,label:string,view_url:string}>}
+     */
+    private function buildDocumentPropertyLists(array $rows): array
+    {
+        $with = [];
+        $without = [];
+
+        foreach ($rows as $row) {
+            if (! $this->isApprovedStatementStatus($row['status'] ?? '')) {
+                continue;
+            }
+
+            $propertyId = (int) ($row['id_properties'] ?? 0);
+            if ($propertyId <= 0) {
+                continue;
+            }
+
+            $item = [
+                'id'       => $propertyId,
+                'label'    => $this->statementRmLabel($propertyId),
+                'view_url' => base_url('/app/statements/view/' . $propertyId),
+            ];
+
+            if ($this->propertyHasDocumentary($propertyId)) {
+                $with[] = $item;
+            } else {
+                $without[] = $item;
+            }
+        }
+
+        return ['with' => $with, 'without' => $without];
+    }
+
+    private function isApprovedStatementStatus(mixed $status): bool
+    {
+        return strcasecmp(trim((string) $status), 'Aprobado') === 0;
+    }
+
+    private function statementRmLabel(int $propertyId): string
+    {
+        return 'RM00' . $propertyId;
+    }
+
+    private function propertyHasDocumentary(int $propertyId): bool
+    {
+        helper('filesystem');
+        $dir = FCPATH . 'properties/RM00' . $propertyId . '/documentary/';
+        if (! is_dir($dir)) {
+            return false;
+        }
+
+        $files = directory_map($dir);
+        if (! is_array($files) || $files === []) {
+            return false;
+        }
+
+        foreach ($files as $entry) {
+            if (is_string($entry) && $entry !== '') {
+                return true;
+            }
+            if (is_array($entry) && $entry !== []) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /*///////////////////////////////////////////////////
@@ -229,17 +271,17 @@ class RealStateController extends BaseController
         /* CONSULTA QUERY CI4 */
         $query = $this->Properties->getMyProperties();
 
-        /* GENERAMOS NUESTRO DATATABLE */
-        $this->table($query, $title, $description, $header, $prefix, $action);
+        /* GENERAMOS NUESTRO DATATABLE (sin echo: la vista incluye el partial) */
+        $this->table($query, $title, $description, $header, $prefix, $action, false);
         
         /* ASIGNAMOS VALORES A LA VARIABLE SEMIGLOBAL "BODY" */
-        $this->body = [
+        $this->body = array_merge($this->body, [
             "area_type" => $this->AreaType->findAll(),
             "housing_type" => $this->Housingtype->findAll(),
             "business_model" => $this->BusinessModel->findAll(),
             "market_type" => $this->MarketType->findAll(),
-            "state" => $this->State->findAll()
-        ]; 
+            "state" => $this->State->findAll(),
+        ]);
 
         /* GENERAMOS NUESTRA PÁGINA */
         $this->generate_template($this->settings["url"]);
@@ -436,11 +478,11 @@ class RealStateController extends BaseController
             $a = [];
             
             foreach ($fields as $field) {
-                $a[$field] = $row[$field];
+                $a[$field] = $row[$field] ?? '';
             }
             
-            $a['rrss'] = $rrss;
-            $a['image'] = $image['image'];            
+            $a['rrss'] = $rrss ?: [];
+            $a['image'] = $this->resolvePropertyCoverImage((int) $row['id_properties'], $image);            
 
             if ($wasi) {
                 $a['rrss'][] = [
@@ -539,7 +581,7 @@ class RealStateController extends BaseController
             "property_data" => $model,
             "aceas" => $this->Acea->findAll(),
             "business_conditions" => $this->BusinessConditionsModel->findAll(),
-            "graphics" => $this->ImageOrderByProperties->where('property_id', $id_property)->findAll(),
+            "graphics" => $this->ImageOrderByProperties->gallery($id_property),
             "documentarys" => $files_documentary,
             "area_type" => $this->AreaType->findAll(),
             "housing_type" => $this->Housingtype->findAll(),
@@ -602,7 +644,7 @@ class RealStateController extends BaseController
             "property_data" => $model,
             "aceas" => $this->Acea->findAll(),
             "business_conditions" => $this->BusinessConditionsModel->findAll(),
-            "graphics" => $this->ImageOrderByProperties->where('property_id', $id_property)->findAll(),
+            "graphics" => $this->ImageOrderByProperties->gallery($id_property),
             "documentarys" => $files_documentary,
             "area_type" => $this->AreaType->findAll(),
             "housing_type" => $this->Housingtype->findAll(),
@@ -747,6 +789,39 @@ class RealStateController extends BaseController
     /*///////////////////////////////////////////////////
     ///////// ELIMINAR ARCHIVOS A MI PROPIEDAD //////////
     ///////////////////////////////////////////////////*/
+
+    public function delete_property_image($propertyId, $imageId)
+    {
+        $propertyId = (int) $propertyId;
+        $imageId = (int) $imageId;
+        $row = $this->ImageOrderByProperties
+            ->where('property_id', $propertyId)
+            ->find($imageId);
+
+        if ($row === null) {
+            session()->setFlashdata(['error' => 'No se encontró la imagen a eliminar.']);
+
+            return redirect()->to(base_url('/app/my_properties/view/' . $propertyId));
+        }
+
+        $path = '/properties/RM00' . $propertyId . '/graphic/' . $row['image'] . '/' . $row['id'];
+
+        log_activity('delete', 'property_files', $imageId, null, [
+            'deleted_by'      => session()->get('id'),
+            'deleted_by_name' => session()->get('full_name'),
+            'property_id'     => $propertyId,
+            'property_rm'     => 'RM00' . $propertyId,
+            'file_name'       => $row['image'],
+            'file_path'       => $path,
+            'deletion_reason' => 'manual_deletion',
+            'action_type'     => 'image_deletion',
+        ]);
+
+        $this->destroy_file($path);
+
+        return redirect()->to($this->previous_page() ?: base_url('/app/my_properties/view/' . $propertyId));
+    }
+
 	public function delete_file($id, $file = null)
 	{   
         $fileToDelete = $file ? base64_decode($file) : $this->request->getPost('destroy_file');
@@ -1681,14 +1756,12 @@ class RealStateController extends BaseController
     {
         $property = $this->Properties->getViewProperties($id_property) ?? 'No existe la propiedad';
 
-        $images_property = $this->ImageOrderByProperties
-            ->where('property_id', $id_property)
-            ->findAll();
+        $images_property = $this->ImageOrderByProperties->gallery($id_property);
         
         $rrss = $this->RRSSPublicationsModel->getRRSS($id_property);
             
         $wasi = $this->ServiceWasi->getWasi($id_property);
-        
+
         $images = array_map(function($value) {
             return base_url('/properties/RM00'.$value['property_id'].'/graphic/'.$value['image']);
         }, $images_property);
@@ -1792,6 +1865,36 @@ class RealStateController extends BaseController
     /*///////////////////////////////////////////////////
     //////////////// KIT DE CAPTACIONES /////////////////
     ///////////////////////////////////////////////////*/
+
+    private function resolvePropertyCoverImage(int $propertyId, $imageRow = null): ?string
+    {
+        $gallery = $this->ImageOrderByProperties->gallery($propertyId);
+        return $gallery[0]['image'] ?? null;
+    }
+
+    private function listPropertyGraphicFiles(int $propertyId): array
+    {
+        $dir = FCPATH . 'properties/RM00' . $propertyId . '/graphic/';
+        if (! is_dir($dir)) {
+            return [];
+        }
+        $files = [];
+        foreach (scandir($dir) ?: [] as $name) {
+            if ($name === '.' || $name === '..') {
+                continue;
+            }
+            if (! is_file($dir . $name)) {
+                continue;
+            }
+            if (! preg_match('/\.(jpe?g|png|webp|gif)$/i', $name)) {
+                continue;
+            }
+            $files[] = $name;
+        }
+        natsort($files);
+        return array_values($files);
+    }
+
     public function pickup_kit()
     {
         /* TÍTULO Y SLOGAN DE PÁGINA */

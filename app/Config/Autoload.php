@@ -97,6 +97,7 @@ class Autoload extends AutoloadConfig
      * @var list<string>
      */
     public $helpers = [
-        'activity'
+        'activity',
+        'platform',
     ];
 }

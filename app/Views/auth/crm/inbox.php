@@ -112,7 +112,7 @@
                                 <input type="text" class="form-control" id="message-input" placeholder="Escribe un mensaje..." 
                                     onkeypress="if(event.key==='Enter') sendMessage()">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" onclick="sendMessage()">
+                                    <button class="btn btn-primary" id="send-message-btn" onclick="sendMessage()">
                                         <i class="fas fa-paper-plane"></i>
                                     </button>
                                 </div>
@@ -134,6 +134,9 @@
                             </div>
 
                             <div id="lead-detail-content" style="display: none;">
+                                <div class="text-center mb-3" id="detail-photo-wrap" style="display:none;">
+                                    <img id="detail-photo" alt="" width="72" height="72" style="width:72px;height:72px;border-radius:50%;object-fit:cover;">
+                                </div>
                                 <!-- Score Bar -->
                                 <div class="mb-3">
                                     <label class="font-weight-bold">Score de Intención</label>
@@ -372,6 +375,39 @@ function loadConversations() {
     });
 }
 
+
+function safeLeadPhoto(pic) {
+    return typeof pic === 'string' && /^\/uploads\/crm-avatars\/\d+\.(jpg|png|webp|gif)$/.test(pic) ? pic : '';
+}
+
+function paintLeadAvatar($el, name, pic) {
+    var photo = safeLeadPhoto(pic);
+    var letter = ((name || '?') + '').charAt(0).toUpperCase();
+    if (photo) {
+        $el.css({backgroundImage: 'url("' + photo + '")', backgroundSize: 'cover', backgroundPosition: 'center'}).text('');
+    } else {
+        $el.css({backgroundImage: '', backgroundSize: '', backgroundPosition: ''}).text(letter);
+    }
+}
+
+function paintDetailPhoto(pic) {
+    var photo = safeLeadPhoto(pic);
+    if (photo) {
+        $('#detail-photo').attr('src', photo);
+        $('#detail-photo-wrap').show();
+    } else {
+        $('#detail-photo').attr('src', '');
+        $('#detail-photo-wrap').hide();
+    }
+}
+
+function leadAvatarHtml(pic, name, size) {
+    var photo = safeLeadPhoto(pic);
+    var px = size || 28;
+    if (!photo) return '';
+    return '<img src="' + photo + '" alt="" width="' + px + '" height="' + px + '" style="width:' + px + 'px;height:' + px + 'px;border-radius:50%;object-fit:cover;margin-right:6px;">';
+}
+
 function renderConversationList(convs) {
     const list = $('#conversation-list');
     
@@ -399,6 +435,7 @@ function renderConversationList(convs) {
                 <div class="d-flex justify-content-between align-items-start">
                     <div class="flex-grow-1">
                         <div class="d-flex align-items-center">
+                            ${leadAvatarHtml(conv.lead_photo, conv.lead_name, 28)}
                             <span class="mr-1">${channelIcon}</span>
                             <span class="conv-name">${conv.lead_name || 'Sin nombre'}</span>
                             <span class="badge badge-sm ml-1" style="background:${labelColor}; color:white; font-size:10px;">${conv.intention_score || 0}%</span>
@@ -466,7 +503,7 @@ function fetchConversationMessages(id, showLoading) {
                 + (conv.recipient_ig_username ? ' → @' + conv.recipient_ig_username : '')
                 + ' <span class="badge ml-1" style="background:' + getLabelColor(conv.intention_label) + ';color:white;font-size:10px">' + getLabelText(conv.intention_label) + ' ' + (conv.intention_score || 0) + '%</span>'
             );
-            $('#chat-avatar').text((conv.lead_name || '?')[0].toUpperCase());
+            paintLeadAvatar($('#chat-avatar'), conv.lead_name, conv.lead_photo);
             scrollToBottom();
         }
     });
@@ -482,7 +519,8 @@ function renderMessages(messages) {
     let lastDate = '';
 
     messages.forEach(msg => {
-        const msgDate = msg.created_at ? msg.created_at.split(' ')[0] : '';
+        const when = caracasParts(msg.created_at);
+        const msgDate = when ? (when.year + '-' + when.month + '-' + when.day) : '';
         if (msgDate !== lastDate) {
             html += `<div class="text-center my-3"><span class="badge badge-light px-3 py-1">${formatDate(msgDate)}</span></div>`;
             lastDate = msgDate;
@@ -492,7 +530,7 @@ function renderMessages(messages) {
         const senderLabel = direction === 'outbound'
             ? (msg.sender_name ? escapeHtml(msg.sender_name) : 'Equipo')
             : 'Cliente';
-        const time = msg.created_at ? msg.created_at.split(' ')[1].substring(0, 5) : '';
+        const time = when ? (when.hour + ':' + when.minute) : '';
 
         html += `
             <div class="d-flex ${direction === 'outbound' ? 'justify-content-end' : 'justify-content-start'}">
@@ -526,6 +564,7 @@ function renderLeadDetail(conv) {
 
     // Lead info
     $('#detail-name').text(conv.lead_name || '-');
+    paintDetailPhoto(conv.lead_photo);
     $('#detail-channel').html(getChannelIcon(conv.channel) + ' ' + (conv.channel || '-'));
     $('#detail-instagram').text(conv.instagram_username || '-');
     $('#detail-recipient-ig').text(conv.recipient_ig_username ? '@' + conv.recipient_ig_username : '-');
@@ -538,37 +577,39 @@ function renderLeadDetail(conv) {
     $('#detail-lead-link').attr('href', '/app/leads/edit/' + conv.lead_id);
 }
 
+var sendInFlight = false;
+
 function sendMessage() {
-    const content = $('#message-input').val().trim();
-    if (!content || !currentConversationId) return;
+    if (sendInFlight || !currentConversationId) return;
+
+    var content = $('#message-input').val().trim();
+    if (!content) return;
+
+    sendInFlight = true;
+    var $input = $('#message-input');
+    var $btn = $('#send-message-btn');
+    $input.val('').prop('disabled', true);
+    $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i>');
 
     $.post('/app/crm/api/send', {
         conversation_id: currentConversationId,
         content: content
     }, function(response) {
         if (response.status === 'success') {
-            const now = new Date();
-            const time = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
-            const delivered = response.data && response.data.graph_sent ? ' ✓✓' : ' ⏳';
-            const html = `
-                <div class="d-flex justify-content-end">
-                    <div class="message-bubble outbound">
-                        <div class="msg-sender"><?= session()->get('full_name') ?></div>
-                        <div>${escapeHtml(content)}</div>
-                        <div class="msg-time">${time}${delivered}</div>
-                    </div>
-                </div>
-            `;
-            $('#messages-area').append(html);
-            $('#message-input').val('');
-            scrollToBottom();
-            lastMessageCount += 1;
+            lastMessageCount = -1;
+            fetchConversationMessages(currentConversationId, false);
         } else {
+            $input.val(content);
             alert(response.message || 'No se pudo enviar el mensaje.');
         }
     }).fail(function(xhr) {
+        $input.val(content);
         var msg = (xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : 'Error de red al enviar.';
         alert(msg);
+    }).always(function() {
+        sendInFlight = false;
+        $input.prop('disabled', false).focus();
+        $btn.prop('disabled', false).html('<i class="fas fa-paper-plane"></i>');
     });
 }
 
@@ -656,9 +697,30 @@ function getLabelText(label) {
     }
 }
 
+function caracasParts(value) {
+    if (!value) return null;
+    var raw = String(value).trim().replace(' ', 'T');
+    if (raw.length === 16) raw += ':00';
+    if (!/[zZ]|[+-]\d{2}:\d{2}$/.test(raw)) raw += 'Z';
+    var d = new Date(raw);
+    if (isNaN(d.getTime())) return null;
+    var map = {};
+    new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Caracas',
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+    }).formatToParts(d).forEach(function (part) {
+        if (part.type !== 'literal') map[part.type] = part.value;
+    });
+    return map;
+}
+
 function formatTimeAgo(dateStr) {
     if (!dateStr) return '';
-    const date = new Date(dateStr);
+    var raw = String(dateStr).trim().replace(' ', 'T');
+    if (raw.length === 16) raw += ':00';
+    if (!/[zZ]|[+-]\d{2}:\d{2}$/.test(raw)) raw += 'Z';
+    const date = new Date(raw);
     const now = new Date();
     const diff = Math.floor((now - date) / 1000);
     
@@ -671,9 +733,11 @@ function formatTimeAgo(dateStr) {
 
 function formatDate(dateStr) {
     if (!dateStr) return '';
-    const today = new Date().toISOString().split('T')[0];
+    var todayParts = caracasParts(new Date().toISOString());
+    var today = todayParts ? (todayParts.year + '-' + todayParts.month + '-' + todayParts.day) : '';
     if (dateStr === today) return 'Hoy';
-    const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+    var yesterdayParts = caracasParts(new Date(Date.now() - 86400000).toISOString());
+    var yesterday = yesterdayParts ? (yesterdayParts.year + '-' + yesterdayParts.month + '-' + yesterdayParts.day) : '';
     if (dateStr === yesterday) return 'Ayer';
     return dateStr;
 }

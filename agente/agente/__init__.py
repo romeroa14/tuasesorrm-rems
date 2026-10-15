@@ -1,3 +1,3 @@
-"""Microservicio de agente ATC REMS (DeepSeek + catálogo MySQL)."""
+"""Microservicio de agente ATC REMS (OpenRouter + catálogo MySQL)."""
 
-__version__ = "0.1.0"
+__version__ = "0.4.0"

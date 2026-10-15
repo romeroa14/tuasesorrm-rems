@@ -35,7 +35,7 @@ class CommissionParticipantModel extends Model
     protected $validationRules = [
         'property_id'      => 'required|integer|is_not_unique[commission_properties.id]',
         'user_id'          => 'required|integer|is_not_unique[users.id]',
-        'role'             => 'required|in_list[cerrador,cap,coordinator,gs,fe,sales_manager,registro,external_advisor,ne]',
+        'role'             => 'required|in_list[cerrador,cap,coordinator,gs,fe,sales_manager,registro,external_advisor,ne,atc,marketing]',
         'commission_type'  => 'required|in_list[percentage,fixed,formula]',
         'commission_value' => 'required|numeric|greater_than[0]',
     ];

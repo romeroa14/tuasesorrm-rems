@@ -17,7 +17,7 @@ load_dotenv(_ENV_FILE, override=False)
 
 
 class Settings(BaseSettings):
-    """Variables con prefijo opcional; sin prefijo. Env: DEEPSEEK_API_KEY, MYSQL_HOST, …"""
+    """Variables sin prefijo. Env: OPENROUTER_API_KEY, MYSQL_HOST, …"""
 
     model_config = SettingsConfigDict(
         env_file_encoding="utf-8",
@@ -26,9 +26,11 @@ class Settings(BaseSettings):
         env_file=_ENV_FILE if _ENV_FILE.is_file() else None,
     )
 
-    deepseek_api_key: str = ""
-    deepseek_base_url: str = "https://api.deepseek.com/v1"
-    deepseek_model: str = "deepseek-chat"
+    openrouter_api_key: str = ""
+    openrouter_base_url: str = "https://openrouter.ai/api/v1"
+    openrouter_model: str = "openai/gpt-4o-mini"
+    public_base_url: str = "https://rems.asesoresrm.com.ve"
+    properties_root: str = "/opt/docker/rems/tuasesorrm-rems/public/properties"
 
     mysql_host: str = "127.0.0.1"
     mysql_port: int = 3306

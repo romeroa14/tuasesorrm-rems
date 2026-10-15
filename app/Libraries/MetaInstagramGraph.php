@@ -151,7 +151,7 @@ class MetaInstagramGraph
                 $endpointUrl,
                 [
                     'query' => [
-                        'fields'       => 'name,username',
+                        'fields'       => 'name,username,profile_pic,follower_count',
                         'access_token' => $pageToken,
                     ],
                 ]
@@ -167,12 +167,20 @@ class MetaInstagramGraph
                 return null;
             }
 
+            $pic = '';
+            if (isset($body['profile_pic']) && is_string($body['profile_pic'])) {
+                $pic = trim($body['profile_pic']);
+            } elseif (isset($body['profile_pic_url']) && is_string($body['profile_pic_url'])) {
+                $pic = trim($body['profile_pic_url']);
+            }
+            $followers = $body['followers_count'] ?? $body['follower_count'] ?? 0;
+
             return [
                 'name'            => isset($body['name']) ? (string) $body['name'] : '',
                 'username'        => isset($body['username']) ? (string) $body['username'] : '',
-                'is_private'      => false,
-                'profile_pic_url' => null,
-                'followers_count' => 0,
+                'is_private'      => ! empty($body['is_private']),
+                'profile_pic_url' => $pic !== '' ? $pic : null,
+                'followers_count' => (int) $followers,
             ];
         } catch (\Throwable $e) {
             log_message('error', 'MetaInstagramGraph::resolveParticipantProfile exception=' . $e::class
@@ -181,6 +189,148 @@ class MetaInstagramGraph
 
             return null;
         }
+    }
+
+
+    /**
+     * Guarda la foto del cliente en el servidor. El enlace de Meta caduca a los pocos días.
+     */
+    public static function cacheParticipantPhoto(int $leadId, ?string $remoteUrl): ?string
+    {
+        if ($leadId < 1 || $remoteUrl === null || trim($remoteUrl) === '') {
+            return null;
+        }
+        $remoteUrl = trim($remoteUrl);
+        if (! str_starts_with(strtolower($remoteUrl), 'https://')) {
+            return null;
+        }
+        $host = parse_url($remoteUrl, PHP_URL_HOST);
+        if (! is_string($host) || ! self::avatarHostAllowed($host)) {
+            return null;
+        }
+
+        $dir = FCPATH . 'uploads/crm-avatars';
+        if (! is_dir($dir) && ! mkdir($dir, 0755, true) && ! is_dir($dir)) {
+            return null;
+        }
+
+        try {
+            $client = \Config\Services::curlrequest([
+                'timeout'         => 8,
+                'http_errors'     => false,
+                'allow_redirects' => false,
+            ]);
+            $response = $client->get($remoteUrl);
+            if ($response->getStatusCode() !== 200) {
+                return null;
+            }
+            $body = (string) $response->getBody();
+            $len = strlen($body);
+            if ($len < 80 || $len > 2000000) {
+                return null;
+            }
+            $ext = null;
+            if (str_starts_with($body, "\xFF\xD8")) {
+                $ext = 'jpg';
+            } elseif (str_starts_with($body, "\x89PNG")) {
+                $ext = 'png';
+            } elseif (str_starts_with($body, 'GIF8')) {
+                $ext = 'gif';
+            } elseif (str_starts_with($body, 'RIFF') && str_contains(substr($body, 0, 16), 'WEBP')) {
+                $ext = 'webp';
+            }
+            if ($ext === null) {
+                return null;
+            }
+            foreach (['jpg', 'png', 'gif', 'webp'] as $oldExt) {
+                $old = $dir . '/' . $leadId . '.' . $oldExt;
+                if ($oldExt !== $ext && is_file($old)) {
+                    unlink($old);
+                }
+            }
+            $dest = $dir . '/' . $leadId . '.' . $ext;
+            if (file_put_contents($dest, $body) === false) {
+                return null;
+            }
+
+            return '/uploads/crm-avatars/' . $leadId . '.' . $ext;
+        } catch (\Throwable $e) {
+            log_message('error', 'MetaInstagramGraph::cacheParticipantPhoto ' . $e->getMessage());
+
+            return null;
+        }
+    }
+
+    public static function cacheAdCreative(int $conversationId, ?string $remoteUrl): ?string
+    {
+        if ($conversationId < 1 || $remoteUrl === null || trim($remoteUrl) === '') {
+            return null;
+        }
+        $remoteUrl = trim($remoteUrl);
+        if (! str_starts_with(strtolower($remoteUrl), 'https://')) {
+            return null;
+        }
+        $host = parse_url($remoteUrl, PHP_URL_HOST);
+        if (! is_string($host) || ! self::avatarHostAllowed($host)) {
+            return null;
+        }
+
+        $dir = FCPATH . 'uploads/crm-ads';
+        if (! is_dir($dir) && ! mkdir($dir, 0755, true) && ! is_dir($dir)) {
+            return null;
+        }
+
+        try {
+            $client = \Config\Services::curlrequest([
+                'timeout' => 8,
+                'http_errors' => false,
+                'allow_redirects' => true,
+            ]);
+            $response = $client->get($remoteUrl);
+            if ($response->getStatusCode() !== 200) {
+                return null;
+            }
+            $body = (string) $response->getBody();
+            $len = strlen($body);
+            if ($len < 80 || $len > 2000000) {
+                return null;
+            }
+            $ext = null;
+            if (str_starts_with($body, "\xFF\xD8")) {
+                $ext = 'jpg';
+            } elseif (str_starts_with($body, "\x89PNG")) {
+                $ext = 'png';
+            } elseif (str_starts_with($body, 'GIF8')) {
+                $ext = 'gif';
+            } elseif (str_starts_with($body, 'RIFF') && str_contains(substr($body, 0, 16), 'WEBP')) {
+                $ext = 'webp';
+            }
+            if ($ext === null) {
+                return null;
+            }
+            $dest = $dir . '/' . $conversationId . '.' . $ext;
+            if (file_put_contents($dest, $body) === false) {
+                return null;
+            }
+
+            return '/uploads/crm-ads/' . $conversationId . '.' . $ext;
+        } catch (\Throwable $e) {
+            log_message('error', 'MetaInstagramGraph::cacheAdCreative ' . $e->getMessage());
+
+            return null;
+        }
+    }
+
+    private static function avatarHostAllowed(string $host): bool
+    {
+        $host = strtolower($host);
+        foreach (['fbcdn.net', 'cdninstagram.com', 'fbsbx.com', 'facebook.com', 'fb.com'] as $suffix) {
+            if ($host === $suffix || str_ends_with($host, '.' . $suffix)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

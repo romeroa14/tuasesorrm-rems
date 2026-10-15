@@ -48,7 +48,9 @@ class FinanceReceiptService
         $timestamp = strtotime($paymentDate) ?: time();
 
         $clientName = strtoupper(trim((string) ($lead['name'] ?? $quota['name'] ?? 'CLIENTE')));
-        $nationalId = $this->formatNationalId((string) ($lead['national_id'] ?? ''));
+        $nationalIdRaw = (string) ($lead['national_id'] ?? '');
+        $nationalId = $this->formatNationalId($nationalIdRaw);
+        $nationalIdSignature = $this->formatClientNationalIdSignature($nationalIdRaw);
 
         return [
             'quota'              => $quota,
@@ -58,17 +60,23 @@ class FinanceReceiptService
             'receipt_number'     => (string) ($quota['receipt_number'] ?? ''),
             'city'               => getenv('FINANCE_RECEIPT_CITY') ?: 'CARACAS',
             'date_line'          => $this->formatReceiptDateLine($timestamp),
-            'company_name'       => getenv('FINANCE_RECEIPT_COMPANY_NAME') ?: 'ASESORES RXI C.A',
+            'company_name'       => getenv('FINANCE_RECEIPT_COMPANY_NAME') ?: 'ASESORES RXI C.A,',
             'company_rif'        => getenv('FINANCE_RECEIPT_RIF') ?: 'J-403576750',
+            'header_company_line'=> getenv('FINANCE_RECEIPT_HEADER_LINE') ?: 'ASESORES RM XXI, C.A. J-40357675-0',
             'representative_name'=> getenv('FINANCE_RECEIPT_REP_NAME') ?: 'ROSSANA MIGLIORE',
-            'representative_id'  => getenv('FINANCE_RECEIPT_REP_ID') ?: 'V-15.161.333',
+            'representative_id'  => $this->formatRepresentativeNationalId(getenv('FINANCE_RECEIPT_REP_ID') ?: 'V-15.161.333'),
             'client_name'        => $clientName,
             'client_national_id' => $nationalId,
+            'client_national_id_signature' => $nationalIdSignature,
             'amount_usd'         => $amountUsd,
             'amount_formatted'   => FinanceAmountWords::formatUsdAmount($amountUsd),
             'amount_words'       => FinanceAmountWords::usdInWords($amountUsd),
             'concept'            => $this->buildConcept($quota, $installment, $plan),
             'missing_national_id'=> $nationalId === '____________',
+            'footer_address'     => getenv('FINANCE_RECEIPT_ADDRESS') ?: 'Calle Madrid de la Mercedes, Centro Financiero Madrid, piso 11, oficina 1107, Miranda - Baruta, ZP 1010',
+            'footer_phone'       => getenv('FINANCE_RECEIPT_PHONE') ?: '0424.141.3908',
+            'footer_website'     => getenv('FINANCE_RECEIPT_WEBSITE') ?: 'www.tuasesorrm.com.ve',
+            'footer_instagram'   => getenv('FINANCE_RECEIPT_INSTAGRAM') ?: "@tuasesorrm\n@realtors.rm\n@tiendainmueblerm",
         ];
     }
 
@@ -76,24 +84,36 @@ class FinanceReceiptService
     {
         $context = $this->buildContext($quotaId);
         $context['forPdf'] = $forPdf;
+        $context['assets'] = $this->receiptAssets($forPdf);
 
         return view('auth/finance/quota_receipt', $context);
     }
 
     public function generatePdf(int $quotaId): string
     {
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+
         $html = $this->renderHtml($quotaId, true);
 
         $options = new Options();
         $options->set('isRemoteEnabled', false);
-        $options->set('defaultFont', 'DejaVu Serif');
+        $options->set('defaultFont', 'DejaVu Sans');
+        $options->set('isFontSubsettingEnabled', true);
+        $options->setChroot([ROOTPATH, FCPATH, WRITEPATH]);
 
         $dompdf = new Dompdf($options);
         $dompdf->loadHtml($html, 'UTF-8');
         $dompdf->setPaper('letter', 'portrait');
         $dompdf->render();
 
-        return (string) $dompdf->output();
+        $pdf = (string) $dompdf->output();
+        if (! str_starts_with($pdf, '%PDF')) {
+            throw new \RuntimeException('No se pudo generar el PDF del recibo.');
+        }
+
+        return $pdf;
     }
 
     private function formatReceiptDateLine(int $timestamp): string
@@ -119,11 +139,115 @@ class FinanceReceiptService
             return '____________';
         }
 
-        if (preg_match('/^[VEJP]-?\d/i', $raw)) {
-            return preg_replace('/\s+/', '', $raw);
+        $prefix = 'V';
+        if (preg_match('/^([VEJP])-?\s*(.+)$/', $raw, $matches)) {
+            $prefix = $matches[1];
+            $raw = $matches[2];
         }
 
-        return 'V-' . preg_replace('/\D/', '', $raw);
+        $digits = preg_replace('/\D/', '', $raw);
+        if ($digits === '') {
+            return '____________';
+        }
+
+        return $prefix . $this->formatVenezuelanIdNumber($digits);
+    }
+
+    private function formatClientNationalIdSignature(string $raw): string
+    {
+        $raw = strtoupper(trim($raw));
+        if ($raw === '') {
+            return '____________';
+        }
+
+        $prefix = 'V';
+        if (preg_match('/^([VEJP])-?\s*(.+)$/', $raw, $matches)) {
+            $prefix = $matches[1];
+            $raw = $matches[2];
+        }
+
+        $digits = preg_replace('/\D/', '', $raw);
+        if ($digits === '') {
+            return '____________';
+        }
+
+        return $prefix . '- ' . $this->formatVenezuelanIdNumber($digits);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function receiptAssets(bool $forPdf): array
+    {
+        $files = [
+            'logo'           => 'logo-main.jpg',
+            'header_company' => 'header-company.png',
+            'slogan'         => 'slogan.png',
+            'qr'             => 'qr-code.png',
+            'icon_location'  => 'icon-location.jpg',
+        ];
+
+        $assets = [];
+        foreach ($files as $key => $filename) {
+            $assets[$key] = $this->receiptAssetUri($filename, $forPdf);
+        }
+
+        return $assets;
+    }
+
+    private function receiptAssetUri(string $filename, bool $forPdf): string
+    {
+        $path = FCPATH . 'assets/finance/receipt/' . $filename;
+        if (! is_file($path)) {
+            return '';
+        }
+
+        if ($forPdf) {
+            $mime = mime_content_type($path) ?: 'image/png';
+
+            return 'data:' . $mime . ';base64,' . base64_encode((string) file_get_contents($path));
+        }
+
+        return base_url('assets/finance/receipt/' . $filename);
+    }
+
+    private function formatRepresentativeNationalId(string $raw): string
+    {
+        $raw = strtoupper(trim($raw));
+        if ($raw === '') {
+            return '';
+        }
+
+        $prefix = 'V';
+        if (preg_match('/^([VEJP])-?\s*(.+)$/', $raw, $matches)) {
+            $prefix = $matches[1];
+            $raw = $matches[2];
+        }
+
+        $digits = preg_replace('/\D/', '', $raw);
+        if ($digits === '') {
+            return $raw;
+        }
+
+        return $prefix . '- ' . $this->formatVenezuelanIdNumber($digits);
+    }
+
+    private function formatVenezuelanIdNumber(string $digits): string
+    {
+        $length = strlen($digits);
+        if ($length <= 3) {
+            return $digits;
+        }
+
+        $last = substr($digits, -3);
+        $middle = substr($digits, -6, 3);
+        $first = substr($digits, 0, $length - 6);
+
+        if ($first === '') {
+            return $middle . '.' . $last;
+        }
+
+        return $first . '.' . $middle . '.' . $last;
     }
 
     /**

@@ -16,7 +16,7 @@ use CodeIgniter\CLI\CLI;
 use Config\Database;
 
 /**
- * Demo del agente ATC con DeepSeek + tools sobre tabla properties (solo lectura).
+ * Demo del agente ATC con OpenRouter + tools sobre tabla properties (solo lectura).
  *
  * Uso:
  *   php spark ai:crm-agent-demo --list-tables
@@ -33,7 +33,7 @@ class AiCrmAgentDemo extends BaseCommand
     protected $group       = 'CRM';
     protected $name        = 'ai:crm-agent-demo';
     protected $usage       = 'ai:crm-agent-demo [opciones]';
-    protected $description = 'DeepSeek + tools BD (properties): demo sin exponer API keys';
+    protected $description = 'OpenRouter + tools BD (properties): demo sin exponer API keys';
 
     public function run(array $params)
     {
@@ -314,7 +314,7 @@ TXT;
             $msg = is_array($choice) ? ($choice['message'] ?? null) : null;
 
             if (! is_array($msg)) {
-                throw new \RuntimeException('Respuesta DeepSeek sin message.');
+                throw new \RuntimeException('Respuesta OpenRouter sin message.');
             }
 
             $toolCalls = $msg['tool_calls'] ?? null;

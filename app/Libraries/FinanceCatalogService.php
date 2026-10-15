@@ -32,12 +32,28 @@ class FinanceCatalogService
             'companies'         => $this->getCompanies(),
             'active_company_id' => $companyContext->getActiveCompanyId(),
             'currency_context'  => $currencyContext,
+            'commission_schemes'=> \App\Libraries\FinanceCommissionPolicy::schemes(),
+            'commission_profile'=> \App\Libraries\FinanceCommissionPolicy::loadProfile(),
+            'users'             => $this->getActiveUsers(),
         ];
     }
 
     /**
      * @return list<array<string, mixed>>
      */
+    public function getActiveUsers(): array
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users')->select('id, full_name')->orderBy('full_name', 'ASC');
+        if ($db->fieldExists('status', 'users')) {
+            $builder->where('status', 'activo');
+        } elseif ($db->fieldExists('active', 'users')) {
+            $builder->where('active', 1);
+        }
+
+        return $builder->get()->getResultArray();
+    }
+
     public function getCompanies(): array
     {
         $model = new FinanceCompany();
@@ -197,13 +213,14 @@ class FinanceCatalogService
     /**
      * @return list<array<string, mixed>>
      */
-    public function searchClients(string $term = '', int $limit = 25): array
+    public function searchClients(string $term = '', int $limit = 10): array
     {
         $model = new Leads();
         $builder = $model
-            ->select('id, name, phone, email, national_id')
+            ->select('id, name, phone, email, national_id, intention_label')
+            ->where('status !=', 'Eliminado')
             ->orderBy('name', 'ASC')
-            ->limit(max(1, min($limit, 50)));
+            ->limit(max(10, min($limit, 50)));
 
         $term = trim($term);
         if ($term !== '') {
@@ -282,6 +299,7 @@ class FinanceCatalogService
             'national_id'      => $nationalId !== '' ? strtoupper($nationalId) : null,
             'observation'      => $observation,
             'status'           => 'Activo',
+            'intention_label'  => 'caliente',
         ];
 
         if (! $model->insert($data)) {

@@ -34,8 +34,11 @@ function get_properties(page, rm, address, min_p, max_p, business_model, tp, min
                     box.appendChild(top);
 
                     var img = document.createElement('img');
-                    img.src = '/properties/RM00' + item.id_properties + '/graphic/' + item.image;
+                    img.src = item.image
+                        ? '/properties/RM00' + item.id_properties + '/graphic/' + item.image
+                        : '/img/recurso-no-encontrado.jpg';
                     img.alt = '';
+                    img.onerror = function () { this.onerror = null; this.src = '/img/recurso-no-encontrado.jpg'; };
                     top.appendChild(img);
 
                     var span = document.createElement('span');
@@ -43,7 +46,7 @@ function get_properties(page, rm, address, min_p, max_p, business_model, tp, min
 
                     
 
-                    item.rrss.forEach(rrss => {
+                    (item.rrss || []).forEach(rrss => {
                         var shareBtn = document.createElement('p');
                         shareBtn.classList.add('text-label-card');
                         shareBtn.innerHTML = '<a href="'+ rrss['link'] +'" class="text-white" target="_blank">'+ rrss['name'] +'</a>';

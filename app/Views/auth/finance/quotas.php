@@ -34,12 +34,16 @@
         background: #f8f9fc;
         padding: .5rem .75rem;
     }
+    #planFilterBar .select2-container { width: 100% !important; }
 </style>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">
             <i class="fas fa-hand-holding-usd text-primary"></i> <?= esc($title ?? 'Finanzas — Cuotas') ?>
         </h1>
         <div>
+            <a class="btn btn-outline-secondary btn-sm mr-2" href="<?= base_url('/app/finance/quota-movements') ?>">
+                <i class="fas fa-stream"></i> Trazabilidad
+            </a>
             <button class="btn btn-outline-primary btn-sm mr-2" onclick="showPlanModal()">
                 <i class="fas fa-file-invoice-dollar"></i> Nuevo plan de pago
             </button>
@@ -59,27 +63,35 @@
     </ul>
 
     <div id="quotasTabManage">
-    <div class="row">
-        <div class="col-lg-4 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-users"></i> Clientes / planes</h6>
+    <div class="card shadow mb-3" id="planFilterBar">
+        <div class="card-body py-3">
+            <div class="form-row align-items-end">
+                <div class="form-group col-md-4 mb-2 mb-md-0">
+                    <label class="small text-muted mb-1">Proyecto</label>
+                    <select id="planFilterProject" class="form-control">
+                        <option value="">Todos los proyectos</option>
+                    </select>
                 </div>
-                <div class="card-body p-0">
-                    <div class="list-group list-group-flush" id="plansList">
-                        <div class="list-group-item text-muted small">Cargando...</div>
-                    </div>
+                <div class="form-group col-md-8 mb-0">
+                    <label class="small text-muted mb-1">Cliente</label>
+                    <select id="planFilterClient" class="form-control">
+                        <option value="">Selecciona un cliente...</option>
+                    </select>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-8 mb-4">
+    </div>
+    <div class="row">
+        <div class="col-12 mb-4">
             <div class="card shadow mb-3" id="planHeaderCard" style="display:none;">
                 <div class="card-header py-3 bg-dark text-white d-flex justify-content-between align-items-center">
                     <h6 class="m-0 font-weight-bold"><i class="fas fa-table"></i> Plan de pago</h6>
                     <div>
-                        <button type="button" class="btn btn-outline-light btn-sm mr-1" onclick="closePlanView()" title="Volver a la lista">
+                        <button type="button" class="btn btn-outline-light btn-sm mr-1" onclick="closePlanView()" title="Cerrar plan">
                             <i class="fas fa-times"></i> Cerrar
+                        </button>
+                        <button type="button" class="btn btn-warning btn-sm mr-1" id="btnEditPlan" onclick="openPlanEditor()" style="display:none;">
+                            <i class="fas fa-edit"></i> Editar plan
                         </button>
                         <button type="button" class="btn btn-light btn-sm mr-1" id="btnPrintPlan" onclick="printSelectedPlan()">
                             <i class="fas fa-print"></i> Imprimir plan
@@ -127,7 +139,7 @@
             <div class="card shadow mt-3" id="planEmptyState">
                 <div class="card-body text-center text-muted py-5">
                     <i class="fas fa-hand-pointer fa-2x mb-3"></i>
-                    <p class="mb-0">Selecciona un cliente para ver el plan de pago y las cuotas pendientes.</p>
+                    <p class="mb-0">Elige un proyecto y un cliente en los filtros de arriba para ver el plan y las cuotas.</p>
                 </div>
             </div>
         </div>
@@ -206,36 +218,6 @@
         </div>
     </div>
 
-    <div class="card shadow mb-4 mt-2" id="quotasMovementsCard">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-receipt"></i> Movimientos de cuotas registrados</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id="quotasTable" class="table table-striped table-bordered" style="width:100%">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>ID</th>
-                            <th>Tipo</th>
-                            <th>Nombre / Cliente</th>
-                            <th>Entregada a</th>
-                            <th>N° Recibo</th>
-                            <th>Monto</th>
-                            <th>Método de pago</th>
-                            <th>Equiv. USD</th>
-                            <th>Equiv. BS</th>
-                            <th>Tasa</th>
-                            <th>Período</th>
-                            <th>Fecha pago</th>
-                            <th>Fecha recep.</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Modal plan de pago -->
@@ -247,6 +229,7 @@
                 <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
             </div>
             <form id="planForm">
+                <input type="hidden" name="plan_id" id="plan_edit_id" value="">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -281,7 +264,20 @@
                         <div class="col-md-3"><div class="form-group"><label>Inicio financiamiento <span class="text-danger">*</span></label><input type="date" class="form-control" name="start_date" required value="<?= date('Y-m-d') ?>"></div></div>
                         <div class="col-md-3"><div class="form-group"><label>Moneda</label><select class="form-control" name="currency_code"><option value="USD">USD</option></select></div></div>
                     </div>
-                    <div class="form-group mb-0"><label>Notas</label><textarea class="form-control" name="notes" rows="2"></textarea></div>
+                    <div class="row">
+                        <div class="col-md-4"><div class="form-group"><label>Fecha de venta</label><input type="date" class="form-control" name="sale_date" id="plan_sale_date"></div></div>
+                        <div class="col-md-8"><div class="form-group"><label>Origen del cliente</label><select class="form-control" name="client_source" id="plan_client_source">
+                            <option value="">Sin especificar</option>
+                            <option value="ads_meta">Publicidad (Meta / ADS)</option>
+                            <option value="referral">Referido</option>
+                            <option value="agent_portfolio">Cartera agente (ej. Roxana)</option>
+                            <option value="organic">Orgánico / walk-in</option>
+                            <option value="repeat_client">Cliente recurrente</option>
+                            <option value="other">Otro</option>
+                        </select></div></div>
+                    </div>
+                    <div class="form-group"><label>Notas comisión / trazabilidad</label><textarea class="form-control" name="commission_notes" id="plan_commission_notes" rows="2" placeholder="Ej. comisión bruta, referidor, reparto..."></textarea></div>
+                    <div class="form-group mb-0"><label>Notas del plan</label><textarea class="form-control" name="notes" rows="2"></textarea></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -398,9 +394,9 @@
                             <?php echo view('auth/finance/partials/payment_amount_fields'); ?>
                             <div class="row" id="quotaNotifyRow">
                                 <div class="col-md-6">
-                                    <div class="custom-control custom-checkbox mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="send_receipt_email" name="send_receipt_email" value="1" checked>
-                                        <label class="custom-control-label" for="send_receipt_email">Enviar recibo por correo al cliente</label>
+                                    <div class="alert alert-info py-2 mb-2">
+                                        <i class="fas fa-envelope"></i>
+                                        Al guardar, el recibo se envía <strong>automáticamente</strong> al correo del cliente en el CRM (si está configurado SMTP).
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -467,16 +463,21 @@ var buildersApiUrl = '<?= base_url('/app/finance/api/builders') ?>';
 var currentFilter = '<?= esc($current_type ?? '') ?>';
 var selectedPlanId = null;
 var selectedPlan = null;
+var allPlansCache = [];
 var portfolioLoaded = false;
 var buildersCatalog = [];
 var initialQuotasTab = '<?= esc($initial_view ?? 'manage') ?>';
+var canDraftFinance = <?= ! empty($can_draft) ? 'true' : 'false' ?>;
 
 function closePlanView() {
     selectedPlanId = null;
     selectedPlan = null;
     $('#planHeaderCard, #planScheduleCard').hide();
     $('#planEmptyState').show();
-    $('#plansList .list-group-item').removeClass('active');
+    if ($('#planFilterClient').val()) {
+        $('#planFilterClient').val(null).trigger('change.select2');
+    }
+    loadTable();
 }
 
 function toggleQuotaTypeFields() {
@@ -497,12 +498,39 @@ function toggleQuotaTypeFields() {
 
 function setPeriodFromDueDate(dueDate) {
     if (!dueDate) return;
-    var parts = String(dueDate).split('-');
-    if (parts.length < 2) return;
-    var year = parseInt(parts[0], 10);
-    var month = parseInt(parts[1], 10);
-    if (month >= 1 && month <= 12) $('#period_month').val(String(month));
-    if (year >= 2000) $('#period_year').val(String(year));
+    var str = String(dueDate);
+    var parts = str.split('-');
+    if (parts.length >= 2 && /^\d{4}$/.test(parts[0])) {
+        var year = parseInt(parts[0], 10);
+        var month = parseInt(parts[1], 10);
+        if (month >= 1 && month <= 12) $('#period_month').val(String(month));
+        if (year >= 2000) $('#period_year').val(String(year));
+        return;
+    }
+    var monthMap = { ene: 1, feb: 2, mar: 3, abr: 4, may: 5, jun: 6, jul: 7, ago: 8, sep: 9, oct: 10, nov: 11, dic: 12 };
+    var match = str.toLowerCase().match(/(ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic)[a-z]*[\s/-]+(\d{4})/);
+    if (match) {
+        $('#period_month').val(String(monthMap[match[1].substring(0, 3)] || ''));
+        $('#period_year').val(match[2]);
+    }
+}
+
+function escapeHtml(s) {
+    if (s === null || s === undefined) return '';
+    return String(s).replace(/[&<>"']/g, function(c) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+}
+
+function formatEmailStatus(row) {
+    if (row.type !== 'received') return '—';
+    if (row.email_sent_at && row.email_sent_to) {
+        return '<span class="text-success" title="Enviado el ' + escapeHtml(row.email_sent_at) + ' a ' + escapeHtml(row.email_sent_to) + '"><i class="fas fa-check-circle"></i> ' + escapeHtml(row.email_sent_to) + '</span>';
+    }
+    if (row.email_send_error) {
+        return '<span class="text-danger" title="' + escapeHtml(row.email_send_error) + '"><i class="fas fa-times-circle"></i> Error</span>';
+    }
+    return '<span class="text-muted" title="Sin envío registrado"><i class="fas fa-minus-circle"></i> —</span>';
 }
 
 function formatPeriodLabel(row) {
@@ -857,44 +885,94 @@ function statusBadge(status) {
     return '<span class="badge badge-' + (map[status] || 'secondary') + '">' + (labels[status] || status) + '</span>';
 }
 
+function planProjectLabel(p) {
+    var name = (p && p.project_name) ? String(p.project_name).trim() : '';
+    return name || 'Sin proyecto';
+}
+
+function fillProjectFilter() {
+    var current = $('#planFilterProject').val() || '';
+    var names = {};
+    allPlansCache.forEach(function(p) {
+        names[planProjectLabel(p)] = true;
+    });
+    var $sel = $('#planFilterProject');
+    $sel.empty().append($('<option>').val('').text('Todos los proyectos'));
+    Object.keys(names).sort(function(a, b) { return a.localeCompare(b, 'es'); }).forEach(function(name) {
+        $sel.append($('<option>').val(name).text(name));
+    });
+    if (current && names[current]) {
+        $sel.val(current);
+    }
+}
+
+function planOptionLabel(p) {
+    var unit = p.unit_ref || p.property_ref || '—';
+    return (p.client_name || 'Sin cliente') + ' · Apt ' + unit;
+}
+
+function filteredPlans() {
+    var proj = $('#planFilterProject').val() || '';
+    return allPlansCache.filter(function(p) {
+        return !proj || planProjectLabel(p) === proj;
+    }).sort(function(a, b) {
+        return planOptionLabel(a).localeCompare(planOptionLabel(b), 'es');
+    });
+}
+
+function fillClientFilter() {
+    var plans = filteredPlans();
+    var current = selectedPlanId ? String(selectedPlanId) : ($('#planFilterClient').val() || '');
+    var $sel = $('#planFilterClient');
+    if ($sel.hasClass('select2-hidden-accessible')) {
+        $sel.select2('destroy');
+    }
+    $sel.empty().append($('<option>').val('').text('Selecciona un cliente...'));
+    plans.forEach(function(p) {
+        $sel.append($('<option>').val(String(p.id)).text(planOptionLabel(p)));
+    });
+    if (current && $sel.find('option[value="' + current + '"]').length) {
+        $sel.val(current);
+    } else {
+        $sel.val('');
+    }
+    $sel.select2({
+        placeholder: 'Selecciona un cliente...',
+        allowClear: true,
+        width: '100%',
+        language: { noResults: function() { return 'Sin coincidencias'; } }
+    });
+}
+
+function renderPlansList() {
+    fillClientFilter();
+}
+
 function loadPlans() {
-    $('#plansList').html('<div class="list-group-item text-muted small">Cargando...</div>');
     $.post(planApiBase + '/list')
         .done(function(res) {
-            var html = '';
-            var plans = (res && res.status === 'success' && Array.isArray(res.data)) ? res.data : [];
-            if (!plans.length) {
-                html = '<div class="list-group-item text-muted">No hay planes. Crea uno con "Nuevo plan de pago".</div>';
-            } else {
-                plans.forEach(function(p) {
-                    var active = String(selectedPlanId) === String(p.id) ? ' active' : '';
-                    html += '<a href="#" class="list-group-item list-group-item-action' + active + '" data-plan-id="' + p.id + '">' +
-                        '<div class="font-weight-bold">' + (p.client_name || 'Sin cliente') + '</div>' +
-                        '<div class="small text-muted">' + (p.lead_phone || '') + '</div>' +
-                        '<div class="small">' + (p.project_name || '—') + ' · Apt ' + (p.unit_ref || '—') + '</div>' +
-                        '<div class="small text-danger">Pendiente: ' + moneyFmt(p.pending_total) + '</div></a>';
-                });
-            }
-            $('#plansList').html(html);
-            $('#plansList a').on('click', function(e) {
-                e.preventDefault();
-                selectPlan($(this).data('plan-id'));
-            });
+            allPlansCache = (res && res.status === 'success' && Array.isArray(res.data)) ? res.data : [];
+            fillProjectFilter();
+            renderPlansList();
+            var planFromUrl = new URLSearchParams(window.location.search).get('plan');
+            if (planFromUrl) selectPlan(planFromUrl);
         })
         .fail(function(xhr) {
             var msg = (xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : 'No se pudo cargar los planes.';
-            $('#plansList').html('<div class="list-group-item text-danger small">' + msg + '</div>');
             showFinanceError(msg, 'Planes de pago');
         });
 }
 
 function selectPlan(id) {
     selectedPlanId = id;
+    if ($('#planFilterClient').val() !== String(id)) {
+        $('#planFilterClient').val(String(id)).trigger('change.select2');
+    }
     $.get(planApiBase + '/' + id, function(res) {
         if (res.status !== 'success') return;
         selectedPlan = res.data;
         renderPlan(selectedPlan);
-        loadPlans();
+        loadTable();
     });
 }
 
@@ -914,7 +992,9 @@ function renderPlan(plan) {
         ['Reserva', plan.reservation_amount ? moneyFmt(plan.reservation_amount) : '—'],
         ['Financiamiento', moneyFmt(plan.financing_amount)],
         ['Cuotas', plan.installments],
-        ['Inicio', plan.start_date || '—'],
+        ['Fecha venta', plan.sale_date || '—'],
+        ['Origen', plan.client_source_label || plan.client_source || '—'],
+        ['Inicio fin.', plan.start_date || '—'],
         ['Final', plan.end_date || '—']
     ];
 
@@ -922,6 +1002,11 @@ function renderPlan(plan) {
     fields.forEach(function(f) {
         headerHtml += '<div class="col-md-4 col-6 mb-2"><div class="text-xs text-uppercase text-muted">' + f[0] + '</div><div class="font-weight-bold">' + f[1] + '</div></div>';
     });
+    if (canDraftFinance) {
+        $('#btnEditPlan').show();
+    } else {
+        $('#btnEditPlan').hide();
+    }
     $('#planHeaderFields').html(headerHtml);
     $('#sumScheduled').text(moneyFmt(plan.totals.scheduled));
     $('#sumPaid').text(moneyFmt(plan.totals.paid));
@@ -937,7 +1022,8 @@ function renderPlan(plan) {
             '<td class="text-right">' + moneyFmt(row.paid_amount) + '</td>' +
             '<td class="text-right">' + moneyFmt(row.pending_amount) + '</td>' +
             '<td>' + statusBadge(row.status) + '</td>' +
-            '<td>' + (canPay ? '<button class="btn btn-success btn-sm" onclick="payInstallment(' + row.id + ')"><i class="fas fa-dollar-sign"></i></button>' : '—') + '</td>' +
+            '<td>' + (canPay ? '<button class="btn btn-success btn-sm mr-1" onclick="payInstallment(' + row.id + ')"><i class="fas fa-dollar-sign"></i></button>' : '') +
+            (canDraftFinance && row.status !== 'paid' ? '<button class="btn btn-outline-secondary btn-sm" onclick="editInstallmentDueDate(' + row.id + ', \'' + (row.due_date || '') + '\')" title="Cambiar fecha"><i class="fas fa-calendar-alt"></i></button>' : (canPay ? '' : '—')) + '</td>' +
             '</tr>';
     });
     $('#scheduleTable tbody').html(rows);
@@ -948,27 +1034,36 @@ function payInstallment(installmentId) {
     var row = (selectedPlan.installment_schedule || []).find(function(r) { return String(r.id) === String(installmentId); });
     if (!row) return;
 
-    showModal('create');
+    editMode = false;
+    $('#record_id').val('');
+    $('#quotaForm')[0].reset();
+    resetQuotaPeriodFields();
+    showQuotaClientPicker();
+    resetQuotaLeadSelect();
+    $('#type').val('received');
+    toggleQuotaTypeFields();
     $('#financing_plan_id').val(selectedPlan.id);
     $('#installment_id').val(installmentId);
-    $('#type').val('received');
     if (selectedPlan.lead_id) {
         lockQuotaClient(selectedPlan.lead_id, selectedPlan.client_name, selectedPlan.lead_phone);
     } else {
-        showQuotaClientPicker();
-        resetQuotaLeadSelect();
         $('#name').val(selectedPlan.client_name || '');
     }
     $('#amount').val(row.pending_amount || row.amount);
-    setPeriodFromDueDate(row.due_date);
+    setPeriodFromDueDate(row.due_date || row.month_label);
     $('#payment_date').val(new Date().toISOString().slice(0, 10));
     $('#receipt_date').val(new Date().toISOString().slice(0, 10));
     $('#installmentHint').show().html(
         'Cuota <strong>#' + row.installment_number + '</strong> — ' + (row.month_label || row.due_date) +
         ' — Programada: ' + moneyFmt(row.amount) + ' — Pendiente: <strong>' + moneyFmt(row.pending_amount) + '</strong>'
     );
+    $('#quotaModal').one('shown.bs.modal', function() {
+        initQuotaLeadSelect();
+        setPeriodFromDueDate(row.due_date || row.month_label);
+    });
     moneyHelper.populatePaymentTypes();
     moneyHelper.refresh();
+    $('#quotaModal').modal('show');
 }
 
 function paymentTypeLabel(id) {
@@ -976,7 +1071,60 @@ function paymentTypeLabel(id) {
     return paymentType ? (paymentType.name || paymentType.code || '—') : '—';
 }
 
+
+function setPlanModalMode(mode) {
+    var isEdit = mode === 'edit';
+    $('#plan_edit_id').val(isEdit && selectedPlan ? selectedPlan.id : '');
+    $('#planModal .modal-title').html(isEdit
+        ? '<i class="fas fa-edit"></i> Editar plan de pago'
+        : '<i class="fas fa-file-invoice-dollar"></i> Nuevo plan de pago');
+    $('#planForm button[type="submit"]').html(isEdit
+        ? '<i class="fas fa-save"></i> Guardar cambios'
+        : '<i class="fas fa-save"></i> Generar tabla');
+    $('#plan_installments, #plan_total_price').prop('readonly', isEdit);
+}
+
+function openPlanEditor() {
+    if (!selectedPlan) return;
+    $('#planForm')[0].reset();
+    resetPlanLeadSelect();
+    setPlanModalMode('edit');
+    var p = selectedPlan;
+    if (p.lead_id) setPlanLeadSelection(p.lead_id, p.client_name || '');
+    $('#planForm [name="project_name"]').val(p.project_name || '');
+    $('#planForm [name="unit_ref"]').val(p.unit_ref || p.property_ref || '');
+    $('#planForm [name="square_meters"]').val(p.square_meters || '');
+    $('#planForm [name="reservation_amount"]').val(p.reservation_amount || '');
+    $('#planForm [name="total_price"]').val(p.total_price || '');
+    $('#planForm [name="down_payment"]').val(p.down_payment || '');
+    $('#planForm [name="financing_amount"]').val(p.financing_amount || '');
+    $('#plan_installments').val(p.installments || p.installment_count || '');
+    $('#planForm [name="start_date"]').val(p.start_date || '');
+    $('#plan_sale_date').val(p.sale_date || '');
+    $('#plan_client_source').val(p.client_source || '');
+    $('#plan_commission_notes').val(p.commission_notes || '');
+    $('#planForm [name="notes"]').val(p.notes || '');
+    recalcFinancing();
+    $('#planModal').one('shown.bs.modal', function() { initPlanLeadSelect(); });
+    $('#planModal').modal('show');
+}
+
+function editInstallmentDueDate(installmentId, currentDue) {
+    var next = window.prompt('Nueva fecha de vencimiento (AAAA-MM-DD):', currentDue || '');
+    if (!next) return;
+    $.post(planApiBase + '/installment/' + installmentId, { due_date: next }, function(res) {
+        if (res.status === 'success') {
+            selectedPlan = res.data;
+            renderPlan(selectedPlan);
+            showFinanceSuccess('Fecha de cuota actualizada.');
+        } else showFinanceError(res.message || 'No se pudo actualizar.');
+    }).fail(function(xhr) {
+        showFinanceError((xhr.responseJSON && xhr.responseJSON.message) || 'Error de conexión');
+    });
+}
+
 function showPlanModal() {
+    setPlanModalMode('create');
     $('#planForm')[0].reset();
     resetPlanLeadSelect();
     recalcFinancing();
@@ -992,13 +1140,15 @@ $('#planForm').submit(function(e) {
         showFinanceError('Selecciona un cliente del CRM.');
         return;
     }
-    $.post(planApiBase + '/create', $(this).serialize(), function(res) {
+    var editId = $('#plan_edit_id').val();
+    var url = editId ? (planApiBase + '/' + editId) : (planApiBase + '/create');
+    $.post(url, $(this).serialize(), function(res) {
         if (res.status === 'success') {
             $('#planModal').modal('hide');
             selectPlan(res.data.id);
             loadPlans();
-            showFinanceSuccess('Plan de pago generado correctamente.');
-        } else showFinanceError(res.message || 'No se pudo crear el plan.');
+            showFinanceSuccess(editId ? 'Plan actualizado.' : 'Plan de pago generado correctamente.');
+        } else showFinanceError(res.message || 'No se pudo guardar el plan.');
     }).fail(function(xhr) {
         showFinanceError((xhr.responseJSON && xhr.responseJSON.message) || 'Error de conexión');
     });
@@ -1060,41 +1210,71 @@ $('#createBuilderForm').submit(function(e) {
     });
 });
 
+function quotaTableRow(row) {
+    var isExcel = row.source === 'excel';
+    var denomination = row.currency_denomination || 'USD';
+    var typeLabel = row.type === 'received' ? 'Recibida' : 'Entregada';
+    if (isExcel) {
+        typeLabel = 'Recibida <span class="badge badge-secondary">Excel</span>';
+    }
+    var actions = '<span class="text-muted small">Histórico</span>';
+    if (!isExcel) {
+        actions = (row.type === 'received'
+            ? '<a class="btn btn-outline-primary btn-sm mr-1" href="/app/finance/quotas/receipt/' + row.id + '" target="_blank" title="Ver recibo"><i class="fas fa-file-pdf"></i></a>'
+            + '<a class="btn btn-outline-secondary btn-sm mr-1" href="/app/finance/quotas/receipt/' + row.id + '/pdf" target="_blank" title="PDF"><i class="fas fa-download"></i></a>'
+            : '') +
+        '<button class="btn btn-danger btn-sm" onclick="remove(' + row.id + ')"><i class="fas fa-trash"></i></button>';
+    }
+    return [
+        isExcel ? '—' : row.id,
+        typeLabel,
+        row.name || '—',
+        row.type === 'delivered' ? (row.builder_name || '—') : '—',
+        row.receipt_number || '—',
+        moneyHelper.formatPrimaryAmount(row.amount, denomination),
+        isExcel ? 'Excel' : paymentTypeLabel(row.payment_type_id),
+        '$ ' + formatFinanceMoney(parseFloat(row.amount_usd || 0)),
+        'Bs. ' + formatFinanceMoney(parseFloat(row.amount_bs || 0)),
+        parseFloat(row.exchange_rate || 0).toFixed(4),
+        formatPeriodLabel(row),
+        row.payment_date || '—',
+        row.receipt_date || '—',
+        isExcel ? '<span class="text-muted">Histórico</span>' : formatEmailStatus(row),
+        actions
+    ];
+}
+
 function loadTable() {
+    if (!$('#quotasTable').length) return;
     $.post(apiBase + '/list', { type: currentFilter })
         .done(function(response) {
             var rows = [];
             if (response.status === 'success' && Array.isArray(response.data)) {
                 response.data.forEach(function(row) {
-                    var denomination = row.currency_denomination || 'USD';
-                    rows.push([
-                        row.id,
-                        row.type === 'received' ? 'Recibida' : 'Entregada',
-                        row.name || '—',
-                        row.type === 'delivered' ? (row.builder_name || '—') : '—',
-                        row.receipt_number || '—',
-                        moneyHelper.formatPrimaryAmount(row.amount, denomination),
-                        paymentTypeLabel(row.payment_type_id),
-                        '$ ' + formatFinanceMoney(parseFloat(row.amount_usd || 0)),
-                        'Bs. ' + formatFinanceMoney(parseFloat(row.amount_bs || 0)),
-                        parseFloat(row.exchange_rate || 0).toFixed(4),
-                        formatPeriodLabel(row),
-                        row.payment_date || '—',
-                        row.receipt_date || '—',
-                        (row.type === 'received'
-                            ? '<a class="btn btn-outline-primary btn-sm mr-1" href="/app/finance/quotas/receipt/' + row.id + '" target="_blank" title="Ver recibo"><i class="fas fa-file-pdf"></i></a>'
-                            + '<a class="btn btn-outline-secondary btn-sm mr-1" href="/app/finance/quotas/receipt/' + row.id + '/pdf" target="_blank" title="PDF"><i class="fas fa-download"></i></a>'
-                            : '') +
-                        '<button class="btn btn-danger btn-sm" onclick="remove(' + row.id + ')"><i class="fas fa-trash"></i></button>'
-                    ]);
+                    try {
+                        rows.push(quotaTableRow(row));
+                    } catch (err) {
+                        console.error('No se pudo armar la fila de movimiento', row && row.id, err);
+                    }
                 });
+            }
+            if ($('#quotasMovementsHint').length) {
+                $('#quotasMovementsHint').html(
+                    'Todos los pagos <strong>recibidos</strong> y <strong>entregados</strong>: los registrados con Registrar pago y los abonos importados del Excel.'
+                );
             }
             if (dt) dt.clear().rows.add(rows).draw();
             else dt = $('#quotasTable').DataTable({
                 data: rows,
                 pageLength: 10,
                 language: {
-                    url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'
+                    emptyTable: 'No hay movimientos de cuotas.',
+                    zeroRecords: 'Sin resultados',
+                    search: 'Buscar:',
+                    lengthMenu: 'Mostrar _MENU_',
+                    info: '_START_ a _END_ de _TOTAL_',
+                    infoEmpty: 'Sin registros',
+                    paginate: { first: 'Primero', last: 'Último', next: 'Siguiente', previous: 'Anterior' }
                 }
             });
         })
@@ -1180,11 +1360,11 @@ $('#quotaForm').submit(function(e) {
                 if (res.data && res.data.notifications) {
                     var n = res.data.notifications;
                     if (n.email && n.email.sent) {
-                        msg += '<br><small>Recibo enviado por correo.</small>';
-                    } else if (n.email && !n.email.skipped && n.email.error) {
-                        msg += '<br><small class="text-danger">Correo: ' + escapeHtml(n.email.error).substring(0, 120) + '</small>';
-                    } else if (n.email && n.email.reason) {
-                        msg += '<br><small>' + escapeHtml(n.email.reason) + '</small>';
+                        msg += '<br><strong class="text-success"><i class="fas fa-envelope"></i> Recibo enviado a ' + escapeHtml(n.email.to || 'correo del cliente') + '</strong>';
+                    } else if (n.email && n.email.skipped && n.email.reason) {
+                        msg += '<br><span class="text-warning"><i class="fas fa-envelope-open"></i> ' + escapeHtml(n.email.reason) + '</span>';
+                    } else if (n.email && n.email.error) {
+                        msg += '<br><strong class="text-danger"><i class="fas fa-exclamation-triangle"></i> Correo no enviado:</strong> ' + escapeHtml(n.email.error).substring(0, 180);
                     }
                     if (n.whatsapp && n.whatsapp.sent) {
                         msg += '<br><small>WhatsApp enviado.</small>';
@@ -1207,6 +1387,25 @@ $(document).ready(function() {
     moneyHelper.bind();
     loadBuildersCatalog();
     loadPlans();
+    $('#planFilterProject').on('change', function() {
+        selectedPlanId = null;
+        selectedPlan = null;
+        $('#planHeaderCard, #planScheduleCard').hide();
+        $('#planEmptyState').show();
+        renderPlansList();
+        loadTable();
+    });
+    $('#planFilterClient').on('change', function() {
+        var id = $(this).val();
+        if (id) selectPlan(id);
+        else {
+            selectedPlanId = null;
+            selectedPlan = null;
+            $('#planHeaderCard, #planScheduleCard').hide();
+            $('#planEmptyState').show();
+            loadTable();
+        }
+    });
     moneyHelper.loadCatalog(function() {
         loadTable();
     });

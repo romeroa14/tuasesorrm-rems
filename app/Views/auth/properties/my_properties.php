@@ -1,7 +1,7 @@
 <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#add_property">
     <i class="fa fa-plus" aria-hidden="true"></i> Declarar captación
 </button>
-<?= view('shared/datatable/datatable'); ?>
+<?= view('shared/datatable/datatable', ['datatable' => $datatable ?? []]); ?>
 
 <!-- Modal -->
 <div class="modal fade" id="add_property" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

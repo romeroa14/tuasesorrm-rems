@@ -57,7 +57,7 @@
         <?php if(strpos($title, 'Catálogo inmobiliario') !== false): ?>
             <script src="<?= base_url('js/get_properties.js') ?>"></script>
         <?php endif; ?>
-        <?php if(strpos($title, 'RM00') !== false): ?>
+        <?php if(isset($title) && strpos($title, 'RM00') !== false): ?>
             <script src="<?= base_url('js/get_property_view.js') ?>"></script>
         <?php endif; ?>
 
@@ -108,6 +108,10 @@
             }
 
             $(document).ready(function () {
+                if (!$('#leadsAtcTable').length) {
+                    return;
+                }
+
                 var funnelsOptions = [];
                 var businessmodelOptions = [];
                 var housingOptions = [];

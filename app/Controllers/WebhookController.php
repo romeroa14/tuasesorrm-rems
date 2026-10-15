@@ -122,19 +122,24 @@ class WebhookController extends ResourceController
                 $toFieldId = isset($event['recipient']['id']) ? (string) $event['recipient']['id'] : '';
                 $timestamp = self::normalizeMetaTimestamp($event);
 
-                $referralSource = '';
-                $referralAdId = '';
-                if (! empty($event['referral'])) {
-                    $referralSource = (string) ($event['referral']['source'] ?? '');
-                    $referralAdId  = (string) ($event['referral']['ad_id'] ?? '');
+                $referral = [];
+                if (! empty($event['referral']) && is_array($event['referral'])) {
+                    $referral = $event['referral'];
+                } elseif (! empty($event['message']['referral']) && is_array($event['message']['referral'])) {
+                    $referral = $event['message']['referral'];
                 }
+                $adsContext = is_array($referral['ads_context_data'] ?? null) ? $referral['ads_context_data'] : [];
+                $referralSource = (string) ($referral['source'] ?? '');
+                $referralAdId = (string) ($referral['ad_id'] ?? '');
+                $referralAdTitle = trim((string) ($adsContext['ad_title'] ?? ''));
+                $referralPhotoUrl = trim((string) ($adsContext['photo_url'] ?? ''));
 
-                if (empty($event['message'])) {
+                if (empty($event['message']) && $referralAdId === '' && $referralAdTitle === '') {
                     continue;
                 }
 
-                $messageText = $event['message']['text'] ?? '';
-                $messageId = $event['message']['mid'] ?? '';
+                $messageText = (string) ($event['message']['text'] ?? '');
+                $messageId = (string) ($event['message']['mid'] ?? '');
                 $contentType = 'text';
                 $mediaUrl = null;
                 if (! empty($event['message']['attachments'])) {
@@ -160,7 +165,9 @@ class WebhookController extends ResourceController
                         $timestamp,
                         $recipientIgId,
                         $referralSource,
-                        $referralAdId
+                        $referralAdId,
+                        $referralAdTitle,
+                        $referralPhotoUrl
                     );
 
                     continue;
@@ -227,7 +234,9 @@ class WebhookController extends ResourceController
         int $timestamp = 0,
         string $recipientIgId = '',
         string $referralSource = '',
-        string $referralAdId = ''
+        string $referralAdId = '',
+        string $referralAdTitle = '',
+        string $referralPhotoUrl = ''
     ) {
         if ($externalMessageId !== '') {
             $dup = $this->messageModel->where('external_message_id', $externalMessageId)->first();
@@ -250,6 +259,7 @@ class WebhookController extends ResourceController
 
         // 1. Find or create conversation
         $conversation = $this->conversationModel->findByExternalId($channel, $externalId, $recipientIgId);
+        $openedNow = ! $conversation;
 
         $recipientUsername = null;
         if ($channel === 'instagram' && $recipientIgId !== '') {
@@ -287,7 +297,7 @@ class WebhookController extends ResourceController
                 'email' => null,
                 'instagram_username' => $resolvedUsername,
                 'instagram_full_name' => $isResolved ? (trim((string) ($profile['name'] ?? '')) ?: ($resolvedUsername ?? null)) : null,
-                'profile_pic'     => $isResolved ? ($profile['profile_pic_url'] ?? null) : null,
+                'profile_pic'     => null,
                 'followers'       => $isResolved ? ($profile['followers_count'] ?? 0) : null,
                 'is_private'      => $isResolved ? ($profile['is_private'] ? 1 : 0) : null,
                 'last_resolution_at' => date('Y-m-d H:i:s'),
@@ -302,6 +312,13 @@ class WebhookController extends ResourceController
                 'intention_label' => 'frio',
             ]);
 
+            if ($isResolved && $leadId) {
+                $storedPic = MetaInstagramGraph::cacheParticipantPhoto((int) $leadId, $profile['profile_pic_url'] ?? null);
+                if ($storedPic !== null) {
+                    $this->leadsModel->update((int) $leadId, ['profile_pic' => $storedPic]);
+                }
+            }
+
             $conversationData = [
                 'lead_id' => $leadId,
                 'channel' => $channel,
@@ -312,7 +329,7 @@ class WebhookController extends ResourceController
                 'status' => 'open',
                 'last_message_at' => date('Y-m-d H:i:s', $timestamp ?: time()),
                 'unread_count' => 1,
-                'ai_auto_reply' => 0, // Desactivado: respuestas automáticas deshabilitadas
+                'ai_auto_reply' => $this->newConversationAutoReply($channel, $recipientUsername, $recipientIgId),
             ];
             if ($referralAdId !== '') {
                 $conversationData['ad_id'] = $referralAdId;
@@ -344,6 +361,11 @@ class WebhookController extends ResourceController
             $conversation = $this->conversationModel->find($conversation['id']);
         }
 
+        $this->storeAdReferral((int) $conversation['id'], $referralAdId, $referralSource, $referralAdTitle, $referralPhotoUrl, $openedNow);
+        if (trim($content) === '' && ($mediaUrl === null || $mediaUrl === '')) {
+            return 0;
+        }
+
         // 2. Save message
         $messageId = $this->messageModel->insert([
             'conversation_id' => $conversation['id'],
@@ -359,6 +381,10 @@ class WebhookController extends ResourceController
         if ($channel === 'instagram') {
             $this->enrichInstagramLeadFromParticipant((int) $conversation['lead_id'], (int) $conversation['id'], $externalId, $recipientIgId);
             $this->maybeCapturePhoneFromInbound($content, (int) $conversation['lead_id'], (int) $conversation['id']);
+            if ($messageId) {
+                // The existing web return-to-AI path can set ai_auto_reply back to 1.
+                $this->maybeCatalogLiveReply($conversation, $content, $externalId, $recipientIgId, (int) $messageId);
+            }
         }
 
         // 3. Score the conversation (LLM-based with keyword fallback)
@@ -391,6 +417,13 @@ class WebhookController extends ResourceController
         if ($externalMessageId !== '') {
             $dup = $this->messageModel->where('external_message_id', $externalMessageId)->first();
             if ($dup !== null) {
+                if (($dup['sender_type'] ?? '') === 'ai') {
+                    $own = $this->findInstagramConversationForCustomer($customerIgScopedId, $recipientIgId);
+                    if ($own) {
+                        $this->restoreOwnAiEcho($own);
+                    }
+                }
+
                 return;
             }
         }
@@ -459,7 +492,9 @@ class WebhookController extends ResourceController
             return;
         }
 
-        if (($lead['resolution_status'] ?? null) === 'resolved') {
+        $hasPhoto = is_string($lead['profile_pic'] ?? null)
+            && str_starts_with((string) $lead['profile_pic'], '/uploads/crm-avatars/');
+        if (($lead['resolution_status'] ?? null) === 'resolved' && $hasPhoto) {
             return;
         }
 
@@ -494,7 +529,10 @@ class WebhookController extends ResourceController
         }
 
         $leadPatch['instagram_full_name'] = $name !== '' ? $name : ($handle !== '' ? $handle : null);
-        $leadPatch['profile_pic']         = $profile['profile_pic_url'] ?? null;
+        $storedPic = MetaInstagramGraph::cacheParticipantPhoto($leadId, $profile['profile_pic_url'] ?? null);
+        if ($storedPic !== null) {
+            $leadPatch['profile_pic'] = $storedPic;
+        }
         $leadPatch['followers']           = $profile['followers_count'] ?? 0;
         $leadPatch['is_private']          = $profile['is_private'] ? 1 : 0;
         $leadPatch['last_resolution_at']  = date('Y-m-d H:i:s');
@@ -505,6 +543,48 @@ class WebhookController extends ResourceController
         $conv = $this->conversationModel->find($conversationId);
         if ($conv && $handle !== '' && trim((string) ($conv['external_username'] ?? '')) === '') {
             $this->conversationModel->update($conversationId, ['external_username' => $handle]);
+        }
+    }
+
+    private function storeAdReferral(int $conversationId, string $adId, string $source, string $title, string $photoUrl, bool $openedNow = false): void
+    {
+        if ($conversationId < 1) {
+            return;
+        }
+        $row = $this->conversationModel->find($conversationId);
+        if (! is_array($row)) {
+            return;
+        }
+        $isAd = $adId !== '' || $title !== '' || strtoupper($source) === 'ADS';
+        if (! $isAd && $source === '' && $photoUrl === '') {
+            if ($openedNow && empty($row['ad_id']) && empty($row['referral_source'])) {
+                $this->conversationModel->update($conversationId, ['referral_source' => 'direct']);
+            }
+
+            return;
+        }
+        if ($source === '') {
+            $source = 'ADS';
+        }
+        $update = [];
+        if ($adId !== '' && empty($row['ad_id'])) {
+            $update['ad_id'] = mb_substr($adId, 0, 50);
+        }
+        $currentSource = (string) ($row['referral_source'] ?? '');
+        if ($source !== '' && ($currentSource === '' || $currentSource === 'direct')) {
+            $update['referral_source'] = mb_substr($source, 0, 20);
+        }
+        if ($title !== '' && empty($row['ad_title'])) {
+            $update['ad_title'] = mb_substr($title, 0, 255);
+        }
+        if ($photoUrl !== '' && empty($row['ad_photo_url'])) {
+            $cached = \App\Libraries\MetaInstagramGraph::cacheAdCreative($conversationId, $photoUrl);
+            if ($cached !== null) {
+                $update['ad_photo_url'] = $cached;
+            }
+        }
+        if ($update !== []) {
+            $this->conversationModel->update($conversationId, $update);
         }
     }
 
@@ -519,26 +599,21 @@ class WebhookController extends ResourceController
             return;
         }
 
-        // Better regex: +58 412-xxx, 0412-xxx, 58412xxxxxx, 412xxxxxxx
-        $patterns = [
-            '/(?:\+58|0058)[-\s]?(4\d{2})[-\s]?\d{3}[-\s]?\d{4}/',
-            '/(?:^|[^\d])0?(4\d{2})[-\s]?\d{3}[-\s]?\d{4}(?:[^\d]|$)/',
-        ];
+        // Acepta (0414).243.3497, 0414-243-3497 y +58 414 2433497.
         $phoneFound = null;
-
-        foreach ($patterns as $pattern) {
-            if (preg_match($pattern, $content, $m)) {
-                $digits = preg_replace('/\D/', '', $m[0]);
-                // Normalize: remove leading 0
+        if (preg_match_all('/(?:\+58|0058|58|0)?[\s().\-]*4(?:[\s().\-]*\d){9}/u', $content, $matches)) {
+            foreach ($matches[0] as $raw) {
+                $digits = preg_replace('/\D/', '', $raw);
+                if (str_starts_with($digits, '0058')) {
+                    $digits = substr($digits, 2);
+                }
                 $digits = ltrim($digits, '0');
-                // VE mobile: 412XXXXXXX (10 digits starting with 4) -> 58412XXXXXXX
-                if (strlen($digits) === 10 && $digits[0] === '4') {
-                    $phoneFound = '58' . $digits;
+                if (strlen($digits) === 12 && str_starts_with($digits, '58') && ($digits[2] ?? '') === '4') {
+                    $phoneFound = $digits;
                     break;
                 }
-                // International: 58412XXXXXXX (12 digits starting with 58)
-                if (strlen($digits) === 12 && substr($digits, 0, 2) === '58') {
-                    $phoneFound = $digits;
+                if (strlen($digits) === 10 && str_starts_with($digits, '4')) {
+                    $phoneFound = '58' . $digits;
                     break;
                 }
             }
@@ -548,7 +623,11 @@ class WebhookController extends ResourceController
 
         // Update lead phone if empty
         if (trim((string) ($lead['phone'] ?? '')) === '') {
-            $this->leadsModel->update($leadId, ['phone' => $phoneFound]);
+            try {
+                $this->leadsModel->update($leadId, ['phone' => $phoneFound]);
+            } catch (\Throwable $e) {
+                log_message('notice', 'Webhook phone duplicado lead=' . $leadId);
+            }
         }
 
         // Insert into clientes_whatsapp
@@ -730,7 +809,9 @@ class WebhookController extends ResourceController
         int $timestamp,
         string $recipientIgId,
         string $referralSource,
-        string $referralAdId
+        string $referralAdId,
+        string $referralAdTitle = '',
+        string $referralPhotoUrl = ''
     ): void {
         $payload = [
             'channel'         => 'instagram',
@@ -743,6 +824,8 @@ class WebhookController extends ResourceController
             'recipient_ig_id' => $recipientIgId,
             'referral_source' => $referralSource,
             'referral_ad_id'  => $referralAdId,
+            'referral_ad_title' => $referralAdTitle,
+            'referral_photo_url' => $referralPhotoUrl,
             'attempts'        => 0,
         ];
 
@@ -764,7 +847,9 @@ class WebhookController extends ResourceController
                 $timestamp,
                 $recipientIgId,
                 $referralSource,
-                $referralAdId
+                $referralAdId,
+                $referralAdTitle,
+                $referralPhotoUrl
             );
         } catch (\Throwable $e) {
             log_message(
@@ -772,6 +857,171 @@ class WebhookController extends ResourceController
                 'Webhook instagram (sync fallback): exception for sender '
                 . $senderId . ': ' . $e->getMessage()
             );
+        }
+    }
+
+    private function newConversationAutoReply(string $channel, ?string $recipientUsername, string $recipientIgId): int
+    {
+        if ($channel !== 'instagram') {
+            return 0;
+        }
+
+        try {
+            $name = (string) ($recipientUsername ?? '');
+            if (trim($name) === '' && $recipientIgId !== '') {
+                $mapped = \App\Libraries\AiCustomerAgentAccounts::usernameFor($recipientIgId);
+                $name = $mapped ?? '';
+            }
+            $agent = (new \App\Models\AiCustomerAgent())->row();
+
+            return \App\Models\AiCustomerAgent::insertAutoReplyFlag(is_array($agent) ? $agent : null, $name);
+        } catch (\Throwable $e) {
+            log_message('error', 'newConversationAutoReply ' . $e->getMessage());
+
+            return 0;
+        }
+    }
+
+    /**
+     * @param array<string, mixed> $conversation
+     */
+    private function maybeCatalogLiveReply(array $conversation, string $content, string $customerIgId, string $recipientIgId, int $messageId): void
+    {
+        // The existing web return-to-AI path can set ai_auto_reply back to 1.
+        try {
+            $agent = (new \App\Models\AiCustomerAgent())->row();
+            if (! is_array($agent)) {
+                return;
+            }
+            $username = (string) ($conversation['recipient_ig_username'] ?? '');
+            if (trim($username) === '' && $recipientIgId !== '') {
+                $username = \App\Libraries\AiCustomerAgentAccounts::usernameFor($recipientIgId) ?? '';
+            }
+            $assigned = \Config\Database::connect()->query(
+                'SELECT assigned_id FROM assignedclients WHERE lead_id = ?',
+                [(int) ($conversation['lead_id'] ?? 0)]
+            )->getRowArray();
+            $assignedId = is_array($assigned) ? ($assigned['assigned_id'] ?? null) : null;
+            $flag = (int) ($conversation['ai_auto_reply'] ?? 0);
+            if (! \App\Models\AiCustomerAgent::liveSendAllowed($agent, $username, $flag, $assignedId, $content)) {
+                return;
+            }
+
+            $history = $this->catalogHistory((int) $conversation['id'], $messageId);
+            $reply = new \App\Libraries\CatalogLiveReply(
+                new \App\Libraries\CatalogAgentClient(),
+                static function (string $chunk) use ($recipientIgId, $customerIgId): array {
+                    return \App\Libraries\MetaInstagramSend::sendTextMessage($recipientIgId, $customerIgId, $chunk);
+                }
+            );
+            $result = $reply->attempt($agent, $username, $flag, $assignedId, $content, $history, (string) ($agent['soul'] ?? ''));
+            foreach ($result['sent'] as $item) {
+                $chunk = (string) ($item['chunk'] ?? '');
+                $graphId = (string) ($item['result']['message_id'] ?? '');
+                if ($chunk === '' || $graphId === '') {
+                    continue;
+                }
+                $this->storeAiOutbound((int) $conversation['id'], $chunk, $graphId, $conversation);
+            }
+            $phones = $result['extracted_phones'] ?? [];
+            if (is_array($phones) && $phones !== []) {
+                $lead = $this->leadsModel->find((int) $conversation['lead_id']);
+                if (is_array($lead) && trim((string) ($lead['phone'] ?? '')) === '') {
+                    $this->maybeCapturePhoneFromInbound((string) $phones[0], (int) $conversation['lead_id'], (int) $conversation['id']);
+                }
+            }
+        } catch (\Throwable $e) {
+            log_message('error', 'catalog live reply ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * @return list<array{role: string, content: string}>
+     */
+    private function catalogHistory(int $conversationId, int $currentMessageId): array
+    {
+        $rows = $this->messageModel
+            ->where('conversation_id', $conversationId)
+            ->where('id <', $currentMessageId)
+            ->orderBy('id', 'DESC')
+            ->findAll(40);
+        $history = [];
+        foreach (array_reverse($rows) as $row) {
+            $type = (string) ($row['sender_type'] ?? '');
+            if ($type === 'system') {
+                continue;
+            }
+            $direction = (string) ($row['direction'] ?? '');
+            $text = (string) ($row['content'] ?? '');
+            if ($direction === 'inbound' && $type === 'lead') {
+                $history[] = ['role' => 'user', 'content' => $text];
+            } elseif ($direction === 'outbound' && ($type === 'ai' || $type === 'agent')) {
+                $history[] = ['role' => 'assistant', 'content' => $text];
+            }
+        }
+        if (count($history) > 20) {
+            $history = array_slice($history, -20);
+        }
+
+        return $history;
+    }
+
+    /**
+     * @param array<string, mixed> $conversation
+     */
+    private function storeAiOutbound(int $conversationId, string $text, string $graphId, array $conversation): void
+    {
+        $existing = $graphId !== ''
+            ? $this->messageModel->where('external_message_id', $graphId)->first()
+            : null;
+        if (is_array($existing)) {
+            $this->messageModel->update((int) $existing['id'], [
+                'direction' => 'outbound',
+                'sender_type' => 'ai',
+                'sender_id' => null,
+                'content' => $text,
+            ]);
+            $this->restoreOwnAiEcho($conversation);
+
+            return;
+        }
+
+        $this->messageModel->insert([
+            'conversation_id' => $conversationId,
+            'direction' => 'outbound',
+            'sender_type' => 'ai',
+            'sender_id' => null,
+            'content' => $text,
+            'content_type' => 'text',
+            'external_message_id' => $graphId,
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+    }
+
+    /**
+     * @param array<string, mixed> $conversation
+     */
+    private function restoreOwnAiEcho(array $conversation): void
+    {
+        try {
+            $agent = (new \App\Models\AiCustomerAgent())->row();
+            $assigned = \Config\Database::connect()->query(
+                'SELECT assigned_id FROM assignedclients WHERE lead_id = ?',
+                [(int) ($conversation['lead_id'] ?? 0)]
+            )->getRowArray();
+            $assignedId = is_array($assigned) ? ($assigned['assigned_id'] ?? null) : null;
+            $username = (string) ($conversation['recipient_ig_username'] ?? '');
+            if (trim($username) === '') {
+                $username = \App\Libraries\AiCustomerAgentAccounts::usernameFor((string) ($conversation['recipient_ig_id'] ?? '')) ?? '';
+            }
+            $enabled = is_array($agent) && (int) ($agent['enabled'] ?? 0) === 1;
+            $match = is_array($agent) && \App\Models\AiCustomerAgent::usernamesMatch((string) ($agent['instagram_username'] ?? ''), $username);
+            $assignedEmpty = $assignedId === null || $assignedId === '' || (int) $assignedId === 0;
+            if ($enabled && $match && $assignedEmpty) {
+                $this->conversationModel->update((int) $conversation['id'], ['ai_auto_reply' => 1]);
+            }
+        } catch (\Throwable $e) {
+            log_message('error', 'restoreOwnAiEcho ' . $e->getMessage());
         }
     }
 }

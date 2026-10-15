@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Libraries\FinanceAuthorization;
+use App\Libraries\FinanceCommissionPolicy;
 use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -98,6 +99,37 @@ class CommissionController extends BaseController
     /**
      * Properties list view with DataTable.
      */
+
+    public function profile()
+    {
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
+
+        $this->body['profile'] = FinanceCommissionPolicy::loadProfile();
+        $this->setCommissionContext(
+            'Comisiones — Perfil de reparto',
+            'auth/finance/commission/profile'
+        );
+        $this->generate_template($this->settings['url']);
+    }
+
+    public function saveProfile()
+    {
+        if ($response = $this->requireFinanceAccess()) {
+            return $response;
+        }
+
+        try {
+            FinanceCommissionPolicy::saveProfile($this->request->getPost());
+            $this->session->setFlashdata(['success' => 'Perfil de reparto guardado.']);
+        } catch (\Throwable $e) {
+            $this->session->setFlashdata(['error' => $e->getMessage()]);
+        }
+
+        return redirect()->to(base_url('/app/finance/commission/profile'));
+    }
+
     public function properties()
     {
         if ($response = $this->requireFinanceAccess()) {
@@ -105,10 +137,24 @@ class CommissionController extends BaseController
         }
 
         // Fetch all properties with generated columns for the DataTable
-        $this->body['properties'] = $this->CommissionPropertyModel
+        $properties = $this->CommissionPropertyModel
             ->select('id, reference, sale_price, commission_pct, registration_fee, sale_date, status, notes, commission_base, net_income')
             ->orderBy('created_at', 'DESC')
             ->findAll();
+        $parts = $this->db->table('commission_participants')
+            ->select('property_id, role, user_id')
+            ->get()
+            ->getResultArray();
+        $byProp = [];
+        foreach ($parts as $part) {
+            $byProp[(int) ($part['property_id'] ?? 0)][] = $part;
+        }
+        foreach ($properties as &$property) {
+            $property['participants'] = $byProp[(int) ($property['id'] ?? 0)] ?? [];
+        }
+        unset($property);
+        $this->body['properties'] = $properties;
+        $this->body['filter_users'] = $this->getActiveUsers();
 
         $this->setCommissionContext(
             'Comisiones — Propiedades',

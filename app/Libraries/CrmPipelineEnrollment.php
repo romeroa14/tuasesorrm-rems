@@ -58,14 +58,14 @@ class CrmPipelineEnrollment
         $db = Database::connect();
 
         $row = $db->query(
-            "SELECT id FROM trackingstatus WHERE LOWER(name) LIKE '%sin atender%' ORDER BY id ASC LIMIT 1"
+            "SELECT id FROM trackingstatus WHERE is_active = 1 AND LOWER(name) LIKE '%sin atender%' ORDER BY id ASC LIMIT 1"
         )->getRow();
 
         if ($row !== null) {
             return (int) $row->id;
         }
 
-        $row = $db->query('SELECT id FROM trackingstatus ORDER BY id ASC LIMIT 1')->getRow();
+        $row = $db->query('SELECT id FROM trackingstatus WHERE is_active = 1 ORDER BY id ASC LIMIT 1')->getRow();
 
         return $row !== null ? (int) $row->id : null;
     }

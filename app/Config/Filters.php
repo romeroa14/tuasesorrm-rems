@@ -5,6 +5,7 @@ namespace Config;
 use App\Filters\Auth;
 use App\Filters\AuthApi;
 use App\Filters\FinanceMember;
+use App\Filters\PlatformAdminFilter;
 use App\Filters\CorsFilter;
 use App\Filters\ActivityFilter;
 use CodeIgniter\Config\BaseConfig;
@@ -32,6 +33,7 @@ class Filters extends BaseConfig
 		'auth'     => Auth::class,
         'authApi' => AuthApi::class,
         'financeMember' => FinanceMember::class,
+        'platformAdmin' => PlatformAdminFilter::class,
         'cors' => CorsFilter::class,
         'activity' => ActivityFilter::class
     ];

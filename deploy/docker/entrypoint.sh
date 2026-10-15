@@ -40,5 +40,10 @@ if ! apache2ctl configtest 2>&1; then
   exit 1
 fi
 
+# Límites de subida (mod_php ignora public/.user.ini)
+if [ -f deploy/docker/php/uploads.ini ]; then
+  cp deploy/docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+fi
+
 echo "[rems] OK — arrancando Apache (DocumentRoot=public/)"
 exec apache2-foreground

@@ -191,7 +191,7 @@ class ApiPublicController extends BaseController
      */
     private function getPropertyImages($propertyId)
     {
-        $images = $this->imageModel->getImages($propertyId);
+        $images = $this->imageModel->gallery($propertyId);
         $imageUrls = [];
         
         foreach ($images as $image) {

@@ -7,36 +7,36 @@ namespace App\Libraries;
 use Config\Services;
 
 /**
- * Cliente mínimo compatible OpenAI para DeepSeek (chat + tools).
- *
- * @see https://api-docs.deepseek.com/
+ * Cliente OpenAI-compatible contra OpenRouter (chat + tools).
  */
 class DeepSeekClient
 {
     /**
-     * @param array<string, mixed> $body Cuerpo JSON para POST /v1/chat/completions
+     * @param array<string, mixed> $body Cuerpo JSON para POST /chat/completions
      *
      * @return array<string, mixed>
      */
     public static function chatCompletions(array $body): array
     {
-        $key = getenv('DEEPSEEK_API_KEY');
+        $key = getenv('OPENROUTER_API_KEY');
         if ($key === false || trim((string) $key) === '') {
-            throw new \RuntimeException('Define DEEPSEEK_API_KEY en .env (no la subas a git).');
+            throw new \RuntimeException('Define OPENROUTER_API_KEY en .env (no la subas a git).');
         }
 
-        $base = getenv('DEEPSEEK_API_BASE');
+        $base = getenv('OPENROUTER_BASE_URL');
         $base = ($base !== false && trim((string) $base) !== '')
             ? rtrim(trim((string) $base), '/')
-            : 'https://api.deepseek.com';
+            : 'https://openrouter.ai/api/v1';
 
-        $url = $base . '/v1/chat/completions';
+        $url = $base . '/chat/completions';
         $client = Services::curlrequest(['timeout' => 120, 'http_errors' => false]);
 
         $r = $client->post($url, [
             'headers' => [
                 'Authorization' => 'Bearer ' . trim((string) $key),
                 'Content-Type'  => 'application/json',
+                'HTTP-Referer'  => 'https://rems.asesoresrm.com.ve',
+                'X-Title'       => 'Agente REMS',
             ],
             'body' => json_encode($body, JSON_UNESCAPED_UNICODE),
         ]);
@@ -46,7 +46,7 @@ class DeepSeekClient
 
         if ($r->getStatusCode() !== 200 || ! is_array($json)) {
             throw new \RuntimeException(
-                'DeepSeek HTTP ' . $r->getStatusCode() . ': ' . mb_substr($raw, 0, 800)
+                'OpenRouter HTTP ' . $r->getStatusCode() . ': ' . mb_substr($raw, 0, 800)
             );
         }
 
@@ -55,8 +55,8 @@ class DeepSeekClient
 
     public static function defaultModel(): string
     {
-        $m = getenv('DEEPSEEK_MODEL');
+        $m = getenv('OPENROUTER_MODEL');
 
-        return ($m !== false && trim((string) $m) !== '') ? trim((string) $m) : 'deepseek-chat';
+        return ($m !== false && trim((string) $m) !== '') ? trim((string) $m) : 'openai/gpt-4o-mini';
     }
 }

@@ -11,14 +11,14 @@ class Conversation extends Model
         'lead_id', 'channel', 'external_id', 'external_username',
         'recipient_ig_id', 'recipient_ig_username',
         'status', 'assigned_to', 'last_message_at', 'unread_count',
-        'ai_auto_reply', 'ad_id', 'referral_source',
+        'ai_auto_reply', 'ad_id', 'referral_source', 'ad_title', 'ad_photo_url',
     ];
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
 
     public function getWithLead($id)
     {
-        return $this->select('conversations.*, leads.name as lead_name, leads.phone as lead_phone, leads.email as lead_email, leads.instagram_username, leads.intention_score, leads.intention_label, leads.interest_type, leads.budget_detected, leads.zone_interest, users.full_name as agent_name')
+        return $this->select('conversations.*, leads.name as lead_name, leads.phone as lead_phone, leads.email as lead_email, leads.instagram_username, leads.intention_score, leads.intention_label, leads.interest_type, leads.budget_detected, leads.zone_interest, leads.profile_pic as lead_photo, users.full_name as agent_name')
             ->join('leads', 'leads.id = conversations.lead_id')
             ->join('users', 'users.id = conversations.assigned_to', 'left')
             ->find($id);
@@ -55,7 +55,7 @@ class Conversation extends Model
 
     public function getInbox($filters = [], $limit = 50, $offset = 0)
     {
-        $builder = $this->select('conversations.*, leads.name as lead_name, leads.phone as lead_phone, leads.instagram_username, leads.intention_score, leads.intention_label, users.full_name as agent_name')
+        $builder = $this->select('conversations.*, leads.name as lead_name, leads.phone as lead_phone, leads.instagram_username, leads.profile_pic as lead_photo, leads.intention_score, leads.intention_label, users.full_name as agent_name')
             ->join('leads', 'leads.id = conversations.lead_id')
             ->join('users', 'users.id = conversations.assigned_to', 'left')
             ->orderBy('conversations.last_message_at', 'DESC');

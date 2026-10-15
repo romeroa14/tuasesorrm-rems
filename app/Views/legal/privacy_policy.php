@@ -26,8 +26,10 @@
 
 <h2>3. Instagram / Meta</h2>
 <p>
-    Cuando utilices Instagram conectado a nuestra aplicación, parte del tratamiento puede realizarse también conforme a las políticas de Meta Platforms, Inc.
-    Te recomendamos revisar la información que Meta pone a disposición sobre privacidad y mensajería profesional.
+    Cuando una cuenta profesional de Instagram está conectada a nuestra aplicación, tratamos los datos necesarios para recibir y responder
+    mensajes directos: identificadores de la cuenta o página, identificador del remitente, nombre de usuario público cuando la API lo entrega,
+    y el contenido del mensaje. No solicitamos el correo electrónico de los remitentes de Instagram a través de permisos de Facebook Login
+    (<code>email</code> / <code>public_profile</code>) para esta integración. El tratamiento también queda sujeto a las políticas de Meta Platforms, Inc.
 </p>
 
 <h2>4. Conservación</h2>
@@ -36,22 +38,21 @@
     Los plazos concretos pueden depender del tipo de dato y del uso del sistema por parte del responsable.
 </p>
 
-<h2>5. Tus derechos</h2>
+<h2>5. Eliminación de datos</h2>
+<p>
+    Puedes solicitar la supresión de tus datos personales escribiendo a
+    <a href="mailto:<?= esc($contactEmail) ?>"><?= esc($contactEmail) ?></a>
+    e identificando la cuenta, conversación o dato que deseas eliminar.
+    Las instrucciones detalladas están en
+    <a href="<?= site_url('legal/data-deletion') ?>">Eliminación de datos</a>.
+</p>
+
+<h2>6. Tus derechos</h2>
 <p>
     Según la legislación aplicable (por ejemplo, normativa de protección de datos en tu país), puedes solicitar acceso, rectificación,
     supresión, limitación u oposición al tratamiento, así como presentar reclamaciones ante la autoridad de control competente.
 </p>
 
-<h2>6. Contacto</h2>
-<?php if ($contactEmail !== '') : ?>
-    <p>Para ejercer derechos o consultas sobre privacidad: <a href="mailto:<?= esc($contactEmail) ?>"><?= esc($contactEmail) ?></a>.</p>
-<?php else : ?>
-    <p>
-        El correo de contacto para privacidad debe configurarse en el servidor (variable de entorno <code>LEGAL_CONTACT_EMAIL</code>).
-    </p>
-<?php endif ?>
-
-<p>
-    Las URLs públicas de estos documentos están pensadas entre otras cosas para cumplir requisitos del panel de Meta Developer al publicar la aplicación.
-</p>
+<h2>7. Contacto</h2>
+<p>Para ejercer derechos o consultas sobre privacidad: <a href="mailto:<?= esc($contactEmail) ?>"><?= esc($contactEmail) ?></a>.</p>
 <?= $this->endSection() ?>

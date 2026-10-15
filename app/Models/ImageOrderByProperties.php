@@ -54,4 +54,50 @@ class ImageOrderByProperties extends Model
     {
         return $this->where('property_id', $propertyId)->findAll();
     }
+
+    /**
+     * Fotos cuyo archivo existe en RM00{id}/graphic.
+     * Si ninguna del registro está en disco, usa los wasi_ de esa misma carpeta.
+     */
+    public function gallery($propertyId): array
+    {
+        $rows = $this->where('property_id', $propertyId)->findAll();
+        $dir = FCPATH . 'properties/RM00' . $propertyId . '/graphic/';
+        $existing = [];
+
+        foreach ($rows as $row) {
+            $name = $row['image'] ?? '';
+            if ($name !== '' && is_file($dir . $name)) {
+                $existing[] = $row;
+            }
+        }
+
+        if ($existing !== []) {
+            return $existing;
+        }
+
+        if (! is_dir($dir)) {
+            return [];
+        }
+
+        $wasi = [];
+        foreach (scandir($dir) ?: [] as $name) {
+            if (preg_match('/^wasi_.*\.(jpe?g|png|webp|gif)$/i', $name) && is_file($dir . $name)) {
+                $wasi[] = $name;
+            }
+        }
+        natsort($wasi);
+
+        $out = [];
+        foreach (array_values($wasi) as $name) {
+            $out[] = [
+                'id' => null,
+                'property_id' => (int) $propertyId,
+                'image' => $name,
+                'fallback' => 'wasi',
+            ];
+        }
+
+        return $out;
+    }
 }

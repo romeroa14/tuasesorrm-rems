@@ -10,12 +10,14 @@ use App\Libraries\FinanceCompanyContext;
 use App\Libraries\FinanceMoneyService;
 use App\Libraries\FinanceQuotaIncomeService;
 use App\Libraries\FinanceNotificationService;
+use App\Libraries\FinanceMovementAdminService;
 use App\Libraries\FinanceReceiptService;
 use App\Models\FinanceBuilder;
 use App\Models\FinanceFinancingInstallment;
 use App\Models\FinanceFinancingPlan;
 use App\Models\FinanceQuota;
 use App\Models\Leads;
+use App\Libraries\FinanceClientSource;
 use Config\FinanceMenu;
 use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\HTTP\RequestInterface;
@@ -64,6 +66,23 @@ class FinanceQuotaController extends BaseController
         $this->body['quota_types'] = $quotaTypes;
         $this->body['can_draft'] = $this->financeAuthorization->canDraftWorkflow();
         $this->body['initial_view'] = $this->request->getGet('view') === 'summary' ? 'summary' : 'manage';
+        $this->body['client_source_options'] = FinanceClientSource::options();
+
+        $this->generate_template($this->settings['url']);
+    }
+
+    public function movements()
+    {
+        if (! $this->financeAuthorization->canViewIncome()) {
+            return redirect()->to(base_url('/app/finance'));
+        }
+
+        $pageTitle = 'Finanzas — Trazabilidad de cuotas';
+        $this->settings['title'] = $pageTitle;
+        $this->settings['url']   = 'auth/finance/quota_movements';
+        $this->body['title'] = $pageTitle;
+        $this->body['entity'] = 'quota_movements';
+        $this->body['can_draft'] = $this->financeAuthorization->canDraftWorkflow();
 
         $this->generate_template($this->settings['url']);
     }
@@ -93,7 +112,124 @@ class FinanceQuotaController extends BaseController
                 ->groupEnd();
         }
 
-        return $this->jsonSuccess($builder->findAll());
+        $quotas = $builder->findAll();
+        if (! is_array($quotas)) {
+            $quotas = [];
+        }
+
+        foreach ($quotas as &$quota) {
+            $quota['source'] = 'registered';
+        }
+        unset($quota);
+
+        if ($type !== 'delivered') {
+            $quotas = array_merge(
+                $quotas,
+                $this->historicalInstallmentMovements($quotas, $companyId)
+            );
+        }
+
+        usort($quotas, static function (array $a, array $b): int {
+            return strcmp((string) ($b['receipt_date'] ?? ''), (string) ($a['receipt_date'] ?? ''));
+        });
+
+        return $this->jsonSuccess(array_values($quotas));
+    }
+
+    /**
+     * Abonos del plan (Excel u oficina) que aún no tienen fila en finance_quotas.
+     *
+     * @param list<array<string, mixed>> $quotas
+     *
+     * @return list<array<string, mixed>>
+     */
+    protected function historicalInstallmentMovements(array $quotas, ?int $companyId): array
+    {
+        $linkedInstallmentIds = [];
+        foreach ($quotas as $quota) {
+            $installmentId = (int) ($quota['installment_id'] ?? 0);
+            if ($installmentId > 0) {
+                $linkedInstallmentIds[$installmentId] = true;
+            }
+        }
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('finance_financing_installments AS i')
+            ->select('i.id, i.paid_amount, i.due_date, i.paid_at, i.installment_number, i.financing_plan_id, i.finance_quota_id, p.client_name, p.project_name, p.unit_ref, p.lead_id')
+            ->join('finance_financing_plans AS p', 'p.id = i.financing_plan_id', 'inner')
+            ->where('i.paid_amount >', 0);
+
+        if ($companyId !== null) {
+            $builder->groupStart()
+                ->where('p.company_id', $companyId)
+                ->orWhere('p.company_id', null)
+                ->groupEnd();
+        }
+
+        $rows = $builder->get()->getResultArray();
+        $movements = [];
+
+        foreach ($rows as $row) {
+            $installmentId = (int) ($row['id'] ?? 0);
+            if ($installmentId <= 0) {
+                continue;
+            }
+            if (! empty($row['finance_quota_id']) || isset($linkedInstallmentIds[$installmentId])) {
+                continue;
+            }
+
+            $paid = round((float) ($row['paid_amount'] ?? 0), 2);
+            if ($paid <= 0) {
+                continue;
+            }
+
+            $dueDate = trim((string) ($row['due_date'] ?? ''));
+            $paidAt = trim((string) ($row['paid_at'] ?? ''));
+            $receiptDate = $paidAt !== '' ? substr($paidAt, 0, 10) : $dueDate;
+            $timestamp = $dueDate !== '' ? strtotime($dueDate) : ($receiptDate !== '' ? strtotime($receiptDate) : false);
+            $periodMonth = $timestamp !== false ? (int) date('n', $timestamp) : null;
+            $periodYear = $timestamp !== false ? (int) date('Y', $timestamp) : null;
+
+            $client = trim((string) ($row['client_name'] ?? 'Sin cliente'));
+            $project = trim((string) ($row['project_name'] ?? ''));
+            $unit = trim((string) ($row['unit_ref'] ?? ''));
+            $label = $client;
+            $suffix = trim($project . ($unit !== '' ? ' Apt ' . $unit : ''));
+            if ($suffix !== '') {
+                $label .= ' · ' . $suffix;
+            }
+
+            $movements[] = [
+                'id' => 'excel-' . $installmentId,
+                'source' => 'excel',
+                'type' => 'received',
+                'name' => $label,
+                'lead_id' => $row['lead_id'] ?? null,
+                'builder_id' => null,
+                'builder_name' => null,
+                'receipt_date' => $receiptDate !== '' ? $receiptDate : null,
+                'period_month' => $periodMonth,
+                'period_year' => $periodYear,
+                'payment_date' => $receiptDate !== '' ? $receiptDate : null,
+                'delivery_date' => null,
+                'payment_type_id' => null,
+                'currency' => 'CASH',
+                'currency_denomination' => 'USD',
+                'exchange_rate' => 0,
+                'receipt_number' => 'Excel #' . (int) ($row['installment_number'] ?? 0),
+                'amount' => $paid,
+                'amount_usd' => $paid,
+                'amount_bs' => 0,
+                'notes' => 'Abono importado desde Excel',
+                'financing_plan_id' => $row['financing_plan_id'] ?? null,
+                'installment_id' => $installmentId,
+                'email_sent_at' => null,
+                'email_sent_to' => null,
+                'email_send_error' => null,
+            ];
+        }
+
+        return $movements;
     }
 
     public function apiGet(string $id): ResponseInterface
@@ -180,12 +316,13 @@ class FinanceQuotaController extends BaseController
                 $record['receipt_url'] = base_url('/app/finance/quotas/receipt/' . $quotaId);
                 $record['receipt_pdf_url'] = base_url('/app/finance/quotas/receipt/' . $quotaId . '/pdf');
 
-                $sendEmail = ! isset($data['send_receipt_email']) || filter_var($data['send_receipt_email'], FILTER_VALIDATE_BOOLEAN);
+                $sendEmail = $this->notificationService->shouldAutoSendReceiptEmail();
                 $sendWhatsapp = isset($data['send_receipt_whatsapp']) && filter_var($data['send_receipt_whatsapp'], FILTER_VALIDATE_BOOLEAN);
                 $record['notifications'] = $this->notificationService->afterQuotaPayment($quotaId, [
                     'send_email'    => $sendEmail,
                     'send_whatsapp' => $sendWhatsapp,
                 ]);
+                $record = $this->quotaModel->find($quotaId);
             }
 
             return $this->jsonSuccess($record);
@@ -230,7 +367,22 @@ class FinanceQuotaController extends BaseController
                 );
             }
 
-            return $this->jsonSuccess($this->quotaModel->find($id));
+            $updated = $this->quotaModel->find($id);
+            $movementId = (int) ($updated['finance_movement_id'] ?? 0);
+            $receiptDate = trim((string) ($updated['receipt_date'] ?? $data['receipt_date'] ?? ''));
+            if ($movementId > 0 && $receiptDate !== '') {
+                $clientSource = null;
+                $planId = (int) ($updated['financing_plan_id'] ?? 0);
+                if ($planId > 0) {
+                    $plan = (new FinanceFinancingPlan())->find($planId);
+                    if (is_array($plan) && ! empty($plan['client_source'])) {
+                        $clientSource = (string) $plan['client_source'];
+                    }
+                }
+                (new FinanceMovementAdminService())->syncFromQuota($movementId, $receiptDate, $clientSource);
+            }
+
+            return $this->jsonSuccess($updated);
         } catch (\InvalidArgumentException $exception) {
             return $this->jsonError($exception->getMessage(), 422);
         }
@@ -268,10 +420,7 @@ class FinanceQuotaController extends BaseController
         }
 
         try {
-            $context = $this->receiptService->buildContext((int) $id);
-            $context['forPdf'] = false;
-
-            return view('auth/finance/quota_receipt', $context);
+            return $this->response->setBody($this->receiptService->renderHtml((int) $id, false));
         } catch (\Throwable $e) {
             return $this->response->setStatusCode(404)->setBody($e->getMessage());
         }
@@ -287,6 +436,10 @@ class FinanceQuotaController extends BaseController
         }
 
         try {
+            while (ob_get_level() > 0) {
+                ob_end_clean();
+            }
+
             $context = $this->receiptService->buildContext((int) $id);
             $pdf = $this->receiptService->generatePdf((int) $id);
             $filename = 'recibo-' . preg_replace('/[^A-Za-z0-9._-]+/', '-', (string) ($context['receipt_number'] ?? $id)) . '.pdf';
@@ -294,6 +447,8 @@ class FinanceQuotaController extends BaseController
             return $this->response
                 ->setHeader('Content-Type', 'application/pdf')
                 ->setHeader('Content-Disposition', 'inline; filename="' . $filename . '"')
+                ->setHeader('Content-Length', (string) strlen($pdf))
+                ->setHeader('Cache-Control', 'private, max-age=0, must-revalidate')
                 ->setBody($pdf);
         } catch (\Throwable $e) {
             return $this->response->setStatusCode(404)->setBody($e->getMessage());

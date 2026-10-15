@@ -118,6 +118,9 @@ class FinanceWorkflow
             'actor_user_id' => $actorUserId,
             'approved_by'   => self::nullableInt($decision['approved_by'] ?? null),
             'lead_id'       => self::nullableInt($input['lead_id'] ?? null),
+            'client_source' => isset($input['client_source']) && trim((string) $input['client_source']) !== ''
+                ? trim((string) $input['client_source']) : null,
+            'financing_plan_id' => self::nullableInt($input['financing_plan_id'] ?? null),
             'currency_id'   => $sharedDimensions['currency_id'],
             'payment_type_id' => $sharedDimensions['payment_type_id'],
             'rate_to_base'  => $sharedDimensions['rate_to_base'],

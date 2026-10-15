@@ -2,12 +2,14 @@
 
 namespace App\Libraries;
 
+use App\Libraries\DeepSeekClient;
+
 use App\Models\Message;
 use App\Models\IntentionLog;
 use App\Models\Leads;
 
 /**
- * Análisis de intención mediante DeepSeek LLM con fallback keyword.
+ * Análisis de intención mediante OpenRouter con fallback keyword.
  * Reemplazo progresivo del ScoringService.
  */
 class AiScoringService
@@ -25,7 +27,7 @@ class AiScoringService
 
     /**
      * Analiza la conversación y actualiza intention_score + intention_label en el lead.
-     * Usa DeepSeek si está disponible, fallback a keywords.
+     * Usa OpenRouter si está disponible, fallback a keywords.
      */
     public function scoreConversation(int $conversationId, int $leadId): array
     {
@@ -51,7 +53,9 @@ class AiScoringService
             $result = $this->analyzeWithLLM($history);
             if ($result !== null) {
                 $this->extractLeadData($messages, $leadId);
-                return $this->saveResult($leadId, $result['score'], $result['label'], $result['reasoning']);
+                $saved = $this->saveResult($leadId, $result['score'], $result['label'], $result['reasoning']);
+                $this->suggestPipelineStatus($conversationId, $leadId);
+                return $saved;
             }
         } catch (\Throwable $e) {
             log_message('error', 'AiScoringService LLM failed: ' . $e->getMessage());
@@ -59,11 +63,22 @@ class AiScoringService
 
         // Fallback: keyword scoring
         $scorer = new ScoringService();
-        return $scorer->scoreConversation($conversationId, $leadId);
+        $saved = $scorer->scoreConversation($conversationId, $leadId);
+        $this->suggestPipelineStatus($conversationId, $leadId);
+        return $saved;
+    }
+
+    private function suggestPipelineStatus(int $conversationId, int $leadId): void
+    {
+        try {
+            (new JevPipelineClassifier())->placeUnassignedLead($leadId, $conversationId);
+        } catch (\Throwable $e) {
+            log_message('error', 'suggestPipelineStatus ' . $e->getMessage());
+        }
     }
 
     /**
-     * Analyze text with DeepSeek.
+     * Analyze text with OpenRouter.
      */
     private function analyzeWithLLM(string $history): ?array
     {
@@ -86,7 +101,7 @@ Mensaje:
 PROMPT;
 
         $response = DeepSeekClient::chatCompletions([
-            'model' => getenv('DEEPSEEK_MODEL') ?: 'deepseek-chat',
+            'model' => DeepSeekClient::defaultModel(),
             'messages' => [
                 ['role' => 'system', 'content' => 'Eres un clasificador JSON. Responde siempre con JSON válido.'],
                 ['role' => 'user', 'content' => $prompt],
@@ -130,7 +145,7 @@ PROMPT;
                 . "Texto: {$text}";
 
             $response = DeepSeekClient::chatCompletions([
-                'model' => getenv('DEEPSEEK_MODEL') ?: 'deepseek-chat',
+                'model' => DeepSeekClient::defaultModel(),
                 'messages' => [['role' => 'user', 'content' => $prompt]],
                 'max_tokens' => 200,
                 'temperature' => 0.1,

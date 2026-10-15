@@ -23,6 +23,11 @@ class FinanceNotificationService
         $this->whatsappService = $whatsappService ?? new HilosWhatsAppService();
     }
 
+    public function shouldAutoSendReceiptEmail(): bool
+    {
+        return $this->mailService->sendReceiptOnPaymentEnabled();
+    }
+
     /**
      * @param array{send_email?: bool, send_whatsapp?: bool} $options
      *
@@ -48,6 +53,7 @@ class FinanceNotificationService
 
         if ($sendEmail) {
             $result['email'] = $this->sendReceiptEmail($quotaId, $email, $context);
+            $this->persistQuotaEmailStatus($quotaId, $email, $result['email']);
         }
 
         if ($sendWhatsapp) {
@@ -147,11 +153,16 @@ class FinanceNotificationService
                 . '<p>Atentamente,<br>Asesores RM</p>'
             );
 
-            return $this->mailService->sendHtml($email, $subject, $body, [[
+            $mail = $this->mailService->sendHtml($email, $subject, $body, [[
                 'name'    => 'recibo-' . preg_replace('/[^A-Za-z0-9._-]+/', '-', (string) ($context['receipt_number'] ?? $quotaId)) . '.pdf',
                 'content' => $pdf,
                 'mime'    => 'application/pdf',
             ]]);
+            if (! empty($mail['sent'])) {
+                $mail['to'] = $email;
+            }
+
+            return $mail;
         } catch (\Throwable $e) {
             log_message('error', 'FinanceNotificationService::sendReceiptEmail ' . $e->getMessage());
 
@@ -164,5 +175,30 @@ class FinanceNotificationService
         return '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;color:#222;">'
             . $innerHtml
             . '</body></html>';
+    }
+
+    /**
+     * @param array<string, mixed> $emailResult
+     */
+    protected function persistQuotaEmailStatus(int $quotaId, string $email, array $emailResult): void
+    {
+        $model = model('FinanceQuota');
+        $update = [];
+
+        if (! empty($emailResult['sent'])) {
+            $update = [
+                'email_sent_at'    => date('Y-m-d H:i:s'),
+                'email_sent_to'    => $email,
+                'email_send_error' => null,
+            ];
+        } elseif (empty($emailResult['skipped'])) {
+            $update = [
+                'email_send_error' => (string) ($emailResult['error'] ?? $emailResult['reason'] ?? 'No se pudo enviar el correo.'),
+            ];
+        }
+
+        if ($update !== []) {
+            $model->update($quotaId, $update);
+        }
     }
 }

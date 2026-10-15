@@ -89,6 +89,7 @@
         <nav>
             <a href="<?= site_url('legal/privacy-policy') ?>">Privacidad</a>
             <a href="<?= site_url('legal/terms-of-service') ?>">Condiciones</a>
+            <a href="<?= site_url('legal/data-deletion') ?>">Eliminación de datos</a>
         </nav>
     </div>
 </header>
@@ -98,7 +99,7 @@
     </div>
 </main>
 <footer>
-    Documentos legales de uso general. Para solicitudes relativas a datos personales, utiliza el correo indicado en la política de privacidad (si está configurado).
+    Documentos legales de uso general. Para solicitudes relativas a datos personales, utiliza el correo indicado en la política de privacidad.
 </footer>
 </body>
 </html>

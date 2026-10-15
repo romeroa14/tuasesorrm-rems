@@ -75,10 +75,11 @@ class FinanceReportService
         $db = \Config\Database::connect();
 
         $builder = $db->table('finance_movement_lines ml')
-            ->select('m.id, ml.amount, ml.description, ml.account_id, ml.currency_id, ml.category_id, m.occurred_on, m.workflow_type, m.status, m.notes, m.lead_id, c.name AS category_name, c.movement_type, l.name AS lead_name, l.phone AS lead_phone')
+            ->select('m.id, ml.amount, ml.description, ml.account_id, ml.currency_id, ml.category_id, m.occurred_on, m.workflow_type, m.status, m.notes, m.lead_id, m.client_source, m.financing_plan_id, m.commission_property_id, cp.sale_price, cp.commission_pct, cp.scheme_code, c.name AS category_name, c.movement_type, l.name AS lead_name, l.phone AS lead_phone')
             ->join('finance_movements m', 'm.id = ml.movement_id')
             ->join('finance_categories c', 'c.id = ml.category_id')
             ->join('leads l', 'l.id = m.lead_id', 'left')
+            ->join('commission_properties cp', 'cp.id = m.commission_property_id', 'left')
             ->where('ml.line_number', 1)
             ->where('c.type', 'income');
 
@@ -100,7 +101,7 @@ class FinanceReportService
         $db = \Config\Database::connect();
 
         $builder = $db->table('finance_movement_lines ml')
-            ->select('m.id, ml.amount, ml.description, ml.account_id, ml.currency_id, ml.category_id, m.occurred_on, m.workflow_type, m.status, m.notes, m.lead_id, c.name AS category_name, c.movement_type, l.name AS lead_name, l.phone AS lead_phone')
+            ->select('m.id, ml.amount, ml.description, ml.account_id, ml.currency_id, ml.category_id, m.occurred_on, m.workflow_type, m.status, m.notes, m.lead_id, m.client_source, m.financing_plan_id, m.commission_property_id, c.name AS category_name, c.movement_type, l.name AS lead_name, l.phone AS lead_phone')
             ->join('finance_movements m', 'm.id = ml.movement_id')
             ->join('finance_categories c', 'c.id = ml.category_id')
             ->join('leads l', 'l.id = m.lead_id', 'left')

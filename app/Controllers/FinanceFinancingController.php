@@ -169,6 +169,47 @@ class FinanceFinancingController extends BaseController
         }
     }
 
+
+    public function apiUpdatePlan(string $id): ResponseInterface
+    {
+        if (! $this->financeAuthorization->canDraftWorkflow()) {
+            return $this->jsonError('No tienes permisos para editar planes de pago.', 403);
+        }
+
+        try {
+            return $this->jsonSuccess($this->amortizationService->updatePlan((int) $id, $this->requestData()));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
+        } catch (\Throwable $exception) {
+            log_message('error', 'FinanceFinancingController::apiUpdatePlan - ' . $exception->getMessage());
+
+            return $this->jsonError('No se pudo actualizar el plan de pago.', 500);
+        }
+    }
+
+    public function apiUpdateInstallment(string $id): ResponseInterface
+    {
+        if (! $this->financeAuthorization->canDraftWorkflow()) {
+            return $this->jsonError('No tienes permisos para editar cuotas del plan.', 403);
+        }
+
+        $data = $this->requestData();
+        $dueDate = trim((string) ($data['due_date'] ?? ''));
+        if ($dueDate === '') {
+            return $this->jsonError('due_date es obligatorio.', 422);
+        }
+
+        try {
+            return $this->jsonSuccess($this->amortizationService->updateInstallmentDueDate((int) $id, $dueDate));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
+        } catch (\Throwable $exception) {
+            log_message('error', 'FinanceFinancingController::apiUpdateInstallment - ' . $exception->getMessage());
+
+            return $this->jsonError('No se pudo actualizar la fecha de la cuota.', 500);
+        }
+    }
+
     public function apiCreatePlan(): ResponseInterface
     {
         if (! $this->financeAuthorization->canDraftWorkflow()) {

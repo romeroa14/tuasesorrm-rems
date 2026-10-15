@@ -39,6 +39,9 @@ class FinanceQuota extends Model
         'finance_movement_id',
         'financing_plan_id',
         'installment_id',
+        'email_sent_at',
+        'email_sent_to',
+        'email_send_error',
     ];
 
     protected $useTimestamps = true;

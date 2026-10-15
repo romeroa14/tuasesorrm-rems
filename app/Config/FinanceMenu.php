@@ -141,6 +141,10 @@ class FinanceMenu extends BaseConfig
                 'icon'  => 'fas fa-percentage text-primary',
                 'items' => [
                     [
+                        'label' => 'Perfil de reparto',
+                        'url'   => '/app/finance/commission/profile',
+                    ],
+                    [
                         'label' => 'Propiedades',
                         'url'   => '/app/finance/commission/properties',
                     ],
@@ -201,6 +205,10 @@ class FinanceMenu extends BaseConfig
                         'url'   => '/app/finance/quotas',
                     ],
                     [
+                        'label' => 'Trazabilidad',
+                        'url'   => '/app/finance/quota-movements',
+                    ],
+                    [
                         'label' => 'Constructoras',
                         'url'   => '/app/finance/builders',
                     ],
@@ -242,6 +250,10 @@ class FinanceMenu extends BaseConfig
                 'label' => 'Comisiones',
                 'icon'  => 'fas fa-percentage text-primary',
                 'items' => [
+                    [
+                        'label' => 'Perfil de reparto',
+                        'url'   => '/app/finance/commission/profile',
+                    ],
                     [
                         'label' => 'Propiedades',
                         'url'   => '/app/finance/commission/properties',
@@ -288,6 +300,10 @@ class FinanceMenu extends BaseConfig
     private static function mapQuotaLinks(): array
     {
         $items = [];
+        $items[] = [
+            'label' => 'Trazabilidad',
+            'url'   => '/app/finance/quota-movements',
+        ];
         $items[] = [
             'label' => 'Resumen cartera',
             'url'   => '/app/finance/quotas?view=summary',

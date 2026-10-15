@@ -25,6 +25,7 @@
 <p>
     Si se conecta Instagram u otros productos Meta, el uso de dichas funciones queda sujeto también a las políticas y condiciones de Meta,
     así como a los permisos aprobados para la aplicación. Nos reservamos el derecho de modificar o desactivar integraciones si Meta lo exige o si dejan de cumplir la normativa aplicable.
+    Esta aplicación utiliza Instagram para mensajería profesional (mensajes directos) en el CRM; no ofrece gestión de comentarios públicos como función del producto.
 </p>
 
 <h2>4. Contenido y mensajes</h2>
@@ -46,9 +47,5 @@
 </p>
 
 <h2>7. Contacto</h2>
-<?php if ($contactEmail !== '') : ?>
-    <p>Consultas sobre estas condiciones: <a href="mailto:<?= esc($contactEmail) ?>"><?= esc($contactEmail) ?></a>.</p>
-<?php else : ?>
-    <p>Configura <code>LEGAL_CONTACT_EMAIL</code> en el entorno del servidor para mostrar un correo de contacto público.</p>
-<?php endif ?>
+<p>Consultas sobre estas condiciones: <a href="mailto:<?= esc($contactEmail) ?>"><?= esc($contactEmail) ?></a>.</p>
 <?= $this->endSection() ?>

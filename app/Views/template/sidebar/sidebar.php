@@ -2,7 +2,10 @@
 <?php
 use App\Libraries\FinanceAuthorization;
 use App\Libraries\FinanceSidebar;
+use App\Libraries\PlatformAdmin;
 
+$isPlatformAdmin = PlatformAdmin::isAdmin();
+$hasOperationalSuper = PlatformAdmin::isDelegate();
 $financeAuthorization = new FinanceAuthorization();
 $canAccessFinance = $financeAuthorization->canAccess();
 $financeCurrentPath = uri_string();
@@ -110,7 +113,7 @@ $financeModules = FinanceSidebar::modules();
     </li>
     <?php endif; ?>
 
-    <?php if(session()->get('id_fk_rol') == 2): ?>
+    <?php if($isPlatformAdmin): ?>
     <li class="nav-item <?= $title == 'Historial de acciones' ? 'active' : '' ?>">
         <a class="nav-link" href="<?= base_url('/app/activity_log/all') ?>">
             <i class="fa fa-history"></i>
@@ -119,7 +122,7 @@ $financeModules = FinanceSidebar::modules();
     </li>
     <?php endif; ?>
 
-    <?php if(session()->get('id_fk_rol') == 1 || session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 5 || session()->get('id_fk_rol') == 6 || session()->get('id_fk_rol') == 8): ?>
+    <?php if(session()->get('id_fk_rol') == 1 || $hasOperationalSuper || session()->get('id_fk_rol') == 5 || session()->get('id_fk_rol') == 6 || session()->get('id_fk_rol') == 8): ?>
         <li class="nav-item <?= $title == 'Mis visitas' ? 'active' : '' ?>">
             <a class="nav-link" href="<?= base_url('/app/my_visits/all') ?>">
                 <i class="fa fa-calendar-alt menu-icon"></i>
@@ -143,7 +146,7 @@ $financeModules = FinanceSidebar::modules();
     <div class="sidebar-heading">
         Inmuebles
     </div>
-    <?php if(session()->get('id_fk_rol') == 1 || session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 5 || session()->get('id_fk_rol') == 6 || session()->get('id_fk_rol') == 8): ?>
+    <?php if(session()->get('id_fk_rol') == 1 || $hasOperationalSuper || session()->get('id_fk_rol') == 5 || session()->get('id_fk_rol') == 6 || session()->get('id_fk_rol') == 8): ?>
         <li class="nav-item <?= $title == 'Visitas' ? 'active' : '' ?>">
             <a class="nav-link" href="<?= base_url('/app/visits/all') ?>">
                 <i class="fa fa-calendar-alt menu-icon"></i>
@@ -208,7 +211,7 @@ $financeModules = FinanceSidebar::modules();
     </li>
 
     <hr class="sidebar-divider">
-    <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 8 || session()->get('id_fk_rol') == 6): ?>
+    <?php if($hasOperationalSuper || session()->get('id_fk_rol') == 8 || session()->get('id_fk_rol') == 6): ?>
         <div class="sidebar-heading">
             Captaciones
         </div>
@@ -233,7 +236,7 @@ $financeModules = FinanceSidebar::modules();
         Complementos
     </div>
 
-    <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 8): ?>
+    <?php if($hasOperationalSuper || session()->get('id_fk_rol') == 8): ?>
         <li class="nav-item">
         <a href="<?= base_url('/app/commission_sheets/all') ?>" class="nav-link">
             <i class="fa fa-file-invoice-dollar menu-icon"></i>
@@ -272,11 +275,11 @@ $financeModules = FinanceSidebar::modules();
 
 
     <hr class="sidebar-divider">
-    <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 1 || session()->get('id_fk_rol') == 5 || session()->get('id_fk_rol') == 6 || session()->get('id_fk_rol') == 7 || session()->get('id_fk_rol') == 8): ?>
+    <?php if($hasOperationalSuper || session()->get('id_fk_rol') == 1 || session()->get('id_fk_rol') == 5 || session()->get('id_fk_rol') == 6 || session()->get('id_fk_rol') == 7 || session()->get('id_fk_rol') == 8): ?>
         <div class="sidebar-heading">
             Clientes
         </div>
-        <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 7 || session()->get('id_fk_rol') == 8): ?>
+        <?php if($hasOperationalSuper || session()->get('id_fk_rol') == 7 || session()->get('id_fk_rol') == 8): ?>
             <li class="nav-item <?= $title == 'ATC Leads' ? 'active' : '' ?>">
                 <a class="nav-link" href="<?= base_url('/app/leads/atc/all') ?>">
                     <i class="fa fa-users menu-icon"></i>
@@ -284,7 +287,7 @@ $financeModules = FinanceSidebar::modules();
                 </a>
             </li>
         <?php endif; ?>
-        <?php if(session()->get('id_fk_rol') == 2): ?>
+        <?php if($isPlatformAdmin): ?>
             <li class="nav-item <?= $title == 'ATC Macro' ? 'active' : '' ?>">
                 <a class="nav-link" href="<?= base_url('/app/macro_lead/all') ?>">
                     <i class="fa fa-users menu-icon"></i>
@@ -292,7 +295,7 @@ $financeModules = FinanceSidebar::modules();
                 </a>
             </li>
         <?php endif; ?>
-        <?php if(session()->get('id_fk_rol') == 2): ?>
+        <?php if($isPlatformAdmin): ?>
             <li class="nav-item <?= $title == 'Cruce ATC/Usuario' ? 'active' : '' ?>">
                 <a class="nav-link" href="<?= base_url('/app/delegations/all') ?>">
                     <i class="fa fa-random menu-icon"></i>
@@ -300,7 +303,7 @@ $financeModules = FinanceSidebar::modules();
                 </a>
             </li>
         <?php endif; ?>
-        <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 5 || session()->get('id_fk_rol') == 6 || session()->get('id_fk_rol') == 8): ?>
+        <?php if($hasOperationalSuper || session()->get('id_fk_rol') == 5 || session()->get('id_fk_rol') == 6 || session()->get('id_fk_rol') == 8): ?>
             <li class="nav-item <?= $title == 'Leads delegados' ? 'active' : '' ?>">
                 <a class="nav-link" href="<?= base_url('/app/delegates/all') ?>">
                     <i class="fa fa-users menu-icon"></i>
@@ -308,7 +311,7 @@ $financeModules = FinanceSidebar::modules();
                 </a>
             </li>
         <?php endif; ?>
-        <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 1 || session()->get('id_fk_rol') == 7 || session()->get('id_fk_rol') == 5 || session()->get('id_fk_rol') == 8): ?>
+        <?php if($hasOperationalSuper || session()->get('id_fk_rol') == 1 || session()->get('id_fk_rol') == 7 || session()->get('id_fk_rol') == 5 || session()->get('id_fk_rol') == 8): ?>
             <li class="nav-item <?= $title == 'Clientes asignados' ? 'active' : '' ?>">
                 <a class="nav-link" href="<?= base_url('/app/assigned_clients/all') ?>">
                     <i class="fa fa-users menu-icon"></i>
@@ -320,7 +323,7 @@ $financeModules = FinanceSidebar::modules();
     <?php endif; ?>
 
 
-    <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 4): ?>
+    <?php if($hasOperationalSuper || session()->get('id_fk_rol') == 4): ?>
         <hr class="sidebar-divider">
         <div class="sidebar-heading">
             Mercadeo
@@ -333,7 +336,7 @@ $financeModules = FinanceSidebar::modules();
         </li>
         <hr class="sidebar-divider">
     <?php endif; ?>
-    <?php if(session()->get('id_fk_rol') == 2 || session()->get('id_fk_rol') == 8): ?>
+    <?php if($hasOperationalSuper || session()->get('id_fk_rol') == 8): ?>
         <hr class="sidebar-divider">
         <div class="sidebar-heading">
             Servicios API
@@ -346,15 +349,15 @@ $financeModules = FinanceSidebar::modules();
         </li>
         <hr class="sidebar-divider">
     <?php endif; ?>
-    <?php if(session()->get('id_fk_rol') == 2): ?>
+    <?php if($isPlatformAdmin): ?>
         <hr class="sidebar-divider">
         <div class="sidebar-heading">
             SUPER ACCIONES
         </div>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="<?= base_url('') ?>">
+        <li class="nav-item <?= $title == 'Usuarios y permisos' ? 'active' : '' ?>">
+            <a class="nav-link" href="<?= base_url('/app/admin/users') ?>">
                 <i class="fa fa-user menu-icon"></i>
-                <span>Usuarios (Próximamente)</span>
+                <span>Usuarios y permisos</span>
             </a>
         </li>
         <hr class="sidebar-divider">

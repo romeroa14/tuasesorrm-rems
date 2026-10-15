@@ -197,7 +197,8 @@ function loadParticipants() {
         $('#participantsTable').show();
 
         var roleLabels = {
-            'cerrador': 'Cerrador', 'cap': 'CAP', 'coordinator': 'Coordinador',
+            'cerrador': 'Cerrador', 'cap': 'CAP', 'coordinator': 'Coordinadora',
+            'atc': 'ATC', 'marketing': 'Mercadeo',
             'gs': 'GS', 'fe': 'FE', 'sales_manager': 'Gerente Ventas',
             'registro': 'Registro', 'external_advisor': 'Asesor Externo', 'ne': 'NE'
         };

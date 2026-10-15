@@ -55,7 +55,7 @@ class ServiceWasi extends Model
             ->join('housingtype h', 'h.id = p.housing_type')
             ->join('municipality m', 'm.id = p.municipality')
             ->join('state ', 'state.id = p.state')
-            ->join('city c', 'c.id = p.city')
+            ->join('city c', 'c.id = p.city', 'left')
             ->where('servicewasi.property_id', $propertyId)
             ->orderBy('servicewasi.created_at', 'DESC')
             ->first();
@@ -69,7 +69,7 @@ class ServiceWasi extends Model
             ->join('housingtype h', 'h.id = p.housing_type')
             ->join('municipality m', 'm.id = p.municipality')
             ->join('state ', 'state.id = p.state')
-            ->join('city c', 'c.id = p.city')
+            ->join('city c', 'c.id = p.city', 'left')
             ->findAll();
     }
 }

@@ -7,6 +7,7 @@ namespace App\Libraries;
 use App\Models\FinanceFinancingInstallment;
 use App\Models\FinanceFinancingPlan;
 use App\Models\FinanceQuota;
+use App\Libraries\FinanceClientSource;
 use App\Models\Leads;
 use DateInterval;
 use DateTimeImmutable;
@@ -74,6 +75,11 @@ class FinanceAmortizationService
             'currency_code'        => strtoupper((string) ($input['currency_code'] ?? 'USD')),
             'status'               => 'active',
             'notes'                => $input['notes'] ?? null,
+            'client_source'        => $this->normalizeClientSource($input['client_source'] ?? null),
+            'sale_date'            => isset($input['sale_date']) && trim((string) $input['sale_date']) !== ''
+                ? $this->requireDate($input['sale_date'], 'Fecha de venta') : null,
+            'commission_notes'     => isset($input['commission_notes']) && trim((string) $input['commission_notes']) !== ''
+                ? trim((string) $input['commission_notes']) : null,
         ];
 
         if (! $this->planModel->insert($planRow)) {
@@ -145,7 +151,10 @@ class FinanceAmortizationService
             'pending'   => round($totals['pending'], 2),
         ];
 
-        return $this->attachLeadData($plan);
+        $plan = $this->attachLeadData($plan);
+        $plan['client_source_label'] = FinanceClientSource::label($plan['client_source'] ?? null);
+
+        return $plan;
     }
 
     /**
@@ -510,6 +519,163 @@ class FinanceAmortizationService
     private function money($value): float
     {
         return round((float) $value, 2);
+    }
+
+
+    /**
+     * @param array<string, mixed> $input
+     *
+     * @return array<string, mixed>
+     */
+    public function updatePlan(int $planId, array $input): array
+    {
+        $plan = $this->planModel->find($planId);
+        if (! is_array($plan)) {
+            throw new InvalidArgumentException('Plan no encontrado.');
+        }
+
+        $patch = [];
+
+        if (isset($input['lead_id']) && (int) $input['lead_id'] > 0) {
+            $client = $this->resolveClientFromInput($input);
+            $patch['lead_id'] = $client['lead_id'];
+            $patch['client_name'] = $client['client_name'];
+        }
+
+        foreach (['project_name', 'notes', 'commission_notes'] as $field) {
+            if (array_key_exists($field, $input)) {
+                $val = trim((string) $input[$field]);
+                $patch[$field] = $val !== '' ? $val : null;
+            }
+        }
+
+        if (array_key_exists('unit_ref', $input)) {
+            $unit = trim((string) $input['unit_ref']);
+            $patch['unit_ref'] = $unit !== '' ? $unit : null;
+            $patch['property_ref'] = $patch['unit_ref'];
+        }
+
+        if (array_key_exists('square_meters', $input)) {
+            $patch['square_meters'] = $input['square_meters'] === '' || $input['square_meters'] === null
+                ? null
+                : (float) $input['square_meters'];
+        }
+
+        if (array_key_exists('reservation_amount', $input)) {
+            $patch['reservation_amount'] = $input['reservation_amount'] === '' || $input['reservation_amount'] === null
+                ? null
+                : $this->money($input['reservation_amount']);
+        }
+
+        if (array_key_exists('total_price', $input) && $input['total_price'] !== '') {
+            $patch['total_price'] = $this->money($input['total_price']);
+        }
+
+        if (array_key_exists('down_payment', $input) && $input['down_payment'] !== '') {
+            $patch['down_payment'] = $this->money($input['down_payment']);
+        }
+
+        if (array_key_exists('financing_amount', $input) && $input['financing_amount'] !== '') {
+            $patch['financing_amount'] = $this->money($input['financing_amount']);
+        }
+
+        if (array_key_exists('start_date', $input) && $input['start_date'] !== '') {
+            $patch['start_date'] = $this->requireDate($input['start_date'], 'Inicio del financiamiento');
+        }
+
+        if (array_key_exists('sale_date', $input)) {
+            $sale = trim((string) $input['sale_date']);
+            $patch['sale_date'] = $sale === '' ? null : $this->requireDate($sale, 'Fecha de venta');
+        }
+
+        if (array_key_exists('client_source', $input)) {
+            $patch['client_source'] = $this->normalizeClientSource($input['client_source']);
+        }
+
+        if ($patch !== []) {
+            $this->planModel->update($planId, $patch);
+        }
+
+        if (isset($patch['client_source']) && $patch['client_source'] !== null) {
+            $this->propagateClientSourceFromPlan($planId, (string) $patch['client_source']);
+        }
+
+        return $this->getPlanDetail($planId) ?? [];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function updateInstallmentDueDate(int $installmentId, string $dueDate): array
+    {
+        $installment = $this->installmentModel->find($installmentId);
+        if (! is_array($installment)) {
+            throw new InvalidArgumentException('Cuota de amortización no encontrada.');
+        }
+
+        if (($installment['status'] ?? '') === 'paid') {
+            throw new InvalidArgumentException('No se puede cambiar la fecha de una cuota ya pagada.');
+        }
+
+        $dueDate = $this->requireDate($dueDate, 'Fecha de vencimiento');
+        $planId = (int) ($installment['financing_plan_id'] ?? 0);
+
+        $this->installmentModel->update($installmentId, ['due_date' => $dueDate]);
+
+        if ($planId > 0) {
+            $last = $this->installmentModel
+                ->selectMax('due_date', 'max_due')
+                ->where('financing_plan_id', $planId)
+                ->first();
+            if (is_array($last) && ! empty($last['max_due'])) {
+                $this->planModel->update($planId, ['end_date' => $last['max_due']]);
+            }
+        }
+
+        return $this->getPlanDetail($planId) ?? [];
+    }
+
+    private function normalizeClientSource(mixed $value): ?string
+    {
+        $source = trim((string) $value);
+        if ($source === '') {
+            return null;
+        }
+
+        if (! in_array($source, FinanceClientSource::validCodes(), true)) {
+            throw new InvalidArgumentException('Origen de cliente no válido.');
+        }
+
+        return $source;
+    }
+
+    private function propagateClientSourceFromPlan(int $planId, string $clientSource): void
+    {
+        $db = \Config\Database::connect();
+        if (! $db->fieldExists('client_source', 'finance_movements')) {
+            return;
+        }
+
+        if ($db->fieldExists('financing_plan_id', 'finance_movements')) {
+            $db->table('finance_movements')
+                ->where('financing_plan_id', $planId)
+                ->update(['client_source' => $clientSource]);
+        }
+
+        $quotaRows = (new FinanceQuota())
+            ->select('finance_movement_id')
+            ->where('financing_plan_id', $planId)
+            ->where('finance_movement_id IS NOT NULL', null, false)
+            ->findAll();
+
+        foreach ($quotaRows as $row) {
+            $movementId = (int) ($row['finance_movement_id'] ?? 0);
+            if ($movementId > 0) {
+                $db->table('finance_movements')
+                    ->where('id', $movementId)
+                    ->update(['client_source' => $clientSource]);
+            }
+        }
     }
 
     private function requireDate(?string $value, string $label): string

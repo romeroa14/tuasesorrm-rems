@@ -33,6 +33,9 @@ class FinanceFinancingPlan extends Model
         'currency_code',
         'status',
         'notes',
+        'client_source',
+        'sale_date',
+        'commission_notes',
     ];
 
     protected $useTimestamps = true;

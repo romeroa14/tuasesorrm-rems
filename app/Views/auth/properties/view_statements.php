@@ -40,8 +40,12 @@
                 <?= csrf_field() ?>
                     <div class="row pt-3">
                         <?php foreach ($graphics as $key => $graphic): ?>
+                            <?php $isWasi = !empty($graphic['fallback']); ?>
                             <div class="col-md-4 pb-3">
                                 <img id="graphic" src="<?= '/properties/RM00'.$id_property.'/graphic/'.$graphic['image'] ?>" class="img-property-grid" alt="Asesores RM">
+                                <?php if ($isWasi): ?>
+                                    <p class="small text-muted mb-2">Foto Wasi</p>
+                                <?php else: ?>
                                 <div class="input-group input-group-sm mt-0">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text rounded-0" id="inputGroup-sizing-sm">
@@ -54,7 +58,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <a 
-                                        href="<?= '/app/my_properties/delete_image/'.$id_property.'/'.base64_encode('/properties/RM00'.$id_property.'/graphic/'.$graphic['image'].'/'.$graphic['id']) ?>" 
+                                        href="<?= base_url('/app/my_properties/delete_image/'.$id_property.'/'.$graphic['id']) ?>" 
                                         class="btn btn-danger btn-sm w-100 rounded-0" >
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </a>
@@ -68,12 +72,15 @@
                                         </a>
                                     </div>
                                 </div>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>
+                    <?php if ($graphics === [] || empty($graphics[0]['fallback'])): ?>
                     <button type="submit" class="btn btn-primary btn-sm h-25 w-100 rounded-0">
                         <i class="fa fa-wrench"></i> Guardar puestos
                     </button>
+                    <?php endif; ?>
                 </form>
             </div>
         </div>
@@ -351,6 +358,14 @@
                     <div class="form-group">
                         <?= form_label('Teléfono del propietario', 'owner_phone'); ?>
                         <?= form_input('owner_phone', $property_data['owner_phone'], 'class="form-control rounded"') ?>
+                    </div>
+                    <div class="form-group">
+                        <?= form_label('Nota / Observaciones', 'management_notes'); ?>
+                        <?= form_textarea('management_notes', $property_data['management_notes'] ?? '', [
+                            'class' => 'form-control rounded',
+                            'rows'  => '5',
+                            'placeholder' => 'Notas internas de captación / declaración',
+                        ]) ?>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn-sm h-25 w-100 rounded-0">

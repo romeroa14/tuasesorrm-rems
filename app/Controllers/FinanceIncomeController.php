@@ -8,6 +8,9 @@ use App\Libraries\FinanceAuthorization;
 use App\Libraries\FinanceCatalogService;
 use App\Libraries\FinanceCompanyContext;
 use App\Libraries\FinanceReportService;
+use App\Libraries\FinanceMovementAdminService;
+use App\Libraries\FinanceClientSource;
+use App\Libraries\FinanceIncomeCommissionBridge;
 use App\Libraries\FinanceWorkflow;
 use Config\FinanceMenu;
 use CodeIgniter\HTTP\RequestInterface;
@@ -77,6 +80,7 @@ class FinanceIncomeController extends BaseController
         $this->body['current_type'] = $type;
         $this->body['date_from'] = $this->request->getGet('date_from') ?? date('Y-m-01');
         $this->body['date_to'] = $this->request->getGet('date_to') ?? date('Y-m-t');
+        $this->body['client_source_options'] = FinanceClientSource::options();
 
         $this->generate_template($this->settings['url']);
     }
@@ -151,8 +155,12 @@ class FinanceIncomeController extends BaseController
         }
 
         $term = trim((string) ($this->request->getGet('q') ?? $this->request->getPost('q') ?? ''));
+        $limit = (int) ($this->request->getGet('limit') ?? $this->request->getPost('limit') ?? 10);
+        if ($limit < 10) {
+            $limit = 10;
+        }
 
-        return $this->jsonSuccess($this->catalogService->searchClients($term));
+        return $this->jsonSuccess($this->catalogService->searchClients($term, $limit));
     }
 
     public function apiCreateClient(): ResponseInterface
@@ -206,6 +214,48 @@ class FinanceIncomeController extends BaseController
         return $this->jsonSuccess($data);
     }
 
+
+
+    public function apiGetIncome(string $id): ResponseInterface
+    {
+        if (! $this->financeAuthorization->canViewIncome()) {
+            return $this->jsonError('No tienes permisos para ver ingresos.', 403);
+        }
+
+        try {
+            return $this->jsonSuccess((new FinanceMovementAdminService())->getIncomeDetail((int) $id));
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 404);
+        } catch (\Throwable $exception) {
+            log_message('error', 'FinanceIncomeController::apiGetIncome - ' . $exception->getMessage());
+
+            return $this->jsonError('No se pudo cargar el ingreso.', 500);
+        }
+    }
+
+    public function apiUpdateIncome(string $id): ResponseInterface
+    {
+        if (! $this->financeAuthorization->canDraftWorkflow()) {
+            return $this->jsonError('No tienes permisos para editar ingresos.', 403);
+        }
+
+        try {
+            $payload = $this->requestData();
+            $prepared = $this->catalogService->prepareWorkflowInput($payload, 'ingreso');
+            $service = new FinanceMovementAdminService();
+            $service->updatePostedIncome((int) $id, $prepared);
+            $bridge = (new FinanceIncomeCommissionBridge())->sync((int) $id, $prepared);
+
+            return $this->jsonSuccess(['updated' => true, 'id' => (int) $id, 'bridge' => $bridge]);
+        } catch (\InvalidArgumentException $exception) {
+            return $this->jsonError($exception->getMessage(), 422);
+        } catch (\Throwable $exception) {
+            log_message('error', 'FinanceIncomeController::apiUpdateIncome - ' . $exception->getMessage());
+
+            return $this->jsonError('No se pudo actualizar el ingreso.', 500);
+        }
+    }
+
     public function apiCreateIncome(): ResponseInterface
     {
         return $this->handleWorkflowCreate('ingreso');
@@ -243,6 +293,13 @@ class FinanceIncomeController extends BaseController
             $membership = $this->requireMembership();
             $prepared = $this->catalogService->prepareWorkflowInput($payload, $workflowType);
             $result = $this->financeWorkflow->createWorkflow($workflowType, $prepared, $membership);
+
+            if ($workflowType === 'ingreso') {
+                $movementId = (int) ($result['movement']['id'] ?? 0);
+                if ($movementId > 0) {
+                    $result['bridge'] = (new FinanceIncomeCommissionBridge())->sync($movementId, $prepared);
+                }
+            }
 
             return $this->jsonSuccess($result);
         } catch (\InvalidArgumentException $exception) {

@@ -17,7 +17,10 @@ class TrackingStatus extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'name'
+        'name',
+        'emoji',
+        'classifier_hint',
+        'is_active',
     ];
 
     // Dates

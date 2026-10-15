@@ -260,7 +260,7 @@ abstract class BaseController extends Controller
     /*///////////////////////////////////////////////////
     ////////// COMPONENTE GENERADOR DE TABLAS ///////////
     ///////////////////////////////////////////////////*/
-    public function table($model, $title, $description, $header, $prefix, $action = null)
+    public function table($model, $title, $description, $header, $prefix, $action = null, bool $echoView = true)
     {      
         if (isset($action)) {
 
@@ -305,11 +305,15 @@ abstract class BaseController extends Controller
         /* ASIGNAMOS LA URL PARA ACCEDER A LA PÁGINA */
         $this->body["datatable"] = $config;
 
+        $this->settings['datatable'] = ['prefix' => $prefix];
+
         /* ASIGNAMOS LA URL PARA ACCEDER A LA PÁGINA */
         $url = 'shared/datatable/datatable';
 
         /* CUERPO DE PÁGINA */
-        view($url, $this->body);
+        if ($echoView) {
+            view($url, $this->body);
+        }
     }
     
     /*///////////////////////////////////////////////////
@@ -371,33 +375,43 @@ abstract class BaseController extends Controller
     ///////////////////////////////////////////////////*/
     public function uploadImages($upload, $url_folder, $quality, $max_width){
         if ($upload->isValid() && !$upload->hasMoved())
-        {   
-            $newName = $upload->getRandomName();
-            $upload->move($url_folder, $newName);
-            $helper = \Config\Services::image();
-            $origen = $url_folder.$newName; // Ruta de la imagen
-            $destino = $url_folder.$newName; // Ruta para guardar la imagen comprimida
-            $max_width = $max_width; // Ancho máximo permitido
-            $quality = $quality; // Calidad de compresión
-
-            // Cargar la imagen y obtener sus dimensiones
-            $image = $helper->withFile($origen);
-            $width = $image->getWidth();
-            $height = $image->getHeight();
-
-            // Redimensionar la imagen si es necesario
-            if ($width > $max_width) {
-                $image->resize($max_width, $height, true);
+        {
+            if (! is_dir($url_folder) && ! mkdir($url_folder, 0775, true) && ! is_dir($url_folder)) {
+                $this->session->setFlashdata(['error' => 'No se pudo crear la carpeta de imágenes. Revisa los permisos del servidor.']);
+                return false;
             }
 
-            // Comprimir la imagen y guardarla
-            $image->save($destino, $quality);
-            if (is_file($destino)) {
+            $newName = $upload->getRandomName();
+            $upload->move($url_folder, $newName);
+            $origen = $url_folder.$newName;
+
+            try {
+                $helper = \Config\Services::image();
+                $image = $helper->withFile($origen);
+                $width = $image->getWidth();
+                $height = $image->getHeight();
+
+                if ($width > $max_width) {
+                    $image->resize($max_width, $height, true);
+                }
+
+                $image->save($origen, $quality);
+            } catch (\Throwable $exception) {
+                log_message('error', 'uploadImages no pudo redimensionar {file}: {msg}', [
+                    'file' => $newName,
+                    'msg' => $exception->getMessage(),
+                ]);
+            }
+
+            if (is_file($origen)) {
                 return $newName;
             }
         }
         else{
-            $this->session->setFlashdata(['error' => 'Lo siento, no hemos podido cargar el archivo. Por favor, inténtalo de nuevo más tarde.']);
+            $reason = method_exists($upload, 'getErrorString') ? $upload->getErrorString() : '';
+            $this->session->setFlashdata(['error' => $reason
+                ? ('No se pudo cargar el archivo: ' . $reason)
+                : 'Lo siento, no hemos podido cargar el archivo. Por favor, inténtalo de nuevo más tarde.']);
         }
     }
 
@@ -505,7 +519,23 @@ abstract class BaseController extends Controller
     /*///////////////////////////////////////////////////
     //////// COMPONENTE DESTRUCTOR DE ARCHIVOS //////////
     ///////////////////////////////////////////////////*/
-    public function destroy_file($directory_file_destroy)
+    protected function decodeDeleteToken(?string $token): string
+    {
+        if ($token === null || $token === '') {
+            return '';
+        }
+
+        $b64 = strtr($token, '-_', '+/');
+        $pad = strlen($b64) % 4;
+        if ($pad > 0) {
+            $b64 .= str_repeat('=', 4 - $pad);
+        }
+
+        $decoded = base64_decode($b64, true);
+        return is_string($decoded) ? $decoded : '';
+    }
+
+        public function destroy_file($directory_file_destroy)
     {
         /* RECIBIMOS LA VARIABLE Y ELIMINAMOS */ 
         $url = $directory_file_destroy;
@@ -576,8 +606,11 @@ abstract class BaseController extends Controller
     ///////////////////////////////////////////////////*/
     public function generateMessageWpProperty($property)
     {
+        if (! is_array($property)) {
+            return '';
+        }
 
-        $ubi = $property['state_name'] === 'Distrito Capital' ? '' : 'Estado';
+        $ubi = ($property['state_name'] ?? '') === 'Distrito Capital' ? '' : 'Estado';
         
         $address = mb_convert_encoding($property['address'], 'UTF-8', 'UTF-8');
         $address = iconv('UTF-8', 'UTF-8//IGNORE', $address);

@@ -1,12 +1,12 @@
 # Microservicio **agente** (Python)
 
-Servicio independiente con **prompt del sistema**, cliente **DeepSeek** (API compatible OpenAI) y **tools** que consultan MySQL con la misma lógica que `App\Libraries\CrmAiPropertyToolRunner` en PHP (solo `status.name = 'Aprobado'`).
+Servicio independiente con **prompt del sistema**, cliente **OpenRouter** (API compatible OpenAI) y **tools** que consultan MySQL con la misma lógica que `App\Libraries\CrmAiPropertyToolRunner` en PHP (solo `status.name = 'Aprobado'`).
 
 ## Requisitos
 
 - Python 3.11+ recomendado
 - Credenciales MySQL iguales que usa CodeIgniter (`database` en el `.env` PHP → copiar host, usuario, contraseña, base)
-- `DEEPSEEK_API_KEY`
+- `OPENROUTER_API_KEY`
 
 ## Instalación
 
@@ -16,7 +16,7 @@ python3 -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env
-# Editar .env con MYSQL_* y DEEPSEEK_API_KEY (sin comillas en el valor)
+# Editar .env con MYSQL_* y OPENROUTER_API_KEY (sin comillas en el valor)
 # Tras cambiar .env: reinicia uvicorn (--reload no observa solo cambios en .env).
 ```
 
@@ -57,7 +57,7 @@ Ejemplo **systemd** (ajusta `User` y rutas): archivo `/etc/systemd/system/agente
 
 ```ini
 [Unit]
-Description=Agente REMS (FastAPI + DeepSeek)
+Description=Agente REMS (FastAPI + OpenRouter)
 After=network.target mysql.service
 
 [Service]
@@ -91,7 +91,7 @@ curl -sS -X POST http://127.0.0.1:8090/v1/chat \
 |------|-----|
 | `agente/prompts.py` | System prompt (único lugar en Python) |
 | `agente/db_tools.py` | SQL `search_properties` / `get_property_detail` |
-| `agente/runner.py` | Bucle LLM ↔ tools ↔ DeepSeek |
+| `agente/runner.py` | Bucle LLM ↔ tools ↔ OpenRouter |
 | `agente/server.py` | FastAPI `/health`, `/v1/chat` |
 | `agente/cli_chat.py` | REPL de prueba |
 

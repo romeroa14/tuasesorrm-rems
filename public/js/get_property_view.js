@@ -1,4 +1,7 @@
 function get_property_view() {
+    if (!document.getElementById('HeaderMemory') || !document.getElementById('CarouselImages')) {
+        return;
+    }
 
     var url = $(location).attr('href');
 
@@ -12,9 +15,10 @@ function get_property_view() {
 
 
 
-            if (response.data.property == 'No existe la propiedad') {
+            if (!response.data.property || response.data.error) {
 
                 window.location.href = '/app/properties/all';
+                return;
 
             }
 
@@ -444,7 +448,10 @@ function get_property_view() {
 
             imgAgent.classList.add('rounded', 'shadow-sm', 'list-group', 'mb-4');
 
-            $(imgAgent).attr('src', '/users/'+ property.email_agent + '/' + property.profile_photo_agent);
+            var agentPhoto = property.profile_photo_agent
+                ? '/users/' + property.email_agent + '/' + property.profile_photo_agent
+                : '/users/default-profile.jpg';
+            $(imgAgent).attr('src', agentPhoto);
 
             $(imgAgent).attr('style', 'height: 20rem; width: 100%; object-position: top; object-fit: cover;');
 
@@ -826,7 +833,9 @@ function get_property_view() {
 
             console.error(error);
 
-            preloader.setAttribute("style", "display: none !important;");
+            if (typeof preloader !== 'undefined' && preloader) {
+                preloader.setAttribute("style", "display: none !important;");
+            }
 
         });
 

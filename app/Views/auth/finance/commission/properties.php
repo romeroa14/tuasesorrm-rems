@@ -27,14 +27,34 @@
             <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-list"></i> Listado de Propiedades</h6>
         </div>
         <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="mb-1">Perfil</label>
+                    <select class="form-control form-control-sm" id="filterProfile">
+                        <option value="">Todos</option>
+                        <option value="coordinator">Coordinadora</option>
+                        <option value="atc">ATC</option>
+                        <option value="marketing">Mercadeo</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="mb-1">Persona</label>
+                    <select class="form-control form-control-sm" id="filterPerson">
+                        <option value="">Todas</option>
+                        <?php foreach (($filter_users ?? []) as $user): ?>
+                        <option value="<?= (int) ($user['id'] ?? 0) ?>"><?= esc($user['full_name'] ?? ('Usuario #' . ($user['id'] ?? ''))) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table id="propertiesTable" class="table table-striped table-bordered" style="width:100%">
                     <thead class="thead-light">
                         <tr>
                             <th>ID</th>
                             <th>Referencia</th>
-                            <th>Precio Venta</th>
-                            <th>Base Comisión</th>
+                            <th>Pago total</th>
+                            <th>Comisión</th>
                             <th>Gasto Registro</th>
                             <th>Ingreso Neto</th>
                             <th>Fecha Venta</th>
@@ -51,6 +71,7 @@
 
 <script>
 var dt;
+var propertyMeta = {};
 var baseUrl = '<?= base_url('/app/finance/commission') ?>';
 
 function formatMoney(value) {
@@ -61,6 +82,10 @@ function formatMoney(value) {
 function loadTable() {
     var rows = [];
     <?php foreach ($properties ?? [] as $row): ?>
+    propertyMeta[<?= (int) ($row['id'] ?? 0) ?>] = <?= json_encode([
+        'roles' => array_values(array_unique(array_column($row['participants'] ?? [], 'role'))),
+        'users' => array_values(array_unique(array_map('intval', array_column($row['participants'] ?? [], 'user_id')))),
+    ], JSON_UNESCAPED_UNICODE) ?>;
     var statusLbl = {'pending': 'Pendiente', 'settled': 'Liquidado', 'cancelled': 'Cancelado'};
     var statusCls = {'pending': 'warning', 'settled': 'success', 'cancelled': 'secondary'};
     rows.push([
@@ -107,5 +132,19 @@ function deleteProperty(id) {
     });
 }
 
+$.fn.dataTable.ext.search.push(function(settings, data) {
+    if (settings.nTable.id !== 'propertiesTable') return true;
+    var id = parseInt(data[0], 10);
+    var meta = propertyMeta[id] || {roles: [], users: []};
+    var role = $('#filterProfile').val();
+    var person = $('#filterPerson').val();
+    if (role && (meta.roles || []).indexOf(role) === -1) return false;
+    if (person && (meta.users || []).map(String).indexOf(String(person)) === -1) return false;
+    return true;
+});
+$('#filterProfile, #filterPerson').on('change', function() {
+    if (dt) dt.draw();
+});
 $(document).ready(function() { loadTable(); });
+
 </script>
