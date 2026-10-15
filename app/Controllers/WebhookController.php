@@ -40,15 +40,15 @@ class WebhookController extends ResourceController
         $challenge = $this->request->getGet('hub_challenge') ?? $this->request->getGet('hub.challenge');
 
         $verifyToken = getenv('INSTAGRAM_VERIFY_TOKEN');
-        $verifyToken = ($verifyToken !== false && trim((string) $verifyToken) !== '')
-            ? trim((string) $verifyToken)
-            : 'asesoresrm_verify_2026';
+        $verifyToken = ($verifyToken !== false) ? trim((string) $verifyToken) : '';
 
-        if ($verifyToken === 'asesoresrm_verify_2026') {
-            log_message('notice', 'Webhook Instagram GET: usando INSTAGRAM_VERIFY_TOKEN por defecto; define uno secreto en .env para Live.');
+        if ($verifyToken === '') {
+            log_message('error', 'Webhook Instagram GET: INSTAGRAM_VERIFY_TOKEN no esta definido; verificacion rechazada.');
+
+            return $this->failUnauthorized('Invalid verify token');
         }
 
-        if ($mode === 'subscribe' && $token === $verifyToken) {
+        if ($mode === 'subscribe' && hash_equals($verifyToken, (string) $token)) {
             return $this->response->setBody($challenge);
         }
 
@@ -726,7 +726,10 @@ class WebhookController extends ResourceController
     {
         $v = getenv('META_WEBHOOK_REQUIRE_SIGNATURE');
         if ($v === false || $v === '') {
-            return false;
+            // Secure by default: enforce the signature whenever the app secret is configured.
+            $secret = getenv('META_APP_SECRET');
+
+            return is_string($secret) && trim($secret) !== '';
         }
 
         return filter_var($v, FILTER_VALIDATE_BOOLEAN);
