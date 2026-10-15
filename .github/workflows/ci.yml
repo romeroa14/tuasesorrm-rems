@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: intl, mbstring, mysqli, pdo_mysql, zip, gd, bcmath, redis
+          tools: composer:v2
+
+      - uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+
+      - run: composer install --no-interaction --prefer-dist
+
+      - name: Syntax check
+        run: find app tests -name '*.php' -print0 | xargs -0 -n1 -P4 php -l > /dev/null
+
+      - name: Prepare writable dirs
+        run: mkdir -p writable/cache writable/logs writable/session
+
+      # Blocking: suites that are green today and guard the security changes.
+      - name: Security tests (blocking)
+        run: vendor/bin/phpunit tests/unit/AiIngestAuthTest.php tests/unit/WebhookControllerTest.php
+
+      # Non-blocking until the known failures (Finance migrations/authorization, Meta graph) are fixed.
+      - name: Full suite (informative)
+        continue-on-error: true
+        run: vendor/bin/phpunit
+
+  agente:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agente
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt pytest httpx
+      - run: python -m pytest -q
