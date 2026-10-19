@@ -190,12 +190,12 @@ $financeModules = FinanceSidebar::modules();
     <div class="sidebar-heading">
         CRM
     </div>
-    <li class="nav-item <?= ($title == 'CRM Inbox' || $title == 'Pipeline CRM' || $title == 'CRM Dashboard' || $title == 'Estatus de Seguimiento (Pipeline)') ? 'active' : '' ?>">
+    <li class="nav-item <?= ($title == 'CRM Inbox' || $title == 'Pipeline CRM' || $title == 'CRM Dashboard' || $title == 'Estatus de Seguimiento (Pipeline)' || $title == 'Reportes CRM') ? 'active' : '' ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCRM" aria-expanded="false" aria-controls="collapseCRM">
             <i class="fas fa-headset"></i>
             <span>CRM</span>
         </a>
-        <div id="collapseCRM" class="collapse <?= ($title == 'CRM Inbox' || $title == 'Pipeline CRM' || $title == 'CRM Dashboard' || $title == 'Estatus de Seguimiento (Pipeline)') ? 'show' : '' ?>">
+        <div id="collapseCRM" class="collapse <?= ($title == 'CRM Inbox' || $title == 'Pipeline CRM' || $title == 'CRM Dashboard' || $title == 'Estatus de Seguimiento (Pipeline)' || $title == 'Reportes CRM') ? 'show' : '' ?>">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item <?= $title == 'CRM Dashboard' ? 'active' : '' ?>" href="<?= base_url('/app/crm/dashboard') ?>">
                     <i class="fas fa-chart-bar"></i> Dashboard
@@ -206,6 +206,11 @@ $financeModules = FinanceSidebar::modules();
                 <a class="collapse-item <?= $title == 'Estatus de Seguimiento (Pipeline)' ? 'active' : '' ?>" href="<?= base_url('/app/trackingstatus/all') ?>">
                     <i class="fas fa-list"></i> Estatus de Pipeline
                 </a>
+                <?php if (in_array((int) session()->get('id_fk_rol'), config('CrmReports')->allowedRoles, true)): ?>
+                <a class="collapse-item <?= $title == 'Reportes CRM' ? 'active' : '' ?>" href="<?= base_url('/app/crm/reports') ?>">
+                    <i class="fas fa-file-alt"></i> Reportes
+                </a>
+                <?php endif; ?>
             </div>
         </div>
     </li>

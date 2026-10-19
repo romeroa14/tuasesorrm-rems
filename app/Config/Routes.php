@@ -155,6 +155,9 @@ $routes->delete('/app/ai/threads/(:num)', 'AiAgentController::delete_thread/$1',
 $routes->get('/app/crm/inbox', 'CrmController::inbox', ['filter' => 'auth']); /* CRM Inbox */
 $routes->get('/app/crm/pipeline', 'CrmController::pipeline', ['filter' => 'auth']); /* CRM Pipeline Kanban */
 $routes->get('/app/crm/dashboard', 'CrmController::dashboard', ['filter' => 'auth']); /*  */
+$routes->get('/app/crm/reports', 'CrmReportsController::index', ['filter' => 'auth']); /* Reportes CRM */
+$routes->get('/app/crm/reports/data', 'CrmReportsController::api_attention', ['filter' => 'auth']); /* Datos reporte de atencion */
+$routes->get('/app/crm/reports/phones', 'CrmReportsController::export_phones', ['filter' => 'auth']); /* Exportar numeros (CSV) */
 
 // CRM API (requieren autenticación)
 $routes->get('/app/crm/api/conversations', 'CrmController::api_conversations', ['filter' => 'auth']); /* Obtener conversaciones */
