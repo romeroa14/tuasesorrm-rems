@@ -231,10 +231,21 @@ class InstagramBackfillMessages extends BaseCommand
     {
         $response = Services::curlrequest(['timeout' => 60, 'http_errors' => false])->get($url);
         $json     = json_decode((string) $response->getBody(), true) ?: [];
-        if (isset($json['error'])) {
-            throw new \RuntimeException('Graph API: ' . ($json['error']['message'] ?? 'error'));
+        if (! isset($json['error'])) {
+            return $json;
         }
 
-        return $json;
+        // Meta caps the payload size: retry the same page with half the page size.
+        $message = (string) ($json['error']['message'] ?? 'error');
+        parse_str((string) parse_url($url, PHP_URL_QUERY), $query);
+        $limit = (int) ($query['limit'] ?? 0);
+        if (stripos($message, 'reduce the amount of data') !== false && $limit > 5) {
+            $query['limit'] = intdiv($limit, 2);
+            $base           = strtok($url, '?');
+
+            return $this->getJson($base . '?' . http_build_query($query));
+        }
+
+        throw new \RuntimeException('Graph API: ' . $message);
     }
 }
