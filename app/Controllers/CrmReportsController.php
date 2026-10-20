@@ -34,37 +34,46 @@ class CrmReportsController extends BaseController
             . view('template/footer/footer', $data);
     }
 
-    /** GET /app/crm/reports/data?from=YYYY-MM-DD&to=YYYY-MM-DD */
+    /** GET /app/crm/reports/data?from=YYYY-MM-DD&to=YYYY-MM-DD&mode=conversation|crm */
     public function api_attention(): ResponseInterface
     {
         if (! $this->canViewReports()) {
             return $this->response->setStatusCode(403)->setJSON(['status' => 'error', 'message' => 'Sin permiso']);
         }
 
-        [$from, $to] = $this->range();
+        [$from, $to]  = $this->range();
+        $crmAvailable = $this->crmInUse();
+        $mode         = $this->request->getGet('mode') === 'crm' && $crmAvailable ? 'crm' : 'conversation';
+
         $conversations = $this->conversationsInRange($from, $to);
-        $outbound      = $this->outboundTexts(array_column($conversations, 'id'));
+        $ids           = array_column($conversations, 'id');
+        $outbound      = $this->outboundTexts($ids);
+        $report        = new CrmAttentionReport();
 
-        $input = [];
-        foreach ($conversations as $c) {
-            $texts   = $outbound[$c['id']] ?? [];
-            $input[] = [
-                'id'             => (int) $c['id'],
-                'human_replied'  => $texts !== [],
-                'outbound_texts' => $texts,
-            ];
+        if ($mode === 'crm') {
+            $senders = $this->crmSenders($ids);
+            $input   = [];
+            foreach ($conversations as $c) {
+                $input[] = [
+                    'id'            => (int) $c['id'],
+                    'human_replied' => isset($outbound[(int) $c['id']]),
+                    'participants'  => $senders[(int) $c['id']] ?? [],
+                ];
+            }
+            $summary = $report->summarizeParticipants($input);
+        } else {
+            $summary = $report->summarizeConversations($this->conversationInput($conversations, $outbound));
         }
+        unset($summary['conversations']);
 
-        $summary = (new CrmAttentionReport($this->advisorMap()))->summarize($input);
-
-        $rows = [];
-        foreach ($summary['advisors'] as $name => $row) {
-            $rows[] = ['advisor' => $name] + $row;
-        }
-        usort($rows, static fn (array $a, array $b): int => $b['total'] <=> $a['total']);
-        $summary['advisors'] = $rows;
-
-        return $this->response->setJSON(['status' => 'success', 'from' => $from, 'to' => $to, 'data' => $summary]);
+        return $this->response->setJSON([
+            'status'        => 'success',
+            'mode'          => $mode,
+            'crm_available' => $crmAvailable,
+            'from'          => $from,
+            'to'            => $to,
+            'data'          => $summary,
+        ]);
     }
 
     /** GET /app/crm/reports/phones?from=YYYY-MM-DD&to=YYYY-MM-DD  (CSV download) */
@@ -78,20 +87,14 @@ class CrmReportsController extends BaseController
         $conversations = $this->conversationsInRange($from, $to);
         $ids           = array_column($conversations, 'id');
         $byId          = array_column($conversations, null, 'id');
-        $report        = new CrmAttentionReport($this->advisorMap());
-        $outbound      = $this->outboundTexts($ids);
+        $attribution   = (new CrmAttentionReport())
+            ->summarizeConversations($this->conversationInput($conversations, $this->outboundTexts($ids)))['conversations'];
 
         /** @var array<string, array<string, string>> $found canonical number => row */
         $found = [];
-        $add   = function (string $number, string $source, array $c, string $date) use (&$found, $report, $outbound): void {
+        $add   = static function (string $number, string $source, array $c, string $date) use (&$found, $attribution): void {
             if (isset($found[$number])) {
                 return;
-            }
-            $advisors        = [];
-            foreach ($outbound[$c['id']] ?? [] as $text) {
-                foreach ($report->advisorsIn($text) as $name) {
-                    $advisors[$name] = true;
-                }
             }
             $found[$number] = [
                 'number'   => $number,
@@ -99,7 +102,7 @@ class CrmReportsController extends BaseController
                 'client'   => (string) ($c['lead_name'] ?? ''),
                 'ig_user'  => (string) ($c['instagram_username'] ?? $c['external_username'] ?? ''),
                 'account'  => (string) ($c['recipient_ig_username'] ?? ''),
-                'advisors' => implode(' / ', array_keys($advisors)),
+                'advisors' => implode(' / ', $attribution[(int) $c['id']] ?? []),
                 'date'     => $date,
                 'conv_id'  => (string) $c['id'],
             ];
@@ -155,10 +158,63 @@ class CrmReportsController extends BaseController
         return [$from, $to];
     }
 
-    /** @return array<string, list<string>> */
-    private function advisorMap(): array
+    /**
+     * @param list<array<string, mixed>>  $conversations
+     * @param array<int, list<string>>    $outbound
+     *
+     * @return list<array{id: int, human_replied: bool, outbound_texts: list<string>}>
+     */
+    private function conversationInput(array $conversations, array $outbound): array
     {
-        return config('CrmReports')->advisors;
+        $input = [];
+        foreach ($conversations as $c) {
+            $texts   = $outbound[(int) $c['id']] ?? [];
+            $input[] = ['id' => (int) $c['id'], 'human_replied' => $texts !== [], 'outbound_texts' => $texts];
+        }
+
+        return $input;
+    }
+
+    /** True once any reply has been sent from the CRM (it carries the CRM user id). */
+    private function crmInUse(): bool
+    {
+        return db_connect()->table('messages')
+            ->where('direction', 'outbound')
+            ->where('sender_type', 'agent')
+            ->where('sender_id IS NOT NULL')
+            ->countAllResults() > 0;
+    }
+
+    /**
+     * CRM users who replied from the CRM, per conversation, in reply order.
+     *
+     * @param list<int|string> $ids
+     *
+     * @return array<int, list<string>>
+     */
+    private function crmSenders(array $ids): array
+    {
+        $out = [];
+        foreach (array_chunk($ids, self::IN_CHUNK) as $chunk) {
+            $rows = db_connect()->table('messages m')
+                ->select('m.conversation_id, u.full_name')
+                ->join('users u', 'u.id = m.sender_id', 'inner')
+                ->where('m.direction', 'outbound')
+                ->where('m.sender_type', 'agent')
+                ->whereIn('m.conversation_id', $chunk)
+                ->orderBy('m.id', 'ASC')
+                ->get()
+                ->getResultArray();
+            foreach ($rows as $r) {
+                $name = trim((string) $r['full_name']);
+                $cid  = (int) $r['conversation_id'];
+                if ($name !== '' && ! in_array($name, $out[$cid] ?? [], true)) {
+                    $out[$cid][] = $name;
+                }
+            }
+        }
+
+        return $out;
     }
 
     /** @return list<array<string, mixed>> */

@@ -31,6 +31,17 @@
                 </div>
             </div>
 
+            <div class="btn-group mb-3" role="group" aria-label="Tipo de análisis">
+                <button type="button" class="btn btn-primary" data-mode="conversation">
+                    <i class="fas fa-comments"></i> Análisis por conversación
+                </button>
+                <button type="button" class="btn btn-outline-primary" data-mode="crm" disabled
+                        title="Se habilita cuando el equipo ATC responda desde el CRM">
+                    <i class="fas fa-database"></i> Análisis por datos del CRM
+                </button>
+            </div>
+            <p class="small text-muted mb-3" id="mode-help"></p>
+
             <div id="report-error" class="alert alert-danger d-none"></div>
 
             <!-- KPI cards -->
@@ -106,11 +117,14 @@
             </div>
 
             <p class="small text-muted" id="report-note"></p>
-            <p class="small text-muted">
-                El asesor se identifica por el nombre con el que se presenta en el chat (por ejemplo, “por acá le habla Luis Rojas”).
-                <strong>Atendida</strong>: hay una respuesta humana que menciona a un asesor. <strong>Sin atender</strong>: el resto, incluidas las respondidas sin nombre.
-                <strong>Veces primero</strong>: primer asesor en responder. <strong>Compartida</strong>: respondieron dos o más asesores.
-            </p>
+            <div class="small text-muted">
+                <strong>Total atendidas</strong>: conversaciones en las que el asesor respondió.
+                <strong>Veces primero</strong>: en cuántas fue el primero en responder.
+                <strong>Exclusivas</strong>: atendidas sólo por ese asesor.
+                <strong>Compartidas</strong>: respondieron dos o más asesores (cuenta para cada uno).
+                <strong>% Cuota del total</strong>: atendidas del asesor ÷ total de atendidas; con compartidas la suma puede pasar del 100&nbsp;%.
+                <strong>Sin atender</strong>: conversaciones sin asesor identificado, incluidas las respondidas sin firma.
+            </div>
 
         </div>
     </div>
@@ -121,6 +135,19 @@
     var DATA_URL = '<?= base_url('/app/crm/reports/data') ?>';
     var PHONES_URL = '<?= base_url('/app/crm/reports/phones') ?>';
     var $from = $('#rep-from'), $to = $('#rep-to');
+    var mode = 'conversation';
+    var HELP = {
+        conversation: 'Clasificación por mensajes: el asesor se identifica por cómo firma o se presenta en el chat (“Valery Mendoza | Asesores RM”, “Odra Cedeño del Equipo de Asesores RM”, “le habla Luis Rojas”).',
+        crm: 'Clasificación por datos del CRM: cuenta a los usuarios que respondieron desde el CRM con su sesión. Es la fuente oficial cuando el equipo ATC trabaje en el CRM.'
+    };
+    function setMode(m) {
+        mode = m;
+        $('[data-mode]').each(function () {
+            var on = $(this).data('mode') === m;
+            $(this).toggleClass('btn-primary', on).toggleClass('btn-outline-primary', !on);
+        });
+        $('#mode-help').text(HELP[m]);
+    }
 
     function iso(d) {
         var m = ('0' + (d.getMonth() + 1)).slice(-2), day = ('0' + d.getDate()).slice(-2);
@@ -155,16 +182,18 @@
         });
         $('#advisor-rows').html(rows.join('') || '<tr><td colspan="6" class="text-center text-muted py-4">Sin datos</td></tr>');
         $('#report-note').text(d.unidentified_human > 0
-            ? d.unidentified_human + ' conversaciones tienen respuesta humana sin nombre de asesor y cuentan como “sin atender”.'
+            ? 'Sin firma: ' + d.unidentified_human + ' conversaciones tienen respuesta humana pero sin nombre de asesor; cuentan como “sin atender”.'
             : '');
     }
 
     function load() {
-        var q = { from: $from.val(), to: $to.val() };
+        var q = { from: $from.val(), to: $to.val(), mode: mode };
         $('#report-error').addClass('d-none');
         $('#export-phones').attr('href', PHONES_URL + '?' + $.param(q));
         $.getJSON(DATA_URL, q).done(function (res) {
             $from.val(res.from); $to.val(res.to);
+            $('[data-mode="crm"]').prop('disabled', !res.crm_available);
+            setMode(res.mode);
             $('#export-phones').attr('href', PHONES_URL + '?' + $.param({ from: res.from, to: res.to }));
             render(res.data);
         }).fail(function () {
@@ -174,6 +203,8 @@
 
     $('#report-filters').on('submit', function (e) { e.preventDefault(); load(); });
     $('[data-range]').on('click', function () { setRange($(this).data('range')); load(); });
+    $('[data-mode]').on('click', function () { if (!this.disabled) { setMode($(this).data('mode')); load(); } });
+    setMode('conversation');
     setRange('month');
     load();
 })();

@@ -14,19 +14,4 @@ class CrmReports extends BaseConfig
      * @var list<int>
      */
     public array $allowedRoles = [2];
-
-    /**
-     * Advisors tracked by the attention report: display name => aliases used to
-     * recognise a self-introduction in outbound DMs (lowercase, no accents).
-     *
-     * @var array<string, list<string>>
-     */
-    public array $advisors = [
-        'Alejandra Velasco' => ['alejandra velasco', 'alejandra'],
-        'Barbara Migliore'  => ['barbara migliore', 'barbara'],
-        'Valery Mendoza'    => ['valery mendoza', 'valery'],
-        'Alejandro Flores'  => ['alejandro flores', 'alejandro'],
-        'Luis Rojas'        => ['luis rojas', 'luis'],
-        'Jefferson Ramirez' => ['jefferson ramirez', 'jefferson'],
-    ];
 }
