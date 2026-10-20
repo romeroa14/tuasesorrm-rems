@@ -32,11 +32,10 @@ class InstagramBackfillLeads extends BaseCommand
         $db = Database::connect();
 
         $rows = $db->query(
-            'SELECT l.id, l.instagram_username, c.external_id
+            'SELECT l.id, l.name, l.instagram_username, c.external_id, c.recipient_ig_id
              FROM leads l
              JOIN conversations c ON c.lead_id = l.id AND c.channel = ?
-             WHERE l.instagram_username IS NOT NULL
-             AND (l.resolution_status IS NULL OR l.resolution_status IN (?, ?))
+             WHERE (l.resolution_status IS NULL OR l.resolution_status IN (?, ?))
              ' . ($limit > 0 ? 'LIMIT ' . (int) $limit : ''),
             ['instagram', 'pending', 'failed']
         )->getResultArray();
@@ -55,14 +54,16 @@ class InstagramBackfillLeads extends BaseCommand
             $leadId     = (int) ($row['id'] ?? 0);
             $username   = (string) ($row['instagram_username'] ?? '');
             $externalId = (string) ($row['external_id'] ?? '');
+            $recipient  = (string) ($row['recipient_ig_id'] ?? '');
+            $leadName   = (string) ($row['name'] ?? '');
 
-            if ($leadId < 1 || $externalId === '') {
+            if ($leadId < 1 || $externalId === '' || $recipient === '') {
                 $skipped++;
 
                 continue;
             }
 
-            $profile = MetaInstagramGraph::resolveParticipantProfile($externalId);
+            $profile = MetaInstagramGraph::resolveParticipantProfile($externalId, $recipient);
             if ($profile === null) {
                 $failed++;
 
@@ -82,21 +83,33 @@ class InstagramBackfillLeads extends BaseCommand
             }
 
             $resolved++;
+            $name   = trim((string) ($profile['name'] ?? ''));
+            $handle = trim((string) ($profile['username'] ?? ''));
+            $handle = $handle !== '' ? '@' . ltrim($handle, '@') : '';
+
+            $patch = [
+                'instagram_full_name' => $name !== '' ? $name : ($handle !== '' ? $handle : null),
+                'profile_pic'         => $profile['profile_pic_url'] ?? null,
+                'followers'           => $profile['followers_count'] ?? 0,
+                'is_private'          => $profile['is_private'] ? 1 : 0,
+                'last_resolution_at'  => date('Y-m-d H:i:s'),
+                'resolution_status'   => 'resolved',
+            ];
+            if ($handle !== '' && $username === '') {
+                $patch['instagram_username'] = $handle;
+            }
+            // Only replace the auto-generated placeholder, never a name an advisor typed.
+            if ($leadName === '' || str_starts_with($leadName, 'Instagram User ')) {
+                $display = $name !== '' ? $name : $handle;
+                if ($display !== '') {
+                    $patch['name'] = $display;
+                }
+            }
+
             if ($dryRun) {
-                $name = (string) ($profile['name'] ?? '');
-                CLI::write("[dry-run] Lead {$leadId} ({$username}): would set name='{$name}', resolved");
+                CLI::write("[dry-run] Lead {$leadId}: would set name='" . ($patch['name'] ?? $leadName) . "', resolved");
             } else {
-                $db->table('leads')->update(
-                    [
-                        'instagram_full_name' => trim((string) ($profile['name'] ?? '')) ?: $username,
-                        'profile_pic'         => $profile['profile_pic_url'] ?? null,
-                        'followers'           => $profile['followers_count'] ?? 0,
-                        'is_private'          => $profile['is_private'] ? 1 : 0,
-                        'last_resolution_at'  => date('Y-m-d H:i:s'),
-                        'resolution_status'   => 'resolved',
-                    ],
-                    ['id' => $leadId]
-                );
+                $db->table('leads')->update($patch, ['id' => $leadId]);
             }
 
             if (! $dryRun) {
