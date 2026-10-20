@@ -56,23 +56,31 @@ class InstagramBackfillMessages extends BaseCommand
             return EXIT_ERROR;
         }
 
-        $accounts = array_filter(array_map('trim', explode(',', (string) (CLI::getOption('accounts') ?? ''))));
-        if ($accounts === []) {
-            $accounts = array_column(db_connect()->query(
-                "SELECT DISTINCT recipient_ig_username FROM conversations WHERE recipient_ig_username IS NOT NULL AND recipient_ig_username <> ''"
-            )->getResultArray(), 'recipient_ig_username');
+        // Known receiving accounts by Instagram id (stable), with the username the CRM already uses.
+        $known = [];
+        foreach (db_connect()->query(
+            "SELECT recipient_ig_id, MAX(recipient_ig_username) AS username FROM conversations WHERE recipient_ig_id IS NOT NULL AND recipient_ig_id <> '' GROUP BY recipient_ig_id"
+        )->getResultArray() as $r) {
+            $known[(string) $r['recipient_ig_id']] = (string) $r['username'];
         }
+        $wanted = array_filter(array_map('trim', explode(',', (string) (CLI::getOption('accounts') ?? ''))));
 
         $pages = $this->graph('me/accounts', ['fields' => 'id,name,access_token,instagram_business_account{id,username}', 'limit' => 100], $userToken)['data'] ?? [];
         $totals = ['conversations' => 0, 'new_conversations' => 0, 'new_messages' => 0, 'skipped' => 0];
 
         foreach ($pages as $page) {
             $ig = $page['instagram_business_account'] ?? null;
-            if (! is_array($ig) || ! in_array((string) ($ig['username'] ?? ''), $accounts, true)) {
+            if (! is_array($ig)) {
                 continue;
             }
-            $stats = $this->importAccount((string) $page['id'], (string) $page['access_token'], (string) $ig['id'], (string) $ig['username'], $from, $to, $dryRun);
-            CLI::write(sprintf('%-18s conversaciones=%d nuevas=%d mensajes_nuevos=%d ya_existian=%d', $ig['username'], $stats['conversations'], $stats['new_conversations'], $stats['new_messages'], $stats['skipped']));
+            $igId     = (string) $ig['id'];
+            $username = $known[$igId] ?? (string) ($ig['username'] ?? '');
+            $selected = $wanted === [] ? isset($known[$igId]) : (in_array($username, $wanted, true) || in_array((string) ($ig['username'] ?? ''), $wanted, true));
+            if (! $selected) {
+                continue;
+            }
+            $stats = $this->importAccount((string) $page['id'], (string) $page['access_token'], $igId, $username, $from, $to, $dryRun);
+            CLI::write(sprintf('%-18s conversaciones=%d nuevas=%d mensajes_nuevos=%d ya_existian=%d', $username, $stats['conversations'], $stats['new_conversations'], $stats['new_messages'], $stats['skipped']));
             foreach ($totals as $k => $v) {
                 $totals[$k] = $v + $stats[$k];
             }
