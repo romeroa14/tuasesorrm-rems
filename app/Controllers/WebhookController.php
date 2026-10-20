@@ -726,10 +726,8 @@ class WebhookController extends ResourceController
     {
         $v = getenv('META_WEBHOOK_REQUIRE_SIGNATURE');
         if ($v === false || $v === '') {
-            // Secure by default: enforce the signature whenever the app secret is configured.
-            $secret = getenv('META_APP_SECRET');
-
-            return is_string($secret) && trim($secret) !== '';
+            // Opt-in only: enforcing it with a secret from another Meta app rejects every webhook.
+            return false;
         }
 
         return filter_var($v, FILTER_VALIDATE_BOOLEAN);
