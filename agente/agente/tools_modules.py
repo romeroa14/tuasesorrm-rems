@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import json
+
 from langchain_core.tools import tool
 
+from agente.pending_actions import WRITE_TOOLS, conversation_context
 from agente.db_tools import (
     get_property_detail as _detail,
     get_seller as _seller,
@@ -112,3 +115,23 @@ def list_wasi(property_id: int | None = None, limit: int = 10) -> str:
 def operational_summary() -> str:
     """Conteos de catálogo, captadores, visitas, búsquedas y prospectos. No incluye finanzas."""
     return _summary({})
+
+
+def _propose(tool_name: str, **kwargs: object) -> str:
+    """Propose-only: stores a pending action for an advisor to approve. Needs the turn's conversation."""
+    ctx = conversation_context()
+    if ctx is None:
+        return json.dumps({"error": "no_conversation_context"}, ensure_ascii=False)
+    return WRITE_TOOLS[tool_name](_args(**kwargs), ctx)
+
+
+@tool
+def proponer_registrar_telefono(phone: str) -> str:
+    """Propone guardar el teléfono que el cliente dio. NO lo guarda: un asesor debe aprobarlo. Úsalo solo cuando el cliente escribió su número."""
+    return _propose("proponer_registrar_telefono", phone=phone)
+
+
+@tool
+def proponer_crear_visita(date_at: str, property_label: str | None = None, notes: str | None = None) -> str:
+    """Propone agendar una visita acordada con el cliente. NO la agenda: un asesor debe aprobarla. date_at futuro, formato YYYY-MM-DD HH:MM. Úsalo solo si el cliente confirmó día y hora."""
+    return _propose("proponer_crear_visita", date_at=date_at, property_label=property_label, notes=notes)

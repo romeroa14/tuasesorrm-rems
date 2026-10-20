@@ -11,7 +11,7 @@ class Conversation extends Model
         'lead_id', 'channel', 'external_id', 'external_username',
         'recipient_ig_id', 'recipient_ig_username',
         'status', 'assigned_to', 'last_message_at', 'unread_count',
-        'ai_auto_reply', 'ad_id', 'referral_source', 'ad_title', 'ad_photo_url',
+        'ai_auto_reply', 'ai_handoff_at', 'ai_handoff_reason', 'ad_id', 'referral_source', 'ad_title', 'ad_photo_url',
     ];
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';

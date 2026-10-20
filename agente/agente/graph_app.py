@@ -21,6 +21,8 @@ from agente.tools_modules import (
     list_visits,
     list_wasi,
     operational_summary,
+    proponer_crear_visita,
+    proponer_registrar_telefono,
     search_properties,
 )
 from agente.finance_tools import (
@@ -48,7 +50,7 @@ El sustantivo manda. Un adjetivo no cambia de módulo.
 - visitas solo si dice visita o visitas, y no dice propiedad ni inmueble.
 - captadores: el equipo comercial, sin un inmueble concreto.
 - busquedas: búsquedas inmobiliarias de clientes.
-- crm: prospectos y clientes asignados.
+- crm: prospectos y clientes asignados. También proponer guardar el teléfono o agendar la visita del cliente de esta conversación (solo si el mensaje de sistema lo permite).
 - marketing: publicaciones en redes.
 - wasi: códigos Wasi.
 - catalogo también cubre precio, fotos, habitaciones y el captador de una ficha. Si hay un id de inmueble, es catalogo.
@@ -119,8 +121,11 @@ def get_graph():
     crm = _agent(
         model,
         "crm",
-        [list_leads, list_assignments],
-        "Eres el subagente de CRM. Prospectos y asignaciones. No reveles cédulas ni datos de finanzas.",
+        [list_leads, list_assignments, proponer_registrar_telefono, proponer_crear_visita],
+        "Eres el subagente de CRM. Prospectos y asignaciones. No reveles cédulas ni datos de finanzas. "
+        "proponer_registrar_telefono y proponer_crear_visita solo PROPONEN: un asesor humano aprueba antes de que ocurra algo. "
+        "Propón el teléfono solo si el cliente lo escribió; propón la visita solo si confirmó día y hora concretos. "
+        "Tras proponer, dile que un asesor confirmará; nunca afirmes que quedó registrado o agendado.",
     )
     marketing = _agent(
         model,

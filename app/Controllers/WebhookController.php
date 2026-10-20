@@ -389,7 +389,19 @@ class WebhookController extends ResourceController
 
         // 3. Score the conversation (LLM-based with keyword fallback)
         $scorer = new \App\Libraries\AiScoringService();
-        $scorer->scoreConversation($conversation['id'], $conversation['lead_id']);
+        $score = $scorer->scoreConversation($conversation['id'], $conversation['lead_id']);
+
+        // 4. Auto-reply (only when the advisor enabled it on this thread; dry-run by default)
+        try {
+            (new \App\Libraries\AiAutoReplyService())->handle(
+                (int) $conversation['id'],
+                $score['label'] ?? null,
+                (string) $content,
+                is_numeric($messageId) ? (int) $messageId : null
+            );
+        } catch (\Throwable $e) {
+            log_message('error', 'AiAutoReplyService failed: ' . $e->getMessage());
+        }
 
         // Bust pipeline cache — new conversations affect pipeline data
         CacheService::bust('pipeline');

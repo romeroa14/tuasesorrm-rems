@@ -37,6 +37,8 @@ class ChatRequest(BaseModel):
     history: list[ChatMessage] = []
     debug: bool = False
     finance: FinanceAccessIn = Field(default_factory=FinanceAccessIn)
+    conversation_id: int | None = None
+    lead_id: int | None = None
 
 
 class ChatResponse(BaseModel):
@@ -96,6 +98,11 @@ def chat(req: ChatRequest):
             hist,
             include_debug=req.debug,
             finance=FinanceAccess.from_payload(req.finance.model_dump()),
+            context=(
+                {"conversation_id": req.conversation_id, "lead_id": req.lead_id}
+                if req.conversation_id and req.lead_id
+                else None
+            ),
         )
     except RuntimeError as e:
         raise HTTPException(status_code=503, detail=str(e)) from e

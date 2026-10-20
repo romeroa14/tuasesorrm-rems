@@ -164,6 +164,9 @@ $routes->get('/app/crm/api/conversations', 'CrmController::api_conversations', [
 $routes->get('/app/crm/api/messages/(:num)', 'CrmController::api_messages/$1', ['filter' => 'auth']); /* Obtener mensajes */
 $routes->post('/app/crm/api/send', 'CrmController::api_send_message', ['filter' => 'auth']); /* Enviar mensaje */
 $routes->post('/app/crm/api/return_to_ai', 'CrmController::api_return_to_ai', ['filter' => 'auth']); /* Devolver a la IA */
+$routes->get('/app/crm/api/ai-actions/(:num)', 'AiPendingActionsController::index/$1', ['filter' => 'auth']); /* Acciones propuestas por la IA (pendientes) */
+$routes->post('/app/crm/api/ai-actions/(:num)/approve', 'AiPendingActionsController::approve/$1', ['filter' => 'auth']);
+$routes->post('/app/crm/api/ai-actions/(:num)/reject', 'AiPendingActionsController::reject/$1', ['filter' => 'auth']);
 $routes->post('/app/crm/api/assign', 'CrmController::api_assign', ['filter' => 'auth']); /* Asignar conversación */
 $routes->post('/app/crm/api/status', 'CrmController::api_update_status', ['filter' => 'auth']); /* Actualizar estado */
 $routes->get('/app/crm/api/pipeline', 'CrmController::api_pipeline', ['filter' => 'auth']); /* Datos del pipeline */

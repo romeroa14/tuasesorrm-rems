@@ -326,6 +326,8 @@ class CrmController extends BaseController
             'status' => 'open',
             'assigned_to' => null,
             'ai_auto_reply' => 1,
+            'ai_handoff_at' => null,
+            'ai_handoff_reason' => null,
         ]);
 
         // Send resume webhook to Python AI
