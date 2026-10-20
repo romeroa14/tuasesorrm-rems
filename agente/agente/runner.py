@@ -10,6 +10,7 @@ from langchain_core.messages import AIMessage, ToolMessage
 
 from agente.finance_access import FinanceAccess, reset_finance_access, set_finance_access
 from agente.graph_app import SPECIALISTS, get_graph
+from agente.pending_actions import conversation_context, reset_conversation_context, set_conversation_context
 
 
 def _text(content: Any) -> str:
@@ -52,10 +53,12 @@ def run_agent_turn(
     *,
     include_debug: bool = False,
     finance: FinanceAccess | None = None,
+    context: dict[str, Any] | None = None,
 ) -> tuple[str, list[dict[str, Any]]]:
     history = history or []
     access = finance or FinanceAccess()
     token = set_finance_access(access)
+    ctx_token = set_conversation_context(context)
     today = date.today().isoformat()
     messages: list[dict[str, Any]] = [
         {
@@ -66,6 +69,11 @@ def run_agent_turn(
                 "Propiedad o inmueble es catálogo, aunque digan agendadas. Visitas solo si dicen visita. "
                 "No uses 2023 ni 2024. "
                 + access.instruction()
+                + (
+                    " Esta conversación permite proponer teléfono y visita a un asesor."
+                    if conversation_context()
+                    else " No hay conversación asociada: no propongas acciones."
+                )
             ),
         },
         *[
@@ -82,6 +90,7 @@ def run_agent_turn(
         )
     finally:
         reset_finance_access(token)
+        reset_conversation_context(ctx_token)
     out = result.get("messages") or []
     debug = _debug_from_messages(out) if include_debug else []
     reply = ""

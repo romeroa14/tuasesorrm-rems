@@ -38,7 +38,7 @@ class AiAutoReplyService
         }
 
         try {
-            $draft = $this->askAgent($conversationId, $inboundText);
+            $draft = $this->askAgent($conversationId, (int) $conversation['lead_id'], $inboundText);
         } catch (\Throwable $e) {
             log_message('error', 'AiAutoReplyService agent error: ' . $e->getMessage());
             $this->log($conversationId, $inboundMessageId, 'error', null, null, mb_substr($e->getMessage(), 0, 250));
@@ -55,7 +55,7 @@ class AiAutoReplyService
         return $this->send($conversation, $inboundMessageId, $draft);
     }
 
-    private function askAgent(int $conversationId, string $inboundText): string
+    private function askAgent(int $conversationId, int $leadId, string $inboundText): string
     {
         $rows = (new Message())->where('conversation_id', $conversationId)
             ->orderBy('id', 'DESC')->limit(self::HISTORY_LIMIT)->findAll();
@@ -79,7 +79,10 @@ class AiAutoReplyService
                 'Content-Type'  => 'application/json',
                 'Authorization' => 'Bearer ' . (string) getenv('AGENT_API_TOKEN'),
             ],
-            'body' => json_encode(['message' => $inboundText, 'history' => $history], JSON_UNESCAPED_UNICODE),
+            'body' => json_encode(
+                ['message' => $inboundText, 'history' => $history, 'conversation_id' => $conversationId, 'lead_id' => $leadId],
+                JSON_UNESCAPED_UNICODE
+            ),
         ]);
 
         $json  = json_decode((string) $r->getBody(), true);

@@ -10,7 +10,7 @@ Branch: feat/ai-auto-reply | Delivery: ask-on-risk | Test runner: vendor/bin/php
 
 ## Tasks
 - T1 (S1-S3) auto-reply service + policy + dry-run log + webhook hook | inline | done: RED->GREEN AiAutoReplyPolicyTest (4 tests); service paths (off/human/hot/agent-down) exercised on local docker DB in a rolled-back transaction; not verified: draft path (needs agent + DeepSeek key) and live send
-- T2 (S4) write tools in agent with confirmation | inline | pending
+- T2 (S4) propose-only write tools (registrar_telefono, crear_visita) + advisor approval | inline | done: PHP rules RED->GREEN (4 tests), pytest 5 new (11 total), approve/reject/fail paths and a real Python insert verified on local docker DB (test rows removed); not verified: agent calling the tools through DeepSeek, advisor UI (only JSON endpoints /app/crm/api/ai-actions)
 
 ## Log
 - L1 (2026-10-19) user: "Perfecto vamos a ejecutar estas mejoras de IA por impacto empecemos con la 1 y la 2"

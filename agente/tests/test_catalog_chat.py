@@ -99,8 +99,9 @@ def test_supervisor_route_still_calls_run_agent_turn(monkeypatch):
     monkeypatch.setattr("agente.server.get_settings", lambda: Ready())
     called = {}
 
-    def fake_turn(message, history, include_debug=False, finance=None):
+    def fake_turn(message, history, include_debug=False, finance=None, context=None):
         called["message"] = message
+        called["context"] = context
         return ("supervisor-reply", [])
 
     monkeypatch.setattr("agente.server.run_agent_turn", fake_turn)
@@ -109,3 +110,7 @@ def test_supervisor_route_still_calls_run_agent_turn(monkeypatch):
     assert response.status_code == 200
     assert response.json()["reply"] == "supervisor-reply"
     assert called["message"] == "cuantas visitas"
+    assert called["context"] is None
+
+    client.post("/v1/chat", json={"message": "hola", "conversation_id": 7, "lead_id": 3})
+    assert called["context"] == {"conversation_id": 7, "lead_id": 3}

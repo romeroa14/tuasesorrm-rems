@@ -608,7 +608,7 @@ def list_wasi(args: dict[str, Any]) -> str:
     return json.dumps({"wasi": rows}, ensure_ascii=False, indent=2)
 
 
-def execute_tool(name: str, arguments_json: str) -> str:
+def execute_tool(name: str, arguments_json: str, ctx: dict[str, Any] | None = None) -> str:
     try:
         args = json.loads(arguments_json or "{}")
     except json.JSONDecodeError:
@@ -638,6 +638,14 @@ def execute_tool(name: str, arguments_json: str) -> str:
         return list_assignments(args)
     if name == "list_wasi":
         return list_wasi(args)
+
+    # Imported here: pending_actions imports _conn from this module.
+    from agente.pending_actions import WRITE_TOOLS
+
+    if name in WRITE_TOOLS:
+        if not ctx or not ctx.get("conversation_id") or not ctx.get("lead_id"):
+            return json.dumps({"error": "no_conversation_context"}, ensure_ascii=False)
+        return WRITE_TOOLS[name](args, ctx)
 
     return json.dumps({"error": "unknown_tool", "name": name}, ensure_ascii=False)
 
@@ -815,3 +823,12 @@ OPENAI_TOOLS: list[dict[str, Any]] = [
         },
     },
 ]
+
+
+def tools_for(ctx: dict[str, Any] | None) -> list[dict[str, Any]]:
+    """Read tools always; propose-only write tools just when the turn belongs to a known conversation."""
+    if ctx and ctx.get("conversation_id") and ctx.get("lead_id"):
+        from agente.pending_actions import WRITE_TOOL_SCHEMAS
+
+        return [*OPENAI_TOOLS, *WRITE_TOOL_SCHEMAS]
+    return OPENAI_TOOLS
