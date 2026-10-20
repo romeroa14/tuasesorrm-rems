@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Libraries\CrmAttentionReport;
-use App\Libraries\PhoneExtractor;
+use App\Libraries\CrmPhoneExport;
 use CodeIgniter\HTTP\ResponseInterface;
 
 /**
@@ -34,7 +34,7 @@ class CrmReportsController extends BaseController
             . view('template/footer/footer', $data);
     }
 
-    /** GET /app/crm/reports/data?from=YYYY-MM-DD&to=YYYY-MM-DD&mode=conversation|crm */
+    /** GET /app/crm/reports/data?from=&to=&mode=conversation|crm&accounts[]= */
     public function api_attention(): ResponseInterface
     {
         if (! $this->canViewReports()) {
@@ -43,9 +43,10 @@ class CrmReportsController extends BaseController
 
         [$from, $to]  = $this->range();
         $crmAvailable = $this->crmInUse();
-        $mode         = $this->request->getGet('mode') === 'crm' && $crmAvailable ? 'crm' : 'conversation';
+        $mode         = $this->mode($crmAvailable);
+        $accounts     = $this->accounts();
 
-        $conversations = $this->conversationsInRange($from, $to);
+        $conversations = $this->conversationsInRange($from, $to, $accounts);
         $ids           = array_column($conversations, 'id');
         $outbound      = $this->outboundTexts($ids);
         $report        = new CrmAttentionReport();
@@ -67,73 +68,76 @@ class CrmReportsController extends BaseController
         unset($summary['conversations']);
 
         return $this->response->setJSON([
-            'status'        => 'success',
-            'mode'          => $mode,
-            'crm_available' => $crmAvailable,
-            'from'          => $from,
-            'to'            => $to,
-            'data'          => $summary,
+            'status'             => 'success',
+            'mode'               => $mode,
+            'crm_available'      => $crmAvailable,
+            'from'               => $from,
+            'to'                 => $to,
+            'accounts'           => $accounts,
+            'accounts_available' => $this->accountsInRange($from, $to),
+            'data'               => $summary,
         ]);
     }
 
-    /** GET /app/crm/reports/phones?from=YYYY-MM-DD&to=YYYY-MM-DD  (CSV download) */
+    /** GET /app/crm/reports/phones?from=&to=&mode=conversation|crm&accounts[]=  (CSV download) */
     public function export_phones(): ResponseInterface
     {
         if (! $this->canViewReports()) {
             return $this->response->setStatusCode(403)->setBody('Sin permiso');
         }
 
-        [$from, $to] = $this->range();
-        $conversations = $this->conversationsInRange($from, $to);
+        [$from, $to]   = $this->range();
+        $mode          = $this->mode($this->crmInUse());
+        $conversations = $this->conversationsInRange($from, $to, $this->accounts());
         $ids           = array_column($conversations, 'id');
-        $byId          = array_column($conversations, null, 'id');
-        $attribution   = (new CrmAttentionReport())
-            ->summarizeConversations($this->conversationInput($conversations, $this->outboundTexts($ids)))['conversations'];
 
-        /** @var array<string, array<string, string>> $found canonical number => row */
-        $found = [];
-        $add   = static function (string $number, string $source, array $c, string $date) use (&$found, $attribution): void {
-            if (isset($found[$number])) {
-                return;
-            }
-            $found[$number] = [
-                'number'   => $number,
-                'source'   => $source,
-                'client'   => (string) ($c['lead_name'] ?? ''),
-                'ig_user'  => (string) ($c['instagram_username'] ?? $c['external_username'] ?? ''),
-                'account'  => (string) ($c['recipient_ig_username'] ?? ''),
-                'advisors' => implode(' / ', $attribution[(int) $c['id']] ?? []),
-                'date'     => $date,
-                'conv_id'  => (string) $c['id'],
-            ];
-        };
+        $attribution = $mode === 'crm'
+            ? $this->crmSenders($ids)
+            : (new CrmAttentionReport())->summarizeConversations(
+                $this->conversationInput($conversations, $this->outboundTexts($ids))
+            )['conversations'];
 
-        foreach ($this->inboundMessages($ids) as $m) {
-            foreach (PhoneExtractor::extract((string) $m['content']) as $number) {
-                $add($number, 'chat', $byId[$m['conversation_id']], (string) $m['created_at']);
-            }
-        }
-        foreach ($conversations as $c) {
-            $phone = trim((string) ($c['lead_phone'] ?? ''));
-            foreach ($phone === '' ? [] : PhoneExtractor::extract($phone) as $number) {
-                $add($number, 'lead', $c, (string) $c['created_at']);
-            }
-        }
-
-        $fh = fopen('php://temp', 'r+');
-        fwrite($fh, "\xEF\xBB\xBF");
-        fputcsv($fh, ['Numero', 'Origen', 'Cliente', 'Usuario IG', 'Cuenta receptora', 'Asesor(es)', 'Fecha', 'Conversacion']);
-        foreach ($found as $row) {
-            fputcsv($fh, array_map([self::class, 'csvSafe'], array_values($row)));
-        }
-        rewind($fh);
-        $csv = (string) stream_get_contents($fh);
-        fclose($fh);
+        $csv = CrmPhoneExport::csv(CrmPhoneExport::rows($conversations, $this->inboundMessages($ids), $attribution));
 
         return $this->response
             ->setHeader('Content-Type', 'text/csv; charset=UTF-8')
-            ->setHeader('Content-Disposition', 'attachment; filename="numeros-whatsapp_' . $from . '_' . $to . '.csv"')
+            ->setHeader('Content-Disposition', 'attachment; filename="numeros-whatsapp_' . $mode . '_' . $from . '_' . $to . '.csv"')
             ->setBody($csv);
+    }
+
+    /** "crm" only once replies are sent from the CRM; otherwise the conversation (signature) mode. */
+    private function mode(bool $crmAvailable): string
+    {
+        return $this->request->getGet('mode') === 'crm' && $crmAvailable ? 'crm' : 'conversation';
+    }
+
+    /** @return list<string> selected receiving accounts; empty means all */
+    private function accounts(): array
+    {
+        $raw = $this->request->getGet('accounts');
+        $raw = is_array($raw) ? $raw : ($raw === null || $raw === '' ? [] : [$raw]);
+
+        return array_values(array_unique(array_filter(
+            array_map(static fn ($a): string => trim((string) $a), $raw),
+            static fn (string $a): bool => preg_match('/^[A-Za-z0-9._]{1,60}$/', $a) === 1
+        )));
+    }
+
+    /** @return list<array{account: string, conversations: int}> */
+    private function accountsInRange(string $from, string $to): array
+    {
+        $rows = db_connect()->table('conversations')
+            ->select('recipient_ig_username AS account, COUNT(*) AS conversations')
+            ->where('created_at >=', $from . ' 00:00:00')
+            ->where('created_at <=', $to . ' 23:59:59')
+            ->where('recipient_ig_username IS NOT NULL')
+            ->where("recipient_ig_username <> ''")
+            ->groupBy('recipient_ig_username')
+            ->orderBy('conversations', 'DESC')
+            ->get()
+            ->getResultArray();
+
+        return array_map(static fn (array $r): array => ['account' => (string) $r['account'], 'conversations' => (int) $r['conversations']], $rows);
     }
 
     private function canViewReports(): bool
@@ -218,9 +222,14 @@ class CrmReportsController extends BaseController
     }
 
     /** @return list<array<string, mixed>> */
-    private function conversationsInRange(string $from, string $to): array
+    private function conversationsInRange(string $from, string $to, array $accounts = []): array
     {
-        return db_connect()->table('conversations c')
+        $builder = db_connect()->table('conversations c');
+        if ($accounts !== []) {
+            $builder->whereIn('c.recipient_ig_username', $accounts);
+        }
+
+        return $builder
             ->select('c.id, c.created_at, c.external_username, c.recipient_ig_username, l.name AS lead_name, l.phone AS lead_phone, l.instagram_username')
             ->join('leads l', 'l.id = c.lead_id', 'left')
             ->where('c.created_at >=', $from . ' 00:00:00')
@@ -278,11 +287,5 @@ class CrmReportsController extends BaseController
         }
 
         return $out;
-    }
-
-    /** Neutralise spreadsheet formula injection in exported cells. */
-    private static function csvSafe(string $value): string
-    {
-        return $value !== '' && strpbrk($value[0], "=+-@\t\r") !== false ? "'" . $value : $value;
     }
 }

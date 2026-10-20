@@ -28,6 +28,12 @@
                             <i class="fab fa-whatsapp"></i> Exportar números (CSV)
                         </a>
                     </form>
+                    <div class="mt-2 d-flex flex-wrap align-items-center">
+                        <span class="font-weight-bold mr-3">Cuentas</span>
+                        <div id="account-boxes" class="d-flex flex-wrap"><span class="text-muted small">Cargando…</span></div>
+                        <button type="button" id="accounts-all" class="btn btn-link btn-sm">Todas</button>
+                        <button type="button" id="accounts-none" class="btn btn-link btn-sm">Ninguna</button>
+                    </div>
                 </div>
             </div>
 
@@ -136,6 +142,7 @@
     var PHONES_URL = '<?= base_url('/app/crm/reports/phones') ?>';
     var $from = $('#rep-from'), $to = $('#rep-to');
     var mode = 'conversation';
+    var selected = null; // null = every account
     var HELP = {
         conversation: 'Clasificación por mensajes: el asesor se identifica por cómo firma o se presenta en el chat (“Valery Mendoza | Asesores RM”, “Odra Cedeño del Equipo de Asesores RM”, “le habla Luis Rojas”).',
         crm: 'Clasificación por datos del CRM: cuenta a los usuarios que respondieron desde el CRM con su sesión. Es la fuente oficial cuando el equipo ATC trabaje en el CRM.'
@@ -160,6 +167,18 @@
         else if (kind === 'month') start = new Date(now.getFullYear(), now.getMonth(), 1);
         $from.val(iso(start));
         $to.val(iso(now));
+    }
+    function renderAccounts(list) {
+        var html = list.map(function (a) {
+            var on = selected === null || selected.indexOf(a.account) !== -1;
+            return '<label class="mr-3 mb-0"><input type="checkbox" class="account-box mr-1" value="' + esc(a.account) + '"' + (on ? ' checked' : '') + '>' +
+                esc(a.account) + ' <span class="text-muted small">(' + a.conversations + ')</span></label>';
+        });
+        $('#account-boxes').html(html.join('') || '<span class="text-muted small">Sin conversaciones en el rango</span>');
+    }
+    function readAccounts() {
+        var all = $('.account-box'), on = $('.account-box:checked');
+        selected = on.length === all.length ? null : on.map(function () { return this.value; }).get();
     }
     function esc(s) { return $('<div>').text(s == null ? '' : s).html(); }
 
@@ -188,13 +207,17 @@
 
     function load() {
         var q = { from: $from.val(), to: $to.val(), mode: mode };
+        if (selected !== null) { q.accounts = selected.length ? selected : ['__none__']; }
         $('#report-error').addClass('d-none');
         $('#export-phones').attr('href', PHONES_URL + '?' + $.param(q));
         $.getJSON(DATA_URL, q).done(function (res) {
             $from.val(res.from); $to.val(res.to);
             $('[data-mode="crm"]').prop('disabled', !res.crm_available);
             setMode(res.mode);
-            $('#export-phones').attr('href', PHONES_URL + '?' + $.param({ from: res.from, to: res.to }));
+            renderAccounts(res.accounts_available || []);
+            var exportQ = { from: res.from, to: res.to, mode: res.mode };
+            if (selected !== null) { exportQ.accounts = selected.length ? selected : ['__none__']; }
+            $('#export-phones').attr('href', PHONES_URL + '?' + $.param(exportQ));
             render(res.data);
         }).fail(function () {
             $('#report-error').text('No se pudo cargar el reporte.').removeClass('d-none');
@@ -203,6 +226,9 @@
 
     $('#report-filters').on('submit', function (e) { e.preventDefault(); load(); });
     $('[data-range]').on('click', function () { setRange($(this).data('range')); load(); });
+    $('#account-boxes').on('change', '.account-box', function () { readAccounts(); load(); });
+    $('#accounts-all').on('click', function () { selected = null; load(); });
+    $('#accounts-none').on('click', function () { selected = []; load(); });
     $('[data-mode]').on('click', function () { if (!this.disabled) { setMode($(this).data('mode')); load(); } });
     setMode('conversation');
     setRange('month');
