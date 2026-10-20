@@ -25,7 +25,7 @@ class InstagramBackfillMessages extends BaseCommand
     protected $group       = 'CRM';
     protected $name        = 'instagram:backfill-messages';
     protected $description = 'Importa desde la Graph API los mensajes de Instagram que no entraron por el webhook.';
-    protected $usage       = 'instagram:backfill-messages --since=YYYY-MM-DD [--until=YYYY-MM-DD] [--accounts=user1,user2] [--dry-run]';
+    protected $usage       = 'instagram:backfill-messages --since YYYY-MM-DD [--until YYYY-MM-DD] [--accounts user1,user2] [--dry-run]';
     protected $options     = [
         '--since'    => 'Fecha inicial (UTC, incluida). Obligatoria.',
         '--until'    => 'Fecha final (UTC, excluida). Por defecto mañana.',
@@ -41,7 +41,7 @@ class InstagramBackfillMessages extends BaseCommand
         $until  = (string) (CLI::getOption('until') ?? gmdate('Y-m-d', strtotime('+1 day')));
         $dryRun = CLI::getOption('dry-run') !== null;
         if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $since) !== 1 || preg_match('/^\d{4}-\d{2}-\d{2}$/', $until) !== 1) {
-            CLI::error('Usa --since=YYYY-MM-DD (y opcionalmente --until=YYYY-MM-DD).');
+            CLI::error('Usa --since YYYY-MM-DD (y opcionalmente --until YYYY-MM-DD), separados por espacio.');
 
             return EXIT_ERROR;
         }
