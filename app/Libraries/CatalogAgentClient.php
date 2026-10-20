@@ -85,6 +85,7 @@ class CatalogAgentClient
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
+                'Authorization' => 'Bearer ' . (string) getenv('AGENT_API_TOKEN'),
             ],
             'body' => json_encode($body, JSON_UNESCAPED_UNICODE),
         ]);
