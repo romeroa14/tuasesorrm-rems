@@ -79,7 +79,7 @@ class CrmReportsController extends BaseController
         ]);
     }
 
-    /** GET /app/crm/reports/phones?from=&to=&mode=conversation|crm&accounts[]=  (CSV download) */
+    /** GET /app/crm/reports/phones?from=&to=&mode=conversation|crm&accounts[]=[&format=csv]  (Excel download by default) */
     public function export_phones(): ResponseInterface
     {
         if (! $this->canViewReports()) {
@@ -97,12 +97,20 @@ class CrmReportsController extends BaseController
                 $this->conversationInput($conversations, $this->outboundTexts($ids))
             )['conversations'];
 
-        $csv = CrmPhoneExport::csv(CrmPhoneExport::rows($conversations, $this->inboundMessages($ids), $attribution));
+        $rows = CrmPhoneExport::rows($conversations, $this->inboundMessages($ids), $attribution);
+        $name = 'numeros-whatsapp_' . $mode . '_' . $from . '_' . $to;
+
+        if ($this->request->getGet('format') === 'csv') {
+            return $this->response
+                ->setHeader('Content-Type', 'text/csv; charset=UTF-8')
+                ->setHeader('Content-Disposition', 'attachment; filename="' . $name . '.csv"')
+                ->setBody(CrmPhoneExport::csv($rows));
+        }
 
         return $this->response
-            ->setHeader('Content-Type', 'text/csv; charset=UTF-8')
-            ->setHeader('Content-Disposition', 'attachment; filename="numeros-whatsapp_' . $mode . '_' . $from . '_' . $to . '.csv"')
-            ->setBody($csv);
+            ->setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            ->setHeader('Content-Disposition', 'attachment; filename="' . $name . '.xlsx"')
+            ->setBody(CrmPhoneExport::xlsx($rows));
     }
 
     /** "crm" only once replies are sent from the CRM; otherwise the conversation (signature) mode. */

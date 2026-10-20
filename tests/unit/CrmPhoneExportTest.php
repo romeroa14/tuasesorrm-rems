@@ -71,4 +71,32 @@ final class CrmPhoneExportTest extends CIUnitTestCase
         $this->assertSame('Telefono,Nombre,"Usuario Instagram","Atendido por",Cuenta,Fecha,Origen,Conversacion', $lines[0]);
         $this->assertStringContainsString("'=HYPERLINK", $lines[1]);
     }
+
+    public function testXlsxIsAValidWorkbookWithHeaderAndTextCells(): void
+    {
+        $binary = CrmPhoneExport::xlsx([[
+            'phone' => '584141234567', 'name' => 'María & Pérez <VIP>', 'instagram' => '@mariap', 'attended_by' => 'Valery Mendoza',
+            'account' => 'realtorsrm', 'date' => '2026-10-16 10:05:00', 'source' => 'chat', 'conversation' => '1',
+        ]]);
+
+        $this->assertSame("PK\x03\x04", substr($binary, 0, 4));
+
+        $file = tempnam(sys_get_temp_dir(), 'xlsx');
+        file_put_contents($file, $binary);
+        $zip = new \ZipArchive();
+        $this->assertTrue($zip->open($file) === true);
+        foreach (['[Content_Types].xml', '_rels/.rels', 'xl/workbook.xml', 'xl/_rels/workbook.xml.rels', 'xl/styles.xml', 'xl/worksheets/sheet1.xml'] as $part) {
+            $this->assertNotFalse($zip->locateName($part), $part);
+        }
+        $sheet = (string) $zip->getFromName('xl/worksheets/sheet1.xml');
+        $zip->close();
+        unlink($file);
+
+        $xml = simplexml_load_string($sheet);
+        $this->assertNotFalse($xml, 'sheet1.xml must be well-formed XML');
+        $this->assertStringContainsString('<t>Telefono</t>', $sheet);
+        $this->assertStringContainsString('<t>Atendido por</t>', $sheet);
+        $this->assertStringContainsString('<t>584141234567</t>', $sheet);
+        $this->assertStringContainsString('María &amp; Pérez &lt;VIP&gt;', $sheet);
+    }
 }

@@ -25,7 +25,7 @@
                             <button type="button" class="btn btn-outline-secondary" data-range="month">Este mes</button>
                         </div>
                         <a id="export-phones" href="#" class="btn btn-sm btn-success ml-auto">
-                            <i class="fab fa-whatsapp"></i> Exportar números (CSV)
+                            <i class="fas fa-file-excel"></i> Exportar números (Excel)
                         </a>
                     </form>
                     <div class="mt-2 d-flex flex-wrap align-items-center">
