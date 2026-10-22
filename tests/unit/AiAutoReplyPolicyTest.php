@@ -33,14 +33,42 @@ final class AiAutoReplyPolicyTest extends CIUnitTestCase
         $this->assertNull(AiAutoReplyPolicy::handoffReason('tibio', 'busco casa'));
     }
 
-    public function testModeDefaultsToDryRun(): void
+    public function testConversationSwitchDecidesAndEnvIsOnlyAKillSwitch(): void
     {
         putenv('AI_AUTO_REPLY_MODE');
-        $this->assertSame('dry_run', AiAutoReplyPolicy::mode());
+        $this->assertSame('live', AiAutoReplyPolicy::mode(), 'without .env the per-conversation switch is enough');
         putenv('AI_AUTO_REPLY_MODE=live');
         $this->assertSame('live', AiAutoReplyPolicy::mode());
-        putenv('AI_AUTO_REPLY_MODE=cualquier-cosa');
+        putenv('AI_AUTO_REPLY_MODE=dry_run');
         $this->assertSame('dry_run', AiAutoReplyPolicy::mode());
         putenv('AI_AUTO_REPLY_MODE');
+    }
+
+    public function testMarkdownIsStrippedForInstagram(): void
+    {
+        $md = "He encontrado opciones:\n\n### Caracas\n1. **Apartamento** en Zona Oeste\n- Precio: __38.000__ USD\n* [Ver ficha](https://x.com/p/1)\n`ok`";
+        $plain = AiAutoReplyPolicy::plainText($md);
+        $this->assertStringNotContainsString('###', $plain);
+        $this->assertStringNotContainsString('**', $plain);
+        $this->assertStringNotContainsString('__', $plain);
+        $this->assertStringNotContainsString('`', $plain);
+        $this->assertStringContainsString('Caracas', $plain);
+        $this->assertStringContainsString('1. Apartamento en Zona Oeste', $plain);
+        $this->assertStringContainsString('• Precio: 38.000 USD', $plain);
+        $this->assertStringContainsString('Ver ficha: https://x.com/p/1', $plain);
+    }
+
+    public function testBotEchoIsRecognizedByContentIgnoringWhitespace(): void
+    {
+        $drafts = ["Hola,\n\nbusco opciones  para usted", 'otra respuesta'];
+        $this->assertTrue(AiAutoReplyPolicy::isBotEcho('Hola, busco opciones para usted', $drafts));
+        $this->assertFalse(AiAutoReplyPolicy::isBotEcho('Me comunico yo con usted', $drafts));
+        $this->assertFalse(AiAutoReplyPolicy::isBotEcho('', $drafts));
+        $this->assertFalse(AiAutoReplyPolicy::isBotEcho('algo', []));
+    }
+
+    public function testPlainTextLeavesNormalTextUntouched(): void
+    {
+        $this->assertSame('Hola, ¿en qué zona busca?', AiAutoReplyPolicy::plainText('Hola, ¿en qué zona busca?'));
     }
 }

@@ -451,6 +451,11 @@ class WebhookController extends ResourceController
             return;
         }
 
+        // Echo of a reply the AI agent just sent: not a human taking over, so keep the AI active.
+        if ((new \App\Libraries\AiAutoReplyService())->isRecentBotEcho((int) $conversation['id'], $content)) {
+            return;
+        }
+
         $sqlTs = date('Y-m-d H:i:s', $timestamp ?: time());
 
         $this->messageModel->insert([

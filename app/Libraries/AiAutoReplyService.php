@@ -38,7 +38,7 @@ class AiAutoReplyService
         }
 
         try {
-            $draft = $this->askAgent($conversationId, (int) $conversation['lead_id'], $inboundText);
+            $draft = AiAutoReplyPolicy::plainText($this->askAgent($conversationId, (int) $conversation['lead_id'], $inboundText));
         } catch (\Throwable $e) {
             log_message('error', 'AiAutoReplyService agent error: ' . $e->getMessage());
             $this->log($conversationId, $inboundMessageId, 'error', null, null, mb_substr($e->getMessage(), 0, 250));
@@ -94,10 +94,26 @@ class AiAutoReplyService
         return $reply;
     }
 
+    /** The outbound webhook calls this so the bot's own reply is not mistaken for a human taking over the thread. */
+    public function isRecentBotEcho(int $conversationId, string $content): bool
+    {
+        $rows = \Config\Database::connect()->table('ai_auto_replies')
+            ->select('draft')
+            ->where('conversation_id', $conversationId)
+            ->whereIn('status', ['sending', 'sent'])
+            ->where('created_at >=', date('Y-m-d H:i:s', time() - 180))
+            ->get()->getResultArray();
+
+        return AiAutoReplyPolicy::isBotEcho($content, array_column($rows, 'draft'));
+    }
+
     /** @param array<string, mixed> $conversation */
     private function send(array $conversation, ?int $inboundMessageId, string $draft): array
     {
         $conversationId = (int) $conversation['id'];
+        // Logged before sending: Meta may echo the message back before this method returns.
+        $this->log($conversationId, $inboundMessageId, 'sending', null, $draft);
+        $sendingId = (int) \Config\Database::connect()->insertID();
         $result = MetaInstagramSend::sendTextMessage(
             (string) ($conversation['recipient_ig_id'] ?? ''),
             (string) ($conversation['external_id'] ?? ''),
@@ -105,7 +121,7 @@ class AiAutoReplyService
         );
 
         if (! ($result['ok'] ?? false)) {
-            $this->log($conversationId, $inboundMessageId, 'error', null, $draft, mb_substr((string) ($result['error'] ?? 'send failed'), 0, 250));
+            $this->finish($sendingId, 'error', mb_substr((string) ($result['error'] ?? 'send failed'), 0, 250));
 
             return ['status' => 'error'];
         }
@@ -121,9 +137,14 @@ class AiAutoReplyService
             'created_at'          => date('Y-m-d H:i:s'),
         ]);
         (new Conversation())->update($conversationId, ['last_message_at' => date('Y-m-d H:i:s')]);
-        $this->log($conversationId, $inboundMessageId, 'sent', null, $draft);
+        $this->finish($sendingId, 'sent');
 
         return ['status' => 'sent', 'draft' => $draft];
+    }
+
+    private function finish(int $logId, string $status, ?string $error = null): void
+    {
+        \Config\Database::connect()->table('ai_auto_replies')->where('id', $logId)->update(['status' => $status, 'error' => $error]);
     }
 
     private function log(int $conversationId, ?int $inboundMessageId, string $status, ?string $reason = null, ?string $draft = null, ?string $error = null): void
