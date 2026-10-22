@@ -62,17 +62,14 @@ class AiAutoReplyPolicy
         return preg_match(self::HUMAN_REQUEST, $text) === 1;
     }
 
-    /** @return string|null handoff reason, or null when the agent may keep answering */
+    /**
+     * The agent hands the thread to a person only when the client asks for it.
+     * The intention score is for prioritising leads, never for cutting the conversation.
+     *
+     * @return string|null handoff reason, or null when the agent may keep answering
+     */
     public static function handoffReason(?string $intentionLabel, string $inboundText): ?string
     {
-        if (self::asksForHuman($inboundText)) {
-            return 'pedido_humano';
-        }
-
-        if (strtolower((string) $intentionLabel) === 'caliente') {
-            return 'score_caliente';
-        }
-
-        return null;
+        return self::asksForHuman($inboundText) ? 'pedido_humano' : null;
     }
 }

@@ -26,10 +26,15 @@ final class AiAutoReplyPolicyTest extends CIUnitTestCase
         }
     }
 
-    public function testHotScoreTriggersHandoff(): void
+    public function testOnlyAnExplicitClientRequestTriggersHandoff(): void
     {
-        $this->assertSame('score_caliente', AiAutoReplyPolicy::handoffReason('caliente', 'ok'));
         $this->assertSame('pedido_humano', AiAutoReplyPolicy::handoffReason('frio', 'quiero hablar con un asesor'));
+        $this->assertSame('pedido_humano', AiAutoReplyPolicy::handoffReason('caliente', 'me pueden llamar?'));
+    }
+
+    public function testHotScoreAloneDoesNotTriggerHandoff(): void
+    {
+        $this->assertNull(AiAutoReplyPolicy::handoffReason('caliente', 'busco casa en Caracas hasta 40.000 $'));
         $this->assertNull(AiAutoReplyPolicy::handoffReason('tibio', 'busco casa'));
     }
 
